@@ -1,0 +1,46 @@
+<h2>¿Cómo se ve la vista Timeline global?</h2>
+<p class="subtitle">Pantalla separada donde ves todos los personajes en orden cronológico</p>
+
+<div class="options">
+  <div class="option" data-choice="horizontal" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Línea horizontal con scroll</h3>
+      <p>Eje de tiempo horizontal, cada personaje es un punto/miniatura sobre la línea. Deslizas horizontalmente. Clic en un punto abre su ficha (o lo lleva a esa carta en el mazo).</p>
+    </div>
+  </div>
+  <div class="option" data-choice="vertical" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Lista vertical por época</h3>
+      <p>Lista agrupada por período bíblico (Patriarcas, Éxodo, Jueces, Reyes, Exilio, Evangelios, Iglesia primitiva...), cada personaje como fila con miniatura. Más fácil de leer, menos "wow" visual.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 32px;">
+  <h3>Vista previa: horizontal</h3>
+  <div class="mockup">
+    <div class="mockup-header">Timeline</div>
+    <div class="mockup-body" style="padding: 24px 12px;">
+      <div style="position:relative; height:4px; background:#555; border-radius:2px; margin: 40px 20px;">
+        <div style="position:absolute; left:5%; top:-30px; text-align:center; width:60px; margin-left:-30px;">
+          <div class="placeholder" style="width:36px;height:36px;border-radius:50%;margin:0 auto 4px;">img</div>
+          <div style="font-size:11px;">Adán</div>
+        </div>
+        <div style="position:absolute; left:30%; top:-30px; text-align:center; width:60px; margin-left:-30px;">
+          <div class="placeholder" style="width:36px;height:36px;border-radius:50%;margin:0 auto 4px;">img</div>
+          <div style="font-size:11px;">Noé</div>
+        </div>
+        <div style="position:absolute; left:55%; top:-30px; text-align:center; width:60px; margin-left:-30px;">
+          <div class="placeholder" style="width:36px;height:36px;border-radius:50%;margin:0 auto 4px;">img</div>
+          <div style="font-size:11px;">Abrahán</div>
+        </div>
+        <div style="position:absolute; left:80%; top:-30px; text-align:center; width:60px; margin-left:-30px;">
+          <div class="placeholder" style="width:36px;height:36px;border-radius:50%;margin:0 auto 4px;">img</div>
+          <div style="font-size:11px;">David</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

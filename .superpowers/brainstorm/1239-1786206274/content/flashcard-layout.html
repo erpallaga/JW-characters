@@ -1,0 +1,48 @@
+<h2>¿Cómo quieres navegar las flashcards?</h2>
+<p class="subtitle">Elige el estilo de la pantalla principal de repaso</p>
+
+<div class="options">
+  <div class="option" data-choice="deck" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Mazo (una carta a la vez)</h3>
+      <p>Como flashcards físicas: una carta grande centrada, botones ← Anterior / Siguiente →, clic para voltear. Estilo clásico de estudio, enfocado, sin distracción.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="grid" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Cuadrícula (todas visibles)</h3>
+      <p>Grid de tarjetas pequeñas, cada una se voltea al hacer clic individualmente. Ves todo el catálogo de un vistazo, útil para elegir un personaje directamente.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="both" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Ambos: cuadrícula + modo mazo</h3>
+      <p>Cuadrícula como pantalla principal, con botón "Modo estudio" que entra al mazo secuencial de una carta a la vez.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 32px;">
+  <h3>Vista previa: Frontal / Reverso de una carta</h3>
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">Frontal</div>
+      <div class="mockup-body" style="text-align:center; padding: 24px;">
+        <div class="placeholder" style="height:160px; border-radius:8px; margin-bottom:12px;">imagen</div>
+        <h3 style="margin:0;">David</h3>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">Reverso (al voltear)</div>
+      <div class="mockup-body" style="padding: 16px; font-size: 14px; text-align:left;">
+        <p><strong>Época:</strong> ~1040–970 a.E.C., época de los reyes</p>
+        <p><strong>Dónde vivió:</strong> Belén, Hebrón, Jerusalén</p>
+        <p><strong>Conocido por:</strong> Pastor que venció a Goliat, segundo rey de Israel, antepasado de Jesús</p>
+        <p><strong>Libros:</strong> 1 y 2 Samuel, 1 Reyes, 1 Crónicas, Salmos</p>
+      </div>
+    </div>
+  </div>
+</div>
