@@ -1,1 +1,4 @@
 .superpowers/
+
+# Reference source material (JW.ORG / WOL publications) - not for public repo
+*.pdf

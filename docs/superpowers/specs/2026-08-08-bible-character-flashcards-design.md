@@ -8,7 +8,7 @@ App web de uso personal/familiar: colección de flashcards con un frontal (image
 
 ## Alcance de la fase 1 (este spec)
 
-- Dataset semilla: 10-15 personajes clave, redactados a partir de fuentes que el usuario suba (JW.ORG + libros).
+- Dataset semilla: 17 personajes clave, redactados a partir de fuentes locales (ver "Fuentes") ampliadas con JW.ORG, WOL y la enciclopedia *Perspicacia para comprender las Escrituras* (it).
 - Dos pantallas: Mazo de flashcards y Timeline global.
 - Datos en Supabase desde el inicio (no JSON estático), para que la fase 2 (panel admin) no requiera migración.
 - Sin panel de administración todavía — los datos de la fase 1 se insertan directamente vía Supabase MCP.
@@ -74,13 +74,32 @@ create policy "Public read access"
 
 Dos pestañas simples arriba de la página (Mazo / Timeline), sin librería de router — alternan visibilidad de dos secciones o usan hash routing simple (`#/deck`, `#/timeline`).
 
+## Fuentes
+
+Libros locales (no versionados en git, ver `.gitignore`; sirven solo de referencia de contenido/estilo):
+
+- `ia_S.pdf` — *Ejemplos de fe* (ia): 14 capítulos, uno por personaje, cronológico.
+- `wcg_S.pdf` — *Seamos valientes al andar con Dios* (wcg): 3 secciones cronológicas, varios personajes por sección.
+- `lfb_S.pdf` — *Lecciones que aprendo de la Biblia* (lfb): relatos bíblicos infantiles, cobertura amplia.
+- Fichas bíblicas sueltas de JW.ORG (serie coleccionable "Ficha bíblica"): Jonatán (23), Ziporá (34), rey Saúl (41), historia ilustrada Jacob y Esaú. Sirven de plantilla de formato (sección "Algunos datos" + línea de tiempo + mapa), aunque estos personajes concretos no están en el seed de fase 1.
+
+Ampliar y verificar contenido con búsquedas en JW.ORG, WOL (wol.jw.org) y *Perspicacia para comprender las Escrituras* (it) cuando el libro local no cubra un dato necesario (dónde vivió, libros, fecha).
+
+### Lista del seed (17 personajes, orden cronológico)
+
+Abel, Noé, Abrahán, Moisés, Rut, Ana, Samuel, Jonatán, David, Abigaíl, Elías, Jonás, Ester, María, José (padre de Jesús), Marta, Pedro.
+
+De *ia_S* (14): Abel, Noé, Abrahán, Rut, Ana, Samuel, Abigaíl, Elías, Jonás, Ester, María, José, Marta, Pedro.
+Añadidos de *wcg_S* (3): Moisés, Jonatán, David.
+
 ## Proceso de contenido (fase 1)
 
-1. El usuario sube fragmentos de fuentes (JW.ORG + libros) para cada uno de los 10-15 personajes elegidos.
-2. Se redacta cada ficha (era, dónde vivió, conocido por, libros, fuente) basándose únicamente en esas fuentes — sin contenido inventado ni de otras fuentes.
-3. El usuario revisa y aprueba el texto de cada ficha antes de insertarla en Supabase.
-4. Se descarga la imagen correspondiente de JW.ORG y se sube al bucket de Storage.
-5. Se inserta la fila en `characters` vía Supabase MCP.
+1. Para cada personaje del seed, se extrae el contenido base del capítulo correspondiente en `ia_S.pdf` o `wcg_S.pdf`.
+2. Se amplía/verifica con JW.ORG, WOL y *Perspicacia* cuando falte un dato (dónde vivió, libros bíblicos, fecha/era).
+3. Se redacta cada ficha (era, dónde vivió, conocido por, libros, fuente) basándose únicamente en estas fuentes — sin contenido inventado.
+4. El usuario revisa y aprueba el texto de cada ficha antes de insertarla en Supabase.
+5. Se descarga la imagen correspondiente de JW.ORG y se sube al bucket de Storage.
+6. Se inserta la fila en `characters` vía Supabase MCP.
 
 ## Manejo de errores
 
