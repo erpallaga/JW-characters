@@ -10,8 +10,8 @@ App web de uso personal/familiar: colección de flashcards con un frontal (image
 
 - Dataset semilla: 17 personajes clave, redactados a partir de fuentes locales (ver "Fuentes") ampliadas con JW.ORG, WOL y la enciclopedia *Perspicacia para comprender las Escrituras* (it).
 - Dos pantallas: Mazo de flashcards y Timeline global.
-- Datos en Supabase desde el inicio (no JSON estático), para que la fase 2 (panel admin) no requiera migración.
-- Sin panel de administración todavía — los datos de la fase 1 se insertan directamente vía Supabase MCP.
+- Datos en un archivo JSON estático versionado en el repo (`data/characters.json`) — sin backend. Se descartó Supabase: el usuario ya no tiene slot libre en su plan free y no quiere abrir una tercera cuenta.
+- Sin panel de administración todavía — los datos de la fase 1 se editan directo en el archivo JSON.
 - Hospedaje: GitHub Pages (frontend estático).
 
 ### Fuera de alcance (fase 1)
@@ -24,35 +24,30 @@ Estos ítems son candidatos para una fase 2 con su propio spec.
 
 ## Arquitectura
 
-- **Frontend**: HTML/CSS/JS vanilla, sin build ni framework. Desplegado en GitHub Pages sirviendo directo desde el repo (rama `main` o carpeta `/docs`, a decidir al configurar Pages).
-- **Datos**: tabla `characters` en Supabase. El frontend la lee con `supabase-js` usando la clave pública `anon` (solo lectura).
-- **Imágenes**: descargadas de JW.ORG y subidas a un bucket de Supabase Storage (`character-images`), para no depender de que JW.ORG mantenga las mismas URLs.
-- **Escritura de datos (fase 1)**: se hace directo contra Supabase vía el MCP de Supabase durante la redacción de cada ficha; no hay UI de escritura en la app.
-- **RLS**: lectura pública (`anon`) habilitada en `characters` y en el bucket de imágenes; escritura bloqueada hasta que exista autenticación (fase 2).
+- **Frontend**: HTML/CSS/JS vanilla, sin build ni framework. Desplegado en GitHub Pages sirviendo directo desde el repo (rama `main`, raíz).
+- **Datos**: `data/characters.json`, un array de objetos, versionado en el repo. El frontend lo carga con `fetch("data/characters.json")` en tiempo de ejecución — sin backend, sin claves, sin RLS.
+- **Imágenes**: descargadas de JW.ORG y guardadas en `assets/images/` del propio repo, servidas por GitHub Pages junto al resto del sitio.
+- **Escritura de datos (fase 1)**: se edita `data/characters.json` directamente (añadir un objeto por personaje) durante la redacción de cada ficha; no hay UI de escritura en la app.
 
 ## Modelo de datos
 
-Tabla `characters`:
+`data/characters.json` — array de objetos con esta forma:
 
-```sql
-create table characters (
-  id text primary key,           -- slug, ej "david"
-  name text not null,
-  image_url text,                -- URL pública en Supabase Storage
-  era_label text,                -- texto legible, ej "Época de los reyes, ~1040–970 a.E.C."
-  era_sort_key integer,          -- año numérico para orden/posición en timeline (negativo = a.E.C.)
-  lived_in text,
-  known_for text,                -- contenido principal: por qué es conocido
-  books text[],                  -- libros bíblicos donde aparece su historia
-  sources text[]                 -- trazabilidad: de qué fuente (JW.ORG / libro) salió el texto
-);
-
-alter table characters enable row level security;
-
-create policy "Public read access"
-  on characters for select
-  using (true);
+```json
+{
+  "id": "david",
+  "name": "David",
+  "image_url": "assets/images/david.jpg",
+  "era_label": "Época de los reyes, ~1040–970 a.E.C.",
+  "era_sort_key": -1040,
+  "lived_in": "Belén, Hebrón, Jerusalén",
+  "known_for": "Pastor que venció a Goliat, segundo rey de Israel, antepasado de Jesús",
+  "books": ["1 Samuel", "2 Samuel", "1 Reyes", "1 Crónicas", "Salmos"],
+  "sources": ["Ejemplos de fe, cap. X", "jw.org: ..."]
+}
 ```
+
+Campos: `id` (slug único), `name`, `image_url` (ruta relativa), `era_label` (texto legible), `era_sort_key` (año numérico, negativo = a.E.C., para ordenar/posicionar en el timeline), `lived_in`, `known_for` (contenido principal), `books` (array de libros bíblicos), `sources` (array, trazabilidad de dónde salió el texto).
 
 ## Pantallas
 
@@ -97,21 +92,21 @@ Añadidos de *wcg_S* (3): Moisés, Jonatán, David.
 1. Para cada personaje del seed, se extrae el contenido base del capítulo correspondiente en `ia_S.pdf` o `wcg_S.pdf`.
 2. Se amplía/verifica con JW.ORG, WOL y *Perspicacia* cuando falte un dato (dónde vivió, libros bíblicos, fecha/era).
 3. Se redacta cada ficha (era, dónde vivió, conocido por, libros, fuente) basándose únicamente en estas fuentes — sin contenido inventado.
-4. El usuario revisa y aprueba el texto de cada ficha antes de insertarla en Supabase.
-5. Se descarga la imagen correspondiente de JW.ORG y se sube al bucket de Storage.
-6. Se inserta la fila en `characters` vía Supabase MCP.
+4. El usuario revisa y aprueba el texto de cada ficha antes de añadirla al JSON.
+5. Se descarga la imagen correspondiente de JW.ORG y se guarda en `assets/images/<id>.jpg` del repo.
+6. Se añade el objeto a `data/characters.json`, con `image_url` apuntando a esa ruta.
 
 ## Manejo de errores
 
-- Si `characters` está vacía o Supabase no responde, la app muestra un mensaje simple ("No se pudieron cargar los personajes") en vez de fallar en blanco.
+- Si `data/characters.json` no carga (404, JSON inválido) o está vacío, la app muestra un mensaje simple ("No se pudieron cargar los personajes") en vez de fallar en blanco.
 - Si una imagen no carga, se muestra un placeholder con el nombre del personaje (sin romper el layout de la carta).
 
 ## Pruebas / validación
 
 - Validación manual: abrir la app (local y en GitHub Pages), recorrer todas las cartas del seed, verificar que el orden en Timeline coincide con `era_sort_key`.
-- No se contemplan pruebas automatizadas en fase 1 (app estática de contenido personal) — se valida a mano la estructura de cada fila antes de insertarla en Supabase.
+- No se contemplan pruebas automatizadas en fase 1 (app estática de contenido personal) — se valida a mano la estructura de cada objeto antes de añadirlo al JSON.
 
 ## Fase 2 (fuera de alcance, futuro spec propio)
 
-- Panel de administración con autenticación (login del usuario) para insertar/editar personajes sin usar SQL/MCP directo.
+- Panel de administración para editar personajes sin tocar el JSON a mano — mecanismo de guardado (backend, Supabase u otro) a decidir cuando se diseñe esa fase.
 - Posibles extras a evaluar entonces: búsqueda, filtros por época/libro, modo quiz.
