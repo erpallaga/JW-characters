@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personajes de la Biblia</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Personajes de la Biblia</h1>
+    <nav class="tabs">
+      <a href="#/deck" class="tab" data-view="deck">Mazo</a>
+      <a href="#/timeline" class="tab" data-view="timeline">Timeline</a>
+    </nav>
+  </header>
+
+  <main>
+    <p id="error-message" class="error-message" hidden>No se pudieron cargar los personajes.</p>
+    <section id="deck-view" class="view"></section>
+    <section id="timeline-view" class="view" hidden></section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
