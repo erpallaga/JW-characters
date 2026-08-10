@@ -2,18 +2,17 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Ship a static web app (GitHub Pages) with 17 Bible-character flashcards (flip for details) and a chronological timeline view, backed by a read-only Supabase table.
+**Goal:** Ship a static web app (GitHub Pages) with 17 Bible-character flashcards (flip for details) and a chronological timeline view, backed by a versioned JSON data file — no backend.
 
-**Architecture:** Vanilla HTML/CSS/JS (no build step, ES modules loaded directly by the browser). Data lives in a single Supabase `characters` table read via `supabase-js` (anon key, public SELECT only). Images ship inside the repo (`assets/images/`) and are served by GitHub Pages alongside the app — no Supabase Storage, no backend writes from the app.
+**Architecture:** Vanilla HTML/CSS/JS (no build step, ES modules loaded directly by the browser). Data lives in `data/characters.json`, fetched at runtime with the `fetch` API. Images ship inside the repo (`assets/images/`) and are served by GitHub Pages alongside the app.
 
-**Tech Stack:** HTML5, CSS3, JavaScript (ES modules), `@supabase/supabase-js@2` (via `esm.sh` CDN, no npm install), Supabase Postgres, GitHub Pages.
+**Tech Stack:** HTML5, CSS3, JavaScript (ES modules), GitHub Pages. No npm, no backend, no database.
 
 ## Global Constraints
 
 - Frontend must be plain HTML/CSS/JS — no framework, no build step, no bundler. (spec: Arquitectura)
-- Data lives in Supabase table `characters`, read-only from the frontend via the `anon` key; writes only via SQL/MCP during content authoring, never from the app UI. (spec: Arquitectura, Modelo de datos)
-- Images are downloaded from JW.ORG and committed to `assets/images/` in the repo — not Supabase Storage, not hotlinked. (spec: Arquitectura, decided after discovering the Supabase MCP has no Storage-upload tool)
-- Row Level Security: public read policy on `characters`; no write policy for `anon` (write stays locked until a future phase-2 admin panel). (spec: Modelo de datos)
+- Data lives in `data/characters.json`, a single JSON array committed to the repo, loaded client-side with `fetch`. No backend, no database, no API keys. (spec: Arquitectura — Supabase was tried and dropped: the user's Supabase free plan has no slot left and they don't want a third account.)
+- Images are downloaded from JW.ORG and committed to `assets/images/` in the repo — not hotlinked, not in any cloud storage. (spec: Arquitectura)
 - Out of scope for this plan: admin panel, authentication, search/filters, quiz mode. (spec: Fuera de alcance)
 - No automated test framework — this is a static personal-content app; verification is manual (local server + browser) as decided in the spec's "Pruebas / validación" section. Every task below still ends in a concrete, checkable verification step.
 - Seed dataset is exactly these 17 characters, in this chronological order: Abel, Noé, Abrahán, Moisés, Rut, Ana, Samuel, Jonatán, David, Abigaíl, Elías, Jonás, Ester, María, José (padre de Jesús), Marta, Pedro. (spec: Lista del seed)
@@ -29,80 +28,22 @@ JW-characters/
 ├── css/
 │   └── styles.css              # all styling (card flip, timeline, tabs)
 ├── js/
-│   ├── config.js                # SUPABASE_URL + SUPABASE_ANON_KEY constants
-│   ├── supabaseClient.js        # creates and exports the supabase-js client
-│   ├── api.js                   # fetchCharacters() — the only DB access point
+│   ├── api.js                   # fetchCharacters() — the only data-loading point
 │   ├── deck.js                  # initDeck() — flashcard deck view
 │   ├── timeline.js              # initTimeline() — horizontal timeline view
 │   ├── router.js                # initRouter()/navigateTo() — hash-based tab switching
 │   └── main.js                  # entry point: wires api + deck + timeline + router
+├── data/
+│   └── characters.json          # the 17-character dataset
 ├── assets/
 │   ├── placeholder.svg          # fallback shown when a character image fails to load
 │   └── images/                  # <id>.jpg per character, e.g. david.jpg
-├── db/
-│   └── schema.sql                # characters table + RLS policy (reference copy)
 └── docs/superpowers/             # specs and plans (this file's home)
 ```
 
 ---
 
-### Task 1: Supabase project — schema and credentials
-
-**Files:**
-- Create: `db/schema.sql`
-
-**Interfaces:**
-- Produces: a `characters` table with columns `id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources` and a public-read RLS policy, reachable at some `SUPABASE_URL` with an `anon` key — both values are consumed by Task 3.
-
-The Supabase MCP connected to this session only sees the "erpallaga's Org" account, which is already at its 2-active-project free-tier limit. The user is creating the project by hand in a different Supabase account that still has a free slot. This task is a human checkpoint — do not skip or fabricate the credentials.
-
-- [ ] **Step 1: Write the schema file**
-
-```sql
--- db/schema.sql
-create table characters (
-  id text primary key,           -- slug, e.g. "david"
-  name text not null,
-  image_url text,                -- relative path, e.g. "assets/images/david.jpg"
-  era_label text,                -- human-readable, e.g. "Época de los reyes, ~1040–970 a.E.C."
-  era_sort_key integer,          -- numeric year for ordering/positioning (negative = a.E.C.)
-  lived_in text,
-  known_for text,
-  books text[],
-  sources text[]
-);
-
-alter table characters enable row level security;
-
-create policy "Public read access"
-  on characters for select
-  using (true);
-```
-
-- [ ] **Step 2: Hand off to the user and wait for credentials**
-
-Tell the user: "Create a new Supabase project in your other account, open its SQL editor, and run the contents of `db/schema.sql`. Then send me the Project URL and the `anon` public key (Project Settings → API)." Do not proceed to Task 3 until both values are provided.
-
-- [ ] **Step 3: Verify**
-
-Once the user provides `SUPABASE_URL` and `SUPABASE_ANON_KEY`, confirm the table exists by running this query through the SQL editor (ask the user to paste back the result, or run it yourself if you gain MCP access to that project later):
-
-```sql
-select column_name, data_type from information_schema.columns where table_name = 'characters';
-```
-
-Expected: 9 rows matching the columns in Step 1.
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add db/schema.sql
-git commit -m "feat: add characters table schema and RLS policy"
-```
-
----
-
-### Task 2: Static page shell
+### Task 1: Static page shell
 
 **Files:**
 - Create: `index.html`
@@ -110,7 +51,7 @@ git commit -m "feat: add characters table schema and RLS policy"
 - Create: `assets/placeholder.svg`
 
 **Interfaces:**
-- Produces: DOM elements later tasks depend on — `#deck-view` (section, initially visible), `#timeline-view` (section, initially `hidden`), `#error-message` (p, initially `hidden`), `.tab[data-view="deck"]` and `.tab[data-view="timeline"]` (nav links), and the CSS classes `.card`, `.card-inner`, `.card-front`, `.card-back`, `.card.flipped`, `.timeline-track`, `.timeline-line`, `.timeline-point` that Tasks 5 and 6 render into.
+- Produces: DOM elements later tasks depend on — `#deck-view` (section, initially visible), `#timeline-view` (section, initially `hidden`), `#error-message` (p, initially `hidden`), `.tab[data-view="deck"]` and `.tab[data-view="timeline"]` (nav links), and the CSS classes `.card`, `.card-inner`, `.card-front`, `.card-back`, `.card.flipped`, `.timeline-track`, `.timeline-line`, `.timeline-point` that Tasks 3 and 4 render into.
 
 - [ ] **Step 1: Write `index.html`**
 
@@ -338,109 +279,63 @@ git commit -m "feat: add static page shell with deck/timeline containers"
 
 ---
 
-### Task 3: Supabase config and client
+### Task 2: Data file and data access layer
 
 **Files:**
-- Create: `js/config.js`
-- Create: `js/supabaseClient.js`
+- Create: `data/characters.json`
+- Create: `js/api.js`
 
 **Interfaces:**
-- Consumes: `SUPABASE_URL` and `SUPABASE_ANON_KEY` values from Task 1's human checkpoint.
-- Produces: `supabase` (named export from `js/supabaseClient.js`) — a `supabase-js` client instance that Task 4's `api.js` imports.
+- Produces: `async function fetchCharacters()` (named export from `js/api.js`) — resolves to an array of objects `{ id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources }` sorted by `era_sort_key` ascending, or throws an `Error` on failure (network error, HTTP error, or malformed JSON). Task 5's `main.js` is the only consumer.
 
-- [ ] **Step 1: Write `js/config.js` with the real project credentials**
+- [ ] **Step 1: Write `data/characters.json` with one placeholder row**
 
-Replace the two string values below with the actual `SUPABASE_URL` and `SUPABASE_ANON_KEY` the user gave you in Task 1. Do not commit placeholder strings — if you don't have the real values yet, stop and go back to Task 1.
+Start with a single dev/test entry so the pipeline is verifiable before real content lands in Tasks 7-9:
 
-```js
-// js/config.js
-export const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-export const SUPABASE_ANON_KEY = "YOUR-ANON-PUBLIC-KEY";
+```json
+[
+  {
+    "id": "test",
+    "name": "Personaje de prueba",
+    "image_url": "assets/placeholder.svg",
+    "era_label": "Época de prueba",
+    "era_sort_key": 0,
+    "lived_in": "Lugar de prueba",
+    "known_for": "Fila insertada solo para verificar el pipeline de datos.",
+    "books": ["Libro de prueba"],
+    "sources": ["fuente de prueba"]
+  }
+]
 ```
 
-- [ ] **Step 2: Write `js/supabaseClient.js`**
+- [ ] **Step 2: Write `js/api.js`**
 
 ```js
-// js/supabaseClient.js
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "./config.js";
+// js/api.js
+export async function fetchCharacters() {
+  const response = await fetch("data/characters.json");
+  if (!response.ok) {
+    throw new Error(`No se pudieron cargar los personajes: HTTP ${response.status}`);
+  }
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let characters;
+  try {
+    characters = await response.json();
+  } catch (err) {
+    throw new Error(`No se pudieron cargar los personajes: JSON inválido (${err.message})`);
+  }
+
+  return [...characters].sort((a, b) => a.era_sort_key - b.era_sort_key);
+}
 ```
 
-- [ ] **Step 3: Verify the client connects**
+- [ ] **Step 3: Verify**
 
 ```bash
 python -m http.server 8000
 ```
 
-Ask the user to open `http://localhost:8000`, open the browser dev console, and run:
-
-```js
-import("./js/supabaseClient.js").then(m => m.supabase.from("characters").select("*").then(console.log))
-```
-
-Expected: `{ data: [], error: null }` (empty array — no rows yet, but no error). If `error` is not `null`, the URL/key in `js/config.js` is wrong — fix and retry before moving on.
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add js/config.js js/supabaseClient.js
-git commit -m "feat: add Supabase client configuration"
-```
-
----
-
-### Task 4: Data access layer
-
-**Files:**
-- Create: `js/api.js`
-
-**Interfaces:**
-- Consumes: `supabase` from `js/supabaseClient.js`.
-- Produces: `async function fetchCharacters()` (named export) — resolves to an array of row objects `{ id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources }` sorted by `era_sort_key` ascending, or throws an `Error` on failure. Task 7's `main.js` is the only consumer.
-
-- [ ] **Step 1: Write `js/api.js`**
-
-```js
-// js/api.js
-import { supabase } from "./supabaseClient.js";
-
-export async function fetchCharacters() {
-  const { data, error } = await supabase
-    .from("characters")
-    .select("id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources")
-    .order("era_sort_key", { ascending: true });
-
-  if (error) {
-    throw new Error(`No se pudieron cargar los personajes: ${error.message}`);
-  }
-  return data;
-}
-```
-
-- [ ] **Step 2: Insert a temporary dev row so there's something to fetch**
-
-Run through the Supabase SQL editor (or MCP `execute_sql` if you have access to the target project):
-
-```sql
-insert into characters (id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources)
-values (
-  'test',
-  'Personaje de prueba',
-  'assets/placeholder.svg',
-  'Época de prueba',
-  0,
-  'Lugar de prueba',
-  'Fila insertada solo para verificar el pipeline de datos.',
-  array['Libro de prueba'],
-  array['fuente de prueba']
-);
-```
-
-- [ ] **Step 3: Verify `fetchCharacters()` returns it**
-
-With `python -m http.server 8000` running, ask the user to open `http://localhost:8000`, open the dev console, and run:
+Ask the user to open `http://localhost:8000`, open the dev console, and run:
 
 ```js
 import("./js/api.js").then(m => m.fetchCharacters().then(console.log))
@@ -448,29 +343,23 @@ import("./js/api.js").then(m => m.fetchCharacters().then(console.log))
 
 Expected: an array with exactly one object, `name: "Personaje de prueba"`.
 
-- [ ] **Step 4: Remove the dev row**
-
-```sql
-delete from characters where id = 'test';
-```
-
-- [ ] **Step 5: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
-git add js/api.js
-git commit -m "feat: add fetchCharacters data access function"
+git add data/characters.json js/api.js
+git commit -m "feat: add characters.json data file and fetchCharacters loader"
 ```
 
 ---
 
-### Task 5: Deck (flashcard) view
+### Task 3: Deck (flashcard) view
 
 **Files:**
 - Create: `js/deck.js`
 
 **Interfaces:**
 - Consumes: an array of character objects (same shape as `fetchCharacters()`'s resolved value) and a container `HTMLElement`.
-- Produces: `function initDeck(characters, containerEl)` (named export) — renders the deck into `containerEl` and returns `{ goTo(id) }`, where `goTo(id)` jumps the deck to the character with that `id` and flips the card to show its back. Task 7's `main.js` calls `initDeck` and passes the returned object's `goTo` to Task 6's `onSelect` callback.
+- Produces: `function initDeck(characters, containerEl)` (named export) — renders the deck into `containerEl` and returns `{ goTo(id) }`, where `goTo(id)` jumps the deck to the character with that `id` and flips the card to show its back. Task 5's `main.js` calls `initDeck` and passes the returned object's `goTo` to Task 4's `onSelect` callback.
 
 - [ ] **Step 1: Write `js/deck.js`**
 
@@ -532,9 +421,9 @@ export function initDeck(characters, containerEl) {
 }
 ```
 
-- [ ] **Step 2: Verify with the dev row**
+- [ ] **Step 2: Verify with the placeholder row**
 
-Re-insert the temporary row from Task 4 Step 2 (same SQL), then add this temporary snippet at the bottom of `index.html`'s `<script type="module">`... actually simpler: ask the user to run this in the dev console instead (no file changes needed):
+With `python -m http.server 8000` running (`data/characters.json` still has just the `"test"` entry from Task 2), ask the user to open `http://localhost:8000`, open the dev console, and run:
 
 ```js
 import("./js/api.js").then(async (api) => {
@@ -547,8 +436,6 @@ import("./js/api.js").then(async (api) => {
 
 Expected in the browser: one card showing "Personaje de prueba" with a disabled "Anterior" button and a disabled "Siguiente" button (only one row). Click the card — it flips to show the back fields. Then run `window.__deck.goTo("test")` in the console — expected: card is shown flipped.
 
-Remove the dev row again when done (`delete from characters where id = 'test';`).
-
 - [ ] **Step 3: Commit**
 
 ```bash
@@ -558,14 +445,14 @@ git commit -m "feat: add flashcard deck view with flip and prev/next navigation"
 
 ---
 
-### Task 6: Timeline view
+### Task 4: Timeline view
 
 **Files:**
 - Create: `js/timeline.js`
 
 **Interfaces:**
 - Consumes: an array of character objects (needs at least `id`, `name`, `image_url`, `era_sort_key`), a container `HTMLElement`, and an `onSelect(id)` callback.
-- Produces: `function initTimeline(characters, containerEl, onSelect)` (named export) — renders a horizontal timeline into `containerEl`; clicking a point calls `onSelect(id)`. Task 7's `main.js` passes a callback that switches to the deck tab and calls `deck.goTo(id)`.
+- Produces: `function initTimeline(characters, containerEl, onSelect)` (named export) — renders a horizontal timeline into `containerEl`; clicking a point calls `onSelect(id)`. Task 5's `main.js` passes a callback that switches to the deck tab and calls `deck.goTo(id)`.
 
 - [ ] **Step 1: Write `js/timeline.js`**
 
@@ -602,18 +489,25 @@ export function initTimeline(characters, containerEl, onSelect) {
 }
 ```
 
-- [ ] **Step 2: Verify with two dev rows**
+- [ ] **Step 2: Verify with two temporary rows**
 
-Insert two temporary rows with different `era_sort_key` values:
+Temporarily add a second object to `data/characters.json` (alongside `"test"`) with a different `era_sort_key`, e.g.:
 
-```sql
-insert into characters (id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources)
-values
-  ('test-a', 'Prueba A', 'assets/placeholder.svg', 'Época A', -2000, 'Lugar A', 'Prueba A', array['Libro A'], array['fuente A']),
-  ('test-b', 'Prueba B', 'assets/placeholder.svg', 'Época B', -1000, 'Lugar B', 'Prueba B', array['Libro B'], array['fuente B']);
+```json
+{
+  "id": "test-b",
+  "name": "Prueba B",
+  "image_url": "assets/placeholder.svg",
+  "era_label": "Época de prueba B",
+  "era_sort_key": 500,
+  "lived_in": "Lugar B",
+  "known_for": "Prueba B",
+  "books": ["Libro B"],
+  "sources": ["fuente B"]
+}
 ```
 
-Ask the user to run in the dev console:
+Ask the user to run in the dev console (server running, page reloaded):
 
 ```js
 import("./js/api.js").then(async (api) => {
@@ -624,9 +518,9 @@ import("./js/api.js").then(async (api) => {
 });
 ```
 
-Expected: two labeled points on a horizontal line, "Prueba A" left of "Prueba B" (older era first). Clicking a point logs `selected: test-a` or `selected: test-b`.
+Expected: two labeled points on a horizontal line, "Personaje de prueba" (era 0) left of "Prueba B" (era 500). Clicking a point logs `selected: test` or `selected: test-b`.
 
-Remove the dev rows: `delete from characters where id in ('test-a', 'test-b');`
+Remove the `"test-b"` object from `data/characters.json` afterward, leaving only `"test"`.
 
 - [ ] **Step 3: Commit**
 
@@ -637,14 +531,14 @@ git commit -m "feat: add horizontal timeline view"
 
 ---
 
-### Task 7: App wiring — router and main entry point
+### Task 5: App wiring — router and main entry point
 
 **Files:**
 - Create: `js/router.js`
 - Create: `js/main.js`
 
 **Interfaces:**
-- Consumes: `fetchCharacters` (Task 4), `initDeck` (Task 5), `initTimeline` (Task 6), and the DOM elements from Task 2 (`#deck-view`, `#timeline-view`, `#error-message`, `.tab[data-view]`).
+- Consumes: `fetchCharacters` (Task 2), `initDeck` (Task 3), `initTimeline` (Task 4), and the DOM elements from Task 1 (`#deck-view`, `#timeline-view`, `#error-message`, `.tab[data-view]`).
 - Produces: the running app — `js/main.js` has no exports, it's the module the browser loads directly.
 
 - [ ] **Step 1: Write `js/router.js`**
@@ -714,19 +608,17 @@ async function start() {
 start();
 ```
 
-- [ ] **Step 3: Verify end-to-end with the dev rows**
+- [ ] **Step 3: Verify end-to-end with the placeholder row**
 
-Re-insert the two dev rows from Task 6 Step 2. Start the server (`python -m http.server 8000`) and ask the user to open `http://localhost:8000` fresh (no manual console imports this time — `main.js` runs on load) and confirm:
-1. The deck tab is active by default and shows "Prueba A" (or "Prueba B" — whichever sorts first).
-2. Clicking the "Timeline" tab shows both points on a line.
-3. Clicking a timeline point switches back to the Mazo tab and shows that character's card flipped.
+With `data/characters.json` containing just the `"test"` entry, start the server (`python -m http.server 8000`) and ask the user to open `http://localhost:8000` fresh (no manual console imports this time — `main.js` runs on load) and confirm:
+1. The deck tab is active by default and shows "Personaje de prueba".
+2. Clicking the "Timeline" tab shows one point on a line.
+3. Clicking that timeline point switches back to the Mazo tab and shows the card flipped.
 4. No errors in the browser console.
-
-Remove the dev rows when done: `delete from characters where id in ('test-a', 'test-b');`
 
 - [ ] **Step 4: Verify the error path**
 
-Temporarily edit `js/config.js` to use an invalid `SUPABASE_ANON_KEY` (e.g. append `"x"`), reload the page, and confirm the `#error-message` paragraph becomes visible with the "No se pudieron cargar los personajes." text and the console shows the thrown error. Then restore the correct key.
+Temporarily rename `data/characters.json` to `data/characters.json.bak`, reload the page, and confirm the `#error-message` paragraph becomes visible with the "No se pudieron cargar los personajes." text and the console shows a 404-based error. Then rename the file back.
 
 - [ ] **Step 5: Commit**
 
@@ -737,13 +629,13 @@ git commit -m "feat: wire router and main entry point, handle load errors"
 
 ---
 
-### Task 8: GitHub Pages deployment
+### Task 6: GitHub Pages deployment
 
 **Files:**
 - None new — configuration only.
 
 **Interfaces:**
-- Consumes: the working static site from Tasks 2–7.
+- Consumes: the working static site from Tasks 1–5.
 - Produces: a public URL serving `index.html` from the repo root.
 
 - [ ] **Step 1: Push the current branch**
@@ -778,15 +670,16 @@ Nothing to commit (Pages config lives on GitHub, not in the repo). Skip this ste
 
 ---
 
-### Task 9: Seed content — Group A (Génesis a Jueces)
+### Task 7: Seed content — Group A (Génesis a Jueces)
 
 Characters: Abel, Noé, Abrahán, Moisés, Rut.
 
 **Files:**
+- Modify: `data/characters.json` (replace the `"test"` placeholder with these 5 real entries)
 - Create: `assets/images/abel.jpg`, `assets/images/noe.jpg`, `assets/images/abrahan.jpg`, `assets/images/moises.jpg`, `assets/images/rut.jpg`
 
 **Interfaces:**
-- Produces: 5 rows in the `characters` table that Tasks 5–7's already-built UI renders — no code changes needed, this task is pure content + data.
+- Produces: 5 objects in the `data/characters.json` array that Tasks 3–5's already-built UI renders — no code changes needed, this task is pure content + data.
 
 For each character, repeat this same procedure:
 
@@ -803,53 +696,59 @@ For each character, repeat this same procedure:
   If the chapter doesn't give a specific place or a clear list of Bible books, search jw.org, wol.jw.org, or *Perspicacia para comprender las Escrituras* (`it`) for that character to fill the gap. Never invent a fact that isn't backed by one of these sources.
 
 - [ ] **Step 3: Get the character's image**
-  Search jw.org for an official illustration of the character (the "Ficha bíblica" collectible series or article illustrations are good candidates). Download it and save as `assets/images/<id>.jpg` (e.g. `assets/images/abel.jpg`), where `<id>` is the lowercase, no-accent slug used in the table (`abel`, `noe`, `abrahan`, `moises`, `rut`).
+  Search jw.org for an official illustration of the character (the "Ficha bíblica" collectible series or article illustrations are good candidates). Download it and save as `assets/images/<id>.jpg` (e.g. `assets/images/abel.jpg`), where `<id>` is the lowercase, no-accent slug used in the data file (`abel`, `noe`, `abrahan`, `moises`, `rut`).
 
 - [ ] **Step 4: Show the drafted fields to the user for approval**
-  Present the `name`, `era_label`, `era_sort_key`, `lived_in`, `known_for`, `books`, `sources` values you drafted, and wait for the user to approve or correct them before inserting.
+  Present the `name`, `era_label`, `era_sort_key`, `lived_in`, `known_for`, `books`, `sources` values you drafted, and wait for the user to approve or correct them before adding to the JSON.
 
-- [ ] **Step 5: Insert the row**
-  Once approved, run through the Supabase SQL editor (or MCP `execute_sql` if available):
+- [ ] **Step 5: Add the entry to `data/characters.json`**
+  Once approved, append an object with this shape to the array (remove the `"test"` placeholder object the first time you do this):
 
-  ```sql
-  insert into characters (id, name, image_url, era_label, era_sort_key, lived_in, known_for, books, sources)
-  values (
-    '<id>',
-    '<name>',
-    'assets/images/<id>.jpg',
-    '<era_label>',
-    <era_sort_key>,
-    '<lived_in>',
-    '<known_for>',
-    array[<books>],
-    array[<sources>]
-  );
+  ```json
+  {
+    "id": "<id>",
+    "name": "<name>",
+    "image_url": "assets/images/<id>.jpg",
+    "era_label": "<era_label>",
+    "era_sort_key": <era_sort_key>,
+    "lived_in": "<lived_in>",
+    "known_for": "<known_for>",
+    "books": [<books>],
+    "sources": [<sources>]
+  }
+  ```
+
+  Validate the file is still well-formed JSON after editing:
+
+  ```bash
+  python -c "import json; json.load(open('data/characters.json', encoding='utf-8')); print('valid JSON')"
   ```
 
 - [ ] **Step 6: Verify**
-  With the dev server running, reload the app and confirm the new character's card appears in the deck (in the correct chronological position relative to any other seeded rows) and its timeline point is positioned correctly.
+  With the dev server running, reload the app and confirm the new character's card appears in the deck (in the correct chronological position relative to any other seeded entries) and its timeline point is positioned correctly.
 
 - [ ] **Step 7: Commit**
-  After all 5 characters in this group are inserted and verified:
+  After all 5 characters in this group are added and verified:
 
   ```bash
-  git add assets/images/abel.jpg assets/images/noe.jpg assets/images/abrahan.jpg assets/images/moises.jpg assets/images/rut.jpg
+  git add data/characters.json assets/images/abel.jpg assets/images/noe.jpg assets/images/abrahan.jpg assets/images/moises.jpg assets/images/rut.jpg
   git commit -m "content: seed Génesis–Jueces characters (Abel, Noé, Abrahán, Moisés, Rut)"
   ```
 
 ---
 
-### Task 10: Seed content — Group B (Reyes al Exilio)
+### Task 8: Seed content — Group B (Reyes al Exilio)
 
 Characters: Ana, Samuel, Jonatán, David, Abigaíl, Elías, Jonás, Ester.
 
 **Files:**
+- Modify: `data/characters.json` (append 8 more entries)
 - Create: `assets/images/ana.jpg`, `assets/images/samuel.jpg`, `assets/images/jonatan.jpg`, `assets/images/david.jpg`, `assets/images/abigail.jpg`, `assets/images/elias.jpg`, `assets/images/jonas.jpg`, `assets/images/ester.jpg`
 
 **Interfaces:**
-- Same as Task 9 — 8 more rows in `characters`, no code changes.
+- Same as Task 7 — 8 more objects in `data/characters.json`, no code changes.
 
-Follow the exact same 7-step procedure as Task 9 for each character, using these source locations for Step 1:
+Follow the exact same 7-step procedure as Task 7 for each character, using these source locations for Step 1:
 
 - Ana: `ia_S.pdf`, pages 51–58.
 - Samuel: `ia_S.pdf`, pages 59–75.
@@ -865,23 +764,24 @@ Ids: `ana`, `samuel`, `jonatan`, `david`, `abigail`, `elias`, `jonas`, `ester`.
 - [ ] **Step 7 (final commit for this group):**
 
 ```bash
-git add assets/images/ana.jpg assets/images/samuel.jpg assets/images/jonatan.jpg assets/images/david.jpg assets/images/abigail.jpg assets/images/elias.jpg assets/images/jonas.jpg assets/images/ester.jpg
+git add data/characters.json assets/images/ana.jpg assets/images/samuel.jpg assets/images/jonatan.jpg assets/images/david.jpg assets/images/abigail.jpg assets/images/elias.jpg assets/images/jonas.jpg assets/images/ester.jpg
 git commit -m "content: seed Reyes–Exilio characters (Ana, Samuel, Jonatán, David, Abigaíl, Elías, Jonás, Ester)"
 ```
 
 ---
 
-### Task 11: Seed content — Group C (Evangelios e iglesia primitiva)
+### Task 9: Seed content — Group C (Evangelios e iglesia primitiva)
 
 Characters: María, José (padre de Jesús), Marta, Pedro.
 
 **Files:**
+- Modify: `data/characters.json` (append final 4 entries)
 - Create: `assets/images/maria.jpg`, `assets/images/jose.jpg`, `assets/images/marta.jpg`, `assets/images/pedro.jpg`
 
 **Interfaces:**
-- Same as Task 9 — final 4 rows in `characters`, no code changes.
+- Same as Task 7 — final 4 objects in `data/characters.json`, no code changes.
 
-Follow the exact same 7-step procedure as Task 9, using these source locations for Step 1 (all in `ia_S.pdf`):
+Follow the exact same 7-step procedure as Task 7, using these source locations for Step 1 (all in `ia_S.pdf`):
 
 - María: pages 145–161.
 - José (padre de Jesús): pages 162–171.
@@ -893,16 +793,16 @@ Ids: `maria`, `jose`, `marta`, `pedro`. For José, disambiguate clearly in `know
 - [ ] **Step 7 (final commit for this group):**
 
 ```bash
-git add assets/images/maria.jpg assets/images/jose.jpg assets/images/marta.jpg assets/images/pedro.jpg
+git add data/characters.json assets/images/maria.jpg assets/images/jose.jpg assets/images/marta.jpg assets/images/pedro.jpg
 git commit -m "content: seed Evangelios characters (María, José, Marta, Pedro)"
 ```
 
 - [ ] **Step 8: Final full verification**
 
-With all 17 rows inserted and the dev server running, reload the app and confirm:
+With all 17 entries in `data/characters.json` and the dev server running, reload the app and confirm:
 1. The deck shows all 17 cards, navigable start to end with no gaps.
 2. Every card flips to show non-empty era/lived_in/known_for/books.
 3. The timeline shows all 17 points, ordered left-to-right chronologically (Abel first, Pedro last).
 4. Clicking any timeline point jumps to that character in the deck, flipped.
 
-Then verify the live GitHub Pages URL from Task 8 shows the same thing.
+Then verify the live GitHub Pages URL from Task 6 shows the same thing.
