@@ -82,8 +82,8 @@
         <div style="{{ singleCard.innerStyle }}" onClick="{{ singleCard.onClick }}">
 
           <div style="{{ singleCard.frontFaceStyle }}">
-            <div style="{{ singleCard.frontFaceInnerStyle }}">
-              <div style="{{ singleCard.frontPortraitStyle }}" onClick="{{ stopBubble }}" onPointerDown="{{ singleCard.onPortraitDown }}" onDoubleClick="{{ singleCard.onPortraitReset }}">
+            <div class="jw-front-inner" style="{{ singleCard.frontFaceInnerStyle }}">
+              <div class="jw-front-portrait" style="{{ singleCard.frontPortraitStyle }}" onClick="{{ stopBubble }}" onPointerDown="{{ singleCard.onPortraitDown }}" onDoubleClick="{{ singleCard.onPortraitReset }}">
                 <div style="position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:10.5px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);pointer-events:none;opacity:.55;">⠿ arrastra para ajustar</div>
               </div>
               <div style="flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;padding:24px 34px;">
@@ -564,7 +564,7 @@ class Component extends DCLogic {
         backFaceStyle: { ...SINGLE_BACK_FACE_BASE, ...faceVisState(flipped, false) },
         backFaceInnerStyle: SINGLE_BACK_FACE_INNER_STYLE,
         frontPortraitStyle: {
-          position: 'relative', width: '380px', flexShrink: 0, borderRadius: '18px 0 0 18px', overflow: 'hidden',
+          position: 'relative', width: 'min(380px, 42%)', flexShrink: 0, borderRadius: '18px 0 0 18px', overflow: 'hidden',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: single.portraitSrc ? `url(${single.portraitSrc})` : 'none',
           backgroundSize: 'cover', backgroundPosition: this.getPortraitPos(single.id),
           cursor: this.state.draggingPortrait === single.id ? 'grabbing' : 'grab', touchAction: 'none',
