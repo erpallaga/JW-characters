@@ -1,6 +1,6 @@
 # Responsive Tablet/Mobile Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Make `index.html` (the only source file) usable and visually correct at phone (375px), tablet (768px), and desktop (1280px) widths, in both view modes (Una por una / Cuadrícula) and both quiz-mode states, without changing data, behavior, or desktop appearance.
 
@@ -28,7 +28,7 @@
 - Consumes: nothing (pure literal template edits, no JS state).
 - Produces: nothing consumed by later tasks — purely visual, independent of Tasks 2–4.
 
-- [ ] **Step 1: Reduce header padding and title size on narrow screens**
+- [x] **Step 1: Reduce header padding and title size on narrow screens**
 
 Find the header container div (currently `padding:48px 32px 20px`) and the `<h1>` (currently `font-size:44px`). Change to fluid values so they shrink automatically instead of forcing horizontal scroll or overflow on a 375px viewport:
 
@@ -40,7 +40,7 @@ Find the header container div (currently `padding:48px 32px 20px`) and the `<h1>
 <h1 style="font-family:'Amiri',serif;font-size:clamp(28px,7vw,44px);font-weight:700;color:oklch(0.26 0.03 50);margin:0;line-height:1.1;">Personajes de la Biblia</h1>
 ```
 
-- [ ] **Step 2: Reduce padding on the chips row and timeline row containers**
+- [x] **Step 2: Reduce padding on the chips row and timeline row containers**
 
 The two sibling containers right below the header (era chips row, timeline row) use `padding:8px 32px 0` and `padding:6px 32px 28px`. Change the horizontal `32px` in both to `clamp(16px,4vw,32px)`:
 
@@ -52,7 +52,7 @@ The two sibling containers right below the header (era chips row, timeline row) 
 <div style="max-width:1180px;margin:0 auto;padding:6px clamp(16px,4vw,32px) 28px;">
 ```
 
-- [ ] **Step 3: Manual check — header at 375px width**
+- [x] **Step 3: Manual check — header at 375px width**
 
 Serve the app locally:
 
@@ -65,7 +65,7 @@ Open `http://localhost:8000/index.html`, use browser devtools responsive mode at
 - Title wraps/shrinks but stays on one or two lines, not clipped.
 - Toggle buttons (Una por una / Cuadrícula), Barajar, and Modo repaso still fit and wrap sanely (they already have `flex-wrap`).
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 cd "C:\Users\PaEr760\Documents\GitHub\JW-characters" && git add index.html && git commit -m "style: fluid header/chip padding for narrow viewports
@@ -85,7 +85,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 - Consumes: nothing new.
 - Produces: `.jw-single-wrap` class name and `.jw-arrow` class name, referenced by the `@media` rule added in this task — later tasks (3, 4) add their own independent classes and don't depend on these.
 
-- [ ] **Step 1: Add classes and make the perspective wrapper fluid-width**
+- [x] **Step 1: Add classes and make the perspective wrapper fluid-width**
 
 Find this line (the `perspective` wrapper around the flip card):
 
@@ -99,7 +99,7 @@ Replace with (adds a class for the media-query height override, and makes width 
 <div class="jw-single-wrap" style="perspective:1800px;width:min(720px,100%);height:460px;">
 ```
 
-- [ ] **Step 2: Make the Prev/Next buttons not push the card off-screen**
+- [x] **Step 2: Make the Prev/Next buttons not push the card off-screen**
 
 Find the two arrow buttons:
 
@@ -119,7 +119,7 @@ Add `class="jw-arrow"` to both:
 <button onClick="{{ onNext }}" class="jw-arrow" style="{{ arrowBtnStyle }}">›</button>
 ```
 
-- [ ] **Step 3: Give the arrow buttons `flex-shrink:0` in their JS style object**
+- [x] **Step 3: Give the arrow buttons `flex-shrink:0` in their JS style object**
 
 In `renderVals()`, find `arrowBtnStyle:` (a plain object, not per-item):
 
@@ -133,7 +133,7 @@ In `renderVals()`, find `arrowBtnStyle:` (a plain object, not per-item):
 
 Confirm `flexShrink: 0` is present (it already is in the current file) — no change needed here, just verify while editing Step 2 so the CSS override in Step 4 has a stable base to shrink from.
 
-- [ ] **Step 4: Add the `@media` rules**
+- [x] **Step 4: Add the `@media` rules**
 
 In the `<style>` block inside `<helmet>` (top of file, right after the `::-webkit-scrollbar-thumb` rule), add:
 
@@ -147,7 +147,7 @@ In the `<style>` block inside `<helmet>` (top of file, right after the `::-webki
 }
 ```
 
-- [ ] **Step 5: Manual check — single view at 768px and 375px**
+- [x] **Step 5: Manual check — single view at 768px and 375px**
 
 With the local server still running (from Task 1), reload at 768×1024 (tablet) and 375×812 (phone) in "Una por una" view. Confirm:
 - No horizontal scrollbar.
@@ -156,7 +156,7 @@ With the local server still running (from Task 1), reload at 768×1024 (tablet) 
 
 (Card content itself will still look wrong at this point — front/back faces are still row-based until Tasks 3–4. That's expected here; this task only fixes the outer wrapper and nav buttons.)
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd "C:\Users\PaEr760\Documents\GitHub\JW-characters" && git add index.html && git commit -m "style: responsive single-card wrapper and nav buttons
@@ -176,7 +176,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 - Consumes: `.jw-single-wrap` height values from Task 2 (front face must fit inside that height).
 - Produces: `.jw-front-inner` and `.jw-front-portrait` classes, independent of Task 4's back-face classes.
 
-- [ ] **Step 1: Add classes to the front-face inner row and the portrait block**
+- [x] **Step 1: Add classes to the front-face inner row and the portrait block**
 
 Find:
 
@@ -192,7 +192,7 @@ Replace with:
   <div class="jw-front-portrait" style="{{ singleCard.frontPortraitStyle }}" onClick="{{ stopBubble }}" onPointerDown="{{ singleCard.onPortraitDown }}" onDoubleClick="{{ singleCard.onPortraitReset }}">
 ```
 
-- [ ] **Step 2: Add responsive width to `frontPortraitStyle` (tablet: narrower fixed width instead of 380px)**
+- [x] **Step 2: Add responsive width to `frontPortraitStyle` (tablet: narrower fixed width instead of 380px)**
 
 In `renderVals()`, inside the `singleCard` builder, find:
 
@@ -216,7 +216,7 @@ Change `width: '380px'` to `width: 'min(380px, 42%)'` so it scales down on table
         },
 ```
 
-- [ ] **Step 3: Add the `@media` rule for mobile stacking**
+- [x] **Step 3: Add the `@media` rule for mobile stacking**
 
 In the `<style>` block, extend the `max-width: 639px` block added in Task 2:
 
@@ -229,11 +229,11 @@ In the `<style>` block, extend the `max-width: 639px` block added in Task 2:
 }
 ```
 
-- [ ] **Step 4: Manual check — front face at 375px and 768px**
+- [x] **Step 4: Manual check — front face at 375px and 768px**
 
 Reload "Una por una" view (front of card, not flipped) at 375px: portrait should be a full-width band on top (~190px tall), name and era pill below it, both fully visible, no horizontal scroll. At 768px: portrait and text should sit side by side, narrower than desktop but not overlapping or clipped.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd "C:\Users\PaEr760\Documents\GitHub\JW-characters" && git add index.html && git commit -m "style: stack single-card front face on mobile
@@ -253,7 +253,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 - Consumes: `.jw-single-wrap` height values from Task 2.
 - Produces: `.jw-back-inner`, `.jw-back-sidebar` classes. Independent of Task 3.
 
-- [ ] **Step 1: Add a class to the back-face inner row**
+- [x] **Step 1: Add a class to the back-face inner row**
 
 Find:
 
@@ -267,7 +267,7 @@ Find:
 <div class="jw-back-inner" style="{{ singleCard.backFaceInnerStyle }}">
 ```
 
-- [ ] **Step 2: Add a class to both sidebar variants (quiz and non-quiz)**
+- [x] **Step 2: Add a class to both sidebar variants (quiz and non-quiz)**
 
 Find the quiz-mode sidebar:
 
@@ -293,7 +293,7 @@ Replace with:
 <div class="jw-back-sidebar" style="width:230px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;border-right:1px solid oklch(0.82 0.02 70);padding-right:20px;">
 ```
 
-- [ ] **Step 3: Reduce the map's `minHeight` on mobile via the JS style object**
+- [x] **Step 3: Reduce the map's `minHeight` on mobile via the JS style object**
 
 In `renderVals()`, find `mapStyle:` inside the `singleCard` builder:
 
@@ -317,7 +317,7 @@ Replace with:
 <div class="jw-map" style="{{ singleCard.mapStyle }}">
 ```
 
-- [ ] **Step 4: Add the `@media` rule for mobile stacking**
+- [x] **Step 4: Add the `@media` rule for mobile stacking**
 
 Extend the `max-width: 639px` block again:
 
@@ -333,14 +333,14 @@ Extend the `max-width: 639px` block again:
 }
 ```
 
-- [ ] **Step 5: Manual check — back face (flipped card) at 375px, quiz mode off and on**
+- [x] **Step 5: Manual check — back face (flipped card) at 375px, quiz mode off and on**
 
 Reload, tap the card to flip it, at 375px width:
 - Non-quiz: name + map + "Dónde vivió" block stacks above the "Por qué se le conoce" / passages / timeline content, no horizontal scroll, map still shows the schematic pattern or image.
 - Toggle "Modo repaso" on: quiz sidebar (portrait-only) stacks above the reveal button / "¿Quién es?" content the same way.
 - At 768px: sidebar and content should sit side by side, narrower than desktop.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd "C:\Users\PaEr760\Documents\GitHub\JW-characters" && git add index.html && git commit -m "style: stack single-card back face on mobile
@@ -360,7 +360,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 - Consumes: nothing.
 - Produces: nothing (leaf task).
 
-- [ ] **Step 1: Lower the grid's minimum column width**
+- [x] **Step 1: Lower the grid's minimum column width**
 
 Find:
 
@@ -376,7 +376,7 @@ Replace with:
 
 (`min(230px,42vw)` means: on a 375px phone the effective minimum column is `42vw ≈ 157px`, so two columns fit with the gap; on desktop it stays 230px since `42vw` there is much larger than 230px and `min()` picks 230px.)
 
-- [ ] **Step 2: Make the per-card height fluid**
+- [x] **Step 2: Make the per-card height fluid**
 
 Find:
 
@@ -392,7 +392,7 @@ Replace with:
 
 (On a narrow 2-column phone layout each card is roughly half the viewport width; `72vw` keeps the card proportionally shorter there while `clamp` caps it at the original 340px on desktop.)
 
-- [ ] **Step 3: Manual check — grid view at 375px, 768px, 1280px**
+- [x] **Step 3: Manual check — grid view at 375px, 768px, 1280px**
 
 Switch to "Cuadrícula" view. Confirm:
 - 375px: 2 columns, cards not so short that the portrait+name+era pill get cramped or overlap.
@@ -400,7 +400,7 @@ Switch to "Cuadrícula" view. Confirm:
 - 1280px: unchanged from before this task (same column count/card size as the current deployed version).
 - Flip a few cards (click) to confirm the back-face content (place/knownFor/passages) still fits without clipping at 375px.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 cd "C:\Users\PaEr760\Documents\GitHub\JW-characters" && git add index.html && git commit -m "style: responsive grid columns and card height
@@ -419,7 +419,7 @@ Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>"
 - Consumes: everything from Tasks 1–5.
 - Produces: final confirmation the feature is done.
 
-- [ ] **Step 1: Full matrix pass**
+- [x] **Step 1: Full matrix pass**
 
 With the local server running, go through this matrix in the browser, resizing devtools to each width (375px, 768px, 1280px) and toggling each mode:
 
@@ -433,15 +433,15 @@ With the local server running, go through this matrix in the browser, resizing d
 | 1280 | Una por una | off | identical to pre-change desktop layout |
 | 1280 | Cuadrícula | off | identical to pre-change desktop layout |
 
-- [ ] **Step 2: Drag-to-reposition regression check on mobile viewport**
+- [x] **Step 2: Drag-to-reposition regression check on mobile viewport**
 
 At 375px, in "Una por una" view (front face), use devtools touch-emulation (or mouse, since `onPointerDown` handles both) to drag the portrait. Confirm the image position updates and persists (double-click/tap resets it, per existing `onPortraitReset` behavior). Repeat in "Cuadrícula" view on one card's portrait.
 
-- [ ] **Step 3: Compare desktop (1280px) screenshot before/after**
+- [x] **Step 3: Compare desktop (1280px) screenshot before/after**
 
 If any visual difference from the pre-Task-1 desktop layout is found, fix it in `index.html` now (the `clamp()`/`min()` values should all resolve to their original fixed values at ≥900px — if they don't, the clamp bounds are wrong).
 
-- [ ] **Step 4: Final commit (only if Step 3 required a fix)**
+- [x] **Step 4: Final commit (only if Step 3 required a fix)**
 
 ```bash
 cd "C:\Users\PaEr760\Documents\GitHub\JW-characters" && git add index.html && git commit -m "fix: correct desktop regression from responsive pass
