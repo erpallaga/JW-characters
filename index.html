@@ -163,9 +163,9 @@
   </sc-if>
 
   <sc-if value="{{ isGridView }}">
-  <div style="max-width:1180px;margin:0 auto;padding:8px 32px 72px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:26px;">
+  <div style="max-width:1180px;margin:0 auto;padding:8px clamp(16px,4vw,32px) 72px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,42vw),1fr));gap:clamp(14px,3vw,26px);">
     <sc-for list="{{ characters }}" as="ch" hint-placeholder-count="18">
-      <div style="perspective:1400px;height:340px;">
+      <div style="perspective:1400px;height:clamp(260px,72vw,340px);">
         <div style="{{ ch.innerStyle }}" onClick="{{ ch.onClick }}">
 
           <div style="{{ ch.frontFaceStyle }}">
