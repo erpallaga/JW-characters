@@ -54,6 +54,9 @@
         <span style="{{ quizKnobStyle }}"></span>
         <span style="position:relative;z-index:1;">Modo repaso</span>
       </button>
+      <a href="./admin.html" title="Panel de tarjetas" aria-label="Panel de tarjetas" style="{{ adminBtnStyle }}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2.5"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+      </a>
     </div>
   </div>
 
@@ -436,7 +439,9 @@ class Component extends DCLogic {
       };
     });
 
-    const filtered = order.map(id => byId[id]).filter(c => !this.state.eraFilter || c.eraId === this.state.eraFilter);
+    const filtered = order.map(id => byId[id])
+      .filter(c => c && !c.hidden)
+      .filter(c => !this.state.eraFilter || c.eraId === this.state.eraFilter);
     this._lastTotal = filtered.length || 1;
     const safeIndex = filtered.length ? Math.min(this.state.currentIndex, filtered.length - 1) : 0;
     const single = filtered[safeIndex];
@@ -565,6 +570,11 @@ class Component extends DCLogic {
         width: '44px', height: '44px', borderRadius: '50%', border: '1px solid oklch(0.82 0.02 70)',
         background: 'oklch(0.97 0.01 80)', color: 'oklch(0.26 0.03 50)', fontSize: '18px', fontWeight: 700,
         cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+      },
+      adminBtnStyle: {
+        width: '36px', height: '36px', borderRadius: '50%', border: '1px solid oklch(0.82 0.02 70)',
+        background: 'oklch(0.97 0.01 80)', color: 'oklch(0.48 0.02 55)', textDecoration: 'none',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
       },
       onShuffle: () => this.shuffle(), toggleQuiz: () => this.toggleQuiz(),
       quizToggleStyle: {
