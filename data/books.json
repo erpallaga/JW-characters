@@ -1,0 +1,398 @@
+[
+  {
+    "id": "genesis",
+    "name": "Génesis",
+    "slug": "Génesis",
+    "chapters": 50
+  },
+  {
+    "id": "exodo",
+    "name": "Éxodo",
+    "slug": "Éxodo",
+    "chapters": 40
+  },
+  {
+    "id": "levitico",
+    "name": "Levítico",
+    "slug": "levitico",
+    "chapters": 27
+  },
+  {
+    "id": "numeros",
+    "name": "Números",
+    "slug": "numeros",
+    "chapters": 36
+  },
+  {
+    "id": "deuteronomio",
+    "name": "Deuteronomio",
+    "slug": "deuteronomio",
+    "chapters": 34
+  },
+  {
+    "id": "josue",
+    "name": "Josué",
+    "slug": "josue",
+    "chapters": 24
+  },
+  {
+    "id": "jueces",
+    "name": "Jueces",
+    "slug": "jueces",
+    "chapters": 21
+  },
+  {
+    "id": "rut",
+    "name": "Rut",
+    "slug": "rut",
+    "chapters": 4
+  },
+  {
+    "id": "samuel1",
+    "name": "1 Samuel",
+    "slug": "1-samuel",
+    "chapters": 31
+  },
+  {
+    "id": "samuel2",
+    "name": "2 Samuel",
+    "slug": "2-samuel",
+    "chapters": 24
+  },
+  {
+    "id": "reyes1",
+    "name": "1 Reyes",
+    "slug": "1-reyes",
+    "chapters": 22
+  },
+  {
+    "id": "reyes2",
+    "name": "2 Reyes",
+    "slug": "2-reyes",
+    "chapters": 25
+  },
+  {
+    "id": "cronicas1",
+    "name": "1 Crónicas",
+    "slug": "1-cronicas",
+    "chapters": 29
+  },
+  {
+    "id": "cronicas2",
+    "name": "2 Crónicas",
+    "slug": "2-cronicas",
+    "chapters": 36
+  },
+  {
+    "id": "esdras",
+    "name": "Esdras",
+    "slug": "esdras",
+    "chapters": 10
+  },
+  {
+    "id": "nehemias",
+    "name": "Nehemías",
+    "slug": "nehemias",
+    "chapters": 13
+  },
+  {
+    "id": "ester",
+    "name": "Ester",
+    "slug": "ester",
+    "chapters": 10
+  },
+  {
+    "id": "job",
+    "name": "Job",
+    "slug": "job",
+    "chapters": 42
+  },
+  {
+    "id": "salmos",
+    "name": "Salmos",
+    "slug": "salmos",
+    "chapters": 150
+  },
+  {
+    "id": "proverbios",
+    "name": "Proverbios",
+    "slug": "proverbios",
+    "chapters": 31
+  },
+  {
+    "id": "eclesiastes",
+    "name": "Eclesiastés",
+    "slug": "eclesiastes",
+    "chapters": 12
+  },
+  {
+    "id": "cantar",
+    "name": "El Cantar de los Cantares",
+    "slug": "el-cantar-de-los-cantares",
+    "chapters": 8
+  },
+  {
+    "id": "isaias",
+    "name": "Isaías",
+    "slug": "isaias",
+    "chapters": 66
+  },
+  {
+    "id": "jeremias",
+    "name": "Jeremías",
+    "slug": "jeremias",
+    "chapters": 52
+  },
+  {
+    "id": "lamentaciones",
+    "name": "Lamentaciones",
+    "slug": "lamentaciones",
+    "chapters": 5
+  },
+  {
+    "id": "ezequiel",
+    "name": "Ezequiel",
+    "slug": "ezequiel",
+    "chapters": 48
+  },
+  {
+    "id": "daniel",
+    "name": "Daniel",
+    "slug": "daniel",
+    "chapters": 12
+  },
+  {
+    "id": "oseas",
+    "name": "Oseas",
+    "slug": "oseas",
+    "chapters": 14
+  },
+  {
+    "id": "joel",
+    "name": "Joel",
+    "slug": "joel",
+    "chapters": 3
+  },
+  {
+    "id": "amos",
+    "name": "Amós",
+    "slug": "amos",
+    "chapters": 9
+  },
+  {
+    "id": "abdias",
+    "name": "Abdías",
+    "slug": "abdias",
+    "chapters": 1
+  },
+  {
+    "id": "jonas",
+    "name": "Jonás",
+    "slug": "jonas",
+    "chapters": 4
+  },
+  {
+    "id": "miqueas",
+    "name": "Miqueas",
+    "slug": "miqueas",
+    "chapters": 7
+  },
+  {
+    "id": "nahum",
+    "name": "Nahúm",
+    "slug": "nahum",
+    "chapters": 3
+  },
+  {
+    "id": "habacuc",
+    "name": "Habacuc",
+    "slug": "habacuc",
+    "chapters": 3
+  },
+  {
+    "id": "sofonias",
+    "name": "Sofonías",
+    "slug": "sofonias",
+    "chapters": 3
+  },
+  {
+    "id": "ageo",
+    "name": "Ageo",
+    "slug": "ageo",
+    "chapters": 2
+  },
+  {
+    "id": "zacarias",
+    "name": "Zacarías",
+    "slug": "zacarias",
+    "chapters": 14
+  },
+  {
+    "id": "malaquias",
+    "name": "Malaquías",
+    "slug": "malaquias",
+    "chapters": 4
+  },
+  {
+    "id": "mateo",
+    "name": "Mateo",
+    "slug": "mateo",
+    "chapters": 28
+  },
+  {
+    "id": "marcos",
+    "name": "Marcos",
+    "slug": "marcos",
+    "chapters": 16
+  },
+  {
+    "id": "lucas",
+    "name": "Lucas",
+    "slug": "lucas",
+    "chapters": 24
+  },
+  {
+    "id": "juan",
+    "name": "Juan",
+    "slug": "juan",
+    "chapters": 21
+  },
+  {
+    "id": "hechos",
+    "name": "Hechos",
+    "slug": "hechos",
+    "chapters": 28
+  },
+  {
+    "id": "romanos",
+    "name": "Romanos",
+    "slug": "romanos",
+    "chapters": 16
+  },
+  {
+    "id": "corintios1",
+    "name": "1 Corintios",
+    "slug": "1-corintios",
+    "chapters": 16
+  },
+  {
+    "id": "corintios2",
+    "name": "2 Corintios",
+    "slug": "2-corintios",
+    "chapters": 13
+  },
+  {
+    "id": "galatas",
+    "name": "Gálatas",
+    "slug": "galatas",
+    "chapters": 6
+  },
+  {
+    "id": "efesios",
+    "name": "Efesios",
+    "slug": "efesios",
+    "chapters": 6
+  },
+  {
+    "id": "filipenses",
+    "name": "Filipenses",
+    "slug": "filipenses",
+    "chapters": 4
+  },
+  {
+    "id": "colosenses",
+    "name": "Colosenses",
+    "slug": "colosenses",
+    "chapters": 4
+  },
+  {
+    "id": "tesalonicenses1",
+    "name": "1 Tesalonicenses",
+    "slug": "1-tesalonicenses",
+    "chapters": 5
+  },
+  {
+    "id": "tesalonicenses2",
+    "name": "2 Tesalonicenses",
+    "slug": "2-tesalonicenses",
+    "chapters": 3
+  },
+  {
+    "id": "timoteo1",
+    "name": "1 Timoteo",
+    "slug": "1-timoteo",
+    "chapters": 6
+  },
+  {
+    "id": "timoteo2",
+    "name": "2 Timoteo",
+    "slug": "2-timoteo",
+    "chapters": 4
+  },
+  {
+    "id": "tito",
+    "name": "Tito",
+    "slug": "tito",
+    "chapters": 3
+  },
+  {
+    "id": "filemon",
+    "name": "Filemón",
+    "slug": "filemon",
+    "chapters": 1
+  },
+  {
+    "id": "hebreos",
+    "name": "Hebreos",
+    "slug": "hebreos",
+    "chapters": 13
+  },
+  {
+    "id": "santiago",
+    "name": "Santiago",
+    "slug": "santiago",
+    "chapters": 5
+  },
+  {
+    "id": "pedro1",
+    "name": "1 Pedro",
+    "slug": "1-pedro",
+    "chapters": 5
+  },
+  {
+    "id": "pedro2",
+    "name": "2 Pedro",
+    "slug": "2-pedro",
+    "chapters": 3
+  },
+  {
+    "id": "juan1",
+    "name": "1 Juan",
+    "slug": "1-juan",
+    "chapters": 5
+  },
+  {
+    "id": "juan2",
+    "name": "2 Juan",
+    "slug": "2-juan",
+    "chapters": 1
+  },
+  {
+    "id": "juan3",
+    "name": "3 Juan",
+    "slug": "3-juan",
+    "chapters": 1
+  },
+  {
+    "id": "judas",
+    "name": "Judas",
+    "slug": "judas",
+    "chapters": 1
+  },
+  {
+    "id": "apocalipsis",
+    "name": "Apocalipsis",
+    "slug": "apocalipsis",
+    "chapters": 22
+  }
+]

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Panel · Personajes de la Biblia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Mismos valores que index.html: el panel extiende el vocabulario del mazo,
+     no inventa uno nuevo. Solo cambia la densidad, que aquí es de herramienta. */
+  :root {
+    --fondo: oklch(0.95 0.016 80);
+    --superficie: oklch(0.97 0.01 80);
+    --campo: oklch(0.99 0.005 80);
+    --hueco: oklch(0.94 0.014 78);
+    --borde: oklch(0.82 0.02 70);
+    --borde-suave: oklch(0.88 0.02 75);
+    --tinta: oklch(0.26 0.03 50);
+    --tinta-2: oklch(0.48 0.02 55);
+    --acento: oklch(0.56 0.13 35);
+    --acento-suave: oklch(0.9 0.035 40);
+    --sombra: 0 1px 3px rgba(40,25,10,0.08);
+    --sombra-alta: 0 3px 10px rgba(40,25,10,0.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fondo); color: var(--tinta);
+    font-family: 'Mulish', system-ui, sans-serif; -webkit-font-smoothing: antialiased;
+  }
+  a { color: oklch(0.42 0.09 255); text-decoration: none; }
+  a:hover { color: oklch(0.34 0.1 255); }
+  ::-webkit-scrollbar { height: 8px; width: 8px; }
+  ::-webkit-scrollbar-thumb { background: var(--borde); border-radius: 8px; }
+  .amiri { font-family: 'Amiri', Georgia, serif; }
+
+  /* --- cabecera ---------------------------------------------------------- */
+  .topbar {
+    height: 56px; background: var(--superficie); border-bottom: 1px solid var(--borde);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(14px, 3vw, 28px); gap: 16px; position: sticky; top: 0; z-index: 20;
+  }
+  .marca { display: flex; align-items: center; gap: 11px; min-width: 0; }
+  .marca-icono {
+    width: 27px; height: 27px; border-radius: 9px; background: var(--acento-suave);
+    display: flex; align-items: center; justify-content: center; color: var(--acento); flex-shrink: 0;
+  }
+  .marca b { font-size: 13.5px; font-weight: 800; }
+  .sep { color: var(--borde); }
+  .marca .amiri { font-size: 14px; color: var(--tinta-2); }
+
+  /* --- controles --------------------------------------------------------- */
+  .btn {
+    height: 34px; padding: 0 17px; border-radius: 999px; border: 1px solid var(--borde);
+    background: var(--superficie); color: var(--tinta);
+    font-family: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--acento); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; border-color: var(--borde); }
+  .btn-primary { background: var(--acento); color: oklch(0.99 0.005 80); border-color: var(--acento); }
+  .btn-primary:hover { filter: brightness(1.06); }
+  .btn-acento { color: var(--acento); border-color: var(--acento); }
+  .btn-ghost { background: transparent; border-color: transparent; }
+  .btn-ghost:hover { border-color: var(--borde); }
+  .btn-alto { height: 40px; padding: 0 20px; font-size: 13px; }
+  .btn-bajo { height: 30px; padding: 0 12px; font-size: 11.5px; }
+  .btn-punteado { border-style: dashed; color: var(--acento); height: 32px; font-size: 12px; }
+  .icono-btn {
+    width: 30px; height: 30px; border-radius: 9px; border: 1px solid transparent;
+    background: transparent; color: var(--tinta-2); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; padding: 0;
+  }
+  .icono-btn:hover { background: var(--hueco); color: var(--tinta); }
+  .icono-btn:disabled { opacity: .35; cursor: not-allowed; background: transparent; }
+
+  .label {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--tinta-2); display: block;
+  }
+  .campo, select.campo, textarea.campo {
+    width: 100%; height: 36px; background: var(--campo); border: 1px solid var(--borde);
+    border-radius: 11px; padding: 0 12px; font-family: inherit; font-size: 13px; color: var(--tinta);
+  }
+  textarea.campo { height: auto; min-height: 126px; padding: 12px 13px; line-height: 1.55; resize: vertical; }
+  select.campo { background: var(--superficie); font-weight: 600; cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a736b' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9.5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 11px center; padding-right: 32px; }
+  .campo:focus, select.campo:focus, textarea.campo:focus { outline: none; border-color: var(--acento); }
+  .campo[readonly] { background: var(--hueco); color: var(--tinta-2); }
+  .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  .campo-grupo { display: flex; flex-direction: column; gap: 6px; }
+  .tarjeta-panel {
+    background: var(--superficie); border: 1px solid var(--borde); border-radius: 16px;
+    box-shadow: var(--sombra); padding: 19px 20px 20px;
+  }
+  .sechd { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--acento); margin-bottom: 14px; }
+
+  /* --- chips de estado --------------------------------------------------- */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; border-radius: 999px;
+    padding: 4px 11px; font-size: 11px; font-weight: 700; white-space: nowrap;
+  }
+  .chip-acento { background: var(--acento-suave); color: var(--acento); }
+  .chip-neutro { background: var(--hueco); color: var(--tinta-2); }
+  .chip-plano { color: var(--tinta-2); padding: 4px 0; }
+  .punto { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+  .punto-hueco { background: transparent; border: 1.5px solid var(--borde); }
+  .punto-gris { background: var(--borde); }
+
+  /* --- segmentado --------------------------------------------------------- */
+  .segmentado { display: flex; }
+  .segmentado button {
+    font-family: inherit; font-weight: 700; font-size: 12.5px; cursor: pointer; padding: 8px 15px;
+    border: 1px solid var(--borde); background: var(--superficie); color: var(--tinta);
+  }
+  .segmentado button:first-child { border-radius: 999px 0 0 999px; border-right: none; }
+  .segmentado button:last-child { border-radius: 0 999px 999px 0; }
+  .segmentado button.activo { background: var(--acento-suave); color: var(--acento); }
+
+  /* --- lista -------------------------------------------------------------- */
+  .lista { background: var(--superficie); border: 1px solid var(--borde); border-radius: 16px;
+    box-shadow: var(--sombra); padding: 6px 0 4px; }
+  .fila { display: flex; align-items: center; gap: 14px; padding: 8px 12px; border-radius: 12px; }
+  .fila + .fila { border-top: 1px solid var(--borde-suave); border-radius: 0; }
+  .fila.oculta { opacity: .55; }
+  .fila-cab { display: flex; align-items: center; gap: 14px; padding: 8px 12px 10px;
+    border-bottom: 1px solid var(--borde-suave); margin: 0 12px 4px; }
+  .col-era { width: 172px; flex-shrink: 0; }
+  .col-vida { width: 140px; flex-shrink: 0; font-size: 12px; color: var(--tinta-2); }
+  .col-estado { width: 158px; flex-shrink: 0; }
+  .col-acciones { width: 104px; flex-shrink: 0; display: flex; gap: 2px; justify-content: flex-end; }
+  .miniatura { width: 38px; height: 38px; border-radius: 11px; object-fit: cover; flex-shrink: 0;
+    border: 1px solid var(--borde); background: var(--hueco); }
+  .miniatura-vacia { display: flex; align-items: center; justify-content: center;
+    border-style: dashed; color: var(--tinta-2); }
+  .nombre-fila { font-size: 14px; font-weight: 700; line-height: 1.25; }
+  .sub-fila { font-size: 11.5px; color: var(--tinta-2); margin-top: 1px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* --- avisos ------------------------------------------------------------- */
+  .aviso { display: flex; align-items: flex-start; gap: 8px; padding: 11px 13px;
+    background: var(--hueco); border-radius: 12px; font-size: 11.5px; line-height: 1.45;
+    color: var(--tinta-2); }
+  .aviso svg { flex-shrink: 0; margin-top: 1px; }
+  .aviso-error { background: var(--acento-suave); color: var(--acento); font-weight: 600; }
+
+  /* --- pantallas centradas (entrar, token) -------------------------------- */
+  .centro { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+  .panel-centro { width: 100%; max-width: 470px; background: var(--superficie);
+    border: 1px solid var(--borde); border-radius: 18px; box-shadow: var(--sombra-alta);
+    padding: 32px; display: flex; flex-direction: column; gap: 22px; }
+
+  /* --- modal --------------------------------------------------------------- */
+  .velo { position: fixed; inset: 0; background: oklch(0.26 0.03 50 / 0.34); z-index: 40;
+    display: flex; align-items: center; justify-content: center; padding: 24px; overflow-y: auto; }
+  .modal { width: 100%; max-width: 540px; background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: 18px; box-shadow: 0 12px 40px rgba(40,25,10,0.28); padding: 26px 26px 22px;
+    display: flex; flex-direction: column; gap: 20px; }
+
+  /* --- editor -------------------------------------------------------------- */
+  .contenido { padding: 22px clamp(14px, 3vw, 28px) 28px; max-width: 1500px; margin: 0 auto; }
+  .editor { display: flex; gap: 24px; align-items: flex-start; }
+  .editor-form { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+  .editor-previa { width: 430px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px;
+    position: sticky; top: 78px; }
+  .rejilla-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .span-2 { grid-column: span 2; }
+
+  /* la tarjeta de la vista previa usa los mismos valores que el reverso real */
+  .previa-tarjeta { border-radius: 18px; background: oklch(0.905 0.02 76); border: 1px solid var(--borde);
+    box-shadow: var(--sombra-alta); padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .previa-nombre { font-family: 'Amiri', Georgia, serif; font-weight: 700; font-size: 30px; line-height: 1.1; }
+  .previa-rotulo { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--acento); }
+  .previa-texto { font-size: 13px; margin-top: 4px; line-height: 1.5; }
+  .previa-mapa { position: relative; height: 150px; border-radius: 10px; border: 1px solid var(--borde);
+    overflow: hidden; background: var(--hueco); }
+  .previa-mapa img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .previa-punto { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--acento);
+    box-shadow: 0 0 0 3px oklch(0.97 0.01 80 / 0.7); transform: translate(-50%, -50%); }
+  .previa-pasaje { font-size: 12.5px; color: var(--acento); background: var(--acento-suave);
+    border-radius: 8px; padding: 6px 10px; font-weight: 700; width: fit-content; }
+  .previa-linea { background: oklch(0.97 0.01 80 / 0.94); border-radius: 10px; padding: 10px 12px;
+    display: flex; flex-direction: column; gap: 6px; }
+  .via { position: relative; height: 6px; border-radius: 999px; background: oklch(0.85 0.02 70); }
+  .via-tramo { position: absolute; top: 0; bottom: 0; border-radius: 999px; background: var(--acento); }
+
+  .fila-pasaje { display: flex; align-items: center; gap: 9px; }
+  .fila-pasaje select { width: 184px; flex-shrink: 0; }
+  .fila-pasaje .cap { width: 74px; flex-shrink: 0; text-align: center; }
+  .fila-pasaje .rotulo { flex: 1; min-width: 0; }
+
+  .cargando { padding: 60px 20px; text-align: center; color: var(--tinta-2); font-size: 13px; }
+
+  @media (max-width: 1100px) {
+    .editor { flex-direction: column; }
+    .editor-previa { width: 100%; position: static; }
+  }
+  @media (max-width: 780px) {
+    .rejilla-2 { grid-template-columns: minmax(0, 1fr); }
+    .span-2 { grid-column: span 1; }
+    .col-era, .col-vida { display: none; }
+    .col-estado { width: auto; }
+    .fila-pasaje { flex-wrap: wrap; }
+    .fila-pasaje select, .fila-pasaje .rotulo { width: 100%; flex: 1 1 100%; }
+  }
+</style>
+</head>
+<body>
+  <div id="app"><div class="cargando">Cargando el panel…</div></div>
+  <script type="module" src="./admin/app.js"></script>
+</body>
+</html>

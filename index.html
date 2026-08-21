@@ -54,8 +54,17 @@
         <span style="{{ quizKnobStyle }}"></span>
         <span style="position:relative;z-index:1;">Modo repaso</span>
       </button>
+      <a href="./admin.html" title="Panel de tarjetas" aria-label="Panel de tarjetas" style="{{ adminBtnStyle }}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2.5"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+      </a>
     </div>
   </div>
+
+  <sc-if value="{{ dataPending }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1180px;margin:0 auto;padding:20px clamp(16px,4vw,32px) 0;">
+    <div style="{{ dataNoticeStyle }}">{{ dataNoticeText }}</div>
+  </div>
+  </sc-if>
 
   <div style="max-width:1180px;margin:0 auto;padding:8px clamp(16px,4vw,32px) 0;">
     <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;">
@@ -224,119 +233,19 @@
 }">
 const PORTRAIT_POS_KEY = 'jw-characters-portrait-pos';
 
-const ERAS = [
-  { id: 'origenes', label: 'Génesis', range: 'Génesis 1–11' },
-  { id: 'patriarcas', label: 'Patriarcas', range: '~2000–1800 a.e.c.' },
-  { id: 'exodo', label: 'Éxodo y conquista', range: '~1500–1400 a.e.c.' },
-  { id: 'jueces', label: 'Jueces y reino unido', range: '~1400–930 a.e.c.' },
-  { id: 'reino_dividido', label: 'Israel y Judá', range: '~930–607 a.e.c.' },
-  { id: 'exilio', label: 'Exilio y Restauración', range: '~607–450 a.e.c.' },
-  { id: 'evangelios', label: 'Evangelios', range: '~2 a.e.c.–33 e.c.' },
-  { id: 'iglesia', label: 'Congregación Cristiana', range: '~33–100 e.c.' },
-];
-
-const SLUG = {
-  genesis: 'Génesis', exodo: 'Éxodo', jueces: 'jueces', rut: 'rut',
-  samuel1: '1-samuel', samuel2: '2-samuel', reyes1: '1-reyes', reyes2: '2-reyes',
-  ester: 'ester', salmos: 'salmos', proverbios: 'proverbios', daniel: 'daniel',
-  mateo: 'mateo', marcos: 'marcos', lucas: 'lucas', juan: 'juan', hechos: 'hechos',
-  romanos: 'romanos', hebreos: 'hebreos', pedro1: '1-pedro',
+// Los personajes, las eras y la tabla de libros ya no viven aquí: se cargan de
+// data/*.json, que es lo que escribe el panel de administración. Esta página
+// solo lee. Ver docs/design/admin-panel/ para el porqué.
+const DATA_SOURCES = {
+  characters: 'data/characters.json',
+  eras: 'data/eras.json',
+  books: 'data/books.json',
 };
-function jw(book, chapter) {
-  return `https://www.jw.org/es/biblioteca/biblia/nwt/libros/${SLUG[book]}/${chapter}/`;
-}
 
-const CHARACTERS = [
-  { id:'noe', name:'Noé', eraId:'origenes', timeframe:'Antes del diluvio', place:'La tierra habitada antes del diluvio',
-    mapSrc: 'assets/mapa-noe.png', portraitSrc: 'assets/portrait-noe.jpg', mapPos: '65% 15%', life: { start: -2970, end: -2020, approx: true },
-    knownFor:'Descendiente de Set, es descrito como un hombre justo e intachable en medio de una sociedad corrompida y malvada. Durante unos 40 a 50 años construyó el arca siguiendo instrucciones precisas de Dios, mientras predicaba sobre el juicio que se avecinaba. Sobrevivió al diluvio junto con su esposa, sus tres hijos y sus esposas, y se convirtió en el antepasado de toda la humanidad posterior al diluvio. Después de salir del arca, Dios estableció con él un pacto simbolizado con el arco iris.',
-    passages:[{label:'Génesis 6–9 (el diluvio)', href: jw('genesis',6)}, {label:'Hebreos 11:7 (su fe)', href: jw('hebreos',11)}] },
-  { id:'abraham', name:'Abraham', eraId:'patriarcas', timeframe:'~2000 a.e.c.', place:'Ur de los caldeos, luego Harán y Canaán',
-    mapSrc: 'assets/mapa-abraham.png', portraitSrc: 'assets/portrait-abraham.jpg', mapPos: '62% 28%',
-    knownFor:'Originario de Ur, una próspera ciudad mesopotámica, dejó su hogar a los 75 años para dirigirse a una tierra que Dios le mostraría. Vivió como forastero en tiendas de campaña en Canaán, mostrando hospitalidad. Su fe fue puesta a prueba de manera extrema cuando se le pidió ofrecer a su hijo Isaac, prueba que superó plenamente confiado en Dios. A través de su hijo Isaac y su nieto Jacob (después llamado Israel) se formaría la nación de Israel y, más adelante, llegaría el Mesías.',
-    life: { start: -2018, end: -1843 },
-    passages:[{label:'Génesis 12 (el llamado)', href: jw('genesis',12)}, {label:'Génesis 22 (la prueba con Isaac)', href: jw('genesis',22)}, {label:'Hebreos 11:8-10', href: jw('hebreos',11)}] },
-  { id:'sara', name:'Sara', eraId:'patriarcas', timeframe:'~2000 a.e.c.', place:'Ur, Harán y Canaán',
-    mapSrc: 'assets/mapa-sara.png', portraitSrc: 'assets/portrait-sara.jpg', mapPos: '62% 28%',
-    knownFor:'Esposa y media hermana de Abraham, lo acompañó en su viaje desde Ur hasta Canaán y compartió con él décadas de vida nómada. Aunque era estéril, a los 90 años dio a luz a Isaac, el hijo que Dios había prometido, en un cumplimiento notable de fe. Es recordada como ejemplo de sujeción respetuosa y de esperanza firme frente a circunstancias que parecían imposibles.',
-    life: { start: -2008, end: -1881 },
-    passages:[{label:'Génesis 18 (la promesa)', href: jw('genesis',18)}, {label:'Génesis 21 (nacimiento de Isaac)', href: jw('genesis',21)}, {label:'1 Pedro 3:5, 6', href: jw('pedro1',3)}] },
-  { id:'jacob', name:'Jacob', eraId:'patriarcas', timeframe:'~1900 a.e.c.', place:'Canaán y Padán-aram',
-    mapSrc: 'assets/mapa-jacob.png', portraitSrc: 'assets/portrait-jacob.jpg', mapPos: '62% 28%',
-    knownFor:'Hijo menor de Isaac y Rebeca, recibió la primogenitura después de que Esaú la despreciara, y más tarde obtuvo también la bendición paternal. Trabajó veinte años para su tío (y luego suegro) Labán en Padán-aram, donde formó una gran familia. Tras luchar con un ángel, recibió el nombre Israel, y sus doce hijos llegaron a ser las cabezas de las doce tribus de Israel.',
-    life: { start: -1858, end: -1711 },
-    passages:[{label:'Génesis 28 (el sueño en Betel)', href: jw('genesis',28)}, {label:'Génesis 32 (cambio de nombre)', href: jw('genesis',32)}] },
-  { id:'jose', name:'José', eraId:'patriarcas', timeframe:'~1900–1800 a.e.c.', place:'Canaán y Egipto',
-    mapSrc: 'assets/mapa-jose.png', portraitSrc: 'assets/portrait-jose.jpg', mapPos: '48% 30%',
-    knownFor:'Hijo favorito de Jacob, fue vendido como esclavo por sus propios hermanos por envidia y llevado a Egipto. Allí, después de ser encarcelado injustamente, interpretó los sueños del faraón y llegó a ser el segundo gobernante del país. Administró con sabiduría los años de abundancia y hambruna, y perdonó a sus hermanos cuando estos acudieron a Egipto en busca de alimento, preservando así a toda su familia.',
-    life: { start: -1767, end: -1657 },
-    passages:[{label:'Génesis 37 (vendido por sus hermanos)', href: jw('genesis',37)}, {label:'Génesis 41 (gobernador de Egipto)', href: jw('genesis',41)}, {label:'Génesis 45 (el perdón)', href: jw('genesis',45)}] },
-  { id:'moises', name:'Moisés', eraId:'exodo', timeframe:'~1500 a.e.c.', place:'Egipto y el desierto del Sinaí',
-    mapSrc: 'assets/mapa-moises.png', portraitSrc: 'assets/portrait-moises.jpg', mapPos: '43% 42%',
-    knownFor:'Criado en la corte egipcia pero educado en su identidad hebrea, huyó a Madián tras matar a un egipcio y pasó allí cuarenta años como pastor. Dios lo comisionó desde una zarza ardiente para liberar a Israel de la esclavitud. Después de las diez plagas, guio al pueblo a través del mar Rojo y, en el monte Sinaí, recibió los Diez Mandamientos y la Ley que organizaría la nación.',
-    life: { start: -1593, end: -1473 },
-    passages:[{label:'Éxodo 3 (la zarza ardiente)', href: jw('exodo',3)}, {label:'Éxodo 14 (cruce del mar Rojo)', href: jw('exodo',14)}, {label:'Éxodo 20 (los Diez Mandamientos)', href: jw('exodo',20)}] },
-  { id:'debora', name:'Débora', eraId:'jueces', timeframe:'~1200 a.e.c.', place:'Montañas de Efraín, Israel',
-    mapSrc: 'assets/mapa-debora.png', portraitSrc: 'assets/portrait-debora.jpg', mapPos: '50% 50%',
-    knownFor:'En una época de opresión cananea bajo el rey Jabín, actuaba como jueza y profetisa, y el pueblo acudía a ella para resolver disputas bajo una palmera en las montañas de Efraín. Instruyó al militar Barac para enfrentar a Sísara, jefe del ejército de Jabín, y acompañó a las tropas israelitas a la batalla. Tras la victoria, compuso junto con Barac un cántico que celebra la liberación de Israel.',
-    life: { start: -1240, end: -1180, approx: true },
-    passages:[{label:'Jueces 4 (la batalla contra Sísara)', href: jw('jueces',4)}, {label:'Jueces 5 (el cántico de Débora)', href: jw('jueces',5)}] },
-  { id:'rut', name:'Rut', eraId:'jueces', timeframe:'~1100 a.e.c.', place:'Moab y Belén',
-    mapSrc: 'assets/mapa-rut.png', portraitSrc: 'assets/portrait-rut.jpg', mapPos: '50% 50%',
-    knownFor:'Viuda moabita, decidió acompañar a su suegra Noemí de regreso a Belén en lugar de quedarse en su propia tierra, pronunciando palabras de lealtad que se han hecho célebres. Trabajó espigando en los campos para sostener a ambas y allí conoció a Booz, un pariente cercano que la tomó como esposa. Su hijo Obed fue abuelo del rey David, integrándola en el linaje real de Israel.',
-    life: { start: -1150, end: -1090, approx: true },
-    passages:[{label:'Rut 1 (su lealtad a Noemí)', href: jw('rut',1)}, {label:'Rut 4 (matrimonio con Booz)', href: jw('rut',4)}] },
-  { id:'david', name:'David', eraId:'jueces', timeframe:'~1100–1000 a.e.c.', place:'Belén y Jerusalén',
-    mapSrc: 'assets/mapa-david.png', portraitSrc: 'assets/portrait-david.jpg', mapPos: '50% 50%',
-    knownFor:'Pastor de ovejas en Belén, fue ungido por el profeta Samuel para ser el futuro rey de Israel siendo aún joven. Se hizo famoso al vencer al gigante filisteo Goliat con una honda, y más tarde tuvo que huir del rey Saúl durante años antes de subir al trono. Como rey unificó las tribus de Israel, estableció Jerusalén como capital y compuso numerosos salmos que expresan una relación profunda con Dios.',
-    life: { start: -1107, end: -1037 },
-    passages:[{label:'1 Samuel 17 (David y Goliat)', href: jw('samuel1',17)}, {label:'2 Samuel 5 (rey de Israel)', href: jw('samuel2',5)}, {label:'Salmo 23', href: jw('salmos',23)}] },
-  { id:'salomon', name:'Salomón', eraId:'jueces', timeframe:'~1037–998 a.e.c.', place:'Jerusalén',
-    mapSrc: 'assets/mapa-salomon.png', portraitSrc: 'assets/portrait-salomon.jpg', mapPos: '50% 50%',
-    knownFor:'Hijo de David y Betsabé, pidió a Dios sabiduría para gobernar en lugar de riquezas, petición que le fue concedida junto con prosperidad. Bajo su reinado se construyó el templo de Jerusalén, centro de la adoración israelita durante siglos. Su fama de sabio atrajo visitantes como la reina de Sabá, aunque en su vejez su fidelidad se vio afectada por sus muchas esposas extranjeras.',
-    life: { start: -1057, end: -998, approx: true },
-    passages:[{label:'1 Reyes 3 (petición de sabiduría)', href: jw('reyes1',3)}, {label:'1 Reyes 6 (construcción del templo)', href: jw('reyes1',6)}, {label:'Proverbios 3', href: jw('proverbios',3)}] },
-  { id:'elias', name:'Elías', eraId:'reino_dividido', timeframe:'~940 a.e.c.', place:'Reino del norte, Israel',
-    mapSrc: 'assets/mapa-elias.png', portraitSrc: 'assets/portrait-elias.jpg', mapPos: '50% 50%',
-    knownFor:'Profeta activo en el reino del norte durante el reinado de Acab, denunció la adoración a Baal promovida por la reina Jezabel. En un enfrentamiento público en el monte Carmelo, demostró que Jehová es el verdadero Dios al hacer bajar fuego del cielo sobre su altar. Huyó al desierto tras las amenazas de Jezabel, pero Dios lo animó y le encomendó nuevas tareas. Cuando le llegó el momento de dejar su función como profeta principal, un torbellino lo trasladó a otro lugar de la tierra, no al cielo; siguió con vida, como muestra una carta suya al rey Jorán años más tarde (2 Crónicas 21:12).',
-    life: { start: -940, end: -860, approx: true },
-    passages:[{label:'1 Reyes 17 (la sequía)', href: jw('reyes1',17)}, {label:'1 Reyes 18 (el monte Carmelo)', href: jw('reyes1',18)}, {label:'2 Reyes 2 (fin de su ministerio)', href: jw('reyes2',2)}] },
-  { id:'ester', name:'Ester', eraId:'exilio', timeframe:'~475 a.e.c.', place:'Persia (Susa)',
-    mapSrc: 'assets/mapa-ester.png', portraitSrc: 'assets/portrait-ester.jpg', mapPos: '75% 45%',
-    knownFor:'Judía huérfana criada por su primo Mardoqueo en Persia, fue elegida reina por el rey Asuero sin que se supiera su origen. Cuando el funcionario Amán planeó exterminar a los judíos del imperio, Ester arriesgó su vida presentándose ante el rey sin haber sido llamada. Su valentía e ingenio en dos banquetes llevaron a la caída de Amán y a la salvación de su pueblo.',
-    life: { start: -510, end: -460, approx: true },
-    passages:[{label:'Ester 4 (su decisión de actuar)', href: jw('ester',4)}, {label:'Ester 7 (la caída de Amán)', href: jw('ester',7)}] },
-  { id:'daniel', name:'Daniel', eraId:'exilio', timeframe:'~618 a.e.c.', place:'Babilonia',
-    mapSrc: 'assets/mapa-daniel.png', portraitSrc: 'assets/portrait-daniel.jpg', mapPos: '68% 40%',
-    knownFor:'Llevado cautivo a Babilonia siendo joven, se mantuvo fiel a sus principios incluso al rechazar la comida de la mesa real. Adquirió reconocimiento al interpretar sueños que ningún sabio babilonio pudo descifrar, incluido el del rey Nabucodonosor. Bajo el dominio persa, sobrevivió una noche en un foso de leones después de negarse a dejar de orar a Dios, y escribió profecías detalladas sobre reinos futuros.',
-    life: { start: -640, end: -536, approx: true },
-    passages:[{label:'Daniel 2 (el sueño de la estatua)', href: jw('daniel',2)}, {label:'Daniel 6 (el foso de los leones)', href: jw('daniel',6)}] },
-  { id:'juanbautista', name:'Juan el Bautista', eraId:'evangelios', timeframe:'~29 e.c.', place:'Desierto de Judea y el río Jordán',
-    mapSrc: 'assets/mapa-juanbautista.png', portraitSrc: 'assets/portrait-juanbautista.jpg', mapPos: '50% 50%',
-    knownFor:'Hijo del sacerdote Zacarías y de Elisabet, nació de forma milagrosa en la vejez de sus padres. Vivió en el desierto y predicó un mensaje de arrepentimiento, bautizando a las personas en el río Jordán como símbolo de un cambio de vida. Bautizó a Jesús y lo señaló como el Cordero de Dios; más tarde fue encarcelado y ejecutado por orden de Herodes Antipas.',
-    life: { start: -2, end: 32, approx: true },
-    passages:[{label:'Lucas 1 (su nacimiento)', href: jw('lucas',1)}, {label:'Mateo 3 (bautiza a Jesús)', href: jw('mateo',3)}] },
-  { id:'maria', name:'María', eraId:'evangelios', timeframe:'~22 a.e.c.–55 e.c.', place:'Nazaret y Belén',
-    mapSrc: 'assets/mapa-maria.png', portraitSrc: 'assets/portrait-maria.jpg', mapPos: '50% 50%',
-    knownFor:'Joven de Nazaret comprometida con José, recibió la visita del ángel Gabriel que le anunció que sería la madre del Hijo de Dios. Aceptó ese papel con humildad a pesar de las dificultades sociales que implicaba. Acompañó a Jesús a lo largo de su vida, incluida su muerte en el madero, y después de la resurrección estuvo presente entre los primeros discípulos reunidos en Jerusalén.',
-    life: { start: -22, end: 55, approx: true },
-    passages:[{label:'Lucas 1 (el anuncio del ángel)', href: jw('lucas',1)}, {label:'Juan 19 (junto a la ejecución de Jesús)', href: jw('juan',19)}] },
-  { id:'jesus', name:'Jesús', eraId:'evangelios', timeframe:'~2 a.e.c.–33 e.c.', place:'Nazaret, Galilea y Judea',
-    mapSrc: 'assets/mapa-jesus.png', portraitSrc: 'assets/portrait-jesus.jpg', mapPos: '50% 50%',
-    knownFor:'Nacido en Belén y criado en Nazaret, comenzó su ministerio público alrededor de los 30 años tras ser bautizado por Juan. Recorrió Galilea y Judea enseñando sobre el Reino de Dios mediante parábolas, y realizó numerosos milagros que incluían sanar enfermos y resucitar muertos. Fue ejecutado en un madero por instigación de líderes religiosos, y sus discípulos lo vieron con vida después de su resurrección, hecho que dio origen a la congregación cristiana.',
-    life: { start: -2, end: 33 },
-    passages:[{label:'Mateo 5–7 (el Sermón del Monte)', href: jw('mateo',5)}, {label:'Juan 11 (resurrección de Lázaro)', href: jw('juan',11)}, {label:'Lucas 24 (su resurrección)', href: jw('lucas',24)}] },
-  { id:'pedro', name:'Pedro', eraId:'iglesia', timeframe:'~30–60 e.c.', place:'Galilea, luego Jerusalén y otras regiones',
-    mapSrc: 'assets/mapa-pedro.png', portraitSrc: 'assets/portrait-pedro.jpg', mapPos: '50% 50%',
-    knownFor:'Pescador de Galilea junto con su hermano Andrés, fue uno de los primeros discípulos llamados por Jesús. Reconocido por su carácter impulsivo, en una ocasión negó conocer a Jesús tres veces, pero luego fue restaurado y encomendado a cuidar de sus seguidores. Después de Pentecostés se convirtió en un líder destacado de la congregación en Jerusalén y predicó tanto a judíos como a los primeros gentiles convertidos.',
-    life: { start: -5, end: 64, approx: true },
-    passages:[{label:'Mateo 16 (confiesa a Jesús como el Cristo)', href: jw('mateo',16)}, {label:'Hechos 2 (Pentecostés)', href: jw('hechos',2)}, {label:'Hechos 10 (Cornelio, el primer gentil)', href: jw('hechos',10)}] },
-  { id:'pablo', name:'Pablo', eraId:'iglesia', timeframe:'~34–65 e.c.', place:'Tarso, luego por todo el Imperio romano',
-    mapSrc: 'assets/mapa-pablo.png', portraitSrc: 'assets/portrait-pablo.jpg', mapPos: '35% 12%',
-    knownFor:'Fariseo de Tarso, en un principio persiguió con dureza a los primeros cristianos hasta que tuvo una visión de Jesús resucitado en el camino a Damasco que cambió el rumbo de su vida. A partir de entonces realizó varios viajes misioneros por el Imperio romano, fundando y fortaleciendo congregaciones en Asia Menor, Grecia y otras regiones. Escribió 14 cartas del canon griego cristiano (incluida la de Hebreos) y, según la tradición histórica —no narrada en la Biblia—, finalmente fue ejecutado en Roma por su actividad como predicador.',
-    life: { start: 5, end: 65, approx: true },
-    passages:[{label:'Hechos 9 (su conversión)', href: jw('hechos',9)}, {label:'Hechos 17 (predica en Atenas)', href: jw('hechos',17)}, {label:'Romanos 8', href: jw('romanos',8)}] },
-];
+function jwHref(booksById, book, chapter) {
+  const b = booksById[book];
+  return b ? `https://www.jw.org/es/biblioteca/biblia/nwt/libros/${b.slug}/${chapter}/` : null;
+}
 
 const FRONT_FACE_BASE = { position: 'absolute', inset: 0, borderRadius: '16px', background: 'oklch(0.97 0.01 80)', border: '1px solid oklch(0.82 0.02 70)', boxShadow: '0 1px 3px rgba(40,25,10,0.08)', display: 'flex', flexDirection: 'column', cursor: 'pointer', transition: 'opacity .3s ease, transform .3s ease' };
 const BACK_FACE_BASE = { position: 'absolute', inset: 0, borderRadius: '16px', background: 'oklch(0.905 0.02 76)', border: '1px solid oklch(0.82 0.02 70)', cursor: 'pointer', transition: 'opacity .3s ease, transform .3s ease' };
@@ -370,6 +279,10 @@ const TEKHELET_SOFT = 'oklch(0.9 0.025 255)';
 
 class Component extends DCLogic {
   state = {
+    characters: [],
+    eras: [],
+    booksById: {},
+    dataStatus: 'loading',
     eraFilter: null,
     quizMode: !!(this.props && this.props.quizModeDefault),
     flipped: {},
@@ -382,7 +295,7 @@ class Component extends DCLogic {
   };
 
   componentDidMount() {
-    if (this.props && this.props.shuffleOnLoad) this.shuffle();
+    this.loadData();
     try {
       const raw = localStorage.getItem(PORTRAIT_POS_KEY);
       if (raw) this.setState({ portraitAdjust: JSON.parse(raw) });
@@ -394,6 +307,26 @@ class Component extends DCLogic {
     };
     document.addEventListener('keydown', this._onKeyDown);
   }
+  loadData() {
+    // no-cache revalida con el ETag: siempre trae la última publicación sin
+    // descargarse los datos enteros en cada visita.
+    const get = (url) => fetch(url, { cache: 'no-cache' }).then(r => {
+      if (!r.ok) throw new Error(`${url}: ${r.status}`);
+      return r.json();
+    });
+    Promise.all([get(DATA_SOURCES.characters), get(DATA_SOURCES.eras), get(DATA_SOURCES.books)])
+      .then(([characters, eras, books]) => {
+        this.setState({
+          characters, eras,
+          booksById: Object.fromEntries(books.map(b => [b.id, b])),
+          dataStatus: 'ready',
+        }, () => {
+          if (this.props && this.props.shuffleOnLoad) this.shuffle();
+        });
+      })
+      .catch(err => this.setState({ dataStatus: 'error', dataError: String(err && err.message || err) }));
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this._onKeyDown);
   }
@@ -458,7 +391,7 @@ class Component extends DCLogic {
     });
   }
   shuffle() {
-    const order = (this.state.orderIds ? [...this.state.orderIds] : CHARACTERS.map(c => c.id));
+    const order = (this.state.orderIds ? [...this.state.orderIds] : this.state.characters.map(c => c.id));
     for (let i = order.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [order[i], order[j]] = [order[j], order[i]];
@@ -474,6 +407,10 @@ class Component extends DCLogic {
     const stopBubble = (e) => e.stopPropagation();
     const linkStyle = { fontSize: '12.5px', color: primary, background: primarySoft, borderRadius: '8px', padding: '6px 10px', textDecoration: 'none', fontWeight: 700, width: 'fit-content' };
     const linkStyleSmall = { fontSize: '11px', color: primary, textDecoration: 'none', fontWeight: 700 };
+
+    const CHARACTERS = this.state.characters;
+    const ERAS = this.state.eras;
+    const booksById = this.state.booksById;
 
     const byId = Object.fromEntries(CHARACTERS.map(c => [c.id, c]));
     const erasById = Object.fromEntries(ERAS.map(e => [e.id, e]));
@@ -502,17 +439,19 @@ class Component extends DCLogic {
       };
     });
 
-    const filtered = order.map(id => byId[id]).filter(c => !this.state.eraFilter || c.eraId === this.state.eraFilter);
+    const filtered = order.map(id => byId[id])
+      .filter(c => c && !c.hidden)
+      .filter(c => !this.state.eraFilter || c.eraId === this.state.eraFilter);
     this._lastTotal = filtered.length || 1;
     const safeIndex = filtered.length ? Math.min(this.state.currentIndex, filtered.length - 1) : 0;
     const single = filtered[safeIndex];
 
     const characters = filtered.map(c => {
-      const era = erasById[c.eraId];
+      const era = erasById[c.eraId] || { label: '—', range: '' };
       const flipped = !!this.state.flipped[c.id];
       return {
         id: c.id, name: c.name, eraLabel: era.label, eraRange: c.timeframe, place: c.place, knownFor: c.knownFor,
-        passages: c.passages.map(p => ({ ...p, styleSmall: linkStyleSmall })),
+        passages: c.passages.map(p => ({ ...p, href: jwHref(booksById, p.book, p.chapter), styleSmall: linkStyleSmall })),
         accentColor: primary, frontName: this.state.quizMode ? '¿Quién es?' : c.name,
         onClick: () => this.toggleFlip(c.id),
         onPortraitDown: (e) => this.onPortraitDown(c.id, e),
@@ -533,12 +472,12 @@ class Component extends DCLogic {
     });
 
     const singleCard = single ? (() => {
-      const era = erasById[single.eraId];
+      const era = erasById[single.eraId] || { label: '—', range: '' };
       const flipped = !!this.state.flipped[single.id];
       return {
         id: single.id, name: single.name, eraLabel: era.label, eraRange: single.timeframe,
         place: single.place, knownFor: single.knownFor,
-        passages: single.passages.map(p => ({ ...p, style: linkStyle })),
+        passages: single.passages.map(p => ({ ...p, href: jwHref(booksById, p.book, p.chapter), style: linkStyle })),
         accentColor: primary, frontName: (this.state.quizMode && !this.state.revealed[single.id]) ? '¿Quién es?' : single.name,
         onPortraitDown: (e) => this.onPortraitDown(single.id, e),
         onPortraitReset: (e) => this.onPortraitReset(single.id, e),
@@ -601,6 +540,16 @@ class Component extends DCLogic {
 
     return {
       eraChips, timelineSegments, characters, stopBubble,
+      dataPending: this.state.dataStatus !== 'ready',
+      dataNoticeText: this.state.dataStatus === 'error'
+        ? `No se han podido cargar las tarjetas (${this.state.dataError}). Recarga la página; si acabas de publicar, dale unos segundos.`
+        : 'Cargando las tarjetas…',
+      dataNoticeStyle: {
+        fontSize: '13px', fontWeight: 700, borderRadius: '12px', padding: '14px 16px',
+        border: '1px solid oklch(0.82 0.02 70)',
+        background: this.state.dataStatus === 'error' ? primarySoft : 'oklch(0.97 0.01 80)',
+        color: this.state.dataStatus === 'error' ? primary : 'oklch(0.48 0.02 55)',
+      },
       isSingleView: this.state.viewMode === 'single', isGridView: this.state.viewMode === 'grid', singleCard,
       counterLabel: filtered.length ? `${safeIndex + 1} / ${filtered.length}` : '0 / 0',
       onPrev: () => this.stepCard(-1, filtered.length), onNext: () => this.stepCard(1, filtered.length),
@@ -621,6 +570,11 @@ class Component extends DCLogic {
         width: '44px', height: '44px', borderRadius: '50%', border: '1px solid oklch(0.82 0.02 70)',
         background: 'oklch(0.97 0.01 80)', color: 'oklch(0.26 0.03 50)', fontSize: '18px', fontWeight: 700,
         cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+      },
+      adminBtnStyle: {
+        width: '36px', height: '36px', borderRadius: '50%', border: '1px solid oklch(0.82 0.02 70)',
+        background: 'oklch(0.97 0.01 80)', color: 'oklch(0.48 0.02 55)', textDecoration: 'none',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
       },
       onShuffle: () => this.shuffle(), toggleQuiz: () => this.toggleQuiz(),
       quizToggleStyle: {

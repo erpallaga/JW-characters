@@ -2,3 +2,6 @@
 
 # Reference source material (JW.ORG / WOL publications) - not for public repo
 *.pdf
+
+# Lienzo de diseño ya montado: se regenera desde los .dc.html de al lado
+docs/design/**/panel-personajes.html
