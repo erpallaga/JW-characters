@@ -1,0 +1,16 @@
+{
+  "artboards": [
+    { "file": "Login.dc.html",    "x": 0,    "y": 0,    "w": 880,  "h": 620,  "title": "Entrar" },
+    { "file": "Token.dc.html",    "x": 960,  "y": 0,    "w": 880,  "h": 640,  "title": "Conectar el repositorio" },
+    { "file": "Publicar.dc.html", "x": 1920, "y": 0,    "w": 960,  "h": 720,  "title": "Publicar" },
+    { "file": "Main.dc.html",     "x": 0,    "y": 880,  "w": 1280, "h": 790,  "title": "Tarjetas" },
+    { "file": "Eras.dc.html",     "x": 1360, "y": 880,  "w": 960,  "h": 780,  "title": "Eras" },
+    { "file": "Editor.dc.html",   "x": 0,    "y": 1880, "w": 1440, "h": 1240, "title": "Editar una tarjeta" }
+  ],
+  "annotations": [
+    { "id": "paso-1", "x": 0, "y": -130, "w": 300, "text": "1 · Entrar\nUsuario y contraseña solo abren el panel. Lo que de verdad autoriza a publicar es el token de GitHub, y se pide una sola vez por navegador." },
+    { "id": "paso-2", "x": 0, "y": 750, "w": 300, "text": "2 · Trabajar\nTodo lo que haces aquí es borrador local: se guarda al instante, pero no toca la web. La cuenta de cambios sin publicar vive arriba a la derecha." },
+    { "id": "paso-3", "x": 0, "y": 1750, "w": 300, "text": "3 · Editar\nFormulario a la izquierda, la tarjeta de verdad a la derecha, con los mismos estilos que el mazo." }
+  ],
+  "launch": { "view": "canvas" }
+}

@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body{margin:0;background:oklch(0.95 0.016 80);font-family:'Mulish',sans-serif;-webkit-font-smoothing:antialiased;}
+    *{box-sizing:border-box;}
+    a{color:oklch(0.42 0.09 255);text-decoration:none;}
+    a:hover{color:oklch(0.34 0.1 255);}
+  </style>
+</helmet>
+
+<div style="min-height:790px;background:oklch(0.95 0.016 80);display:flex;flex-direction:column;">
+
+  <div style="height:56px;flex-shrink:0;background:oklch(0.97 0.01 80);border-bottom:1px solid oklch(0.82 0.02 70);display:flex;align-items:center;justify-content:space-between;padding:0 28px;">
+    <div style="display:flex;align-items:center;gap:11px;">
+      <div style="width:27px;height:27px;border-radius:9px;background:{{ accentSoft }};display:flex;align-items:center;justify-content:center;color:{{ accent }};">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2.5"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+      <span style="font-size:13.5px;font-weight:800;color:oklch(0.26 0.03 50);">Panel de tarjetas</span>
+      <span style="color:oklch(0.82 0.02 70);">/</span>
+      <span style="font-family:'Amiri',serif;font-size:14px;color:oklch(0.48 0.02 55);">Personajes de la Biblia</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span style="display:inline-flex;align-items:center;gap:7px;background:{{ accentSoft }};color:{{ accent }};border-radius:999px;padding:5px 13px;font-size:11.5px;font-weight:700;">
+        <span style="width:6px;height:6px;border-radius:50%;background:{{ accent }};"></span>3 cambios sin publicar
+      </span>
+      <button style="height:34px;padding:0 17px;border:none;border-radius:999px;background:{{ accent }};color:oklch(0.99 0.005 80);font-family:'Mulish',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"/><path d="M6 11l6-6 6 6"/></svg>
+        Publicar
+      </button>
+      <span style="width:1px;height:22px;background:oklch(0.88 0.02 75);"></span>
+      <span style="font-size:12.5px;font-weight:700;color:oklch(0.48 0.02 55);cursor:pointer;">Salir</span>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:22px 28px 24px;display:flex;flex-direction:column;gap:16px;">
+
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;">
+      <div>
+        <div style="font-size:19px;font-weight:800;color:oklch(0.26 0.03 50);line-height:1.2;">Tarjetas</div>
+        <div style="font-size:12.5px;color:oklch(0.48 0.02 55);margin-top:3px;">19 en el mazo · 1 oculta · 3 sin publicar</div>
+      </div>
+      <div style="display:flex;">
+        <button style="font-family:'Mulish',sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;padding:8px 15px;border-radius:999px 0 0 999px;border:1px solid oklch(0.82 0.02 70);border-right:none;background:{{ accentSoft }};color:{{ accent }};">Tarjetas</button>
+        <button style="font-family:'Mulish',sans-serif;font-weight:700;font-size:12.5px;cursor:pointer;padding:8px 15px;border-radius:0 999px 999px 0;border:1px solid oklch(0.82 0.02 70);background:oklch(0.97 0.01 80);color:oklch(0.26 0.03 50);">Eras</button>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:250px;height:36px;display:flex;align-items:center;gap:9px;background:oklch(0.99 0.005 80);border:1px solid oklch(0.82 0.02 70);border-radius:11px;padding:0 12px;color:oklch(0.48 0.02 55);">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
+        <span style="font-size:13px;">Buscar por nombre o lugar</span>
+      </div>
+      <div style="height:36px;display:flex;align-items:center;gap:9px;background:oklch(0.97 0.01 80);border:1px solid oklch(0.82 0.02 70);border-radius:11px;padding:0 12px;">
+        <span style="font-size:13px;font-weight:600;color:oklch(0.26 0.03 50);">Todas las eras</span>
+        <span style="display:inline-flex;color:oklch(0.48 0.02 55);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></span>
+      </div>
+      <div style="height:36px;display:flex;align-items:center;gap:9px;background:oklch(0.97 0.01 80);border:1px solid oklch(0.82 0.02 70);border-radius:11px;padding:0 12px;">
+        <span style="font-size:13px;font-weight:600;color:oklch(0.26 0.03 50);">Cualquier estado</span>
+        <span style="display:inline-flex;color:oklch(0.48 0.02 55);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9.5l6 6 6-6"/></svg></span>
+      </div>
+      <div style="flex:1;"></div>
+      <button style="height:36px;padding:0 16px;border-radius:999px;background:oklch(0.97 0.01 80);border:1px solid {{ accent }};color:{{ accent }};font-family:'Mulish',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5v13M5.5 12h13"/></svg>
+        Nueva tarjeta
+      </button>
+    </div>
+
+    <div style="background:oklch(0.97 0.01 80);border:1px solid oklch(0.82 0.02 70);border-radius:16px;box-shadow:0 1px 3px rgba(40,25,10,0.08);padding:6px 0 4px;">
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px 10px;border-bottom:1px solid oklch(0.88 0.02 75);margin:0 12px 4px;">
+        <div style="width:38px;flex-shrink:0;"></div>
+        <div style="flex:1;min-width:0;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:oklch(0.48 0.02 55);">Personaje</div>
+        <div style="width:172px;flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:oklch(0.48 0.02 55);">Era</div>
+        <div style="width:140px;flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:oklch(0.48 0.02 55);">Vida</div>
+        <div style="width:158px;flex-shrink:0;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:oklch(0.48 0.02 55);">Estado</div>
+        <div style="width:104px;flex-shrink:0;"></div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <div style="width:38px;height:38px;border-radius:11px;flex-shrink:0;background:oklch(0.94 0.014 78);border:1px dashed oklch(0.82 0.02 70);display:flex;align-items:center;justify-content:center;color:oklch(0.48 0.02 55);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17l4.5-3.5 3 2.2 3.5-2.7 5 4"/></svg></div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Ana</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Ramá y Siló</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Jueces y reino unido</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">—</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;background:{{ accentSoft }};color:{{ accent }};border-radius:999px;padding:4px 11px;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:{{ accent }};"></span>Nueva · sin publicar</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-ester.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Ester</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Persia (Susa)</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Exilio y Restauración</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">≈ 510 – 460 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;background:{{ accentSoft }};color:{{ accent }};border-radius:999px;padding:4px 11px;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:{{ accent }};"></span>Con cambios</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-noe.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Noé</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">La tierra habitada antes del diluvio</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Génesis</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">≈ 2970 – 2020 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.82 0.02 70);"></span>Publicada</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-abraham.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Abraham</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Ur de los caldeos, luego Harán y Canaán</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Patriarcas</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">2018 – 1843 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.82 0.02 70);"></span>Publicada</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-sara.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Sara</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Ur, Harán y Canaán</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Patriarcas</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">2008 – 1881 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.82 0.02 70);"></span>Publicada</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-moises.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Moisés</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Egipto y el desierto del Sinaí</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Éxodo y conquista</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">1593 – 1473 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.82 0.02 70);"></span>Publicada</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-debora.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Débora</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Montañas de Efraín, Israel</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Jueces y reino unido</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">≈ 1240 – 1180 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.82 0.02 70);"></span>Publicada</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;">
+        <img src="th-rut.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">Rut</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Moab y Belén</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Jueces y reino unido</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">≈ 1150 – 1090 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;background:oklch(0.82 0.02 70);"></span>Publicada</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.1A9.6 9.6 0 0 1 12 5c5 0 9 4.5 9 7a12 12 0 0 1-2.2 3.2"/><path d="M6.6 6.6C4 8.2 3 10.6 3 12c0 2.5 4 7 9 7 1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+      <div style="height:1px;background:oklch(0.88 0.02 75);margin:0 12px;"></div>
+
+      <div style="display:flex;align-items:center;gap:14px;padding:8px 12px;border-radius:12px;opacity:0.55;">
+        <img src="th-david.jpg" alt="" style="width:38px;height:38px;border-radius:11px;object-fit:cover;flex-shrink:0;border:1px solid oklch(0.82 0.02 70);">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:14px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.25;">David</div>
+          <div style="font-size:11.5px;color:oklch(0.48 0.02 55);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">Belén y Jerusalén</div>
+        </div>
+        <div style="width:172px;flex-shrink:0;">
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.03em;color:oklch(0.48 0.02 55);background:oklch(0.94 0.014 78);border-radius:999px;padding:4px 11px;">Jueces y reino unido</span>
+        </div>
+        <div style="width:140px;flex-shrink:0;font-size:12px;color:oklch(0.48 0.02 55);font-variant-numeric:tabular-nums;">1107 – 1037 a.e.c.</div>
+        <div style="width:158px;flex-shrink:0;"><span style="display:inline-flex;align-items:center;gap:6px;color:oklch(0.48 0.02 55);padding:4px 0;font-size:11px;font-weight:700;"><span style="width:6px;height:6px;border-radius:50%;border:1.5px solid oklch(0.82 0.02 70);"></span>Oculta en el mazo</span></div>
+        <div style="width:104px;flex-shrink:0;display:flex;gap:2px;justify-content:flex-end;color:oklch(0.48 0.02 55);">
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h8"/><path d="M16.4 4.1a1.9 1.9 0 0 1 2.7 2.7L7.6 18.3 4 19l.7-3.6Z"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-2.5 4-7 9-7s9 4.5 9 7-4 7-9 7-9-4.5-9-7Z"/><circle cx="12" cy="12" r="2.6"/></svg></span>
+          <span style="width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16"/><path d="M9 6.5V4.5h6v2"/><path d="M18.2 6.5 17.3 20H6.7L5.8 6.5"/><path d="M10.2 10.5v5.5M13.8 10.5v5.5"/></svg></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <span style="font-size:12px;color:oklch(0.48 0.02 55);">Mostrando 9 de 19 · ordenadas cronológicamente</span>
+      <span style="display:inline-flex;align-items:center;gap:7px;font-size:12px;color:oklch(0.48 0.02 55);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/></svg>
+        Borrador guardado hace 2 s
+      </span>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview": {"width": 1280, "height": 790}, "accentPalette": {"editor": "enum", "default": "clay", "options": ["clay", "tekhelet"], "tsType": "string", "section": "Estilo"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const tek = (this.props.accentPalette ?? 'clay') === 'tekhelet';
+    return {
+      accent: tek ? 'oklch(0.42 0.09 255)' : 'oklch(0.56 0.13 35)',
+      accentSoft: tek ? 'oklch(0.9 0.025 255)' : 'oklch(0.9 0.035 40)',
+    };
+  }
+}
+</script>
+</body>
+</html>
