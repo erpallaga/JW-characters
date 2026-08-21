@@ -12,7 +12,7 @@ export const AUTH = {
   user: 'eric',
   // Para cambiar la contraseña, calcula la huella de la nueva y pégala aquí:
   //   echo -n 'tu-contraseña' | shasum -a 256
-  passwordSha256: '9e6f462a842997cd9c29f1cb846cdd803f3a8d6be34683a98be5ddd0ebdbea6f',
+  passwordSha256: '5554b1fcd2a2ef67d833e48fcaf4e5af34c3a4928502877479620f96e917df26',
 };
 
 // Rutas de los datos dentro del repositorio.
