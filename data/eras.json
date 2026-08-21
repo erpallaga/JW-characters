@@ -1,0 +1,42 @@
+[
+  {
+    "id": "origenes",
+    "label": "Génesis",
+    "range": "Génesis 1–11"
+  },
+  {
+    "id": "patriarcas",
+    "label": "Patriarcas",
+    "range": "~2000–1800 a.e.c."
+  },
+  {
+    "id": "exodo",
+    "label": "Éxodo y conquista",
+    "range": "~1500–1400 a.e.c."
+  },
+  {
+    "id": "jueces",
+    "label": "Jueces y reino unido",
+    "range": "~1400–930 a.e.c."
+  },
+  {
+    "id": "reino_dividido",
+    "label": "Israel y Judá",
+    "range": "~930–607 a.e.c."
+  },
+  {
+    "id": "exilio",
+    "label": "Exilio y Restauración",
+    "range": "~607–450 a.e.c."
+  },
+  {
+    "id": "evangelios",
+    "label": "Evangelios",
+    "range": "~2 a.e.c.–33 e.c."
+  },
+  {
+    "id": "iglesia",
+    "label": "Congregación Cristiana",
+    "range": "~33–100 e.c."
+  }
+]
