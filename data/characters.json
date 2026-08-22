@@ -1,549 +1,1501 @@
 [
-  {
-    "id": "noe",
-    "name": "Noé",
-    "eraId": "origenes",
-    "timeframe": "Antes del diluvio",
-    "place": "La tierra habitada antes del diluvio",
-    "portraitSrc": "assets/portrait-noe.jpg",
-    "mapSrc": "assets/mapa-noe.png",
-    "mapPos": "65% 15%",
-    "knownFor": "Descendiente de Set, es descrito como un hombre justo e intachable en medio de una sociedad corrompida y malvada. Durante unos 40 a 50 años construyó el arca siguiendo instrucciones precisas de Dios, mientras predicaba sobre el juicio que se avecinaba. Sobrevivió al diluvio junto con su esposa, sus tres hijos y sus esposas, y se convirtió en el antepasado de toda la humanidad posterior al diluvio. Después de salir del arca, Dios estableció con él un pacto simbolizado con el arco iris.",
-    "passages": [
-      {
-        "book": "genesis",
-        "chapter": 6,
-        "label": "Génesis 6–9 (el diluvio)"
-      },
-      {
-        "book": "hebreos",
-        "chapter": 11,
-        "label": "Hebreos 11:7 (su fe)"
-      }
-    ],
-    "life": {
-      "start": -2970,
-      "end": -2020,
-      "approx": true
-    }
-  },
-  {
-    "id": "abraham",
-    "name": "Abrahán",
-    "eraId": "patriarcas",
-    "timeframe": "~2000 a.e.c.",
-    "place": "Ur de los caldeos, luego Harán y Canaán",
-    "portraitSrc": "assets/portrait-abraham.jpg",
-    "mapSrc": "assets/mapa-abraham.png",
-    "mapPos": "62% 28%",
-    "knownFor": "Originario de Ur, una próspera ciudad mesopotámica, dejó su hogar a los 75 años para dirigirse a una tierra que Dios le mostraría. Vivió como forastero en tiendas de campaña en Canaán, mostrando hospitalidad. Su fe fue puesta a prueba de manera extrema cuando se le pidió ofrecer a su hijo Isaac, prueba que superó plenamente confiado en Dios. A través de su hijo Isaac y su nieto Jacob (después llamado Israel) se formaría la nación de Israel y, más adelante, llegaría el Mesías.",
-    "passages": [
-      {
-        "book": "genesis",
-        "chapter": 12,
-        "label": "Génesis 12 (el llamado)"
-      },
-      {
-        "book": "genesis",
-        "chapter": 22,
-        "label": "Génesis 22 (la prueba con Isaac)"
-      },
-      {
-        "book": "hebreos",
-        "chapter": 11,
-        "label": "Hebreos 11:8-10"
-      }
-    ],
-    "life": {
-      "start": -2018,
-      "end": -1843
-    }
-  },
-  {
-    "id": "sara",
-    "name": "Sara",
-    "eraId": "patriarcas",
-    "timeframe": "~2000 a.e.c.",
-    "place": "Ur, Harán y Canaán",
-    "portraitSrc": "assets/portrait-sara.jpg",
-    "mapSrc": "assets/mapa-sara.png",
-    "mapPos": "62% 28%",
-    "knownFor": "Esposa y media hermana de Abraham, lo acompañó en su viaje desde Ur hasta Canaán y compartió con él décadas de vida nómada. Aunque era estéril, a los 90 años dio a luz a Isaac, el hijo que Dios había prometido, en un cumplimiento notable de fe. Es recordada como ejemplo de sujeción respetuosa y de esperanza firme frente a circunstancias que parecían imposibles.",
-    "passages": [
-      {
-        "book": "genesis",
-        "chapter": 18,
-        "label": "Génesis 18 (la promesa)"
-      },
-      {
-        "book": "genesis",
-        "chapter": 21,
-        "label": "Génesis 21 (nacimiento de Isaac)"
-      },
-      {
-        "book": "pedro1",
-        "chapter": 3,
-        "label": "1 Pedro 3:5, 6"
-      }
-    ],
-    "life": {
-      "start": -2008,
-      "end": -1881
-    }
-  },
-  {
-    "id": "jacob",
-    "name": "Jacob",
-    "eraId": "patriarcas",
-    "timeframe": "~1900 a.e.c.",
-    "place": "Canaán y Padán-aram",
-    "portraitSrc": "assets/portrait-jacob.jpg",
-    "mapSrc": "assets/mapa-jacob.png",
-    "mapPos": "62% 28%",
-    "knownFor": "Hijo menor de Isaac y Rebeca, recibió la primogenitura después de que Esaú la despreciara, y más tarde obtuvo también la bendición paternal. Trabajó veinte años para su tío (y luego suegro) Labán en Padán-aram, donde formó una gran familia. Tras luchar con un ángel, recibió el nombre Israel, y sus doce hijos llegaron a ser las cabezas de las doce tribus de Israel.",
-    "passages": [
-      {
-        "book": "genesis",
-        "chapter": 28,
-        "label": "Génesis 28 (el sueño en Betel)"
-      },
-      {
-        "book": "genesis",
-        "chapter": 32,
-        "label": "Génesis 32 (cambio de nombre)"
-      }
-    ],
-    "life": {
-      "start": -1858,
-      "end": -1711
-    }
-  },
-  {
-    "id": "jose",
-    "name": "José",
-    "eraId": "patriarcas",
-    "timeframe": "~1900–1800 a.e.c.",
-    "place": "Canaán y Egipto",
-    "portraitSrc": "assets/portrait-jose.jpg",
-    "mapSrc": "assets/mapa-jose.png",
-    "mapPos": "48% 30%",
-    "knownFor": "Hijo favorito de Jacob, fue vendido como esclavo por sus propios hermanos por envidia y llevado a Egipto. Allí, después de ser encarcelado injustamente, interpretó los sueños del faraón y llegó a ser el segundo gobernante del país. Administró con sabiduría los años de abundancia y hambruna, y perdonó a sus hermanos cuando estos acudieron a Egipto en busca de alimento, preservando así a toda su familia.",
-    "passages": [
-      {
-        "book": "genesis",
-        "chapter": 37,
-        "label": "Génesis 37 (vendido por sus hermanos)"
-      },
-      {
-        "book": "genesis",
-        "chapter": 41,
-        "label": "Génesis 41 (gobernador de Egipto)"
-      },
-      {
-        "book": "genesis",
-        "chapter": 45,
-        "label": "Génesis 45 (el perdón)"
-      }
-    ],
-    "life": {
-      "start": -1767,
-      "end": -1657
-    }
-  },
-  {
-    "id": "moises",
-    "name": "Moisés",
-    "eraId": "exodo",
-    "timeframe": "~1500 a.e.c.",
-    "place": "Egipto y el desierto del Sinaí",
-    "portraitSrc": "assets/portrait-moises.jpg",
-    "mapSrc": "assets/mapa-moises.png",
-    "mapPos": "43% 42%",
-    "knownFor": "Criado en la corte egipcia pero educado en su identidad hebrea, huyó a Madián tras matar a un egipcio y pasó allí cuarenta años como pastor. Dios lo comisionó desde una zarza ardiente para liberar a Israel de la esclavitud. Después de las diez plagas, guio al pueblo a través del mar Rojo y, en el monte Sinaí, recibió los Diez Mandamientos y la Ley que organizaría la nación.",
-    "passages": [
-      {
-        "book": "exodo",
-        "chapter": 3,
-        "label": "Éxodo 3 (la zarza ardiente)"
-      },
-      {
-        "book": "exodo",
-        "chapter": 14,
-        "label": "Éxodo 14 (cruce del mar Rojo)"
-      },
-      {
-        "book": "exodo",
-        "chapter": 20,
-        "label": "Éxodo 20 (los Diez Mandamientos)"
-      }
-    ],
-    "life": {
-      "start": -1593,
-      "end": -1473
-    }
-  },
-  {
-    "id": "debora",
-    "name": "Débora",
-    "eraId": "jueces",
-    "timeframe": "~1200 a.e.c.",
-    "place": "Montañas de Efraín, Israel",
-    "portraitSrc": "assets/portrait-debora.jpg",
-    "mapSrc": "assets/mapa-debora.png",
-    "mapPos": "50% 50%",
-    "knownFor": "En una época de opresión cananea bajo el rey Jabín, actuaba como jueza y profetisa, y el pueblo acudía a ella para resolver disputas bajo una palmera en las montañas de Efraín. Instruyó al militar Barac para enfrentar a Sísara, jefe del ejército de Jabín, y acompañó a las tropas israelitas a la batalla. Tras la victoria, compuso junto con Barac un cántico que celebra la liberación de Israel.",
-    "passages": [
-      {
-        "book": "jueces",
-        "chapter": 4,
-        "label": "Jueces 4 (la batalla contra Sísara)"
-      },
-      {
-        "book": "jueces",
-        "chapter": 5,
-        "label": "Jueces 5 (el cántico de Débora)"
-      }
-    ],
-    "life": {
-      "start": -1240,
-      "end": -1180,
-      "approx": true
-    }
-  },
-  {
-    "id": "rut",
-    "name": "Rut",
-    "eraId": "jueces",
-    "timeframe": "~1100 a.e.c.",
-    "place": "Moab y Belén",
-    "portraitSrc": "assets/portrait-rut.jpg",
-    "mapSrc": "assets/mapa-rut.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Viuda moabita, decidió acompañar a su suegra Noemí de regreso a Belén en lugar de quedarse en su propia tierra, pronunciando palabras de lealtad que se han hecho célebres. Trabajó espigando en los campos para sostener a ambas y allí conoció a Booz, un pariente cercano que la tomó como esposa. Su hijo Obed fue abuelo del rey David, integrándola en el linaje real de Israel.",
-    "passages": [
-      {
-        "book": "rut",
-        "chapter": 1,
-        "label": "Rut 1 (su lealtad a Noemí)"
-      },
-      {
-        "book": "rut",
-        "chapter": 4,
-        "label": "Rut 4 (matrimonio con Booz)"
-      }
-    ],
-    "life": {
-      "start": -1150,
-      "end": -1090,
-      "approx": true
-    }
-  },
-  {
-    "id": "david",
-    "name": "David",
-    "eraId": "jueces",
-    "timeframe": "~1100–1000 a.e.c.",
-    "place": "Belén y Jerusalén",
-    "portraitSrc": "assets/portrait-david.jpg",
-    "mapSrc": "assets/mapa-david.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Pastor de ovejas en Belén, fue ungido por el profeta Samuel para ser el futuro rey de Israel siendo aún joven. Se hizo famoso al vencer al gigante filisteo Goliat con una honda, y más tarde tuvo que huir del rey Saúl durante años antes de subir al trono. Como rey unificó las tribus de Israel, estableció Jerusalén como capital y compuso numerosos salmos que expresan una relación profunda con Dios.",
-    "passages": [
-      {
-        "book": "samuel1",
-        "chapter": 17,
-        "label": "1 Samuel 17 (David y Goliat)"
-      },
-      {
-        "book": "samuel2",
-        "chapter": 5,
-        "label": "2 Samuel 5 (rey de Israel)"
-      },
-      {
-        "book": "salmos",
-        "chapter": 23,
-        "label": "Salmo 23"
-      }
-    ],
-    "life": {
-      "start": -1107,
-      "end": -1037
-    }
-  },
-  {
-    "id": "salomon",
-    "name": "Salomón",
-    "eraId": "jueces",
-    "timeframe": "~1037–998 a.e.c.",
-    "place": "Jerusalén",
-    "portraitSrc": "assets/portrait-salomon.jpg",
-    "mapSrc": "assets/mapa-salomon.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Hijo de David y Betsabé, pidió a Dios sabiduría para gobernar en lugar de riquezas, petición que le fue concedida junto con prosperidad. Bajo su reinado se construyó el templo de Jerusalén, centro de la adoración israelita durante siglos. Su fama de sabio atrajo visitantes como la reina de Sabá, aunque en su vejez su fidelidad se vio afectada por sus muchas esposas extranjeras.",
-    "passages": [
-      {
-        "book": "reyes1",
-        "chapter": 3,
-        "label": "1 Reyes 3 (petición de sabiduría)"
-      },
-      {
-        "book": "reyes1",
-        "chapter": 6,
-        "label": "1 Reyes 6 (construcción del templo)"
-      },
-      {
-        "book": "proverbios",
-        "chapter": 3,
-        "label": "Proverbios 3"
-      }
-    ],
-    "life": {
-      "start": -1057,
-      "end": -998,
-      "approx": true
-    }
-  },
-  {
-    "id": "elias",
-    "name": "Elías",
-    "eraId": "reino_dividido",
-    "timeframe": "~940 a.e.c.",
-    "place": "Reino del norte, Israel",
-    "portraitSrc": "assets/portrait-elias.jpg",
-    "mapSrc": "assets/mapa-elias.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Profeta activo en el reino del norte durante el reinado de Acab, denunció la adoración a Baal promovida por la reina Jezabel. En un enfrentamiento público en el monte Carmelo, demostró que Jehová es el verdadero Dios al hacer bajar fuego del cielo sobre su altar. Huyó al desierto tras las amenazas de Jezabel, pero Dios lo animó y le encomendó nuevas tareas. Cuando le llegó el momento de dejar su función como profeta principal, un torbellino lo trasladó a otro lugar de la tierra, no al cielo; siguió con vida, como muestra una carta suya al rey Jorán años más tarde (2 Crónicas 21:12).",
-    "passages": [
-      {
-        "book": "reyes1",
-        "chapter": 17,
-        "label": "1 Reyes 17 (la sequía)"
-      },
-      {
-        "book": "reyes1",
-        "chapter": 18,
-        "label": "1 Reyes 18 (el monte Carmelo)"
-      },
-      {
-        "book": "reyes2",
-        "chapter": 2,
-        "label": "2 Reyes 2 (fin de su ministerio)"
-      }
-    ],
-    "life": {
-      "start": -940,
-      "end": -860,
-      "approx": true
-    }
-  },
-  {
-    "id": "ester",
-    "name": "Ester",
-    "eraId": "exilio",
-    "timeframe": "~475 a.e.c.",
-    "place": "Persia (Susa)",
-    "portraitSrc": "assets/portrait-ester.jpg",
-    "mapSrc": "assets/mapa-ester.png",
-    "mapPos": "75% 45%",
-    "knownFor": "Judía huérfana criada por su primo Mardoqueo en Persia, fue elegida reina por el rey Asuero sin que se supiera su origen. Cuando el funcionario Amán planeó exterminar a los judíos del imperio, Ester arriesgó su vida presentándose ante el rey sin haber sido llamada. Su valentía e ingenio en dos banquetes llevaron a la caída de Amán y a la salvación de su pueblo.",
-    "passages": [
-      {
-        "book": "ester",
-        "chapter": 4,
-        "label": "Ester 4 (su decisión de actuar)"
-      },
-      {
-        "book": "ester",
-        "chapter": 7,
-        "label": "Ester 7 (la caída de Amán)"
-      }
-    ],
-    "life": {
-      "start": -510,
-      "end": -460,
-      "approx": true
-    }
-  },
-  {
-    "id": "daniel",
-    "name": "Daniel",
-    "eraId": "exilio",
-    "timeframe": "~618 a.e.c.",
-    "place": "Babilonia",
-    "portraitSrc": "assets/portrait-daniel.jpg",
-    "mapSrc": "assets/mapa-daniel.png",
-    "mapPos": "68% 40%",
-    "knownFor": "Llevado cautivo a Babilonia siendo joven, se mantuvo fiel a sus principios incluso al rechazar la comida de la mesa real. Adquirió reconocimiento al interpretar sueños que ningún sabio babilonio pudo descifrar, incluido el del rey Nabucodonosor. Bajo el dominio persa, sobrevivió una noche en un foso de leones después de negarse a dejar de orar a Dios, y escribió profecías detalladas sobre reinos futuros.",
-    "passages": [
-      {
-        "book": "daniel",
-        "chapter": 2,
-        "label": "Daniel 2 (el sueño de la estatua)"
-      },
-      {
-        "book": "daniel",
-        "chapter": 6,
-        "label": "Daniel 6 (el foso de los leones)"
-      }
-    ],
-    "life": {
-      "start": -640,
-      "end": -536,
-      "approx": true
-    }
-  },
-  {
-    "id": "juanbautista",
-    "name": "Juan el Bautista",
-    "eraId": "evangelios",
-    "timeframe": "~29 e.c.",
-    "place": "Desierto de Judea y el río Jordán",
-    "portraitSrc": "assets/portrait-juanbautista.jpg",
-    "mapSrc": "assets/mapa-juanbautista.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Hijo del sacerdote Zacarías y de Elisabet, nació de forma milagrosa en la vejez de sus padres. Vivió en el desierto y predicó un mensaje de arrepentimiento, bautizando a las personas en el río Jordán como símbolo de un cambio de vida. Bautizó a Jesús y lo señaló como el Cordero de Dios; más tarde fue encarcelado y ejecutado por orden de Herodes Antipas.",
-    "passages": [
-      {
-        "book": "lucas",
-        "chapter": 1,
-        "label": "Lucas 1 (su nacimiento)"
-      },
-      {
-        "book": "mateo",
-        "chapter": 3,
-        "label": "Mateo 3 (bautiza a Jesús)"
-      }
-    ],
-    "life": {
-      "start": -2,
-      "end": 32,
-      "approx": true
-    }
-  },
-  {
-    "id": "maria",
-    "name": "María",
-    "eraId": "evangelios",
-    "timeframe": "~22 a.e.c.–55 e.c.",
-    "place": "Nazaret y Belén",
-    "portraitSrc": "assets/portrait-maria.jpg",
-    "mapSrc": "assets/mapa-maria.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Joven de Nazaret comprometida con José, recibió la visita del ángel Gabriel que le anunció que sería la madre del Hijo de Dios. Aceptó ese papel con humildad a pesar de las dificultades sociales que implicaba. Acompañó a Jesús a lo largo de su vida, incluida su muerte en el madero, y después de la resurrección estuvo presente entre los primeros discípulos reunidos en Jerusalén.",
-    "passages": [
-      {
-        "book": "lucas",
-        "chapter": 1,
-        "label": "Lucas 1 (el anuncio del ángel)"
-      },
-      {
-        "book": "juan",
-        "chapter": 19,
-        "label": "Juan 19 (junto a la ejecución de Jesús)"
-      }
-    ],
-    "life": {
-      "start": -22,
-      "end": 55,
-      "approx": true
-    }
-  },
-  {
-    "id": "jesus",
-    "name": "Jesús",
-    "eraId": "evangelios",
-    "timeframe": "~2 a.e.c.–33 e.c.",
-    "place": "Nazaret, Galilea y Judea",
-    "portraitSrc": "assets/portrait-jesus.jpg",
-    "mapSrc": "assets/mapa-jesus.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Nacido en Belén y criado en Nazaret, comenzó su ministerio público alrededor de los 30 años tras ser bautizado por Juan. Recorrió Galilea y Judea enseñando sobre el Reino de Dios mediante parábolas, y realizó numerosos milagros que incluían sanar enfermos y resucitar muertos. Fue ejecutado en un madero por instigación de líderes religiosos, y sus discípulos lo vieron con vida después de su resurrección, hecho que dio origen a la congregación cristiana.",
-    "passages": [
-      {
-        "book": "mateo",
-        "chapter": 5,
-        "label": "Mateo 5–7 (el Sermón del Monte)"
-      },
-      {
-        "book": "juan",
-        "chapter": 11,
-        "label": "Juan 11 (resurrección de Lázaro)"
-      },
-      {
-        "book": "lucas",
-        "chapter": 24,
-        "label": "Lucas 24 (su resurrección)"
-      }
-    ],
-    "life": {
-      "start": -2,
-      "end": 33
-    }
-  },
-  {
-    "id": "pedro",
-    "name": "Pedro",
-    "eraId": "iglesia",
-    "timeframe": "~30–60 e.c.",
-    "place": "Galilea, luego Jerusalén y otras regiones",
-    "portraitSrc": "assets/portrait-pedro.jpg",
-    "mapSrc": "assets/mapa-pedro.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Pescador de Galilea junto con su hermano Andrés, fue uno de los primeros discípulos llamados por Jesús. Reconocido por su carácter impulsivo, en una ocasión negó conocer a Jesús tres veces, pero luego fue restaurado y encomendado a cuidar de sus seguidores. Después de Pentecostés se convirtió en un líder destacado de la congregación en Jerusalén y predicó tanto a judíos como a los primeros gentiles convertidos.",
-    "passages": [
-      {
-        "book": "mateo",
-        "chapter": 16,
-        "label": "Mateo 16 (confiesa a Jesús como el Cristo)"
-      },
-      {
-        "book": "hechos",
-        "chapter": 2,
-        "label": "Hechos 2 (Pentecostés)"
-      },
-      {
-        "book": "hechos",
-        "chapter": 10,
-        "label": "Hechos 10 (Cornelio, el primer gentil)"
-      }
-    ],
-    "life": {
-      "start": -5,
-      "end": 64,
-      "approx": true
-    }
-  },
-  {
-    "id": "pablo",
-    "name": "Pablo",
-    "eraId": "iglesia",
-    "timeframe": "~34–65 e.c.",
-    "place": "Tarso, luego por todo el Imperio romano",
-    "portraitSrc": "assets/portrait-pablo.jpg",
-    "mapSrc": "assets/mapa-pablo.png",
-    "mapPos": "35% 12%",
-    "knownFor": "Fariseo de Tarso, en un principio persiguió con dureza a los primeros cristianos hasta que tuvo una visión de Jesús resucitado en el camino a Damasco que cambió el rumbo de su vida. A partir de entonces realizó varios viajes misioneros por el Imperio romano, fundando y fortaleciendo congregaciones en Asia Menor, Grecia y otras regiones. Escribió 14 cartas del canon griego cristiano (incluida la de Hebreos) y, según la tradición histórica —no narrada en la Biblia—, finalmente fue ejecutado en Roma por su actividad como predicador.",
-    "passages": [
-      {
-        "book": "hechos",
-        "chapter": 9,
-        "label": "Hechos 9 (su conversión)"
-      },
-      {
-        "book": "hechos",
-        "chapter": 17,
-        "label": "Hechos 17 (predica en Atenas)"
-      },
-      {
-        "book": "romanos",
-        "chapter": 8,
-        "label": "Romanos 8"
-      }
-    ],
-    "life": {
-      "start": 5,
-      "end": 65,
-      "approx": true
-    }
+ {
+  "id": "noe",
+  "name": "Noé",
+  "eraId": "origenes",
+  "timeframe": "Antes del diluvio",
+  "place": "La tierra habitada antes del diluvio",
+  "portraitSrc": "assets/portrait-noe.jpg",
+  "mapSrc": "assets/mapa-noe.png",
+  "mapPos": "65% 15%",
+  "knownFor": "Descendiente de Set, es descrito como un hombre justo e intachable en medio de una sociedad corrompida y malvada. Durante unos 40 a 50 años construyó el arca siguiendo instrucciones precisas de Dios, mientras predicaba sobre el juicio que se avecinaba. Sobrevivió al diluvio junto con su esposa, sus tres hijos y sus esposas, y se convirtió en el antepasado de toda la humanidad posterior al diluvio. Después de salir del arca, Dios estableció con él un pacto simbolizado con el arco iris.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 6,
+    "label": "Génesis 6–9 (el diluvio)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:7 (su fe)"
+   }
+  ],
+  "life": {
+   "start": -2970,
+   "end": -2020,
+   "approx": true
   }
+ },
+ {
+  "id": "abraham",
+  "name": "Abrahán",
+  "eraId": "patriarcas",
+  "timeframe": "~2000 a.e.c.",
+  "place": "Ur de los caldeos, luego Harán y Canaán",
+  "portraitSrc": "assets/portrait-abraham.jpg",
+  "mapSrc": "assets/mapa-abraham.png",
+  "mapPos": "62% 28%",
+  "knownFor": "Originario de Ur, una próspera ciudad mesopotámica, dejó su hogar a los 75 años para dirigirse a una tierra que Dios le mostraría. Vivió como forastero en tiendas de campaña en Canaán, mostrando hospitalidad. Su fe fue puesta a prueba de manera extrema cuando se le pidió ofrecer a su hijo Isaac, prueba que superó plenamente confiado en Dios. A través de su hijo Isaac y su nieto Jacob (después llamado Israel) se formaría la nación de Israel y, más adelante, llegaría el Mesías.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 12,
+    "label": "Génesis 12 (el llamado)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 22,
+    "label": "Génesis 22 (la prueba con Isaac)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:8-10"
+   }
+  ],
+  "life": {
+   "start": -2018,
+   "end": -1843
+  }
+ },
+ {
+  "id": "sara",
+  "name": "Sara",
+  "eraId": "patriarcas",
+  "timeframe": "~2000 a.e.c.",
+  "place": "Ur, Harán y Canaán",
+  "portraitSrc": "assets/portrait-sara.jpg",
+  "mapSrc": "assets/mapa-sara.png",
+  "mapPos": "62% 28%",
+  "knownFor": "Esposa y media hermana de Abraham, lo acompañó en su viaje desde Ur hasta Canaán y compartió con él décadas de vida nómada. Aunque era estéril, a los 90 años dio a luz a Isaac, el hijo que Dios había prometido, en un cumplimiento notable de fe. Es recordada como ejemplo de sujeción respetuosa y de esperanza firme frente a circunstancias que parecían imposibles.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 18,
+    "label": "Génesis 18 (la promesa)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 21,
+    "label": "Génesis 21 (nacimiento de Isaac)"
+   },
+   {
+    "book": "pedro1",
+    "chapter": 3,
+    "label": "1 Pedro 3:5, 6"
+   }
+  ],
+  "life": {
+   "start": -2008,
+   "end": -1881
+  }
+ },
+ {
+  "id": "jacob",
+  "name": "Jacob",
+  "eraId": "patriarcas",
+  "timeframe": "~1900 a.e.c.",
+  "place": "Canaán y Padán-aram",
+  "portraitSrc": "assets/portrait-jacob.jpg",
+  "mapSrc": "assets/mapa-jacob.png",
+  "mapPos": "62% 28%",
+  "knownFor": "Hijo menor de Isaac y Rebeca, recibió la primogenitura después de que Esaú la despreciara, y más tarde obtuvo también la bendición paternal. Trabajó veinte años para su tío (y luego suegro) Labán en Padán-aram, donde formó una gran familia. Tras luchar con un ángel, recibió el nombre Israel, y sus doce hijos llegaron a ser las cabezas de las doce tribus de Israel.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 28,
+    "label": "Génesis 28 (el sueño en Betel)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 32,
+    "label": "Génesis 32 (cambio de nombre)"
+   }
+  ],
+  "life": {
+   "start": -1858,
+   "end": -1711
+  }
+ },
+ {
+  "id": "jose",
+  "name": "José",
+  "eraId": "patriarcas",
+  "timeframe": "~1900–1800 a.e.c.",
+  "place": "Canaán y Egipto",
+  "portraitSrc": "assets/portrait-jose.jpg",
+  "mapSrc": "assets/mapa-jose.png",
+  "mapPos": "48% 30%",
+  "knownFor": "Hijo favorito de Jacob, fue vendido como esclavo por sus propios hermanos por envidia y llevado a Egipto. Allí, después de ser encarcelado injustamente, interpretó los sueños del faraón y llegó a ser el segundo gobernante del país. Administró con sabiduría los años de abundancia y hambruna, y perdonó a sus hermanos cuando estos acudieron a Egipto en busca de alimento, preservando así a toda su familia.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 37,
+    "label": "Génesis 37 (vendido por sus hermanos)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 41,
+    "label": "Génesis 41 (gobernador de Egipto)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 45,
+    "label": "Génesis 45 (el perdón)"
+   }
+  ],
+  "life": {
+   "start": -1767,
+   "end": -1657
+  }
+ },
+ {
+  "id": "moises",
+  "name": "Moisés",
+  "eraId": "exodo",
+  "timeframe": "~1500 a.e.c.",
+  "place": "Egipto y el desierto del Sinaí",
+  "portraitSrc": "assets/portrait-moises.jpg",
+  "mapSrc": "assets/mapa-moises.png",
+  "mapPos": "43% 42%",
+  "knownFor": "Criado en la corte egipcia pero educado en su identidad hebrea, huyó a Madián tras matar a un egipcio y pasó allí cuarenta años como pastor. Dios lo comisionó desde una zarza ardiente para liberar a Israel de la esclavitud. Después de las diez plagas, guio al pueblo a través del mar Rojo y, en el monte Sinaí, recibió los Diez Mandamientos y la Ley que organizaría la nación.",
+  "passages": [
+   {
+    "book": "exodo",
+    "chapter": 3,
+    "label": "Éxodo 3 (la zarza ardiente)"
+   },
+   {
+    "book": "exodo",
+    "chapter": 14,
+    "label": "Éxodo 14 (cruce del mar Rojo)"
+   },
+   {
+    "book": "exodo",
+    "chapter": 20,
+    "label": "Éxodo 20 (los Diez Mandamientos)"
+   }
+  ],
+  "life": {
+   "start": -1593,
+   "end": -1473
+  }
+ },
+ {
+  "id": "debora",
+  "name": "Débora",
+  "eraId": "jueces",
+  "timeframe": "~1200 a.e.c.",
+  "place": "Montañas de Efraín, Israel",
+  "portraitSrc": "assets/portrait-debora.jpg",
+  "mapSrc": "assets/mapa-debora.png",
+  "mapPos": "50% 50%",
+  "knownFor": "En una época de opresión cananea bajo el rey Jabín, actuaba como jueza y profetisa, y el pueblo acudía a ella para resolver disputas bajo una palmera en las montañas de Efraín. Instruyó al militar Barac para enfrentar a Sísara, jefe del ejército de Jabín, y acompañó a las tropas israelitas a la batalla. Tras la victoria, compuso junto con Barac un cántico que celebra la liberación de Israel.",
+  "passages": [
+   {
+    "book": "jueces",
+    "chapter": 4,
+    "label": "Jueces 4 (la batalla contra Sísara)"
+   },
+   {
+    "book": "jueces",
+    "chapter": 5,
+    "label": "Jueces 5 (el cántico de Débora)"
+   }
+  ],
+  "life": {
+   "start": -1240,
+   "end": -1180,
+   "approx": true
+  }
+ },
+ {
+  "id": "rut",
+  "name": "Rut",
+  "eraId": "jueces",
+  "timeframe": "~1100 a.e.c.",
+  "place": "Moab y Belén",
+  "portraitSrc": "assets/portrait-rut.jpg",
+  "mapSrc": "assets/mapa-rut.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Viuda moabita, decidió acompañar a su suegra Noemí de regreso a Belén en lugar de quedarse en su propia tierra, pronunciando palabras de lealtad que se han hecho célebres. Trabajó espigando en los campos para sostener a ambas y allí conoció a Booz, un pariente cercano que la tomó como esposa. Su hijo Obed fue abuelo del rey David, integrándola en el linaje real de Israel.",
+  "passages": [
+   {
+    "book": "rut",
+    "chapter": 1,
+    "label": "Rut 1 (su lealtad a Noemí)"
+   },
+   {
+    "book": "rut",
+    "chapter": 4,
+    "label": "Rut 4 (matrimonio con Booz)"
+   }
+  ],
+  "life": {
+   "start": -1150,
+   "end": -1090,
+   "approx": true
+  }
+ },
+ {
+  "id": "david",
+  "name": "David",
+  "eraId": "jueces",
+  "timeframe": "~1100–1000 a.e.c.",
+  "place": "Belén y Jerusalén",
+  "portraitSrc": "assets/portrait-david.jpg",
+  "mapSrc": "assets/mapa-david.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Pastor de ovejas en Belén, fue ungido por el profeta Samuel para ser el futuro rey de Israel siendo aún joven. Se hizo famoso al vencer al gigante filisteo Goliat con una honda, y más tarde tuvo que huir del rey Saúl durante años antes de subir al trono. Como rey unificó las tribus de Israel, estableció Jerusalén como capital y compuso numerosos salmos que expresan una relación profunda con Dios.",
+  "passages": [
+   {
+    "book": "samuel1",
+    "chapter": 17,
+    "label": "1 Samuel 17 (David y Goliat)"
+   },
+   {
+    "book": "samuel2",
+    "chapter": 5,
+    "label": "2 Samuel 5 (rey de Israel)"
+   },
+   {
+    "book": "salmos",
+    "chapter": 23,
+    "label": "Salmo 23"
+   }
+  ],
+  "life": {
+   "start": -1107,
+   "end": -1037
+  }
+ },
+ {
+  "id": "salomon",
+  "name": "Salomón",
+  "eraId": "jueces",
+  "timeframe": "~1037–998 a.e.c.",
+  "place": "Jerusalén",
+  "portraitSrc": "assets/portrait-salomon.jpg",
+  "mapSrc": "assets/mapa-salomon.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Hijo de David y Betsabé, pidió a Dios sabiduría para gobernar en lugar de riquezas, petición que le fue concedida junto con prosperidad. Bajo su reinado se construyó el templo de Jerusalén, centro de la adoración israelita durante siglos. Su fama de sabio atrajo visitantes como la reina de Sabá, aunque en su vejez su fidelidad se vio afectada por sus muchas esposas extranjeras.",
+  "passages": [
+   {
+    "book": "reyes1",
+    "chapter": 3,
+    "label": "1 Reyes 3 (petición de sabiduría)"
+   },
+   {
+    "book": "reyes1",
+    "chapter": 6,
+    "label": "1 Reyes 6 (construcción del templo)"
+   },
+   {
+    "book": "proverbios",
+    "chapter": 3,
+    "label": "Proverbios 3"
+   }
+  ],
+  "life": {
+   "start": -1057,
+   "end": -998,
+   "approx": true
+  }
+ },
+ {
+  "id": "elias",
+  "name": "Elías",
+  "eraId": "reino_dividido",
+  "timeframe": "~940 a.e.c.",
+  "place": "Reino del norte, Israel",
+  "portraitSrc": "assets/portrait-elias.jpg",
+  "mapSrc": "assets/mapa-elias.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Profeta activo en el reino del norte durante el reinado de Acab, denunció la adoración a Baal promovida por la reina Jezabel. En un enfrentamiento público en el monte Carmelo, demostró que Jehová es el verdadero Dios al hacer bajar fuego del cielo sobre su altar. Huyó al desierto tras las amenazas de Jezabel, pero Dios lo animó y le encomendó nuevas tareas. Cuando le llegó el momento de dejar su función como profeta principal, un torbellino lo trasladó a otro lugar de la tierra, no al cielo; siguió con vida, como muestra una carta suya al rey Jorán años más tarde (2 Crónicas 21:12).",
+  "passages": [
+   {
+    "book": "reyes1",
+    "chapter": 17,
+    "label": "1 Reyes 17 (la sequía)"
+   },
+   {
+    "book": "reyes1",
+    "chapter": 18,
+    "label": "1 Reyes 18 (el monte Carmelo)"
+   },
+   {
+    "book": "reyes2",
+    "chapter": 2,
+    "label": "2 Reyes 2 (fin de su ministerio)"
+   }
+  ],
+  "life": {
+   "start": -940,
+   "end": -860,
+   "approx": true
+  }
+ },
+ {
+  "id": "ester",
+  "name": "Ester",
+  "eraId": "exilio",
+  "timeframe": "~475 a.e.c.",
+  "place": "Persia (Susa)",
+  "portraitSrc": "assets/portrait-ester.jpg",
+  "mapSrc": "assets/mapa-ester.png",
+  "mapPos": "75% 45%",
+  "knownFor": "Judía huérfana criada por su primo Mardoqueo en Persia, fue elegida reina por el rey Asuero sin que se supiera su origen. Cuando el funcionario Amán planeó exterminar a los judíos del imperio, Ester arriesgó su vida presentándose ante el rey sin haber sido llamada. Su valentía e ingenio en dos banquetes llevaron a la caída de Amán y a la salvación de su pueblo.",
+  "passages": [
+   {
+    "book": "ester",
+    "chapter": 4,
+    "label": "Ester 4 (su decisión de actuar)"
+   },
+   {
+    "book": "ester",
+    "chapter": 7,
+    "label": "Ester 7 (la caída de Amán)"
+   }
+  ],
+  "life": {
+   "start": -510,
+   "end": -460,
+   "approx": true
+  }
+ },
+ {
+  "id": "daniel",
+  "name": "Daniel",
+  "eraId": "exilio",
+  "timeframe": "~618 a.e.c.",
+  "place": "Babilonia",
+  "portraitSrc": "assets/portrait-daniel.jpg",
+  "mapSrc": "assets/mapa-daniel.png",
+  "mapPos": "68% 40%",
+  "knownFor": "Llevado cautivo a Babilonia siendo joven, se mantuvo fiel a sus principios incluso al rechazar la comida de la mesa real. Adquirió reconocimiento al interpretar sueños que ningún sabio babilonio pudo descifrar, incluido el del rey Nabucodonosor. Bajo el dominio persa, sobrevivió una noche en un foso de leones después de negarse a dejar de orar a Dios, y escribió profecías detalladas sobre reinos futuros.",
+  "passages": [
+   {
+    "book": "daniel",
+    "chapter": 2,
+    "label": "Daniel 2 (el sueño de la estatua)"
+   },
+   {
+    "book": "daniel",
+    "chapter": 6,
+    "label": "Daniel 6 (el foso de los leones)"
+   }
+  ],
+  "life": {
+   "start": -640,
+   "end": -536,
+   "approx": true
+  }
+ },
+ {
+  "id": "juanbautista",
+  "name": "Juan el Bautista",
+  "eraId": "evangelios",
+  "timeframe": "~29 e.c.",
+  "place": "Desierto de Judea y el río Jordán",
+  "portraitSrc": "assets/portrait-juanbautista.jpg",
+  "mapSrc": "assets/mapa-juanbautista.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Hijo del sacerdote Zacarías y de Elisabet, nació de forma milagrosa en la vejez de sus padres. Vivió en el desierto y predicó un mensaje de arrepentimiento, bautizando a las personas en el río Jordán como símbolo de un cambio de vida. Bautizó a Jesús y lo señaló como el Cordero de Dios; más tarde fue encarcelado y ejecutado por orden de Herodes Antipas.",
+  "passages": [
+   {
+    "book": "lucas",
+    "chapter": 1,
+    "label": "Lucas 1 (su nacimiento)"
+   },
+   {
+    "book": "mateo",
+    "chapter": 3,
+    "label": "Mateo 3 (bautiza a Jesús)"
+   }
+  ],
+  "life": {
+   "start": -2,
+   "end": 32,
+   "approx": true
+  }
+ },
+ {
+  "id": "maria",
+  "name": "María",
+  "eraId": "evangelios",
+  "timeframe": "~22 a.e.c.–55 e.c.",
+  "place": "Nazaret y Belén",
+  "portraitSrc": "assets/portrait-maria.jpg",
+  "mapSrc": "assets/mapa-maria.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Joven de Nazaret comprometida con José, recibió la visita del ángel Gabriel que le anunció que sería la madre del Hijo de Dios. Aceptó ese papel con humildad a pesar de las dificultades sociales que implicaba. Acompañó a Jesús a lo largo de su vida, incluida su muerte en el madero, y después de la resurrección estuvo presente entre los primeros discípulos reunidos en Jerusalén.",
+  "passages": [
+   {
+    "book": "lucas",
+    "chapter": 1,
+    "label": "Lucas 1 (el anuncio del ángel)"
+   },
+   {
+    "book": "juan",
+    "chapter": 19,
+    "label": "Juan 19 (junto a la ejecución de Jesús)"
+   }
+  ],
+  "life": {
+   "start": -22,
+   "end": 55,
+   "approx": true
+  }
+ },
+ {
+  "id": "jesus",
+  "name": "Jesús",
+  "eraId": "evangelios",
+  "timeframe": "~2 a.e.c.–33 e.c.",
+  "place": "Nazaret, Galilea y Judea",
+  "portraitSrc": "assets/portrait-jesus.jpg",
+  "mapSrc": "assets/mapa-jesus.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Nacido en Belén y criado en Nazaret, comenzó su ministerio público alrededor de los 30 años tras ser bautizado por Juan. Recorrió Galilea y Judea enseñando sobre el Reino de Dios mediante parábolas, y realizó numerosos milagros que incluían sanar enfermos y resucitar muertos. Fue ejecutado en un madero por instigación de líderes religiosos, y sus discípulos lo vieron con vida después de su resurrección, hecho que dio origen a la congregación cristiana.",
+  "passages": [
+   {
+    "book": "mateo",
+    "chapter": 5,
+    "label": "Mateo 5–7 (el Sermón del Monte)"
+   },
+   {
+    "book": "juan",
+    "chapter": 11,
+    "label": "Juan 11 (resurrección de Lázaro)"
+   },
+   {
+    "book": "lucas",
+    "chapter": 24,
+    "label": "Lucas 24 (su resurrección)"
+   }
+  ],
+  "life": {
+   "start": -2,
+   "end": 33
+  }
+ },
+ {
+  "id": "pedro",
+  "name": "Pedro",
+  "eraId": "iglesia",
+  "timeframe": "~30–60 e.c.",
+  "place": "Galilea, luego Jerusalén y otras regiones",
+  "portraitSrc": "assets/portrait-pedro.jpg",
+  "mapSrc": "assets/mapa-pedro.png",
+  "mapPos": "50% 50%",
+  "knownFor": "Pescador de Galilea junto con su hermano Andrés, fue uno de los primeros discípulos llamados por Jesús. Reconocido por su carácter impulsivo, en una ocasión negó conocer a Jesús tres veces, pero luego fue restaurado y encomendado a cuidar de sus seguidores. Después de Pentecostés se convirtió en un líder destacado de la congregación en Jerusalén y predicó tanto a judíos como a los primeros gentiles convertidos.",
+  "passages": [
+   {
+    "book": "mateo",
+    "chapter": 16,
+    "label": "Mateo 16 (confiesa a Jesús como el Cristo)"
+   },
+   {
+    "book": "hechos",
+    "chapter": 2,
+    "label": "Hechos 2 (Pentecostés)"
+   },
+   {
+    "book": "hechos",
+    "chapter": 10,
+    "label": "Hechos 10 (Cornelio, el primer gentil)"
+   }
+  ],
+  "life": {
+   "start": -5,
+   "end": 64,
+   "approx": true
+  }
+ },
+ {
+  "id": "pablo",
+  "name": "Pablo",
+  "eraId": "iglesia",
+  "timeframe": "~34–65 e.c.",
+  "place": "Tarso, luego por todo el Imperio romano",
+  "portraitSrc": "assets/portrait-pablo.jpg",
+  "mapSrc": "assets/mapa-pablo.png",
+  "mapPos": "35% 12%",
+  "knownFor": "Fariseo de Tarso, en un principio persiguió con dureza a los primeros cristianos hasta que tuvo una visión de Jesús resucitado en el camino a Damasco que cambió el rumbo de su vida. A partir de entonces realizó varios viajes misioneros por el Imperio romano, fundando y fortaleciendo congregaciones en Asia Menor, Grecia y otras regiones. Escribió 14 cartas del canon griego cristiano (incluida la de Hebreos) y, según la tradición histórica —no narrada en la Biblia—, finalmente fue ejecutado en Roma por su actividad como predicador.",
+  "passages": [
+   {
+    "book": "hechos",
+    "chapter": 9,
+    "label": "Hechos 9 (su conversión)"
+   },
+   {
+    "book": "hechos",
+    "chapter": 17,
+    "label": "Hechos 17 (predica en Atenas)"
+   },
+   {
+    "book": "romanos",
+    "chapter": 8,
+    "label": "Romanos 8"
+   }
+  ],
+  "life": {
+   "start": 5,
+   "end": 65,
+   "approx": true
+  }
+ },
+ {
+  "id": "abel",
+  "name": "Abel",
+  "eraId": "origenes",
+  "timeframe": "Antes del diluvio",
+  "place": "La tierra habitada antes del diluvio",
+  "portraitSrc": "assets/portrait-abel.jpg",
+  "mapSrc": "assets/mapa-abel.png",
+  "mapPos": "65% 15%",
+  "knownFor": "Segundo hijo de Adán y Eva. Pastor de ovejas; ofreció a Dios lo mejor de su rebaño con fe, y su sacrificio fue aceptado. Es el primer hombre justo en morir: su hermano Caín lo mató por envidia. Jesús lo llamó \"justo\" y Pablo incluyó su nombre entre los grandes ejemplos de fe.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 4,
+    "label": "Génesis 4:1–12 (su vida y muerte)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:4 (su fe)"
+   },
+   {
+    "book": "mateo",
+    "chapter": 23,
+    "label": "Mateo 23:35 (llamado justo)"
+   }
+  ],
+  "life": {
+   "start": -3896,
+   "end": -3096,
+   "approx": true
+  }
+ },
+ {
+  "id": "ana",
+  "name": "Ana",
+  "eraId": "jueces",
+  "timeframe": "~1150 a.e.c.",
+  "place": "Ramataim-zofim, Efraín (Israel)",
+  "portraitSrc": "assets/portrait-ana.jpg",
+  "mapSrc": "assets/mapa-ana.png",
+  "mapPos": "55% 35%",
+  "knownFor": "Mujer estéril que oró con profunda emoción en el tabernáculo de Siló, prometiendo dedicar a su hijo a Jehová. El sacerdote Elí confundió su oración silenciosa con embriaguez, pero ella le explicó su dolor. Jehová la bendijo con Samuel, a quien dedicó al servicio sagrado desde pequeño. Su oración registrada en 1 Samuel 2 es un modelo de humildad y gratitud.",
+  "passages": [
+   {
+    "book": "samuel1",
+    "chapter": 1,
+    "label": "1 Samuel 1 (su oración)"
+   },
+   {
+    "book": "samuel1",
+    "chapter": 2,
+    "label": "1 Samuel 2:1–11 (oración de agradecimiento)"
+   }
+  ],
+  "life": {
+   "start": -1200,
+   "end": -1100,
+   "approx": true
+  }
+ },
+ {
+  "id": "samuel",
+  "name": "Samuel",
+  "eraId": "jueces",
+  "timeframe": "~1170–1070 a.e.c.",
+  "place": "Ramá, Efraín; sirvió en Siló",
+  "portraitSrc": "assets/portrait-samuel.jpg",
+  "mapSrc": "assets/mapa-samuel.png",
+  "mapPos": "55% 33%",
+  "knownFor": "Último juez de Israel y profeta destacado. Dedicado a Jehová por su madre Ana, sirvió en el tabernáculo desde niño, cuando Jehová lo llamó de noche. Ungió a los dos primeros reyes de Israel, Saúl y David, representando a Jehová. Durante toda su vida nadie pudo acusarlo de injusticia ni soborno; su integridad fue reconocida por todo Israel.",
+  "passages": [
+   {
+    "book": "samuel1",
+    "chapter": 3,
+    "label": "1 Samuel 3 (su llamado)"
+   },
+   {
+    "book": "samuel1",
+    "chapter": 9,
+    "label": "1 Samuel 9–10 (ungimiento de Saúl)"
+   },
+   {
+    "book": "samuel1",
+    "chapter": 16,
+    "label": "1 Samuel 16 (ungimiento de David)"
+   }
+  ],
+  "life": {
+   "start": -1170,
+   "end": -1070,
+   "approx": true
+  }
+ },
+ {
+  "id": "jonatan",
+  "name": "Jonatán",
+  "eraId": "jueces",
+  "timeframe": "~1100–1050 a.e.c.",
+  "place": "Guibea, Benjamín",
+  "portraitSrc": "assets/portrait-jonatan.jpg",
+  "mapSrc": "assets/mapa-jonatan.png",
+  "mapPos": "60% 40%",
+  "knownFor": "Hijo mayor del rey Saúl y amigo fiel de David. Hombre valiente que, con solo su escudero, atacó una guarnición filistea confiando en que \"nada impide a Jehová salvar sea con muchos o con pocos\". Renunció voluntariamente a su derecho al trono al reconocer que Jehová había elegido a David, y su amistad con este es un ejemplo de lealtad desinteresada.",
+  "passages": [
+   {
+    "book": "samuel1",
+    "chapter": 14,
+    "label": "1 Samuel 14 (valentía contra los filisteos)"
+   },
+   {
+    "book": "samuel1",
+    "chapter": 18,
+    "label": "1 Samuel 18:1–4 (pacto con David)"
+   },
+   {
+    "book": "samuel1",
+    "chapter": 20,
+    "label": "1 Samuel 20 (lealtad y advertencia)"
+   }
+  ],
+  "life": {
+   "start": -1100,
+   "end": -1050,
+   "approx": true
+  }
+ },
+ {
+  "id": "abigail",
+  "name": "Abigaíl",
+  "eraId": "jueces",
+  "timeframe": "~1060 a.e.c.",
+  "place": "Macaón, Judea",
+  "portraitSrc": "assets/portrait-abigail.jpg",
+  "mapSrc": "assets/mapa-abigail.png",
+  "mapPos": "52% 45%",
+  "knownFor": "Mujer sabia y discreta, esposa primero del insensato Nabal y luego de David. Cuando Nabal insultó a David y este marchó a matar a toda su casa, Abigaíl interceptó al futuro rey con provisiones y una apelación respetuosa y sensata que evitó una masacre. Su respuesta es uno de los mejores ejemplos de tacto y prudencia en la Biblia.",
+  "passages": [
+   {
+    "book": "samuel1",
+    "chapter": 25,
+    "label": "1 Samuel 25 (todo el episodio)"
+   }
+  ],
+  "life": {
+   "start": -1080,
+   "end": -1040,
+   "approx": true
+  }
+ },
+ {
+  "id": "jonas",
+  "name": "Jonás",
+  "eraId": "reino_dividido",
+  "timeframe": "~844 a.e.c. aprox.",
+  "place": "Gat-hefer, Israel; misión a Nínive (Asiria)",
+  "portraitSrc": "assets/portrait-jonas.jpg",
+  "mapSrc": "assets/mapa-jonas.png",
+  "mapPos": "75% 20%",
+  "knownFor": "Profeta enviado a predicar en Nínive, capital enemiga de Asiria. Intentó huir en barco, fue tragado por un gran pez tras tres días, y luego obedeció. Predicó en la ciudad y sus habitantes, desde el rey hasta el más humilde, se arrepintieron y fueron perdonados. Su libro enseña sobre la obediencia, el perdón divino y el peligro de la compasión parcial.",
+  "passages": [
+   {
+    "book": "reyes2",
+    "chapter": 14,
+    "label": "2 Reyes 14:25 (mención)"
+   },
+   {
+    "book": "jonas",
+    "chapter": 1,
+    "label": "Jonás 1–4 (libro entero)"
+   },
+   {
+    "book": "mateo",
+    "chapter": 12,
+    "label": "Mateo 12:39–41 (Jesús lo menciona)"
+   }
+  ],
+  "life": {
+   "start": -870,
+   "end": -800,
+   "approx": true
+  }
+ },
+ {
+  "id": "marta",
+  "name": "Marta",
+  "eraId": "evangelios",
+  "timeframe": "~30 e.c.",
+  "place": "Betania, cerca de Jerusalén",
+  "portraitSrc": "assets/portrait-marta.jpg",
+  "mapSrc": "assets/mapa-marta.png",
+  "mapPos": "62% 42%",
+  "knownFor": "Amiga cercana de Jesús, hermana de María y Lázaro. Mujer activa y hospitalaria que recibía a Jesús en su casa. Tras la muerte de Lázaro expresó una fe notable: \"sé que resucitarás a mi hermano en el último día\". Jesús la corrigió con cariño cuando estaba ansiosa por las tareas domésticas, mostrando que ella aceptaba bien el consejo.",
+  "passages": [
+   {
+    "book": "lucas",
+    "chapter": 10,
+    "label": "Lucas 10:38–42 (hospitalidad y prioridades)"
+   },
+   {
+    "book": "juan",
+    "chapter": 11,
+    "label": "Juan 11:17–27 (fe ante la muerte de Lázaro)"
+   },
+   {
+    "book": "juan",
+    "chapter": 12,
+    "label": "Juan 12:2 (banquete posterior)"
+   }
+  ],
+  "life": {
+   "start": -10,
+   "end": 45,
+   "approx": true
+  }
+ },
+ {
+  "id": "job",
+  "name": "Job",
+  "eraId": "patriarcas",
+  "timeframe": "~1600 a.e.c. aprox.",
+  "place": "Tierra de Uz",
+  "portraitSrc": "assets/portrait-job.jpg",
+  "mapSrc": "assets/mapa-job.png",
+  "mapPos": "68% 55%",
+  "knownFor": "Hombre íntegro y temeroso de Dios, descrito como \"el más notable de todos los hombres del oriente\". Perdió riquezas, hijos y salud en un desafío sobre su lealtad, pero mantuvo la integridad sin maldecir a Dios. Sus amigos lo acusaron injustamente; al final Jehová lo reprendió con paciencia, restauró su salud y le dio el doble de lo que tenía.",
+  "passages": [
+   {
+    "book": "job",
+    "chapter": 1,
+    "label": "Job 1–2 (el desafío)"
+   },
+   {
+    "book": "job",
+    "chapter": 42,
+    "label": "Job 42 (restauración)"
+   },
+   {
+    "book": "santiago",
+    "chapter": 5,
+    "label": "Santiago 5:11 (ejemplo de aguante)"
+   }
+  ],
+  "life": {
+   "start": -1700,
+   "end": -1500,
+   "approx": true
+  }
+ },
+ {
+  "id": "lot",
+  "name": "Lot",
+  "eraId": "origenes",
+  "timeframe": "~2000–1900 a.e.c.",
+  "place": "Ur → Harán → Sodoma (valle del Jordán)",
+  "portraitSrc": "assets/portrait-lot.jpg",
+  "mapSrc": "assets/mapa-lot.png",
+  "mapPos": "62% 48%",
+  "knownFor": "Sobrino de Abrahán. Viajó con él hacia Canaán, pero al haber disputas entre pastores eligió para sí la fértil llanura del Jordán y terminó viviendo en Sodoma. Fue librado milagrosamente de la destrucción de esa ciudad por dos ángeles, aunque perdió a su esposa, que miró atrás. Pedro lo llama \"justo Lot\", cuya alma justa se atormentaba viendo la conducta inmoral de sus vecinos.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 13,
+    "label": "Génesis 13 (separación)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 19,
+    "label": "Génesis 19 (destrucción de Sodoma)"
+   },
+   {
+    "book": "pedro2",
+    "chapter": 2,
+    "label": "2 Pedro 2:7–8 (llamado justo)"
+   }
+  ],
+  "life": {
+   "start": -2050,
+   "end": -1950,
+   "approx": true
+  }
+ },
+ {
+  "id": "rahab",
+  "name": "Rahab",
+  "eraId": "exodo",
+  "timeframe": "~1473 a.e.c.",
+  "place": "Jericó, Canaán",
+  "portraitSrc": "assets/portrait-rahab.jpg",
+  "mapSrc": "assets/mapa-rahab.png",
+  "mapPos": "58% 40%",
+  "knownFor": "Mujer cananea de Jericó que escondió a los espías israelitas, reconociendo que Jehová era \"el Dios del cielo arriba y de la tierra abajo\". Colgó un cordón escarlata en su ventana y ella y su familia fueron las únicas sobrevivientes de la ciudad. Se convirtió en ancestro del Mesías y aparece entre los ejemplos de fe de Hebreos 11. Es un ejemplo de que Jehová puede usar a cualquiera que demuestre fe genuina.",
+  "passages": [
+   {
+    "book": "josue",
+    "chapter": 2,
+    "label": "Josué 2 (los espías)"
+   },
+   {
+    "book": "josue",
+    "chapter": 6,
+    "label": "Josué 6:22–25 (su rescate)"
+   },
+   {
+    "book": "mateo",
+    "chapter": 1,
+    "label": "Mateo 1:5 (antepasada de Cristo)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:31 (su fe)"
+   },
+   {
+    "book": "santiago",
+    "chapter": 2,
+    "label": "Santiago 2:25"
+   }
+  ],
+  "life": {
+   "start": -1500,
+   "end": -1440,
+   "approx": true
+  }
+ },
+ {
+  "id": "gedeon",
+  "name": "Gedeón",
+  "eraId": "jueces",
+  "timeframe": "~1160 a.e.c. aprox.",
+  "place": "Ofrá, Manasés",
+  "portraitSrc": "assets/portrait-gedeon.jpg",
+  "mapSrc": "assets/mapa-gedeon.png",
+  "mapPos": "57% 28%",
+  "knownFor": "Juez de Israel que derrotó a un ejército midianita innumerable con apenas 300 hombres, trompetas, cántaros y antorchas, para que quedara claro que la victoria venía de Jehová. Pidió señales con la lana para confirmar su comisión, y destruyó el altar de Baal de su padre antes de la batalla. Es un ejemplo de fe que actúa pese a las dudas iniciales.",
+  "passages": [
+   {
+    "book": "jueces",
+    "chapter": 6,
+    "label": "Jueces 6 (llamado y señal)"
+   },
+   {
+    "book": "jueces",
+    "chapter": 7,
+    "label": "Jueces 7 (victoria con 300 hombres)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:32"
+   }
+  ],
+  "life": {
+   "start": -1190,
+   "end": -1150,
+   "approx": true
+  }
+ },
+ {
+  "id": "sanson",
+  "name": "Sansón",
+  "eraId": "jueces",
+  "timeframe": "~1118–1078 a.e.c.",
+  "place": "Zora, Dan",
+  "portraitSrc": "assets/portrait-sanson.jpg",
+  "mapSrc": "assets/mapa-sanson.png",
+  "mapPos": "54% 26%",
+  "knownFor": "Nazareno consagrado a Dios desde el vientre materno, dotado de fuerza extraordinaria mientras guardaba su voto. Derrotó a los filisteos repetidamente: un león, 1000 filisteos con la quijada de un asno, y finalmente arruinó el templo de Dagón muriendo con sus enemigos. Su debilidad por mujeres extranjeras lo llevó a revelar el secreto de su fuerza, pero su fe final lo incluye entre los fieles de Hebreos 11.",
+  "passages": [
+   {
+    "book": "jueces",
+    "chapter": 13,
+    "label": "Jueces 13–16 (vida completa)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:32"
+   }
+  ],
+  "life": {
+   "start": -1118,
+   "end": -1078,
+   "approx": true
+  }
+ },
+ {
+  "id": "aaron",
+  "name": "Aarón",
+  "eraId": "exodo",
+  "timeframe": "~1593–1474 a.e.c.",
+  "place": "Egipto; luego desierto del Sinaí",
+  "portraitSrc": "assets/portrait-aaron.jpg",
+  "mapSrc": "assets/mapa-aaron.png",
+  "mapPos": "50% 60%",
+  "knownFor": "Hermano mayor de Moisés, nombrado portavoz ante el Faraón por ser elocuente. Primer sumo sacerdote de Israel, fundador de la línea sacerdotal levítica. Falló gravemente fabricando el becerro de oro bajo presión, pero también enfrentó milagrosamente a los magos egipcios y vio florecer su vara en el tabernáculo como confirmación divina de su nombramiento.",
+  "passages": [
+   {
+    "book": "exodo",
+    "chapter": 4,
+    "label": "Éxodo 4:27–31 (portavoz)"
+   },
+   {
+    "book": "exodo",
+    "chapter": 32,
+    "label": "Éxodo 32 (becerro de oro)"
+   },
+   {
+    "book": "levitico",
+    "chapter": 16,
+    "label": "Levítico 16 (día de expiación)"
+   },
+   {
+    "book": "numeros",
+    "chapter": 17,
+    "label": "Números 17 (vara florecida)"
+   }
+  ],
+  "life": {
+   "start": -1593,
+   "end": -1474,
+   "approx": true
+  }
+ },
+ {
+  "id": "miriam",
+  "name": "Míriam",
+  "eraId": "exodo",
+  "timeframe": "~1592–1490 a.e.c. aprox.",
+  "place": "Egipto; luego desierto",
+  "portraitSrc": "assets/portrait-miriam.jpg",
+  "mapSrc": "assets/mapa-miriam.png",
+  "mapPos": "50% 58%",
+  "knownFor": "Hermana de Moisés y Aarón. De niña vigiló con inteligencia la cesta donde flotaba el bebé Moisés y propuso a la hija del Faraón una nodriza hebrea (su propia madre). Profetisa y líder de las mujeres: dirigió el canto y danza tras cruzar el mar Rojo. Fue castigada temporalmente con lepra por murmurar contra Moisés, pero se recuperó y el pueblo esperó por ella antes de seguir viajando.",
+  "passages": [
+   {
+    "book": "exodo",
+    "chapter": 2,
+    "label": "Éxodo 2:1–10 (vigilando a Moisés)"
+   },
+   {
+    "book": "exodo",
+    "chapter": 15,
+    "label": "Éxodo 15:20–21 (canto victorioso)"
+   },
+   {
+    "book": "numeros",
+    "chapter": 12,
+    "label": "Números 12 (murmuración)"
+   }
+  ],
+  "life": {
+   "start": -1592,
+   "end": -1490,
+   "approx": true
+  }
+ },
+ {
+  "id": "isaias",
+  "name": "Isaías",
+  "eraId": "reino_dividido",
+  "timeframe": "~778–732 a.e.c.",
+  "place": "Jerusalén, Judá",
+  "portraitSrc": "assets/portrait-isaias.jpg",
+  "mapSrc": "assets/mapa-isaias.png",
+  "mapPos": "62% 44%",
+  "knownFor": "Profeta de Judá durante los reinados de Uzías, Jotán, Acaz y Ezequías. Recibió su comisión en una visión del templo: \"aquí estoy, envíame a mí\". Predijo con siglos de anticipación detalles del Mesías: nacido de virgen, Príncipe de Paz, herido por nuestras transgresiones. Anunció tanto juicios como el glorioso futuro del gobierno de Dios.",
+  "passages": [
+   {
+    "book": "isaias",
+    "chapter": 6,
+    "label": "Isaías 6 (comisión)"
+   },
+   {
+    "book": "isaias",
+    "chapter": 9,
+    "label": "Isaías 9:6 (Príncipe de Paz)"
+   },
+   {
+    "book": "isaias",
+    "chapter": 53,
+    "label": "Isaías 53 (el Mesías)"
+   },
+   {
+    "book": "reyes2",
+    "chapter": 19,
+    "label": "2 Reyes 19 (consuelo a Ezequías)"
+   }
+  ],
+  "life": {
+   "start": -778,
+   "end": -732,
+   "approx": true
+  }
+ },
+ {
+  "id": "jeremias",
+  "name": "Jeremías",
+  "eraId": "reino_dividido",
+  "timeframe": "~647–580 a.e.c.",
+  "place": "Anatot, Benjamín; luego Jerusalén y Egipto",
+  "portraitSrc": "assets/portrait-jeremias.jpg",
+  "mapSrc": "assets/mapa-jeremias.png",
+  "mapPos": "60% 40%",
+  "knownFor": "Profeta joven llamado por Dios siendo casi un adolescente: \"antes de formarte yo te conocí\". Pasó décadas advirtiendo de la caída de Jerusalén, siendo ridiculizado, encarcelado y arrojado a una cisterna, aunque nunca dejó de hablar. Escribió Lamentaciones tras la destrucción, con la famosa frase sobre la bondad de Jehová que renueva cada mañana. Ejemplo de aguante en un ministerio aparentemente infructuoso.",
+  "passages": [
+   {
+    "book": "jeremias",
+    "chapter": 1,
+    "label": "Jeremías 1 (llamado)"
+   },
+   {
+    "book": "jeremias",
+    "chapter": 20,
+    "label": "Jeremías 20 (aguante bajo persecución)"
+   },
+   {
+    "book": "jeremias",
+    "chapter": 38,
+    "label": "Jeremías 38 (la cisterna)"
+   },
+   {
+    "book": "lamentaciones",
+    "chapter": 3,
+    "label": "Lamentaciones 3 (bondad de Jehová)"
+   }
+  ],
+  "life": {
+   "start": -647,
+   "end": -580,
+   "approx": true
+  }
+ },
+ {
+  "id": "ezequias",
+  "name": "Ezequías",
+  "eraId": "reino_dividido",
+  "timeframe": "Reinó 745–717 a.e.c.",
+  "place": "Jerusalén, Judá",
+  "portraitSrc": "assets/portrait-ezequias.jpg",
+  "mapSrc": "assets/mapa-ezequias.png",
+  "mapPos": "62% 44%",
+  "knownFor": "Rey de Judá que \"hizo lo recto a ojos de Jehová\". Restauró la adoración pura limpiando el templo y celebrando la primera Pascua en décadas. Enfrentó la invasión asiria de Senaquerib: fortificó Jerusalén, condujo el agua mediante el famoso túnel (que aún existe), y oró con confianza. Esa noche el ángel de Jehová derrotó a 185.000 soldados asirios. También fue sanado milagrosamente de enfermedad mortal.",
+  "passages": [
+   {
+    "book": "reyes2",
+    "chapter": 18,
+    "label": "2 Reyes 18–20 (reinado e invasión asiria)"
+   },
+   {
+    "book": "cronicas2",
+    "chapter": 29,
+    "label": "2 Crónicas 29–32 (restauración)"
+   },
+   {
+    "book": "isaias",
+    "chapter": 36,
+    "label": "Isaías 36–39"
+   }
+  ],
+  "life": {
+   "start": -762,
+   "end": -697,
+   "approx": true
+  }
+ },
+ {
+  "id": "timoteo",
+  "name": "Timoteo",
+  "eraId": "iglesia",
+  "timeframe": "~50–100 e.c. aprox.",
+  "place": "Listra, Galacia; luego viajes misioneros",
+  "portraitSrc": "assets/portrait-timoteo.jpg",
+  "mapSrc": "assets/mapa-timoteo.png",
+  "mapPos": "65% 35%",
+  "knownFor": "Colaborador cercano de Pablo, hijo de madre judía creyente (Eunice) y abuela creyente (Loída), que conocía las Escrituras desde bebé. Se unió a Pablo en su segundo viaje misionero siendo joven y llegó a dirigir la congregación de Éfeso. Recibió dos cartas personales llenas de consejos prácticos: \"que nadie tenga en poco tu juventud\". Ejemplo de crecimiento espiritual desde la infancia.",
+  "passages": [
+   {
+    "book": "hechos",
+    "chapter": 16,
+    "label": "Hechos 16:1–3 (su incorporación)"
+   },
+   {
+    "book": "filipenses",
+    "chapter": 2,
+    "label": "Filipenses 2:19–22 (carácter probado)"
+   },
+   {
+    "book": "timoteo1",
+    "chapter": 4,
+    "label": "1 Timoteo 4:12 (juventud)"
+   }
+  ],
+  "life": {
+   "start": 15,
+   "end": 100,
+   "approx": true
+  }
+ },
+ {
+  "id": "core",
+  "name": "Coré",
+  "eraId": "exodo",
+  "timeframe": "~1513 a.e.c.",
+  "place": "Desierto del Sinaí",
+  "portraitSrc": "assets/portrait-core.jpg",
+  "mapSrc": "assets/mapa-core.png",
+  "mapPos": "45% 62%",
+  "knownFor": "Levita que lideró una rebelión contra el nombramiento de Moisés y Aarón junto a Datán y Abiram, con 250 hombres prominentes. Su argumento sonaba piadoso (\"la asamblea entera es santa\") pero encubría ambición. La tierra se abrió y se lo tragó junto a sus seguidores: un recordatorio solemne de que Jehová respalda a quienes él designa. Sus descendientes posteriores escribieron varios salmos y sirvieron fielmente.",
+  "passages": [
+   {
+    "book": "numeros",
+    "chapter": 16,
+    "label": "Números 16 (la rebelión)"
+   },
+   {
+    "book": "numeros",
+    "chapter": 26,
+    "label": "Números 26:9–11 (registro histórico)"
+   },
+   {
+    "book": "salmos",
+    "chapter": 84,
+    "label": "Salmo 84 (hijos de Coré, leales después)"
+   }
+  ],
+  "life": {
+   "start": -1550,
+   "end": -1513,
+   "approx": true
+  }
+ },
+ {
+  "id": "zipora",
+  "name": "Ziporá",
+  "eraId": "exodo",
+  "timeframe": "~1550 a.e.c. aprox.",
+  "place": "Madián; luego Egipto",
+  "portraitSrc": "assets/portrait-zipora.jpg",
+  "mapSrc": "assets/mapa-zipora.png",
+  "mapPos": "72% 58%",
+  "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo salvando la vida de Moisés cuando Jehová amenazaba con matarlo por descuidar ese pacto. Recogida con su padre y hermanos cuando Moisés regresó, acompañó al pueblo en el éxodo.",
+  "passages": [
+   {
+    "book": "exodo",
+    "chapter": 2,
+    "label": "Éxodo 2:15–22 (matrimonio)"
+   },
+   {
+    "book": "exodo",
+    "chapter": 4,
+    "label": "Éxodo 4:24–26 (circuncisión)"
+   },
+   {
+    "book": "exodo",
+    "chapter": 18,
+    "label": "Éxodo 18:1–6 (reencuentro)"
+   }
+  ],
+  "life": {
+   "start": -1580,
+   "end": -1480,
+   "approx": true
+  }
+ },
+ {
+  "id": "isaac",
+  "name": "Isaac",
+  "eraId": "patriarcas",
+  "timeframe": "~1918–1738 a.e.c.",
+  "place": "Canaán",
+  "portraitSrc": "assets/portrait-isaac.jpg",
+  "mapSrc": "assets/mapa-isaac.png",
+  "mapPos": "60% 35%",
+  "knownFor": "Hijo de la promesa de Abrahán y Sara, nacido cuando ambos eran ancianos. Sobrevivió al episodio del sacrificio en el monte Moriá, donde su padre demostró obediencia extrema. Esposo de Rebeca, elegida por fe del criado de Abrahán. Padre de Jacob y Esaú; Dios renovó con él el pacto hecho a su padre.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 22,
+    "label": "Génesis 22 (el sacrificio)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 24,
+    "label": "Génesis 24 (Rebeca)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 26,
+    "label": "Génesis 26 (renovación del pacto)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:17–20"
+   }
+  ],
+  "life": {
+   "start": -1918,
+   "end": -1738,
+   "approx": true
+  }
+ },
+ {
+  "id": "rebeca",
+  "name": "Rebeca",
+  "eraId": "patriarcas",
+  "timeframe": "~1900–1760 a.e.c. aprox.",
+  "place": "Harán → Canaán",
+  "portraitSrc": "assets/portrait-rebeca.jpg",
+  "mapSrc": "assets/mapa-rebeca.png",
+  "mapPos": "63% 30%",
+  "knownFor": "Elegida como esposa de Isaac por su generosidad excepcional: dio agua al criado de Abrahán y a sus diez camellos sin pedir nada. Partió de Harán dejando a su familia para casarse con Isaac, a quien no conocía, confiando en Jehová. Madre de Jacob y Esaú; aunque cometió errores favoritando a Jacob, es presentada como mujer de fe y decisión.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 24,
+    "label": "Génesis 24 (su elección)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 25,
+    "label": "Génesis 25:21–26 (nacimiento de sus hijos)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 27,
+    "label": "Génesis 27 (las bendiciones)"
+   }
+  ],
+  "life": {
+   "start": -1900,
+   "end": -1760,
+   "approx": true
+  }
+ },
+ {
+  "id": "josue",
+  "name": "Josué",
+  "eraId": "exodo",
+  "timeframe": "~1500–1390 a.e.c. aprox.",
+  "place": "Egipto → desierto → Canaán",
+  "portraitSrc": "assets/portrait-josue.jpg",
+  "mapSrc": "assets/mapa-josue.png",
+  "mapPos": "58% 38%",
+  "knownFor": "Asistente fiel de Moisés desde joven, uno de los dos espías que dieron buen informe sobre Canaán. Sucedió a Moisés y dirigió la conquista de Canaán: Jericó, la coalición del sur y la del norte. Al final de su vida declaró: \"escoge hoy a quién sirvan... pero yo y mi casa serviremos a Jehová\". Su fidelidad contrasta con la generación infiel del desierto.",
+  "passages": [
+   {
+    "book": "exodo",
+    "chapter": 17,
+    "label": "Éxodo 17:8–13 (primera batalla)"
+   },
+   {
+    "book": "numeros",
+    "chapter": 13,
+    "label": "Números 13–14 (los espías)"
+   },
+   {
+    "book": "josue",
+    "chapter": 6,
+    "label": "Josué 1–6 (la conquista)"
+   },
+   {
+    "book": "josue",
+    "chapter": 24,
+    "label": "Josué 24 (discurso final)"
+   }
+  ],
+  "life": {
+   "start": -1500,
+   "end": -1390,
+   "approx": true
+  }
+ },
+ {
+  "id": "barac",
+  "name": "Barac",
+  "eraId": "jueces",
+  "timeframe": "~1250 a.e.c.",
+  "place": "Quedes, Neftalí",
+  "portraitSrc": "assets/portrait-barac.jpg",
+  "mapSrc": "assets/mapa-barac.png",
+  "mapPos": "56% 24%",
+  "knownFor": "General israelita que, junto a la profetisa Débora, derrotó al ejército de carros de Sísara con 10.000 hombres mal armados. Dudó inicialmente y exigió la presencia de Débora, quien profetizó que la gloria de la victoria sería de una mujer (cumplido en Jael). Incluido entre los fieles de Hebreos 11 pese a sus dudas iniciales.",
+  "passages": [
+   {
+    "book": "jueces",
+    "chapter": 4,
+    "label": "Jueces 4–5 (victoria y canto)"
+   },
+   {
+    "book": "hebreos",
+    "chapter": 11,
+    "label": "Hebreos 11:32"
+   }
+  ],
+  "life": {
+   "start": -1280,
+   "end": -1220,
+   "approx": true
+  }
+ },
+ {
+  "id": "eliseo",
+  "name": "Eliseo",
+  "eraId": "reino_dividido",
+  "timeframe": "~905–800 a.e.c. aprox.",
+  "place": "Abelmehola → Israel (reino del norte)",
+  "portraitSrc": "assets/portrait-eliseo.jpg",
+  "mapSrc": "assets/mapa-eliseo.png",
+  "mapPos": "56% 25%",
+  "knownFor": "Sucesor de Elías, labrador que abandonó sus bueyes para seguirlo tras recibir el manto profético. Pidió \"dos partes de su espíritu\" y realizó el doble de milagros: multiplicó el aceite de una viuda, resucitó al hijo de la sunemita, curó a Naamán de lepra e hizo flotar un hacha. Sirvió discretamente a los reyes de Israel, guiándolos en guerras contra Aram.",
+  "passages": [
+   {
+    "book": "reyes1",
+    "chapter": 19,
+    "label": "1 Reyes 19:19–21 (su llamado)"
+   },
+   {
+    "book": "reyes2",
+    "chapter": 2,
+    "label": "2 Reyes 2–6 (ministerio y milagros)"
+   },
+   {
+    "book": "reyes2",
+    "chapter": 13,
+    "label": "2 Reyes 13:20–21 (milagro póstumo)"
+   }
+  ],
+  "life": {
+   "start": -920,
+   "end": -800,
+   "approx": true
+  }
+ },
+ {
+  "id": "nehemias",
+  "name": "Nehemías",
+  "eraId": "exilio",
+  "timeframe": "~456 a.e.c. aprox.",
+  "place": "Susa (Persia) → Jerusalén",
+  "portraitSrc": "assets/portrait-nehemias.jpg",
+  "mapSrc": "assets/mapa-nehemias.png",
+  "mapPos": "72% 40%",
+  "knownFor": "Copero del rey persa Artajerjes, judío en la corte extranjera. Al enterarse del estado ruinoso de los muros de Jerusalén, ayunó y oró, y pidió permiso para reconstruirlos. Superó la oposición de Sanbalat y Tobías, completando la obra en 52 días. Como gobernador rechazó el salario debido y corrigió abusos económicos; organizó una lectura pública de la Ley que produjo un gran despertar espiritual.",
+  "passages": [
+   {
+    "book": "nehemias",
+    "chapter": 1,
+    "label": "Nehemías 1–2 (su llamado)"
+   },
+   {
+    "book": "nehemias",
+    "chapter": 4,
+    "label": "Nehemías 4; 6 (la oposición)"
+   },
+   {
+    "book": "nehemias",
+    "chapter": 8,
+    "label": "Nehemías 8 (lectura de la Ley)"
+   }
+  ],
+  "life": {
+   "start": -500,
+   "end": -420,
+   "approx": true
+  }
+ },
+ {
+  "id": "noemi",
+  "name": "Noemí",
+  "eraId": "jueces",
+  "timeframe": "~1300 a.e.c. aprox.",
+  "place": "Belén de Judá → Moab → Belén",
+  "portraitSrc": "assets/portrait-noemi.jpg",
+  "mapSrc": "assets/mapa-noemi.png",
+  "mapPos": "52% 47%",
+  "knownFor": "Suegra de Rut. Emigró a Moab por hambruna y perdió allí a su esposo e hijos. Al volver a Belén pidió que la llamaran Mara (\"amarga\"), pero Jehová la restauró: acompañó a Rut en el plan de rescate con Booz y terminó cuidando a su nieto Obed, abuelo del rey David. Ejemplo de lealtad y de cómo Dios restaura a quien ha sufrido.",
+  "passages": [
+   {
+    "book": "rut",
+    "chapter": 1,
+    "label": "Rut 1 (su regreso)"
+   },
+   {
+    "book": "rut",
+    "chapter": 4,
+    "label": "Rut 2–4 (rescate y restauración)"
+   }
+  ],
+  "life": {
+   "start": -1350,
+   "end": -1250,
+   "approx": true
+  }
+ },
+ {
+  "id": "manoah",
+  "name": "Manóah",
+  "eraId": "jueces",
+  "timeframe": "~1100 a.e.c. aprox.",
+  "place": "Zora, Dan",
+  "portraitSrc": "assets/portrait-manoah.jpg",
+  "mapSrc": "assets/mapa-manoah.png",
+  "mapPos": "54% 26%",
+  "knownFor": "Padre de Sansón. Él y su esposa eran estériles, pero un ángel les anunció el nacimiento del futuro juez y les dio instrucciones sobre el voto de nazareno para el niño. Manóah oró pidiendo más detalles y recibió al mensajero una segunda vez; quiso ofrecerle un sacrificio y le fue revelado el nombre divino asombroso. Ejemplo de padres que crían a un hijo según las instrucciones de Dios.",
+  "passages": [
+   {
+    "book": "jueces",
+    "chapter": 13,
+    "label": "Jueces 13 (todo el capítulo)"
+   }
+  ],
+  "life": {
+   "start": -1130,
+   "end": -1090,
+   "approx": true
+  }
+ },
+ {
+  "id": "ruben",
+  "name": "Rubén",
+  "eraId": "patriarcas",
+  "timeframe": "~1930–1750 a.e.c. aprox.",
+  "place": "Canaán",
+  "portraitSrc": "assets/portrait-ruben.jpg",
+  "mapSrc": "assets/mapa-ruben.png",
+  "mapPos": "60% 35%",
+  "knownFor": "Primer hijo de Jacob y Lea. Perdió los derechos de primogenitura por un grave error moral, pero mostró un lado compasivo: convenció a sus hermanos de no matar a José y sugirió echarlo al pozo con la intención secreta de devolverlo a su padre (aunque fracasó). Ofreció a sus propios hijos como garantía para la seguridad de Benjamín ante José en Egipto.",
+  "passages": [
+   {
+    "book": "genesis",
+    "chapter": 37,
+    "label": "Génesis 37:21–30 (defiende a José)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 42,
+    "label": "Génesis 42:22; 37 (garantía por Benjamín)"
+   },
+   {
+    "book": "genesis",
+    "chapter": 49,
+    "label": "Génesis 49:3–4 (pierde la primogenitura)"
+   }
+  ],
+  "life": {
+   "start": -1930,
+   "end": -1750,
+   "approx": true
+  }
+ }
 ]
