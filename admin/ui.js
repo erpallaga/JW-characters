@@ -23,6 +23,9 @@ function añadir(el, hijos) {
   }
 }
 
+/** Añade hijos a un elemento que ya existe, con las mismas reglas que h(). */
+export function añadirA(el, ...hijos) { añadir(el, hijos); return el; }
+
 export function vaciar(el) { while (el.firstChild) el.removeChild(el.firstChild); return el; }
 
 const TRAZOS = {
