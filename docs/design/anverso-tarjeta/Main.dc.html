@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Mulish:wght@400;600;700;800&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: oklch(0.42 0.09 255); }
+    a:hover { color: oklch(0.34 0.1 255); }
+  </style>
+</helmet>
+
+<div style="width: 860px; height: 830px; box-sizing: border-box; padding: 40px; background: oklch(0.95 0.016 80); font-family: 'Mulish', system-ui, sans-serif; color: oklch(0.26 0.03 50); display: flex; flex-direction: column; gap: 24px;">
+
+  <div style="display: flex; align-items: center; gap: 13px;">
+    <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: oklch(0.9 0.035 40); color: oklch(0.56 0.13 35); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;">A</span>
+    <div style="flex-grow: 1;">
+      <div style="font-family: 'Amiri', Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1.15;">Tarjeta justa</div>
+      <div style="font-size: 12.5px; color: oklch(0.48 0.02 55); margin-top: 2px;">600 × 460 · la misma tarjeta, estrechada hasta donde llega el texto</div>
+    </div>
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.56 0.13 35); background: oklch(0.9 0.035 40); border-radius: 999px; padding: 5px 13px; white-space: nowrap;">imagen 58 %</span>
+  </div>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 600px; height: 460px; border-radius: 18px; background: oklch(0.97 0.01 80); border: 1px solid oklch(0.82 0.02 70); box-shadow: 0 3px 10px rgba(40,25,10,0.12); overflow: hidden; display: flex; flex-direction: row;">
+      <div style="width: 345px; flex-shrink: 0; background-color: oklch(0.88 0.02 75); background-image: url(&quot;recorte-noe.jpg&quot;); background-size: cover; background-position: 50% 50%;"></div>
+      <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 11px; padding: 24px 26px;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.56 0.13 35); background: oklch(0.9 0.035 40); border-radius: 999px; padding: 4px 12px;">Génesis</div>
+        <div style="font-family: 'Amiri', Georgia, serif; font-size: 36px; font-weight: 700; line-height: 1.08; text-wrap: balance;">Noé</div>
+        <div style="font-size: 12px; font-weight: 700; color: oklch(0.56 0.13 35);">Antes del diluvio</div>
+        <div style="font-size: 12.5px; color: oklch(0.48 0.02 55); line-height: 1.45; margin-top: 4px;">Toca la tarjeta para ver los detalles</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; width: 100%;">
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">Qué cambia</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">La tarjeta se estrecha de 720 a 600 px y el retrato pasa a ocupar los 345 px que le tocan por su proporción: se ve entero, sin recortar ni un píxel más. La columna de texto se queda en 255 px, que es lo que piden tres líneas. La era se parte en dos —píldora arriba, época debajo— para que quepa cómoda.</span>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">Qué cuesta</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">El reverso comparte marco con el anverso, así que también se estrecha 120 px: «por qué se le conoce» pierde una columna de aire y los textos largos pedirán algo más de scroll. Un nombre largo, «Juan el Bautista», cae a dos líneas.</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
