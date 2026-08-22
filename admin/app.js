@@ -642,6 +642,8 @@ function campoImagen(c, tipo, pintarPrevia) {
       ),
       h('div', { style: 'display:flex;gap:6px;flex-wrap:wrap' },
         h('button', { class: 'btn btn-bajo', onclick: () => entrada.click() }, ruta ? 'Reemplazar' : 'Subir'),
+        !esRetrato ? h('button', { class: 'btn btn-bajo', onclick: () => generarMapa() },
+          c.map ? 'Editar el mapa' : 'Generar mapa') : null,
         ruta ? h('button', { class: 'btn btn-bajo', onclick: () => quitar() }, 'Quitar') : null,
       ),
     ));
@@ -651,7 +653,22 @@ function campoImagen(c, tipo, pintarPrevia) {
     const ruta = c[campo];
     if (ruta && estado.imagenes[ruta]) { await store.borrarImagen(ruta); delete estado.imagenes[ruta]; }
     delete c[campo];
+    if (!esRetrato) delete c.map;
     guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
+  };
+
+  // El mapa se dibuja aquí mismo a partir de los lugares, sin salir del panel.
+  // La especificación se guarda en la tarjeta para poder rehacerlo después.
+  const generarMapa = async () => {
+    try {
+      const { abrirEditorDeMapa } = await import('./editor-mapa.js');
+      const hecho = await abrirEditorDeMapa(c);
+      if (!hecho) return;
+      await guardarImagenDelMapa(c, hecho);
+      guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
+    } catch (err) {
+      alert(`No se ha podido generar el mapa: ${err.message}`);
+    }
   };
 
   entrada.addEventListener('change', async () => {
@@ -678,6 +695,19 @@ function campoImagen(c, tipo, pintarPrevia) {
   return h('div', { class: 'campo-grupo' },
     h('span', { class: 'label' }, esRetrato ? 'Retrato · vertical 3:4' : 'Mapa · apaisado 4:3'),
     zona, entrada);
+}
+
+/** Deja el PNG recién dibujado donde el panel guarda las imágenes por subir. */
+async function guardarImagenDelMapa(c, { spec, blob, ancho, alto }) {
+  const ruta = `${PATHS.assets}/mapa-${c.id}.png`;
+  const anterior = estado.imagenes[ruta];
+  if (anterior && anterior._url) URL.revokeObjectURL(anterior._url);
+  const registro = { blob, ancho, alto };
+  await store.guardarImagen(ruta, registro);
+  estado.imagenes[ruta] = registro;
+  c.mapSrc = ruta;
+  c.map = spec;
+  if (!c.mapPos) c.mapPos = '50% 50%';
 }
 
 function bloqueDePasajes(c, pintarPrevia) {

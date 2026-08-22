@@ -6,13 +6,13 @@
 import { PATHS } from './config.js';
 
 export const CAMPOS = [
-  'name', 'eraId', 'timeframe', 'place', 'portraitSrc', 'mapSrc', 'mapPos', 'knownFor', 'hidden',
+  'name', 'eraId', 'timeframe', 'place', 'portraitSrc', 'mapSrc', 'mapPos', 'map', 'knownFor', 'hidden',
 ];
 
 const ETIQUETAS = {
   name: 'nombre', eraId: 'era', timeframe: 'época', place: 'dónde vivió',
   portraitSrc: 'retrato', mapSrc: 'mapa', mapPos: 'punto del mapa',
-  knownFor: 'por qué se le conoce', hidden: 'visibilidad',
+  map: 'lugares del mapa', knownFor: 'por qué se le conoce', hidden: 'visibilidad',
   life: 'fechas', passages: 'pasajes',
 };
 

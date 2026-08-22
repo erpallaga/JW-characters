@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<title>Banco de dibujo de mapas</title>
+<!--
+  Página de trabajo del generador por lotes: no forma parte del sitio.
+  tools/generar-mapas.mjs la abre en Chromium y va llamando a dibujarPersonaje().
+-->
+<body style="margin:0;background:#111;color:#ddd;font:13px system-ui">
+<canvas id="lienzo" width="909" height="540" style="max-width:100%"></canvas>
+<pre id="estado">cargando…</pre>
+<script type="module">
+import { dibujar, encuadrar, resolverLugares } from '../admin/mapa.js';
+import { aPngIndexado } from '../admin/png.js';
+
+const ctx = document.getElementById('lienzo').getContext('2d');
+const estado = document.getElementById('estado');
+
+const [paises, lagos, personajes, nomenclator] = await Promise.all(
+  ['../data/geo/paises.json', '../data/geo/lagos.json', '../data/characters.json', '../data/lugares.json']
+    .map(u => fetch(u).then(r => r.json()))
+);
+const geo = { paises, lagos };   // cada capa lleva su bbox y sus piezas
+const porId = Object.fromEntries(personajes.map(p => [p.id, p]));
+const medir = t => { ctx.font = 'bold 21px "Bitstream Charter", serif'; return ctx.measureText(t).width; };
+
+window.dibujarPersonaje = async id => {
+  const p = porId[id];
+  if (!p) throw new Error(`no existe la tarjeta ${id}`);
+  if (!p.map) throw new Error(`la tarjeta ${id} no tiene especificación de mapa`);
+  const lugares = resolverLugares(p.map, nomenclator);
+  const marco = p.map.encuadre || encuadrar(lugares, { zoom: p.map.zoom, medir });
+  dibujar(ctx, geo, { lugares, ruta: !!p.map.ruta, curva: p.map.curva }, marco);
+  estado.textContent = id;
+  return base64(await aPngIndexado(ctx));
+};
+
+// Sirve para comprobar el renderizador contra los mapas antiguos.
+window.dibujarSpec = async (spec, encuadre) => {
+  const lugares = resolverLugares(spec, nomenclator);
+  dibujar(ctx, geo, { ...spec, lugares }, encuadre || encuadrar(lugares, { medir }));
+  return base64(await aPngIndexado(ctx));
+};
+
+function base64(bytes) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 8192) bin += String.fromCharCode(...bytes.subarray(i, i + 8192));
+  return btoa(bin);
+}
+
+window.conMapa = personajes.filter(p => p.map).map(p => p.id);
+window.listo = true;
+estado.textContent = `listo · ${window.conMapa.length} tarjetas con mapa`;
+</script>
+</body>
+</html>
