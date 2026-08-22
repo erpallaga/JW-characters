@@ -12,15 +12,14 @@ compilación: se abre `index.html` y funciona.
 ## Qué hace
 
 - **Dos vistas del mazo**: una tarjeta a la vez, o todas en cuadrícula.
-- **Anverso y reverso**: el nombre y la época delante; detrás, dónde vivió, por qué se
-  le conoce, los pasajes enlazados a la Biblia en línea de jw.org y una barra que sitúa
-  su vida entre 4026 a. e. c. y 100 e. c.
+- **Anverso y reverso**: delante, el retrato manda —ocupa el 60 % de la tarjeta— con
+  la era, el nombre y la época al lado; detrás, dónde vivió, por qué se le conoce, los
+  pasajes enlazados a la Biblia en línea de jw.org y una barra que sitúa su vida entre
+  4026 a. e. c. y 100 e. c.
 - **Modo repaso**: oculta los nombres para adivinar quién es antes de darle la vuelta.
 - **Filtro por eras** y barajado.
-- **Retratos encuadrados**: la foto se recorta al subirla, desde el panel. Los
-  retratos antiguos, que se subieron antes de que existiera ese recorte, todavía se
-  pueden reencuadrar arrastrándolos dentro de la tarjeta; el ajuste se recuerda en ese
-  navegador.
+- **Retratos encuadrados**: la foto se recorta en 3:4 al subirla, desde el panel, y
+  la tarjeta la enseña entera. El encuadre se decide una vez y lo ve todo el mundo.
 - **Panel de administración** para añadir, editar y ocultar tarjetas sin tocar el código.
 
 <p align="center">
