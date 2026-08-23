@@ -2,7 +2,7 @@
 //
 // Dos motivos. Uno, el peso: sin esto, una foto de 6 MB recién sacada del móvil
 // se quedaría para siempre en el historial del repositorio. Dos, el encuadre:
-// el mazo enseña los retratos en 3:4 y los mapas en 4:3, y una foto que no
+// el mazo enseña los retratos en 3:4 y los mapas en 5:3, y una foto que no
 // venga así la recorta el navegador por el centro, que es justo donde no suele
 // estar lo que interesa. Aquí se decide el recorte y lo que se sube ya está
 // encuadrado.

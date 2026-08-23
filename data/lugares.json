@@ -10,6 +10,7 @@
   { "id": "babilonia", "label": "Babilonia", "lon": 44.4272, "lat": 32.537 },
   { "id": "ninive", "label": "Nínive", "lon": 43.1525, "lat": 36.3597 },
   { "id": "uz", "label": "Tierra de Uz", "lon": 37.4, "lat": 30.6 },
+  { "id": "ararat", "label": "Ararat", "lon": 44.2983, "lat": 39.7019 },
 
   { "id": "jerusalen", "label": "Jerusalén", "lon": 35.2137, "lat": 31.7683 },
   { "id": "belen", "label": "Belén", "lon": 35.202, "lat": 31.7054 },
@@ -17,6 +18,7 @@
   { "id": "jerico", "label": "Jericó", "lon": 35.444, "lat": 31.87 },
   { "id": "anatot", "label": "Anatot", "lon": 35.265, "lat": 31.81 },
   { "id": "silo", "label": "Siló", "lon": 35.2894, "lat": 32.0556 },
+  { "id": "efrain", "label": "Efraín", "lon": 35.2, "lat": 32.1 },
   { "id": "rama", "label": "Ramá", "lon": 35.2331, "lat": 31.8964 },
   { "id": "guibea", "label": "Guibeá", "lon": 35.2317, "lat": 31.8236 },
   { "id": "maon", "label": "Maón", "lon": 35.1319, "lat": 31.4139 },
@@ -29,6 +31,7 @@
   { "id": "mar-muerto", "label": "Mar Muerto", "lon": 35.4667, "lat": 31.5 },
   { "id": "moab", "label": "Moab", "lon": 35.75, "lat": 31.4 },
   { "id": "valle-jordan", "label": "Valle del Jordán", "lon": 35.55, "lat": 32.0 },
+  { "id": "jordan", "label": "Río Jordán", "lon": 35.5372, "lat": 31.8372 },
 
   { "id": "nazaret", "label": "Nazaret", "lon": 35.2978, "lat": 32.7021 },
   { "id": "gat-hefer", "label": "Gat-Héfer", "lon": 35.3419, "lat": 32.7392 },
@@ -39,6 +42,7 @@
   { "id": "abelmehola", "label": "Abel-Meholá", "lon": 35.53, "lat": 32.35 },
   { "id": "samaria", "label": "Samaria", "lon": 35.1953, "lat": 32.2806 },
   { "id": "galilea", "label": "Galilea", "lon": 35.4, "lat": 32.85 },
+  { "id": "carmelo", "label": "Monte Carmelo", "lon": 35.0333, "lat": 32.7333 },
 
   { "id": "tarso", "label": "Tarso", "lon": 34.8951, "lat": 36.9178 },
   { "id": "atenas", "label": "Atenas", "lon": 23.7275, "lat": 37.9838 },

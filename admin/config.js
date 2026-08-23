@@ -23,10 +23,15 @@ export const PATHS = {
   assets: 'assets',
 };
 
+// El marco de los mapas, en un solo sitio. De aquí sale tanto el lienzo que
+// dibuja `admin/mapa.js` como la proporción a la que se recorta un mapa subido
+// a mano, para que los dos caminos den siempre la misma imagen.
+export const LIENZO = { ancho: 909, alto: 540 };
+
 // Límites al reducir las imágenes en el navegador antes de subirlas.
 export const IMAGES = {
   portrait: { maxW: 800, maxH: 1067, quality: 0.82, ext: 'jpg', mime: 'image/jpeg' },
-  map: { maxW: 1200, maxH: 900, quality: 0.85, ext: 'jpg', mime: 'image/jpeg' },
+  map: { maxW: LIENZO.ancho, maxH: LIENZO.alto, quality: 0.85, ext: 'jpg', mime: 'image/jpeg' },
   // Aviso (no bloqueo) si un fichero ya reducido sigue pesando más que esto.
   warnBytes: 400 * 1024,
 };

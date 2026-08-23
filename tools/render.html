@@ -29,7 +29,7 @@ window.dibujarPersonaje = async id => {
   if (!p) throw new Error(`no existe la tarjeta ${id}`);
   if (!p.map) throw new Error(`la tarjeta ${id} no tiene especificación de mapa`);
   const lugares = resolverLugares(p.map, nomenclator);
-  const marco = p.map.encuadre || encuadrar(lugares, { zoom: p.map.zoom, medir });
+  const marco = p.map.encuadre || encuadrar(lugares, { zoom: p.map.zoom, centro: p.map.centro, medir });
   dibujar(ctx, geo, { lugares, ruta: !!p.map.ruta, curva: p.map.curva }, marco);
   estado.textContent = id;
   return base64(await aPngIndexado(ctx));
@@ -38,7 +38,8 @@ window.dibujarPersonaje = async id => {
 // Sirve para comprobar el renderizador contra los mapas antiguos.
 window.dibujarSpec = async (spec, encuadre) => {
   const lugares = resolverLugares(spec, nomenclator);
-  dibujar(ctx, geo, { ...spec, lugares }, encuadre || encuadrar(lugares, { medir }));
+  dibujar(ctx, geo, { ...spec, lugares },
+    encuadre || encuadrar(lugares, { zoom: spec.zoom, centro: spec.centro, medir }));
   return base64(await aPngIndexado(ctx));
 };
 

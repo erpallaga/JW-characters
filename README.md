@@ -1,6 +1,6 @@
 # Personajes de la Biblia
 
-Un mazo de tarjetas para la **noche de adoración en familia**: 18 personajes bíblicos
+Un mazo de tarjetas para la **noche de adoración en familia**: 47 personajes bíblicos
 que se pueden hojear de uno en uno o ver en cuadrícula, con su mapa, los pasajes donde
 aparecen y su lugar en la línea del tiempo.
 
@@ -18,12 +18,13 @@ compilación: se abre `index.html` y funciona.
   4026 a. e. c. y 100 e. c.
 - **Modo repaso**: oculta los nombres para adivinar quién es antes de darle la vuelta.
 - **Filtro por eras** y barajado.
-- **Retratos encuadrados**: la foto se recorta en 3:4 al subirla, desde el panel, y
-  la tarjeta la enseña entera. El encuadre se decide una vez y lo ve todo el mundo.
+- **Imágenes encuadradas**: al subirla desde el panel, la foto se recorta al marco de
+  la tarjeta —3:4 el retrato, 5:3 el mapa— y la tarjeta la enseña entera. El encuadre
+  se decide una vez y lo ve todo el mundo.
 - **Panel de administración** para añadir, editar y ocultar tarjetas sin tocar el código.
 
 <p align="center">
-  <img src="docs/capturas/mazo-cuadricula.png" width="620" alt="Vista de cuadrícula con los 18 personajes">
+  <img src="docs/capturas/mazo-cuadricula.png" width="620" alt="Vista de cuadrícula con los personajes">
   <img src="docs/capturas/mazo-movil.png" width="200" alt="El mazo en un móvil">
 </p>
 
@@ -73,7 +74,20 @@ panel, o todos de una vez con `node tools/generar-mapas.mjs`, que dibuja con el 
 código dentro de un Chromium sin ventana. Los detalles, en
 [`docs/panel.md`](docs/panel.md).
 
-Los 18 mapas originales, hechos a mano en Claude Design, se han dejado como estaban.
+Las 47 tarjetas llevan esa especificación, así que **cualquier mapa se puede rehacer o
+retocar** sin partir de cero, y todos salen con el mismo marco: PNG de paleta,
+909 × 540. Los 18 primeros se dibujaron a mano en Claude Design; se midieron marcador
+a marcador para deducir dónde caía cada lugar, y ahora se generan como los demás.
+
+Para revisarlos sin volver a dibujarlos:
+
+```
+node tools/comprobar-mapas.mjs
+```
+
+Comprueba que toda ficha lleve su especificación, que los lugares que nombra existan
+en el nomenclátor, que el PNG tenga el marco de siempre y que ningún marcador se
+salga de la parte de la imagen que la tarjeta llega a enseñar.
 
 ## Añadir o editar tarjetas
 

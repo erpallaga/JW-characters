@@ -821,7 +821,7 @@ function campoImagen(c, tipo, pintarPrevia) {
 
   pintar();
   return h('div', { class: 'campo-grupo' },
-    h('span', { class: 'label' }, esRetrato ? 'Retrato · vertical 3:4' : 'Mapa · apaisado 4:3'),
+    h('span', { class: 'label' }, esRetrato ? 'Retrato · vertical 3:4' : 'Mapa · apaisado 5:3'),
     zona, entrada);
 }
 
