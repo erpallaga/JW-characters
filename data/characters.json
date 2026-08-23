@@ -1026,7 +1026,7 @@
     "portraitSrc": "assets/portrait-jonatan.jpg",
     "mapSrc": "assets/mapa-jonatan.png",
     "mapPos": "50% 50%",
-    "knownFor": "Hijo mayor del rey Saúl y amigo fiel de David. Hombre valiente que, con solo su escudero, atacó una guarnición filistea confiando en que \"nada impide a Jehová salvar sea con muchos o con pocos\". Renunció voluntariamente a su derecho al trono al reconocer que Jehová había elegido a David, y su amistad con este es un ejemplo de lealtad desinteresada.",
+    "knownFor": "Hijo mayor del rey Saúl y amigo fiel de David. Hombre valiente que, con solo su escudero, atacó una guarnición filistea confiando en que a Jehová nada le impide salvar, ya sea con muchos o con pocos (1 Samuel 14:6). Renunció voluntariamente a su derecho al trono al reconocer que Jehová había elegido a David, y su amistad con este es un ejemplo de lealtad desinteresada.",
     "passages": [
       {
         "book": "samuel1",
@@ -1079,7 +1079,7 @@
     "portraitSrc": "assets/portrait-abigail.jpg",
     "mapSrc": "assets/mapa-abigail.png",
     "mapPos": "50% 50%",
-    "knownFor": "Mujer sabia y discreta, esposa primero del insensato Nabal y luego de David. Cuando Nabal insultó a David y este marchó a matar a toda su casa, Abigaíl interceptó al futuro rey con provisiones y una apelación respetuosa y sensata que evitó una masacre. Su respuesta es uno de los mejores ejemplos de tacto y prudencia en la Biblia.",
+    "knownFor": "Mujer sabia y discreta, esposa primero del insensato Nabal y luego de David. Cuando Nabal insultó a David y este marchó a matar a toda su casa, Abigaíl interceptó al futuro rey con provisiones y una apelación respetuosa y sensata que evitó una masacre. Su respuesta es un ejemplo de tacto y prudencia.",
     "passages": [
       {
         "book": "samuel1",
@@ -1682,7 +1682,7 @@
     "portraitSrc": "assets/portrait-timoteo.jpg",
     "mapSrc": "assets/mapa-timoteo.png",
     "mapPos": "50% 50%",
-    "knownFor": "Colaborador cercano de Pablo, hijo de madre judía creyente (Eunice) y abuela creyente (Loída), que conocía las Escrituras desde bebé. Se unió a Pablo en su segundo viaje misionero siendo joven y llegó a dirigir la congregación de Éfeso. Recibió dos cartas personales llenas de consejos prácticos: \"que nadie tenga en poco tu juventud\". Ejemplo de crecimiento espiritual desde la infancia.",
+    "knownFor": "Colaborador cercano de Pablo, hijo de madre judía creyente (Eunice) y abuela creyente (Loída), que lo instruyeron en las santas Escrituras desde bebé. Se unió a Pablo en su segundo viaje misionero siendo joven y llegó a dirigir la congregación de Éfeso. Recibió dos cartas personales llenas de consejos prácticos: \"que nadie tenga en poco tu juventud\".",
     "passages": [
       {
         "book": "hechos",
@@ -1777,7 +1777,7 @@
     "portraitSrc": "assets/portrait-zipora.jpg",
     "mapSrc": "assets/mapa-zipora.png",
     "mapPos": "50% 50%",
-    "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo salvando la vida de Moisés cuando Jehová amenazaba con matarlo por descuidar ese pacto. Moisés la envió de vuelta a Madián con su padre, y no volvieron a encontrarse hasta después del éxodo, cuando Jetró la llevó al campamento en el desierto.",
+    "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo cuando el descuido de ese pacto puso una vida en peligro, aunque el relato no aclara si la de Moisés o la del niño. Moisés la envió de vuelta a Madián con su padre, y no volvieron a encontrarse hasta después del éxodo, cuando Jetró la llevó al campamento en el desierto.",
     "passages": [
       {
         "book": "exodo",
