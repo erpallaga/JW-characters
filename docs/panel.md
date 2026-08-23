@@ -78,10 +78,45 @@ Una tarjeta **nueva** sigue colocándose sola por sus fechas mientras no se toqu
 orden a mano; en cuanto se mueve, se queda donde se la deja. Cambiar el orden cuenta
 como un cambio sin publicar, igual que editar una tarjeta.
 
+## Los mapas
+
+No hacen falta imágenes de fuera: el botón **Generar mapa**, junto al campo del mapa,
+los dibuja en el propio panel.
+
+1. Se añaden los lugares por su nombre, en el orden del viaje. Si alguno no está en
+   la lista, «Otro lugar (a mano)» acepta un nombre con su latitud y su longitud.
+2. **Unirlos con la línea del viaje** traza la línea roja de puntos que pasa por
+   todos ellos, en el orden en que estén.
+3. El encuadre se calcula solo para que los lugares y sus nombres queden dentro de
+   lo que la tarjeta enseña —las bandas oscuras de la vista previa marcan lo que se
+   recorta—. Quitando **Encuadre automático** se ajusta a mano, que es lo que
+   conviene en un desierto, donde de cerca no se reconoce nada.
+
+Al aceptar, el mapa entra en el borrador como una imagen más y se publica con el
+resto. Los lugares elegidos se guardan en la tarjeta (campo `map`), así que el mapa
+se puede volver a abrir y retocar más adelante sin empezar de cero.
+
+Para rehacerlos todos de golpe desde la consola, sin abrir el panel:
+
+```
+node tools/generar-mapas.mjs            # solo los que falten
+node tools/generar-mapas.mjs --todas    # todos otra vez
+```
+
+Dibuja con el mismo código que el panel, dentro de un Chromium sin ventana. Si el
+navegador no está en `/opt/pw-browsers/chromium`, se le indica con la variable
+`CHROMIUM`.
+
 ## Los datos
 
 - `data/characters.json` — los personajes.
 - `data/eras.json` — las eras, que ordenan el mazo y los filtros.
+- `data/lugares.json` — el nomenclátor: los lugares bíblicos con sus coordenadas.
+  Añadir uno aquí lo pone en la lista del editor de mapas para todas las tarjetas.
+- `data/geo/` — las costas y las fronteras con las que se dibujan los mapas, sacadas
+  de [Natural Earth](https://www.naturalearthdata.com) (dominio público) y recortadas
+  al ámbito bíblico. Se rehacen con `tools/preparar-geo.py`, que solo hace falta si
+  alguna vez hay que ampliar la zona que cubren.
 - `data/books.json` — los 66 libros de la Biblia con su nombre, su fragmento de URL
   en jw.org y cuántos capítulos tiene cada uno. El selector de pasajes construye el
   enlace a partir de esta tabla.

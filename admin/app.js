@@ -746,6 +746,8 @@ function campoImagen(c, tipo, pintarPrevia) {
       ),
       h('div', { style: 'display:flex;gap:6px;flex-wrap:wrap' },
         h('button', { class: 'btn btn-bajo', onclick: () => entrada.click() }, ruta ? 'Reemplazar' : 'Subir'),
+        !esRetrato ? h('button', { class: 'btn btn-bajo', onclick: () => generarMapa() },
+          c.map ? 'Editar el mapa' : 'Generar mapa') : null,
         ruta ? h('button', { class: 'btn btn-bajo', onclick: () => reencuadrar() }, 'Reencuadrar') : null,
         ruta ? h('button', { class: 'btn btn-bajo', onclick: () => quitar() }, 'Quitar') : null,
       ),
@@ -757,11 +759,11 @@ function campoImagen(c, tipo, pintarPrevia) {
     if (ruta && estado.imagenes[ruta]) { await store.borrarImagen(ruta); delete estado.imagenes[ruta]; }
     delete estado.originales[ruta];
     delete c[campo];
+    if (!esRetrato) delete c.map;
     guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
   };
 
-  const guardar = async (recorte, original) => {
-    const ruta = `${PATHS.assets}/${esRetrato ? 'portrait' : 'mapa'}-${c.id}.${IMAGES[tipo].ext}`;
+  const guardar = async (recorte, original, ruta = `${PATHS.assets}/${esRetrato ? 'portrait' : 'mapa'}-${c.id}.${IMAGES[tipo].ext}`) => {
     const anterior = estado.imagenes[ruta];
     if (anterior && anterior._url) URL.revokeObjectURL(anterior._url);
     await store.guardarImagen(ruta, recorte);
@@ -771,6 +773,23 @@ function campoImagen(c, tipo, pintarPrevia) {
     // Ya viene recortada a la proporción de la tarjeta: no hay que desplazarla.
     if (!esRetrato) c.mapPos = '50% 50%';
     guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
+  };
+
+  // El mapa se dibuja aquí mismo a partir de los lugares, sin salir del panel.
+  // La especificación se guarda en la tarjeta para poder rehacerlo después.
+  // No pasa por el recorte: sale ya del tamaño exacto y en PNG, como los mapas
+  // que venían de antes, así que se guarda con su propia extensión.
+  const generarMapa = async () => {
+    try {
+      const { abrirEditorDeMapa } = await import('./editor-mapa.js');
+      const hecho = await abrirEditorDeMapa(c);
+      if (!hecho) return;
+      c.map = hecho.spec;
+      await guardar({ blob: hecho.blob, ancho: hecho.ancho, alto: hecho.alto }, null,
+        `${PATHS.assets}/mapa-${c.id}.png`);
+    } catch (err) {
+      alert(`No se ha podido generar el mapa: ${err.message}`);
+    }
   };
 
   entrada.addEventListener('change', async () => {

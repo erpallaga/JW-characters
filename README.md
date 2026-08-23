@@ -34,9 +34,11 @@ index.html          el mazo entero: plantilla y lógica en un archivo
 support.js          runtime de Claude Design (el mazo es un componente .dc)
 admin.html          panel de administración
 admin/*.js          módulos del panel (sin framework, sin compilar)
-data/*.json         los datos: personajes, eras y libros de la Biblia
+admin/mapa.js       el dibujo de los mapas, compartido con el generador
+data/*.json         los datos: personajes, eras, libros y lugares
+data/geo/           costas y fronteras recortadas, para dibujar los mapas
 assets/             retratos y mapas
-tools/              comprobaciones que se lanzan a mano con node
+tools/              el generador de mapas y las comprobaciones, a mano con node
 docs/               especificaciones, planes y el manual del panel
 ```
 
@@ -56,8 +58,22 @@ Los personajes vivían dentro de `index.html` hasta que el panel los sacó a
 - **`data/books.json`** — los 66 libros con su nombre, su fragmento de URL en jw.org y
   cuántos capítulos tiene cada uno. Los enlaces a los pasajes se construyen a partir de
   aquí, en vez de guardarse ya escritos.
+- **`data/lugares.json`** — el nomenclátor de lugares bíblicos con sus coordenadas, del
+  que salen los marcadores de los mapas.
 
 Una tarjeta con `"hidden": true` sigue en los datos pero no aparece en el mazo.
+
+## Los mapas
+
+No se buscan fuera: se dibujan. Cada tarjeta guarda en su campo `map` los lugares por
+los que pasa —y si se unen con la línea del viaje—, y de ahí sale el PNG, en
+proyección Mercator sobre las costas y fronteras de [Natural
+Earth](https://www.naturalearthdata.com). Se hacen desde el botón **Generar mapa** del
+panel, o todos de una vez con `node tools/generar-mapas.mjs`, que dibuja con el mismo
+código dentro de un Chromium sin ventana. Los detalles, en
+[`docs/panel.md`](docs/panel.md).
+
+Los 18 mapas originales, hechos a mano en Claude Design, se han dejado como estaban.
 
 ## Añadir o editar tarjetas
 
