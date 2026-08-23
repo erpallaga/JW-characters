@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Mulish:wght@400;600;700;800&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: oklch(0.42 0.09 255); }
+    a:hover { color: oklch(0.34 0.1 255); }
+  </style>
+</helmet>
+
+<div style="width: 860px; height: 830px; box-sizing: border-box; padding: 40px; background: oklch(0.95 0.016 80); font-family: 'Mulish', system-ui, sans-serif; color: oklch(0.26 0.03 50); display: flex; flex-direction: column; gap: 24px;">
+
+  <div style="display: flex; align-items: center; gap: 13px;">
+    <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: oklch(0.9 0.035 40); color: oklch(0.56 0.13 35); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;">C</span>
+    <div style="flex-grow: 1;">
+      <div style="font-family: 'Amiri', Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1.15;">Tarjeta vertical</div>
+      <div style="font-size: 12.5px; color: oklch(0.48 0.02 55); margin-top: 2px;">400 × 533 · la tarjeta adopta la forma del retrato</div>
+    </div>
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.56 0.13 35); background: oklch(0.9 0.035 40); border-radius: 999px; padding: 5px 13px; white-space: nowrap;">imagen 100 %</span>
+  </div>
+
+  <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px;">
+    <div style="position: relative; width: 400px; height: 533px; flex-shrink: 0; border-radius: 18px; border: 1px solid oklch(0.82 0.02 70); box-shadow: 0 3px 10px rgba(40,25,10,0.12); overflow: hidden; background-color: oklch(0.88 0.02 75); background-image: url(&quot;recorte-ester.jpg&quot;); background-size: cover; background-position: 50% 50%;">
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 240px; background: linear-gradient(to top, rgba(32,19,8,0.86) 0%, rgba(32,19,8,0.58) 42%, rgba(32,19,8,0) 100%);"></div>
+      <div style="position: absolute; left: 26px; right: 26px; bottom: 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.99 0.005 80); background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.34); border-radius: 999px; padding: 4px 12px;">Exilio y Restauración · ~475 a.e.c.</div>
+        <div style="font-family: 'Amiri', Georgia, serif; font-size: 42px; font-weight: 700; line-height: 1.05; color: oklch(0.99 0.005 80); text-shadow: 0 1px 12px rgba(20,12,4,0.4);">Ester</div>
+        <div style="font-size: 12.5px; color: rgba(255,255,255,0.82);">Toca la tarjeta para ver los detalles</div>
+      </div>
+    </div>
+
+    <div style="width: 250px; flex-shrink: 0; display: flex; flex-direction: column; gap: 14px; padding-top: 6px;">
+      <span style="font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35);">El reverso, en vertical</span>
+      <div style="border: 1px dashed oklch(0.82 0.02 70); border-radius: 14px; background: oklch(0.905 0.02 76); padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'Amiri', Georgia, serif; font-weight: 700; font-size: 20px; line-height: 1.1;">Ester</div>
+        <div style="height: 84px; border-radius: 8px; border: 1px solid oklch(0.82 0.02 70); background: repeating-linear-gradient(60deg, oklch(0.9 0.018 75), oklch(0.9 0.018 75) 5px, oklch(0.94 0.014 78) 5px, oklch(0.94 0.014 78) 10px);"></div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <span style="height: 7px; border-radius: 999px; background: oklch(0.86 0.02 72);"></span>
+          <span style="height: 7px; border-radius: 999px; background: oklch(0.86 0.02 72);"></span>
+          <span style="height: 7px; width: 72%; border-radius: 999px; background: oklch(0.86 0.02 72);"></span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <span style="height: 18px; width: 82%; border-radius: 8px; background: oklch(0.9 0.035 40);"></span>
+          <span style="height: 18px; width: 68%; border-radius: 8px; background: oklch(0.9 0.035 40);"></span>
+        </div>
+        <span style="height: 6px; border-radius: 999px; background: oklch(0.86 0.02 72);"></span>
+      </div>
+      <span style="font-size: 12px; color: oklch(0.48 0.02 55); line-height: 1.5;">Mapa, texto, pasajes y línea de tiempo dejan de ir en dos columnas y pasan a una sola, apiladas.</span>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; width: 100%;">
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">Qué cambia</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">La tarjeta deja de ser apaisada y toma la proporción del retrato: la imagen es la tarjeta, entera y sin recortar, y el texto se apoya abajo sobre un velo oscuro. Es la misma forma que ya tienen las tarjetas de la cuadrícula, así que las dos vistas por fin se parecen, y en el móvil cae de pie.</span>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">Qué cuesta</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">Es la única de las tres que obliga a rehacer el reverso: hoy son dos columnas pensadas para 720 px de ancho. Y el velo oscuro es un tono nuevo en un mazo que hasta ahora era todo papel claro.</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

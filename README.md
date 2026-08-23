@@ -12,13 +12,14 @@ compilación: se abre `index.html` y funciona.
 ## Qué hace
 
 - **Dos vistas del mazo**: una tarjeta a la vez, o todas en cuadrícula.
-- **Anverso y reverso**: el nombre y la época delante; detrás, dónde vivió, por qué se
-  le conoce, los pasajes enlazados a la Biblia en línea de jw.org y una barra que sitúa
-  su vida entre 4026 a. e. c. y 100 e. c.
+- **Anverso y reverso**: delante, el retrato manda —ocupa el 60 % de la tarjeta— con
+  la era, el nombre y la época al lado; detrás, dónde vivió, por qué se le conoce, los
+  pasajes enlazados a la Biblia en línea de jw.org y una barra que sitúa su vida entre
+  4026 a. e. c. y 100 e. c.
 - **Modo repaso**: oculta los nombres para adivinar quién es antes de darle la vuelta.
 - **Filtro por eras** y barajado.
-- **Retratos reencuadrables**: se arrastra la foto dentro de la tarjeta para ajustar el
-  encuadre; el ajuste se recuerda en ese navegador.
+- **Retratos encuadrados**: la foto se recorta en 3:4 al subirla, desde el panel, y
+  la tarjeta la enseña entera. El encuadre se decide una vez y lo ve todo el mundo.
 - **Panel de administración** para añadir, editar y ocultar tarjetas sin tocar el código.
 
 <p align="center">
@@ -35,6 +36,7 @@ admin.html          panel de administración
 admin/*.js          módulos del panel (sin framework, sin compilar)
 data/*.json         los datos: personajes, eras y libros de la Biblia
 assets/             retratos y mapas
+tools/              comprobaciones que se lanzan a mano con node
 docs/               especificaciones, planes y el manual del panel
 ```
 
@@ -78,6 +80,17 @@ cargan con `fetch`, así que abrir el archivo directamente con `file://` no func
 ```
 npx http-server . -p 8080
 ```
+
+Los enlaces a la Biblia se construyen con `data/books.json`, y de sus 66 libros solo
+20 se han comprobado nunca contra jw.org. Para comprobarlos todos hace falta una
+conexión que llegue a jw.org:
+
+```
+node tools/comprobar-libros.mjs --red
+```
+
+Sin `--red` revisa la tabla sin salir a la red: que estén los 66 libros, que los
+capítulos cuadren y que ningún pasaje apunte a un capítulo que no existe.
 
 ## Contenido
 

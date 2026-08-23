@@ -7,9 +7,10 @@ import { AUTH, PATHS, IMAGES, REPO } from './config.js';
 import { entrar, haySesion, salir } from './auth.js';
 import * as gh from './github.js';
 import * as store from './store.js';
-import { reducir, formatearPeso } from './images.js';
+import { formatearPeso } from './images.js';
+import { pedirEncuadre } from './encuadre.js';
 import * as modelo from './model.js';
-import { h, vaciar, icono, aviso } from './ui.js';
+import { h, vaciar, añadirA, icono, aviso } from './ui.js';
 
 const LINEA = { min: -4026, max: 100 };
 const raiz = document.getElementById('app');
@@ -22,6 +23,7 @@ const estado = {
   publicado: null,     // instantánea de lo que hay en el repositorio
   libros: [],
   imagenes: {},        // ruta -> { blob, ancho, alto }, pendientes de subir
+  originales: {},      // ruta -> fichero tal cual se eligió, para poder reencuadrar sin perder calidad
   reciennPublicadas: {}, // ya subidas: se siguen pintando hasta que Pages reconstruya
   baseCommitSha: null,
   editandoId: null,
@@ -271,6 +273,79 @@ function chipEstado(tipo) {
   return h('span', { class: 'chip chip-plano' }, h('span', { class: 'punto punto-gris' }), 'Publicada');
 }
 
+// El mazo se lee en el orden del array, y ese orden es una decisión: Ester va
+// antes que Daniel aunque las fechas digan lo contrario. Una tarjeta nueva se
+// coloca sola por sus fechas (ver colocarPorFecha); esto permite mover
+// cualquiera a mano, arrastrándola o con las flechas del teclado.
+
+/** Tarjetas que el usuario ha movido a mano: ya no se recolocan por fecha. */
+const movidasAMano = new Set();
+
+/** Reordena el array a partir de una lista de ids. Devuelve si algo cambió. */
+function aplicarOrden(ids) {
+  const lista = estado.borrador.characters || [];
+  const porId = Object.fromEntries(lista.map(c => [c.id, c]));
+  const ordenadas = ids.map(id => porId[id]).filter(Boolean);
+  // Si los ids no cuadran con el borrador, mejor no tocar nada.
+  if (ordenadas.length !== lista.length) return false;
+  if (ordenadas.every((c, i) => c === lista[i])) return false;
+  estado.borrador.characters = ordenadas;
+  guardarBorrador();
+  return true;
+}
+
+function moverTarjeta(id, delta) {
+  const ids = (estado.borrador.characters || []).map(c => c.id);
+  const i = ids.indexOf(id);
+  const j = i + delta;
+  if (i < 0 || j < 0 || j >= ids.length) return;
+  ids.splice(j, 0, ids.splice(i, 1)[0]);
+  movidasAMano.add(id);
+  aplicarOrden(ids);
+  render();
+  const agarre = raiz.querySelector(`[data-agarre="${id}"]`);
+  if (agarre) agarre.focus();
+}
+
+/**
+ * Arrastre de una fila. Mientras se arrastra solo se mueve el nodo por el DOM;
+ * al soltar, el orden que haya quedado se vuelca en el borrador.
+ */
+function empezarArrastre(ev, fila, contenedor) {
+  if (ev.button !== undefined && ev.button !== 0) return;
+  ev.preventDefault();
+  fila.classList.add('arrastrando');
+  contenedor.classList.add('reordenando');
+
+  // Los eventos van a la ventana y no al asa: al mover la fila de sitio, el
+  // navegador la saca y la vuelve a meter en el DOM, y con eso se pierde
+  // cualquier captura del puntero sobre ella.
+  const mover = (e) => {
+    if (e.clientY < 90) window.scrollBy(0, -14);
+    else if (e.clientY > window.innerHeight - 90) window.scrollBy(0, 14);
+
+    const destino = [...contenedor.querySelectorAll('.fila')]
+      .filter(f => f !== fila)
+      .find(f => { const r = f.getBoundingClientRect(); return e.clientY < r.top + r.height / 2; }) || null;
+    if (destino !== fila.nextElementSibling) contenedor.insertBefore(fila, destino);
+  };
+
+  const soltar = () => {
+    window.removeEventListener('pointermove', mover);
+    window.removeEventListener('pointerup', soltar);
+    window.removeEventListener('pointercancel', soltar);
+    fila.classList.remove('arrastrando');
+    contenedor.classList.remove('reordenando');
+    movidasAMano.add(fila.dataset.id);
+    aplicarOrden([...contenedor.querySelectorAll('.fila')].map(f => f.dataset.id));
+    render();
+  };
+
+  window.addEventListener('pointermove', mover);
+  window.addEventListener('pointerup', soltar);
+  window.addEventListener('pointercancel', soltar);
+}
+
 function pantallaLista() {
   const eras = estado.borrador.eras || [];
   const erasPorId = Object.fromEntries(eras.map(e => [e.id, e]));
@@ -297,11 +372,29 @@ function pantallaLista() {
     style: 'width:250px', oninput: (e) => { f.texto = e.target.value; render(); },
   });
 
+  // Reordenar solo tiene sentido viendo el mazo entero: con un filtro puesto,
+  // «dejar esta fila aquí» no dice dónde va en el orden real.
+  const puedeReordenar = !f.texto && !f.era && !f.estado && todas.length > 1;
+  const contenedor = h('div', { class: 'lista' });
+
   const filas = visibles.map(c => {
     const tipo = modelo.estadoDe(c, publicadasPorId);
     const era = erasPorId[c.eraId];
     const url = urlImagen(c.portraitSrc);
-    return h('div', { class: `fila${c.hidden ? ' oculta' : ''}` },
+    const agarre = h('button', {
+      class: 'agarre', type: 'button', disabled: !puedeReordenar, 'data-agarre': c.id,
+      title: puedeReordenar
+        ? 'Arrastra para mover la tarjeta; con el teclado, ↑ y ↓'
+        : 'Quita los filtros para poder reordenar',
+      onkeydown: (e) => {
+        if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+        e.preventDefault();
+        moverTarjeta(c.id, e.key === 'ArrowUp' ? -1 : 1);
+      },
+    }, icono('agarre', 15));
+
+    const fila = h('div', { class: `fila${c.hidden ? ' oculta' : ''}`, 'data-id': c.id },
+      agarre,
       url
         ? h('img', { class: 'miniatura', src: url, alt: '', loading: 'lazy' })
         : h('div', { class: 'miniatura miniatura-vacia' }, icono('imagen', 15)),
@@ -320,6 +413,11 @@ function pantallaLista() {
         h('button', { class: 'icono-btn', title: 'Borrar', onclick: () => borrarTarjeta(c) }, icono('papelera')),
       ),
     );
+
+    if (puedeReordenar) {
+      agarre.addEventListener('pointerdown', (ev) => empezarArrastre(ev, fila, contenedor));
+    }
+    return fila;
   });
 
   return h('div', {},
@@ -348,8 +446,9 @@ function pantallaLista() {
         h('div', { style: 'flex:1' }),
         h('button', { class: 'btn btn-acento', onclick: nuevaTarjeta }, icono('mas', 15), 'Nueva tarjeta'),
       ),
-      h('div', { class: 'lista' },
+      añadirA(contenedor,
         h('div', { class: 'fila-cab' },
+          h('div', { style: 'width:22px;flex-shrink:0' }),
           h('div', { style: 'width:38px;flex-shrink:0' }),
           h('div', { class: 'label', style: 'flex:1;min-width:0' }, 'Personaje'),
           h('div', { class: 'label col-era' }, 'Era'),
@@ -360,7 +459,12 @@ function pantallaLista() {
       ),
       h('div', { style: 'display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap' },
         h('span', { style: 'font-size:12px;color:var(--tinta-2)' },
-          `Mostrando ${visibles.length} de ${todas.length}`),
+          `Mostrando ${visibles.length} de ${todas.length}`,
+          todas.length > 1
+            ? (puedeReordenar
+                ? ' · arrastra el asa de una fila para cambiar el orden del mazo'
+                : ' · quita los filtros para poder reordenar')
+            : ''),
         estado.guardadoEn
           ? h('span', { style: 'display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--tinta-2)' },
               icono('reloj', 14), `Borrador guardado ${textoRelativo(estado.guardadoEn)}`)
@@ -583,7 +687,7 @@ function bloqueDeLinea(c, cambiar, pintarPrevia) {
         aprox, h('span', { style: 'font-size:13px' }, 'Fechas aproximadas')),
     ),
     h('div', { style: 'font-size:11.5px;color:var(--tinta-2);margin-top:10px' },
-      'Con las fechas puestas, una tarjeta nueva se coloca sola en su sitio del mazo.'),
+      'Con las fechas puestas, una tarjeta nueva se coloca sola en su sitio del mazo. El orden se puede cambiar luego desde la lista.'),
     h('div', { style: 'margin-top:18px;padding:14px 16px 12px;background:var(--hueco);border-radius:12px' },
       barra,
       h('div', { style: 'display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:7px;font-size:10.5px;color:var(--tinta-2)' },
@@ -593,15 +697,15 @@ function bloqueDeLinea(c, cambiar, pintarPrevia) {
 }
 
 /**
- * El mazo va en orden cronológico, y ese orden es el del array — no está
- * ordenado estrictamente por fecha (Ester va antes que Daniel), así que no se
- * puede reordenar todo sin alterar decisiones ya tomadas. Lo que sí se puede:
- * colocar una tarjeta NUEVA donde le toca, en vez de dejarla siempre la última.
- * Una tarjeta ya publicada no se mueve nunca.
+ * Coloca una tarjeta NUEVA donde le toca por sus fechas, en vez de dejarla
+ * siempre la última. No reordena el resto: el mazo no está estrictamente
+ * ordenado por fecha (Ester va antes que Daniel) y esas decisiones se
+ * respetan. Una tarjeta ya publicada, o una que se haya movido a mano desde
+ * la lista, no se mueve nunca.
  */
 function colocarPorFecha(c) {
   const publicada = (estado.publicado.characters || []).some(x => x.id === c.id);
-  if (publicada || !c.life || typeof c.life.start !== 'number') return;
+  if (publicada || movidasAMano.has(c.id) || !c.life || typeof c.life.start !== 'number') return;
   const lista = estado.borrador.characters;
   const i = lista.indexOf(c);
   if (i < 0) return;
@@ -636,12 +740,13 @@ function campoImagen(c, tipo, pintarPrevia) {
           ruta ? ruta.replace('assets/', '') : 'sin imagen'),
         h('div', { style: 'font-size:11.5px;color:var(--tinta-2);margin-top:3px' },
           pendiente ? `${pendiente.ancho} × ${pendiente.alto} · ${formatearPeso(pendiente.blob.size)} · sin publicar`
-                    : (ruta ? 'ya publicada' : `se reducirá a ${IMAGES[tipo].maxW} px al subirla`)),
+                    : (ruta ? 'ya publicada' : `se recorta y se reduce a ${IMAGES[tipo].maxW} × ${IMAGES[tipo].maxH} px al subirla`)),
         !esRetrato && ruta ? h('div', { style: 'font-size:11px;color:var(--acento);font-weight:700;margin-top:5px' },
           `Punto del mapa: ${c.mapPos || '50% 50%'}`) : null,
       ),
       h('div', { style: 'display:flex;gap:6px;flex-wrap:wrap' },
         h('button', { class: 'btn btn-bajo', onclick: () => entrada.click() }, ruta ? 'Reemplazar' : 'Subir'),
+        ruta ? h('button', { class: 'btn btn-bajo', onclick: () => reencuadrar() }, 'Reencuadrar') : null,
         ruta ? h('button', { class: 'btn btn-bajo', onclick: () => quitar() }, 'Quitar') : null,
       ),
     ));
@@ -650,7 +755,21 @@ function campoImagen(c, tipo, pintarPrevia) {
   const quitar = async () => {
     const ruta = c[campo];
     if (ruta && estado.imagenes[ruta]) { await store.borrarImagen(ruta); delete estado.imagenes[ruta]; }
+    delete estado.originales[ruta];
     delete c[campo];
+    guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
+  };
+
+  const guardar = async (recorte, original) => {
+    const ruta = `${PATHS.assets}/${esRetrato ? 'portrait' : 'mapa'}-${c.id}.${IMAGES[tipo].ext}`;
+    const anterior = estado.imagenes[ruta];
+    if (anterior && anterior._url) URL.revokeObjectURL(anterior._url);
+    await store.guardarImagen(ruta, recorte);
+    estado.imagenes[ruta] = recorte;
+    if (original) estado.originales[ruta] = original;
+    c[campo] = ruta;
+    // Ya viene recortada a la proporción de la tarjeta: no hay que desplazarla.
+    if (!esRetrato) c.mapPos = '50% 50%';
     guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
   };
 
@@ -659,20 +778,27 @@ function campoImagen(c, tipo, pintarPrevia) {
     if (!archivo) return;
     entrada.value = '';
     try {
-      const { blob, ancho, alto } = await reducir(archivo, tipo);
-      const ruta = `${PATHS.assets}/${esRetrato ? 'portrait' : 'mapa'}-${c.id}.${IMAGES[tipo].ext}`;
-      const anterior = estado.imagenes[ruta];
-      if (anterior && anterior._url) URL.revokeObjectURL(anterior._url);
-      const registro = { blob, ancho, alto };
-      await store.guardarImagen(ruta, registro);
-      estado.imagenes[ruta] = registro;
-      c[campo] = ruta;
-      if (!esRetrato && !c.mapPos) c.mapPos = '50% 50%';
-      guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
+      const recorte = await pedirEncuadre(archivo, tipo);
+      if (recorte) await guardar(recorte, archivo);
     } catch (err) {
       alert(`No se ha podido preparar la imagen: ${err.message}`);
     }
   });
+
+  const reencuadrar = async () => {
+    const ruta = c[campo];
+    if (!ruta) return;
+    try {
+      // El original de esta sesión permite recortar sin perder calidad; si la
+      // imagen viene de una publicación anterior, se recorta lo que hay en la web.
+      const pendiente = estado.imagenes[ruta];
+      const fuente = estado.originales[ruta] || (pendiente && pendiente.blob) || urlImagen(ruta);
+      const recorte = await pedirEncuadre(fuente, tipo);
+      if (recorte) await guardar(recorte, estado.originales[ruta]);
+    } catch (err) {
+      alert(`No se ha podido reencuadrar la imagen: ${err.message}`);
+    }
+  };
 
   pintar();
   return h('div', { class: 'campo-grupo' },

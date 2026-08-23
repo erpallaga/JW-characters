@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Mulish:wght@400;600;700;800&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: oklch(0.42 0.09 255); }
+    a:hover { color: oklch(0.34 0.1 255); }
+  </style>
+</helmet>
+
+<div style="width: 860px; height: 830px; box-sizing: border-box; padding: 40px; background: oklch(0.95 0.016 80); font-family: 'Mulish', system-ui, sans-serif; color: oklch(0.26 0.03 50); display: flex; flex-direction: column; gap: 24px;">
+
+  <div style="display: flex; align-items: center; gap: 13px;">
+    <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: oklch(0.9 0.035 40); color: oklch(0.56 0.13 35); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;">B</span>
+    <div style="flex-grow: 1;">
+      <div style="font-family: 'Amiri', Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1.15;">Cartela sobre el retrato</div>
+      <div style="font-size: 12.5px; color: oklch(0.48 0.02 55); margin-top: 2px;">720 × 460 · el marco no se toca; el retrato se lo queda entero</div>
+    </div>
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.56 0.13 35); background: oklch(0.9 0.035 40); border-radius: 999px; padding: 5px 13px; white-space: nowrap;">imagen 100 %</span>
+  </div>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 720px; height: 460px; border-radius: 18px; border: 1px solid oklch(0.82 0.02 70); box-shadow: 0 3px 10px rgba(40,25,10,0.12); overflow: hidden; background-color: oklch(0.88 0.02 75); background-image: url(&quot;recorte-noe.jpg&quot;); background-size: cover; background-position: 50% 18%;">
+      <div style="position: absolute; left: 0; right: 0; bottom: 0; height: 260px; background: linear-gradient(to top, rgba(40,25,10,0.34) 0%, rgba(40,25,10,0) 100%);"></div>
+      <div style="position: absolute; left: 28px; bottom: 28px; width: 322px; background: oklch(0.97 0.01 80); border-radius: 14px; box-shadow: 0 6px 22px rgba(40,25,10,0.26); padding: 20px 22px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.56 0.13 35); background: oklch(0.9 0.035 40); border-radius: 999px; padding: 4px 12px;">Génesis · Antes del diluvio</div>
+        <div style="font-family: 'Amiri', Georgia, serif; font-size: 38px; font-weight: 700; line-height: 1.05;">Noé</div>
+        <div style="font-size: 12.5px; color: oklch(0.48 0.02 55);">Toca la tarjeta para ver los detalles</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; width: 100%;">
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">Qué cambia</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">El retrato pasa a ser la tarjeta entera y el texto se apoya encima, en una cartela de papel abajo a la izquierda, como el cartel de un museo. Un degradado muy suave asienta la cartela sin ensuciar la ilustración. El marco sigue midiendo 720 × 460, así que el reverso no se entera de nada.</span>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">Qué cuesta</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">Un retrato 3:4 dentro de un marco apaisado se recorta: se ve algo menos de la mitad de su altura. Anclándolo arriba (50 % / 18 %) la cara se salva siempre, pero el encuadre que elegiste al subirlo deja de verse entero, y la cartela tapa una esquina.</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

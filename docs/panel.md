@@ -47,9 +47,36 @@ retrato y su mapa si no los usa nadie más.
 
 ## Las imágenes
 
-Se suben desde el propio formulario y se reducen en el navegador antes de subirlas
-(retrato a 800 px, mapa a 1200 px). Sin eso, una foto de 6 MB del móvil se quedaría
-para siempre en el historial del repositorio.
+Se suben desde el propio formulario. Al elegir el fichero se abre el **encuadre**:
+la foto dentro del marco de la tarjeta —vertical 3:4 el retrato, apaisado 4:3 el
+mapa—, que se arrastra y se acerca con la barra hasta que se ve lo que tiene que
+verse. Lo que se guarda ya está recortado, así que en el mazo se ve exactamente eso;
+no hay que ajustar nada después.
+
+**Reencuadrar** vuelve a abrir ese cuadro para una imagen que ya está puesta. Si se
+subió en esta misma sesión se recorta sobre el original, sin perder calidad; si viene
+de una publicación anterior se recorta sobre lo que hay en la web, que ya venía
+reducido.
+
+Al recortar también se reduce (retrato hasta 800 px de ancho, mapa hasta 1200) y se
+guarda en JPEG. Sin eso, una foto de 6 MB del móvil se quedaría para siempre en el
+historial del repositorio. Nunca se agranda: si el recorte da menos píxeles que el
+límite, el fichero sale más pequeño y el cuadro lo avisa.
+
+## El orden del mazo
+
+El mazo se lee en el orden de la lista, y ese orden es una decisión, no una
+ordenación automática: Ester va antes que Daniel aunque las fechas digan lo
+contrario.
+
+Para cambiarlo, el asa (⠿) a la izquierda de cada fila: se arrastra la tarjeta a
+donde tenga que ir, o se mueve con las flechas ↑ y ↓ una vez el asa tiene el foco.
+Con un filtro o una búsqueda puesta el asa se desactiva, porque «déjala aquí» no
+diría dónde va en el orden real.
+
+Una tarjeta **nueva** sigue colocándose sola por sus fechas mientras no se toque el
+orden a mano; en cuanto se mueve, se queda donde se la deja. Cambiar el orden cuenta
+como un cambio sin publicar, igual que editar una tarjeta.
 
 ## Los datos
 
@@ -60,9 +87,21 @@ para siempre en el historial del repositorio.
   enlace a partir de esta tabla.
 
 > Los 20 libros que ya se usaban conservan exactamente el fragmento de URL que
-> tenían. Los otros 46 se escribieron siguiendo esa misma convención, pero **no se
-> han podido comprobar** contra jw.org. El primero que uses de un libro nuevo,
-> conviene abrir el enlace una vez para confirmarlo.
+> tenían. Los otros 46 se escribieron siguiendo esa misma convención y siguen sin
+> comprobarse contra jw.org.
+
+Para comprobarlos de una vez, desde una conexión que llegue a jw.org:
+
+```
+node tools/comprobar-libros.mjs --red
+```
+
+Abre los 66 enlaces y dice cuáles no responden; si uno falla, prueba otras formas del
+nombre y propone la que sí funciona. Sin `--red` solo revisa la tabla: que estén los
+66 libros, que no haya identificadores repetidos, que los capítulos cuadren con la
+Traducción del Nuevo Mundo y que ningún pasaje de `characters.json` apunte a un
+capítulo que no existe. Con `--capitulos` comprueba además el último capítulo de cada
+libro.
 
 ## Si algo va mal
 
