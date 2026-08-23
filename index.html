@@ -480,7 +480,13 @@ class Component extends DCLogic {
           position: 'absolute', top: 0, bottom: 0,
           left: `${Math.max(0, (single.life.start - TIMELINE_MIN) / TIMELINE_SPAN * 100)}%`,
           width: `${Math.max(1.2, (single.life.end - single.life.start) / TIMELINE_SPAN * 100)}%`,
-          borderRadius: '999px', background: primary,
+          borderRadius: '999px',
+          // Una barra maciza afirma unas fechas documentadas. Cuando solo son una
+          // estimación —de bastantes personajes las publicaciones no dan año—, se
+          // raya, para que la tarjeta no prometa más precisión de la que tiene.
+          background: single.life.approx
+            ? `repeating-linear-gradient(115deg, ${primary} 0 3px, transparent 3px 6px)`
+            : primary,
         } : { display: 'none' },
         timelineEndsStyle: { display: 'flex', justifyContent: 'space-between', fontSize: '8px', color: 'oklch(0.55 0.02 55)', fontWeight: 700 },
       };

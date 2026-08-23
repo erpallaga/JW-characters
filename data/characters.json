@@ -25,6 +25,11 @@
         "book": "hebreos",
         "chapter": 11,
         "label": "Hebreos 11:7 (su fe)"
+      },
+      {
+        "book": "pedro2",
+        "chapter": 2,
+        "label": "2 Pedro 2:5 (predicador de justicia)"
       }
     ],
     "life": {
@@ -37,7 +42,7 @@
     "id": "abraham",
     "name": "Abrahán",
     "eraId": "patriarcas",
-    "timeframe": "~2000 a.e.c.",
+    "timeframe": "2018–1843 a.e.c.",
     "place": "Ur de los caldeos, luego Harán y Canaán",
     "portraitSrc": "assets/portrait-abraham.jpg",
     "mapSrc": "assets/mapa-abraham.png",
@@ -77,7 +82,7 @@
     "id": "sara",
     "name": "Sara",
     "eraId": "patriarcas",
-    "timeframe": "~2000 a.e.c.",
+    "timeframe": "2008–1881 a.e.c.",
     "place": "Ur, Harán y Canaán",
     "portraitSrc": "assets/portrait-sara.jpg",
     "mapSrc": "assets/mapa-sara.png",
@@ -117,7 +122,7 @@
     "id": "jacob",
     "name": "Jacob",
     "eraId": "patriarcas",
-    "timeframe": "~1900 a.e.c.",
+    "timeframe": "1858–1711 a.e.c.",
     "place": "Canaán y Padán-aram",
     "portraitSrc": "assets/portrait-jacob.jpg",
     "mapSrc": "assets/mapa-jacob.png",
@@ -151,7 +156,7 @@
     "id": "jose",
     "name": "José",
     "eraId": "patriarcas",
-    "timeframe": "~1900–1800 a.e.c.",
+    "timeframe": "1767–1657 a.e.c.",
     "place": "Canaán y Egipto",
     "portraitSrc": "assets/portrait-jose.jpg",
     "mapSrc": "assets/mapa-jose.png",
@@ -190,7 +195,7 @@
     "id": "moises",
     "name": "Moisés",
     "eraId": "exodo",
-    "timeframe": "~1500 a.e.c.",
+    "timeframe": "1593–1473 a.e.c.",
     "place": "Egipto y el desierto del Sinaí",
     "portraitSrc": "assets/portrait-moises.jpg",
     "mapSrc": "assets/mapa-moises.png",
@@ -640,7 +645,7 @@
       ],
       "ruta": true
     },
-    "knownFor": "Fariseo de Tarso, en un principio persiguió con dureza a los primeros cristianos hasta que tuvo una visión de Jesús resucitado en el camino a Damasco que cambió el rumbo de su vida. A partir de entonces realizó varios viajes misioneros por el Imperio romano, fundando y fortaleciendo congregaciones en Asia Menor, Grecia y otras regiones. Escribió 14 cartas del canon griego cristiano (incluida la de Hebreos) y, según la tradición histórica —no narrada en la Biblia—, finalmente fue ejecutado en Roma por su actividad como predicador.",
+    "knownFor": "Fariseo de Tarso, en un principio persiguió con dureza a los primeros cristianos hasta que tuvo una visión de Jesús resucitado en el camino a Damasco que cambió el rumbo de su vida. A partir de entonces realizó varios viajes misioneros por el Imperio romano, fundando y fortaleciendo congregaciones en Asia Menor, Grecia y otras regiones. Escribió 14 cartas de las Escrituras Griegas Cristianas (incluida la de Hebreos) y, según se desprende de lo que él mismo escribió al ver cercano su final (2 Timoteo 4:6-8), acabó ejecutado en Roma por su actividad como predicador.",
     "passages": [
       {
         "book": "hechos",
@@ -692,8 +697,8 @@
       }
     ],
     "life": {
-      "start": -3896,
-      "end": -3096,
+      "start": -3996,
+      "end": -3896,
       "approx": true
     },
     "map": {
@@ -744,7 +749,7 @@
     "id": "samuel",
     "name": "Samuel",
     "eraId": "jueces",
-    "timeframe": "~1170–1070 a.e.c.",
+    "timeframe": "~1170–1078 a.e.c. aprox.",
     "place": "Ramá, Efraín; sirvió en Siló",
     "portraitSrc": "assets/portrait-samuel.jpg",
     "mapSrc": "assets/mapa-samuel.png",
@@ -769,7 +774,7 @@
     ],
     "life": {
       "start": -1170,
-      "end": -1070,
+      "end": -1078,
       "approx": true
     },
     "map": {
@@ -784,7 +789,7 @@
     "id": "jonatan",
     "name": "Jonatán",
     "eraId": "jueces",
-    "timeframe": "~1100–1050 a.e.c.",
+    "timeframe": "~1098–1078 a.e.c.",
     "place": "Guibea, Benjamín",
     "portraitSrc": "assets/portrait-jonatan.jpg",
     "mapSrc": "assets/mapa-jonatan.png",
@@ -808,8 +813,8 @@
       }
     ],
     "life": {
-      "start": -1100,
-      "end": -1050,
+      "start": -1098,
+      "end": -1078,
       "approx": true
     },
     "map": {
@@ -823,7 +828,7 @@
     "name": "Abigaíl",
     "eraId": "jueces",
     "timeframe": "~1060 a.e.c.",
-    "place": "Macaón, Judea",
+    "place": "Maón, Judá",
     "portraitSrc": "assets/portrait-abigail.jpg",
     "mapSrc": "assets/mapa-abigail.png",
     "mapPos": "50% 50%",
@@ -896,7 +901,7 @@
     "portraitSrc": "assets/portrait-marta.jpg",
     "mapSrc": "assets/mapa-marta.png",
     "mapPos": "50% 50%",
-    "knownFor": "Amiga cercana de Jesús, hermana de María y Lázaro. Mujer activa y hospitalaria que recibía a Jesús en su casa. Tras la muerte de Lázaro expresó una fe notable: \"sé que resucitarás a mi hermano en el último día\". Jesús la corrigió con cariño cuando estaba ansiosa por las tareas domésticas, mostrando que ella aceptaba bien el consejo.",
+    "knownFor": "Amiga cercana de Jesús, hermana de María y Lázaro. Mujer activa y hospitalaria que recibía a Jesús en su casa. Tras la muerte de Lázaro expresó una fe notable: \"yo sé que se levantará en la resurrección, en el último día\". Jesús la corrigió con cariño cuando estaba ansiosa por las tareas domésticas, mostrando que ella aceptaba bien el consejo.",
     "passages": [
       {
         "book": "lucas",
@@ -935,7 +940,7 @@
     "portraitSrc": "assets/portrait-job.jpg",
     "mapSrc": "assets/mapa-job.png",
     "mapPos": "50% 50%",
-    "knownFor": "Hombre íntegro y temeroso de Dios, descrito como \"el más notable de todos los hombres del oriente\". Perdió riquezas, hijos y salud en un desafío sobre su lealtad, pero mantuvo la integridad sin maldecir a Dios. Sus amigos lo acusaron injustamente; al final Jehová lo reprendió con paciencia, restauró su salud y le dio el doble de lo que tenía.",
+    "knownFor": "Hombre íntegro y temeroso de Dios, descrito como \"el más notable de todos los hombres del oriente\". Perdió riquezas, hijos y salud en un desafío sobre su lealtad, pero mantuvo la integridad sin maldecir a Dios. Sus amigos lo acusaron injustamente; al final Jehová le habló desde la tempestad y lo corrigió, restauró su salud y le dio el doble de lo que tenía.",
     "passages": [
       {
         "book": "job",
@@ -968,7 +973,7 @@
   {
     "id": "lot",
     "name": "Lot",
-    "eraId": "origenes",
+    "eraId": "patriarcas",
     "timeframe": "~2000–1900 a.e.c.",
     "place": "Ur → Harán → Sodoma (valle del Jordán)",
     "portraitSrc": "assets/portrait-lot.jpg",
@@ -1097,7 +1102,7 @@
     "name": "Sansón",
     "eraId": "jueces",
     "timeframe": "~1118–1078 a.e.c.",
-    "place": "Zora, Dan",
+    "place": "Zorá, Dan",
     "portraitSrc": "assets/portrait-sanson.jpg",
     "mapSrc": "assets/mapa-sanson.png",
     "mapPos": "50% 50%",
@@ -1129,7 +1134,7 @@
     "id": "aaron",
     "name": "Aarón",
     "eraId": "exodo",
-    "timeframe": "~1593–1474 a.e.c.",
+    "timeframe": "1597–1474 a.e.c.",
     "place": "Egipto; luego desierto del Sinaí",
     "portraitSrc": "assets/portrait-aaron.jpg",
     "mapSrc": "assets/mapa-aaron.png",
@@ -1158,9 +1163,9 @@
       }
     ],
     "life": {
-      "start": -1593,
+      "start": -1597,
       "end": -1474,
-      "approx": true
+      "approx": false
     },
     "map": {
       "lugares": [
@@ -1325,8 +1330,8 @@
       }
     ],
     "life": {
-      "start": -762,
-      "end": -697,
+      "start": -770,
+      "end": -717,
       "approx": true
     },
     "map": {
@@ -1339,7 +1344,7 @@
     "id": "timoteo",
     "name": "Timoteo",
     "eraId": "iglesia",
-    "timeframe": "~50–100 e.c. aprox.",
+    "timeframe": "~29–100 e.c. aprox.",
     "place": "Listra, Galacia; luego viajes misioneros",
     "portraitSrc": "assets/portrait-timoteo.jpg",
     "mapSrc": "assets/mapa-timoteo.png",
@@ -1363,7 +1368,7 @@
       }
     ],
     "life": {
-      "start": 15,
+      "start": 29,
       "end": 100,
       "approx": true
     },
@@ -1423,7 +1428,7 @@
     "portraitSrc": "assets/portrait-zipora.jpg",
     "mapSrc": "assets/mapa-zipora.png",
     "mapPos": "50% 50%",
-    "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo salvando la vida de Moisés cuando Jehová amenazaba con matarlo por descuidar ese pacto. Recogida con su padre y hermanos cuando Moisés regresó, acompañó al pueblo en el éxodo.",
+    "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo salvando la vida de Moisés cuando Jehová amenazaba con matarlo por descuidar ese pacto. Moisés la envió de vuelta a Madián con su padre, y no volvieron a encontrarse hasta después del éxodo, cuando Jetró la llevó al campamento en el desierto.",
     "passages": [
       {
         "book": "exodo",
@@ -1463,7 +1468,7 @@
     "portraitSrc": "assets/portrait-isaac.jpg",
     "mapSrc": "assets/mapa-isaac.png",
     "mapPos": "50% 50%",
-    "knownFor": "Hijo de la promesa de Abrahán y Sara, nacido cuando ambos eran ancianos. Sobrevivió al episodio del sacrificio en el monte Moriá, donde su padre demostró obediencia extrema. Esposo de Rebeca, elegida por fe del criado de Abrahán. Padre de Jacob y Esaú; Dios renovó con él el pacto hecho a su padre.",
+    "knownFor": "Hijo de la promesa de Abrahán y Sara, nacido cuando ambos eran ancianos. Sobrevivió al episodio del sacrificio en el monte Moriá, donde su padre demostró obediencia extrema. Esposo de Rebeca, a quien Jehová escogió al guiar el viaje del criado de Abrahán. Padre de Jacob y Esaú; Dios renovó con él el pacto hecho a su padre.",
     "passages": [
       {
         "book": "genesis",
@@ -1507,7 +1512,7 @@
     "portraitSrc": "assets/portrait-rebeca.jpg",
     "mapSrc": "assets/mapa-rebeca.png",
     "mapPos": "50% 50%",
-    "knownFor": "Elegida como esposa de Isaac por su generosidad excepcional: dio agua al criado de Abrahán y a sus diez camellos sin pedir nada. Partió de Harán dejando a su familia para casarse con Isaac, a quien no conocía, confiando en Jehová. Madre de Jacob y Esaú; aunque cometió errores favoritando a Jacob, es presentada como mujer de fe y decisión.",
+    "knownFor": "Elegida como esposa de Isaac por su generosidad excepcional: dio agua al criado de Abrahán y a sus diez camellos sin pedir nada. Partió de Harán dejando a su familia para casarse con Isaac, a quien no conocía, confiando en Jehová. Madre de Jacob y Esaú; sabiendo lo que Jehová había dicho —que el mayor serviría al menor—, se aseguró de que Jacob recibiera la bendición prometida.",
     "passages": [
       {
         "book": "genesis",
@@ -1663,7 +1668,7 @@
     "id": "nehemias",
     "name": "Nehemías",
     "eraId": "exilio",
-    "timeframe": "~456 a.e.c. aprox.",
+    "timeframe": "~455 a.e.c. aprox.",
     "place": "Susa (Persia) → Jerusalén",
     "portraitSrc": "assets/portrait-nehemias.jpg",
     "mapSrc": "assets/mapa-nehemias.png",
@@ -1703,12 +1708,12 @@
     "id": "noemi",
     "name": "Noemí",
     "eraId": "jueces",
-    "timeframe": "~1300 a.e.c. aprox.",
+    "timeframe": "~1120 a.e.c. aprox.",
     "place": "Belén de Judá → Moab → Belén",
     "portraitSrc": "assets/portrait-noemi.jpg",
     "mapSrc": "assets/mapa-noemi.png",
     "mapPos": "50% 50%",
-    "knownFor": "Suegra de Rut. Emigró a Moab por hambruna y perdió allí a su esposo e hijos. Al volver a Belén pidió que la llamaran Mara (\"amarga\"), pero Jehová la restauró: acompañó a Rut en el plan de rescate con Booz y terminó cuidando a su nieto Obed, abuelo del rey David. Ejemplo de lealtad y de cómo Dios restaura a quien ha sufrido.",
+    "knownFor": "Suegra de Rut. Emigró a Moab por hambruna y perdió allí a su esposo e hijos. Al volver a Belén pidió que la llamaran Mara (\"amarga\"), pero Jehová la restauró: acompañó a Rut en el plan de rescate con Booz y terminó cuidando a su nieto Obed, abuelo del rey David. Ejemplo de cómo Jehová consuela y restaura a quien ha sufrido.",
     "passages": [
       {
         "book": "rut",
@@ -1722,8 +1727,8 @@
       }
     ],
     "life": {
-      "start": -1350,
-      "end": -1250,
+      "start": -1160,
+      "end": -1085,
       "approx": true
     },
     "map": {
@@ -1739,11 +1744,11 @@
     "name": "Manóah",
     "eraId": "jueces",
     "timeframe": "~1100 a.e.c. aprox.",
-    "place": "Zora, Dan",
+    "place": "Zorá, Dan",
     "portraitSrc": "assets/portrait-manoah.jpg",
     "mapSrc": "assets/mapa-manoah.png",
     "mapPos": "50% 50%",
-    "knownFor": "Padre de Sansón. Él y su esposa eran estériles, pero un ángel les anunció el nacimiento del futuro juez y les dio instrucciones sobre el voto de nazareno para el niño. Manóah oró pidiendo más detalles y recibió al mensajero una segunda vez; quiso ofrecerle un sacrificio y le fue revelado el nombre divino asombroso. Ejemplo de padres que crían a un hijo según las instrucciones de Dios.",
+    "knownFor": "Padre de Sansón. Él y su esposa eran estériles, pero un ángel les anunció el nacimiento del futuro juez y les dio instrucciones sobre el voto de nazareno para el niño. Manóah oró pidiendo más detalles y recibió al mensajero una segunda vez; quiso ofrecerle un sacrificio y le preguntó su nombre, pero el ángel se lo negó: \"¿No ves que es algo maravilloso?\". Ejemplo de padres que crían a un hijo según las instrucciones de Dios.",
     "passages": [
       {
         "book": "jueces",
@@ -1766,7 +1771,7 @@
     "id": "ruben",
     "name": "Rubén",
     "eraId": "patriarcas",
-    "timeframe": "~1930–1750 a.e.c. aprox.",
+    "timeframe": "~1773–1660 a.e.c. aprox.",
     "place": "Canaán",
     "portraitSrc": "assets/portrait-ruben.jpg",
     "mapSrc": "assets/mapa-ruben.png",
@@ -1790,8 +1795,8 @@
       }
     ],
     "life": {
-      "start": -1930,
-      "end": -1750,
+      "start": -1773,
+      "end": -1660,
       "approx": true
     },
     "map": {
