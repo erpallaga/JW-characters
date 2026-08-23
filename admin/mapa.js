@@ -285,8 +285,10 @@ function colocarEtiquetas(ctx, marco, lugares) {
     const s = ETIQUETA.separacion;
     const candidatos = [];
     // Primero pegada al punto, y si ahí no cabe se va apartando. En un mapa con
-    // muchas paradas las cuatro posiciones de siempre se agotan enseguida.
-    for (const salto of [0, 14, 28, 44]) {
+    // muchas paradas las cuatro posiciones de siempre se agotan enseguida. El
+    // salto se queda corto a propósito: una etiqueta que huye demasiado deja de
+    // señalar a su punto, y entonces confunde más que un solape pequeño.
+    for (const salto of [0, 11, 22]) {
       candidatos.push(
         [p.x + s + salto, p.y + ETIQUETA.linea],
         [p.x - s - w - salto, p.y + ETIQUETA.linea],

@@ -940,5 +940,35 @@
     "label": "Zóar",
     "lon": 35.4877,
     "lat": 31.0369
+  },
+  {
+    "id": "en-guedi",
+    "label": "En-guedí",
+    "lon": 35.3833,
+    "lat": 31.45
+  },
+  {
+    "id": "ramot-galaad",
+    "label": "Ramot-galaad",
+    "lon": 36.015,
+    "lat": 32.4999
+  },
+  {
+    "id": "hores",
+    "label": "Hores",
+    "lon": 35.1274,
+    "lat": 31.4503
+  },
+  {
+    "id": "zela",
+    "label": "Zelá",
+    "lon": 35.2096,
+    "lat": 31.8025
+  },
+  {
+    "id": "lida",
+    "label": "Lida",
+    "lon": 34.9,
+    "lat": 31.95
   }
 ]

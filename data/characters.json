@@ -12,6 +12,7 @@
       "lugares": [
         "ararat"
       ],
+      "ruta": false,
       "zoom": 20
     },
     "knownFor": "Descendiente de Set, es descrito como un hombre justo e intachable en medio de una sociedad corrompida y malvada. Durante unos 40 a 50 años construyó el arca siguiendo instrucciones precisas de Dios, mientras predicaba sobre el juicio que se avecinaba. Sobrevivió al diluvio junto con su esposa, sus tres hijos y sus esposas, y se convirtió en el antepasado de toda la humanidad posterior al diluvio. Después de salir del arca, Dios estableció con él un pacto simbolizado con el arco iris.",
@@ -51,7 +52,23 @@
       "lugares": [
         "ur",
         "haran",
-        "canaan"
+        "siquem",
+        "betel",
+        "hai",
+        "hebron",
+        "damasco",
+        "guerar",
+        "beerseba",
+        "moria",
+        "macpela"
+      ],
+      "etiquetas": [
+        "ur",
+        "haran",
+        "siquem",
+        "moria",
+        "hebron",
+        "beerseba"
       ],
       "ruta": true
     },
@@ -91,7 +108,16 @@
       "lugares": [
         "ur",
         "haran",
-        "canaan"
+        "siquem",
+        "betel",
+        "hai",
+        "hebron",
+        "guerar"
+      ],
+      "etiquetas": [
+        "ur",
+        "haran",
+        "guerar"
       ],
       "ruta": true
     },
@@ -129,8 +155,22 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "canaan",
-        "haran"
+        "beerseba",
+        "betel",
+        "haran",
+        "mahanaim",
+        "peniel",
+        "sucot-jordan",
+        "siquem",
+        "hebron",
+        "gosen"
+      ],
+      "etiquetas": [
+        "beerseba",
+        "haran",
+        "peniel",
+        "siquem",
+        "gosen"
       ],
       "ruta": true
     },
@@ -163,8 +203,21 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "canaan",
-        "egipto"
+        "sucot-jordan",
+        "siquem",
+        "betel",
+        "belen",
+        "hebron",
+        "dotan",
+        "egipto",
+        "gosen"
+      ],
+      "etiquetas": [
+        "hebron",
+        "siquem",
+        "dotan",
+        "egipto",
+        "gosen"
       ],
       "ruta": true
     },
@@ -202,8 +255,24 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "egipto",
-        "sinai"
+        "sucot-egipto",
+        "etam-desierto",
+        "pi-hahirot",
+        "mara",
+        "elim",
+        "refidim",
+        "desierto-sinai",
+        "sinai",
+        "cades-barnea",
+        "monte-nebo"
+      ],
+      "etiquetas": [
+        "sucot-egipto",
+        "mara",
+        "refidim",
+        "sinai",
+        "cades-barnea",
+        "monte-nebo"
       ],
       "ruta": true
     },
@@ -241,8 +310,13 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "efrain"
-      ]
+        "rama",
+        "betel",
+        "tabor",
+        "cison",
+        "quedes"
+      ],
+      "ruta": true
     },
     "knownFor": "En una época de opresión cananea bajo el rey Jabín, actuaba como jueza y profetisa, y el pueblo acudía a ella para resolver disputas bajo una palmera en las montañas de Efraín. Instruyó al militar Barac para enfrentar a Sísara, jefe del ejército de Jabín, y acompañó a las tropas israelitas a la batalla. Tras la victoria, compuso junto con Barac un cántico que celebra la liberación de Israel.",
     "passages": [
@@ -310,8 +384,29 @@
     "map": {
       "lugares": [
         "belen",
+        "valle-de-ela",
+        "gat",
+        "nob",
+        "cueva-de-adulam",
+        "queila",
+        "desierto-de-zif",
+        "maon",
+        "en-guedi",
+        "carmelo-juda",
+        "ziqlag",
+        "hebron",
+        "jerusalen",
+        "mahanaim"
+      ],
+      "etiquetas": [
+        "belen",
+        "valle-de-ela",
+        "en-guedi",
+        "ziqlag",
+        "hebron",
         "jerusalen"
-      ]
+      ],
+      "ruta": true
     },
     "knownFor": "Pastor de ovejas en Belén, fue ungido por el profeta Samuel para ser el futuro rey de Israel siendo aún joven. Se hizo famoso al vencer al gigante filisteo Goliat con una honda, y más tarde tuvo que huir del rey Saúl durante años antes de subir al trono. Como rey unificó las tribus de Israel, estableció Jerusalén como capital y compuso numerosos salmos que expresan una relación profunda con Dios.",
     "passages": [
@@ -347,8 +442,24 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "jerusalen"
-      ]
+        "gabaon",
+        "guihon",
+        "jerusalen",
+        "moria",
+        "hazor",
+        "meguido",
+        "guezer",
+        "ezion-gueber"
+      ],
+      "etiquetas": [
+        "gabaon",
+        "jerusalen",
+        "hazor",
+        "meguido",
+        "guezer",
+        "ezion-gueber"
+      ],
+      "ruta": true
     },
     "knownFor": "Hijo de David y Betsabé, pidió a Dios sabiduría para gobernar en lugar de riquezas, petición que le fue concedida junto con prosperidad. Bajo su reinado se construyó el templo de Jerusalén, centro de la adoración israelita durante siglos. Su fama de sabio atrajo visitantes como la reina de Sabá, aunque en su vejez su fidelidad se vio afectada por sus muchas esposas extranjeras.",
     "passages": [
@@ -385,8 +496,24 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
+        "sarepta",
         "carmelo",
-        "samaria"
+        "jezreel",
+        "samaria",
+        "beerseba",
+        "sinai",
+        "abelmehola",
+        "betel",
+        "jerico",
+        "jordan"
+      ],
+      "etiquetas": [
+        "sarepta",
+        "carmelo",
+        "jezreel",
+        "samaria",
+        "sinai",
+        "jordan"
       ],
       "ruta": true
     },
@@ -427,6 +554,7 @@
       "lugares": [
         "susa"
       ],
+      "ruta": false,
       "zoom": 55
     },
     "knownFor": "Judía huérfana criada por su primo Mardoqueo en Persia, fue elegida reina por el rey Asuero sin que se supiera su origen. Cuando el funcionario Amán planeó exterminar a los judíos del imperio, Ester arriesgó su vida presentándose ante el rey sin haber sido llamada. Su valentía e ingenio en dos banquetes llevaron a la caída de Amán y a la salvación de su pueblo.",
@@ -459,9 +587,10 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "babilonia"
+        "babilonia",
+        "jerusalen"
       ],
-      "zoom": 55
+      "ruta": true
     },
     "knownFor": "Llevado cautivo a Babilonia siendo joven, se mantuvo fiel a sus principios incluso al rechazar la comida de la mesa real. Adquirió reconocimiento al interpretar sueños que ningún sabio babilonio pudo descifrar, incluido el del rey Nabucodonosor. Bajo el dominio persa, sobrevivió una noche en un foso de leones después de negarse a dejar de orar a Dios, y escribió profecías detalladas sobre reinos futuros.",
     "passages": [
@@ -493,8 +622,12 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "jordan"
-      ]
+        "desierto-judea",
+        "jordan",
+        "betania-jordan",
+        "enon"
+      ],
+      "ruta": true
     },
     "knownFor": "Hijo del sacerdote Zacarías y de Elisabet, nació de forma milagrosa en la vejez de sus padres. Vivió en el desierto y predicó un mensaje de arrepentimiento, bautizando a las personas en el río Jordán como símbolo de un cambio de vida. Bautizó a Jesús y lo señaló como el Cordero de Dios; más tarde fue encarcelado y ejecutado por orden de Herodes Antipas.",
     "passages": [
@@ -527,7 +660,19 @@
     "map": {
       "lugares": [
         "nazaret",
-        "belen"
+        "belen",
+        "jerusalen",
+        "egipto",
+        "cana",
+        "capernaum",
+        "golgotha"
+      ],
+      "etiquetas": [
+        "nazaret",
+        "egipto",
+        "cana",
+        "capernaum",
+        "golgotha"
       ],
       "ruta": true
     },
@@ -561,7 +706,30 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
+        "belen",
         "nazaret",
+        "jordan",
+        "desierto-judea",
+        "cana",
+        "capernaum",
+        "sicar",
+        "tiro",
+        "sidon",
+        "cesarea-filipo",
+        "jerico",
+        "betania",
+        "monte-olivos",
+        "jerusalen",
+        "getsemani",
+        "golgotha",
+        "emaus"
+      ],
+      "etiquetas": [
+        "belen",
+        "nazaret",
+        "capernaum",
+        "sicar",
+        "cesarea-filipo",
         "jerusalen"
       ],
       "ruta": true
@@ -600,8 +768,23 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
-        "galilea",
-        "jerusalen"
+        "betsaida",
+        "capernaum",
+        "jerusalen",
+        "samaria",
+        "lida",
+        "jope",
+        "cesarea",
+        "antioquia-siria",
+        "babilonia"
+      ],
+      "etiquetas": [
+        "betsaida",
+        "capernaum",
+        "jerusalen",
+        "jope",
+        "cesarea",
+        "babilonia"
       ],
       "ruta": true
     },
@@ -824,8 +1007,12 @@
     },
     "map": {
       "lugares": [
+        "silo",
         "rama",
-        "silo"
+        "mizpa",
+        "betel",
+        "guilgal",
+        "belen"
       ],
       "ruta": true
     }
@@ -864,8 +1051,23 @@
     },
     "map": {
       "lugares": [
-        "guibea"
-      ]
+        "guibea",
+        "gueba-micmas",
+        "micmas",
+        "guilgal-betel",
+        "hores",
+        "bet-san",
+        "jabes-galaad",
+        "zela"
+      ],
+      "etiquetas": [
+        "guibea",
+        "micmas",
+        "hores",
+        "bet-san",
+        "jabes-galaad"
+      ],
+      "ruta": true
     }
   },
   {
@@ -892,8 +1094,13 @@
     },
     "map": {
       "lugares": [
-        "maon"
-      ]
+        "maon",
+        "carmelo-juda",
+        "gat",
+        "ziqlag",
+        "hebron"
+      ],
+      "ruta": true
     }
   },
   {
@@ -971,9 +1178,9 @@
     },
     "map": {
       "lugares": [
-        "betania",
-        "jerusalen"
-      ]
+        "betania"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1012,6 +1219,7 @@
       "lugares": [
         "uz"
       ],
+      "ruta": false,
       "zoom": 55
     }
   },
@@ -1051,7 +1259,18 @@
       "lugares": [
         "ur",
         "haran",
-        "sodoma"
+        "canaan",
+        "egipto",
+        "valle-jordan",
+        "sodoma",
+        "zoar"
+      ],
+      "etiquetas": [
+        "ur",
+        "haran",
+        "egipto",
+        "valle-jordan",
+        "zoar"
       ],
       "ruta": true
     }
@@ -1101,7 +1320,8 @@
     "map": {
       "lugares": [
         "jerico"
-      ]
+      ],
+      "ruta": false
     }
   },
   {
@@ -1138,8 +1358,14 @@
     },
     "map": {
       "lugares": [
-        "ofra"
-      ]
+        "ofra",
+        "jezreel",
+        "harod",
+        "more",
+        "sucot-jordan",
+        "peniel"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1171,8 +1397,23 @@
     },
     "map": {
       "lugares": [
-        "zora"
-      ]
+        "zora",
+        "timna",
+        "asquelon",
+        "etam-sanson",
+        "lehi",
+        "soreq",
+        "gaza",
+        "estaol"
+      ],
+      "etiquetas": [
+        "zora",
+        "timna",
+        "asquelon",
+        "lehi",
+        "gaza"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1214,8 +1455,23 @@
     },
     "map": {
       "lugares": [
-        "egipto",
-        "sinai"
+        "sucot-egipto",
+        "etam-desierto",
+        "pi-hahirot",
+        "mara",
+        "elim",
+        "refidim",
+        "desierto-sinai",
+        "sinai",
+        "cades-barnea",
+        "monte-hor"
+      ],
+      "etiquetas": [
+        "sucot-egipto",
+        "refidim",
+        "sinai",
+        "cades-barnea",
+        "monte-hor"
       ],
       "ruta": true
     }
@@ -1254,8 +1510,23 @@
     },
     "map": {
       "lugares": [
-        "egipto",
-        "sinai"
+        "sucot-egipto",
+        "etam-desierto",
+        "pi-hahirot",
+        "mara",
+        "elim",
+        "refidim",
+        "desierto-sinai",
+        "hazerot",
+        "sinai",
+        "cades-barnea"
+      ],
+      "etiquetas": [
+        "sucot-egipto",
+        "mara",
+        "sinai",
+        "hazerot",
+        "cades-barnea"
       ],
       "ruta": true
     }
@@ -1300,7 +1571,8 @@
     "map": {
       "lugares": [
         "jerusalen"
-      ]
+      ],
+      "ruta": false
     }
   },
   {
@@ -1343,8 +1615,21 @@
     "map": {
       "lugares": [
         "anatot",
-        "jerusalen"
-      ]
+        "jerusalen",
+        "eufrates",
+        "rama",
+        "mizpa",
+        "tahpanes",
+        "egipto"
+      ],
+      "etiquetas": [
+        "anatot",
+        "eufrates",
+        "mizpa",
+        "tahpanes",
+        "egipto"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1381,8 +1666,11 @@
     },
     "map": {
       "lugares": [
-        "jerusalen"
-      ]
+        "jerusalen",
+        "guihon",
+        "siloam"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1420,7 +1708,22 @@
     "map": {
       "lugares": [
         "listra",
-        "efeso"
+        "derbe",
+        "troas",
+        "filipos",
+        "tesalonica",
+        "berea",
+        "atenas",
+        "corinto",
+        "efeso",
+        "roma"
+      ],
+      "etiquetas": [
+        "listra",
+        "filipos",
+        "corinto",
+        "efeso",
+        "roma"
       ],
       "ruta": true
     }
@@ -1461,6 +1764,7 @@
       "lugares": [
         "desierto-sinai"
       ],
+      "ruta": false,
       "zoom": 85
     }
   },
@@ -1499,7 +1803,7 @@
     "map": {
       "lugares": [
         "madian",
-        "egipto"
+        "desierto-sinai"
       ],
       "ruta": true
     }
@@ -1544,8 +1848,11 @@
     "map": {
       "lugares": [
         "moria",
-        "beerseba"
-      ]
+        "guerar",
+        "beerseba",
+        "hebron"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1583,6 +1890,7 @@
     "map": {
       "lugares": [
         "haran",
+        "guerar",
         "canaan"
       ],
       "ruta": true
@@ -1627,9 +1935,36 @@
     },
     "map": {
       "lugares": [
-        "egipto",
+        "refidim",
         "sinai",
-        "jerico"
+        "desierto-paran",
+        "sitim",
+        "jordan",
+        "guilgal",
+        "jerico",
+        "hai",
+        "betel",
+        "montes-ebal-guerizim",
+        "gabaon",
+        "maqueda",
+        "libna",
+        "lakis",
+        "eglon",
+        "hebron",
+        "debir",
+        "hazor",
+        "aguas-merom",
+        "siquem",
+        "silo",
+        "timnat-serah"
+      ],
+      "etiquetas": [
+        "sinai",
+        "jerico",
+        "gabaon",
+        "hebron",
+        "hazor",
+        "timnat-serah"
       ],
       "ruta": true
     }
@@ -1664,7 +1999,8 @@
     "map": {
       "lugares": [
         "quedes",
-        "tabor"
+        "tabor",
+        "cison"
       ],
       "ruta": true
     }
@@ -1704,7 +2040,23 @@
     "map": {
       "lugares": [
         "abelmehola",
-        "samaria"
+        "jordan",
+        "jerico",
+        "betel",
+        "guilgal-betel",
+        "sunem",
+        "dotan",
+        "samaria",
+        "damasco",
+        "ramot-galaad"
+      ],
+      "etiquetas": [
+        "abelmehola",
+        "jerico",
+        "sunem",
+        "dotan",
+        "samaria",
+        "damasco"
       ],
       "ruta": true
     }
@@ -1808,8 +2160,10 @@
     },
     "map": {
       "lugares": [
-        "zora"
-      ]
+        "zora",
+        "timna"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1846,8 +2200,11 @@
     },
     "map": {
       "lugares": [
-        "canaan"
-      ]
+        "canaan",
+        "dotan",
+        "gosen"
+      ],
+      "ruta": true
     }
   }
 ]
