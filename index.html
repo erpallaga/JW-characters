@@ -476,18 +476,29 @@ class Component extends DCLogic {
           display: 'flex', flexDirection: 'column', gap: '5px', backdropFilter: 'blur(4px)',
         },
         timelineTrackStyle: { position: 'relative', height: '6px', borderRadius: '999px', background: 'oklch(0.85 0.02 70)' },
-        timelineFillStyle: single.life ? {
-          position: 'absolute', top: 0, bottom: 0,
-          left: `${Math.max(0, (single.life.start - TIMELINE_MIN) / TIMELINE_SPAN * 100)}%`,
-          width: `${Math.max(1.2, (single.life.end - single.life.start) / TIMELINE_SPAN * 100)}%`,
-          borderRadius: '999px',
-          // Una barra maciza afirma unas fechas documentadas. Cuando solo son una
-          // estimación —de bastantes personajes las publicaciones no dan año—, se
-          // raya, para que la tarjeta no prometa más precisión de la que tiene.
-          background: single.life.approx
-            ? `repeating-linear-gradient(115deg, ${primary} 0 3px, transparent 3px 6px)`
-            : primary,
-        } : { display: 'none' },
+        timelineFillStyle: single.life ? (() => {
+          const izq = Math.max(0, (single.life.start - TIMELINE_MIN) / TIMELINE_SPAN * 100);
+          const ancho = Math.max(1.2, (single.life.end - single.life.start) / TIMELINE_SPAN * 100);
+          const base = { position: 'absolute', top: 0, bottom: 0, borderRadius: '999px' };
+          // Una barra maciza afirma unas fechas documentadas. De bastantes
+          // personajes las publicaciones no dan año, y esa barra no debería
+          // prometer más precisión de la que hay.
+          //
+          // La primera versión la rayaba, y no servía: la línea abarca 4.126
+          // años, así que hasta una vida larga ocupa el 2 % del ancho y la trama
+          // no tiene sitio donde resolverse. Lo que sí se lee a cuatro píxeles es
+          // que los extremos no cortan en seco, sino que se desvanecen en la
+          // pista: la barra deja de decir «de aquí a aquí» y pasa a decir «por
+          // aquí». Se ensancha unos píxeles a cada lado para que el degradado
+          // tenga dónde apagarse sin comerse el centro.
+          if (!single.life.approx) return { ...base, left: `${izq}%`, width: `${ancho}%`, background: primary };
+          return {
+            ...base,
+            left: `calc(${izq}% - 7px)`,
+            width: `calc(${ancho}% + 14px)`,
+            background: `linear-gradient(90deg, transparent 0%, ${primary} 34%, ${primary} 66%, transparent 100%)`,
+          };
+        })() : { display: 'none' },
         timelineEndsStyle: { display: 'flex', justifyContent: 'space-between', fontSize: '8px', color: 'oklch(0.55 0.02 55)', fontWeight: 700 },
       };
     })() : null;
