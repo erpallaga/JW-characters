@@ -26,6 +26,31 @@ Cómo buscar en la biblioteca en línea:
 - Índice de Perspicacia por letra y entradas enlazadas desde ahí.
 - Si una URL da error de red, dilo en el informe; no la inventes ni la sustituyas.
 
+## Tu herramienta: `wol.py`
+
+La biblioteca en línea se consulta desde la terminal. Tres órdenes, y funcionan:
+
+```bash
+python3 tools/wol.py buscar "Listra"          # lista resultados con su docid y URL
+python3 tools/wol.py leer 1200002802          # el artículo entero, en texto limpio
+python3 tools/wol.py leer https://wol.jw.org/es/wol/d/r4/lp-s/1200002802
+python3 tools/wol.py biblia "Hechos 16:1-3"   # los versículos, Traducción del Nuevo Mundo
+```
+
+`buscar` devuelve de todo: entradas de Perspicacia, artículos de *La Atalaya*,
+capítulos de libros. Las entradas de Perspicacia son las que llevan por título el
+nombre escueto («Listra», «Timoteo») y empiezan con el nombre en mayúsculas seguido
+del significado entre paréntesis. Ábrelas con `leer` antes de citarlas.
+
+Perspicacia da las ubicaciones con una precisión que te sirve directamente para el
+mapa: «Se la ha identificado con un montículo que hay al N. de Hatunsaray, […] a
+32 Km. al SSO. de Konya (Iconio)». Copia esa frase literal en tu tabla, y de ahí
+deduces lon/lat.
+
+Busca una entrada por cada **persona** de tu lote y otra por cada **lugar** que
+aparezca en su recorrido. La entrada del lugar suele decir quién estuvo allí y con
+qué versículo, así que sirve de comprobación cruzada.
+
 ## Cronología: siempre la de las publicaciones
 
 Anclas que debes respetar (si tu ficha las contradice, es un error):
