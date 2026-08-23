@@ -35,12 +35,27 @@ const PUNTO = { radio: 5.5, radioMenor: 3.6, halo: 2 };
 const RUTA = { grosor: 2.5, trazo: [3, 4.5], curva: 0.12 };
 
 // Zona de la imagen que la tarjeta enseña de verdad: el reverso la recorta con
-// background-size:cover en un hueco casi cuadrado, así que de los 909 px de
-// ancho solo se ven unos 500 del centro. Todo lo que importe cae aquí dentro.
-const SEGURO = { x0: 205, x1: 704, y0: 55, y1: 485 };
+// background-size:cover, así que de los 909 px de ancho solo se ve una franja
+// del centro. Cuánta, depende del hueco, y el hueco cambia con la pantalla.
+//
+// Medido en el navegador sobre el mazo servido: en escritorio se ve de 265 a
+// 644, y en tableta —el hueco más estrecho y alto— de 297 a 612. En móvil el
+// hueco se tumba y entra el ancho entero, pero se recorta por arriba y por
+// abajo. Esta caja toma la de escritorio, que es también la que cabe en móvil.
+// Antes ponía 205 y 704, casi cien píxeles de más por cada lado, y por eso se
+// perdían nombres sin que nada avisara.
+//
+// En tableta vertical el hueco se estrecha aún más (297 a 612) y un recorrido
+// tan ancho como el de Pablo pierde los extremos. Eso no lo arregla el dibujo:
+// el hueco es más alto que ancho y la imagen es apaisada.
+export const SEGURO = { x0: 265, x1: 644, y0: 55, y1: 485 };
 
 const MAX_PX_POR_GRADO = 175;   // no acercarse más que esto (vista tipo Judea)
-const MIN_PX_POR_GRADO = 13;    // ni alejarse más allá de la geometría que hay
+// Alejarse más de esto deja el lienzo con franjas vacías a los lados, porque la
+// geometría está recortada a 70 grados de ancho. Da igual: esas franjas caen
+// fuera de lo que la tarjeta enseña, y sin este margen un viaje como el de
+// Pablo no cabría entero.
+const MIN_PX_POR_GRADO = 9.5;
 
 const rad = g => g * Math.PI / 180;
 
@@ -95,17 +110,26 @@ export function encuadrar(lugares, opciones = {}) {
   const anchoMerc = Math.max(...xs) - Math.min(...xs);
   const altoMerc = Math.max(...ys) - Math.min(...ys);
   const cola = Math.max(...puntos.map(p => ETIQUETA.separacion + medir(p.label)));
-  const respiroX = 40 * margen, respiroY = 30 * margen;
 
-  const porAncho = anchoMerc > 0
-    ? Math.max(anchoSeguro - cola - respiroX * 2, 80) / anchoMerc : Infinity;
-  const porAlto = altoMerc > 0
-    ? Math.max(altoSeguro - respiroY * 2, 80) / altoMerc : Infinity;
-  const k = Math.min(porAncho, porAlto, MAX_PX_POR_GRADO * 180 / Math.PI);
+  // El respiro alrededor es un lujo que solo se puede pagar si sobra sitio. En
+  // un recorrido ancho se come la mitad de la franja visible y echa fuera los
+  // extremos, así que se aprieta antes que recortar el viaje.
+  const escala = (holgura) => {
+    const respiroX = 40 * margen * holgura, respiroY = 30 * margen * holgura;
+    const porAncho = anchoMerc > 0
+      ? Math.max(anchoSeguro - cola - respiroX * 2, 80) / anchoMerc : Infinity;
+    const porAlto = altoMerc > 0
+      ? Math.max(altoSeguro - respiroY * 2, 80) / altoMerc : Infinity;
+    return Math.min(porAncho, porAlto, MAX_PX_POR_GRADO * 180 / Math.PI);
+  };
+  const minimo = MIN_PX_POR_GRADO * 180 / Math.PI;
+  let k = escala(1);
+  if (k < minimo) k = Math.min(escala(0.35), MAX_PX_POR_GRADO * 180 / Math.PI);
 
   // Como las etiquetas solo crecen hacia la derecha, el conjunto se ve
   // descentrado si no se corre el encuadre media etiqueta.
-  return { k: Math.max(k, MIN_PX_POR_GRADO * 180 / Math.PI), cx: fijo ? cx : cx + (cola / 2) / k, cy };
+  k = Math.max(k, minimo);
+  return { k, cx: fijo ? cx : cx + (cola / 2) / k, cy };
 }
 
 export function proyectar(encuadre, lon, lat) {
@@ -303,10 +327,20 @@ function colocarEtiquetas(ctx, marco, lugares) {
 
     const marca = ([x, base]) => caja(x - 2, base - 17, w + 4, 22);
     const solape = c => ocupado.reduce((s2, o) => s2 + area(o, marca(c)), 0);
-    // Si ninguna posición queda limpia, gana la que menos tape: forzar siempre
-    // la primera es lo que dejaba dos nombres impresos uno encima del otro.
-    let elegido = candidatos.find(c => solape(c) === 0);
-    if (!elegido) elegido = candidatos.reduce((a, b) => (solape(b) < solape(a) ? b : a));
+    // La tarjeta recorta el PNG: de los 909 px de ancho solo enseña la franja
+    // central. Un nombre que se salga de ahí no queda feo, queda amputado —
+    // «Antioquía» perdía la mitad y «Roma» desaparecía entera—, así que sale
+    // de la zona visible pesa más que pisar un poco a otro.
+    const visible = caja(SEGURO.x0, SEGURO.y0, SEGURO.x1 - SEGURO.x0, SEGURO.y1 - SEGURO.y0);
+    const fuera = c => {
+      const m = marca(c);
+      return (m.x1 - m.x0) * (m.y1 - m.y0) - area(m, visible);   // superficie amputada
+    };
+    // Las dos penalizaciones se miden en la misma unidad, superficie, para que
+    // pesen lo que deben: un nombre cortado estorba más que uno que roza a otro.
+    const coste = c => fuera(c) * 4 + solape(c);
+    let elegido = candidatos.find(c => coste(c) === 0);
+    if (!elegido) elegido = candidatos.reduce((a, b) => (coste(b) < coste(a) ? b : a));
 
     ocupado.push(marca(elegido));
     puestas.push({ texto: lugar.label, x: elegido[0], base: elegido[1] });

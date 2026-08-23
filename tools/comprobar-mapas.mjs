@@ -19,13 +19,12 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { encuadrar, proyectar, resolverLugares, LIENZO } from '../admin/mapa.js';
+import { encuadrar, proyectar, resolverLugares, LIENZO, SEGURO } from '../admin/mapa.js';
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // La misma franja que respeta admin/mapa.js: el reverso recorta la imagen con
 // background-size:cover en un hueco casi cuadrado.
-const SEGURO = { x0: 205, x1: 704, y0: 55, y1: 485 };
 const HOLGURA = 25;   // por debajo de esto avisa, aunque todavía esté dentro
 
 const leer = async ruta => JSON.parse(await readFile(join(RAIZ, ruta), 'utf8'));
