@@ -66,3 +66,26 @@ Hay además tres homónimos que el nomenclátor debe separar antes de crecer: lo
 **Etam** (la parada del éxodo y el peñasco de Sansón), los dos **Sucot** (la salida de
 Egipto y la ciudad del otro lado del Jordán) y los dos **Carmelo** (el monte de Elías,
 que ya está, y el pueblo de Judá donde vivía Abigail, a 130 km).
+
+
+## Las afirmaciones dudosas, resueltas
+
+De las marcadas como dudosas, las de fechas se resolvieron dejando la estimación y
+rayando la barra, y las de coordenadas, con el nomenclátor. Quedaban seis de
+redacción, revisadas una a una:
+
+- **Abigaíl** — «uno de los mejores ejemplos de tacto y prudencia en la Biblia» era
+  valoración nuestra vestida de cita. Se rebaja a «un ejemplo de tacto y prudencia».
+- **Jonatán** — la frase iba entrecomillada como suya, y ni la letra coincidía con
+  1 Samuel 14:6 ni fue una declaración: se lo dijo a su escudero. Sin comillas y con
+  la referencia detrás.
+- **Zípora** — Éxodo 4:24 dice que Jehová «trató de darle muerte» sin aclarar a quién,
+  y Perspicacia recoge varias interpretaciones sin decidirse. La ficha zanjaba lo que
+  la fuente deja abierto; ahora lo deja abierto también.
+- **Timoteo** — «ejemplo de crecimiento espiritual desde la infancia» no lo dice
+  ninguna publicación. Lo literal es 2 Timoteo 3:15, que ya estaba al principio de la
+  ficha, así que se afina allí y se quita el cierre.
+- **Abel** — «el primer hombre justo en morir». Perspicacia lo llama «el primer hombre
+  de fe», pero Mateo 23:35 dice «el justo Abel». Se queda como está.
+- **Noemí** — «Jehová la restauró» se infiere de Rut 4:14-15 en vez de citarse, pero es
+  como lo expresa Perspicacia. Se queda como está.
