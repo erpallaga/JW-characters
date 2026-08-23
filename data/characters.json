@@ -149,7 +149,7 @@
     "name": "Jacob",
     "eraId": "patriarcas",
     "timeframe": "1858–1711 a.e.c.",
-    "place": "Canaán y Padán-aram",
+    "place": "Canaán, Padán-aram y Egipto",
     "portraitSrc": "assets/portrait-jacob.jpg",
     "mapSrc": "assets/mapa-jacob.png",
     "mapPos": "50% 50%",
@@ -174,7 +174,7 @@
       ],
       "ruta": true
     },
-    "knownFor": "Hijo menor de Isaac y Rebeca, recibió la primogenitura después de que Esaú la despreciara, y más tarde obtuvo también la bendición paternal. Trabajó veinte años para su tío (y luego suegro) Labán en Padán-aram, donde formó una gran familia. Tras luchar con un ángel, recibió el nombre Israel, y sus doce hijos llegaron a ser las cabezas de las doce tribus de Israel.",
+    "knownFor": "Hijo menor de Isaac y Rebeca, recibió la primogenitura después de que Esaú la despreciara, y más tarde obtuvo también la bendición paternal. Trabajó veinte años para su tío (y luego suegro) Labán en Padán-aram, donde formó una gran familia. Tras luchar con un ángel, recibió el nombre Israel, y sus doce hijos llegaron a ser las cabezas de las doce tribus de Israel. Ya anciano bajó a Egipto para reunirse con José, se estableció en Gosén y allí murió a los 147 años; sus hijos llevaron su cuerpo de vuelta a Canaán y lo enterraron en la cueva de Macpelá, junto a Abrahán e Isaac.",
     "passages": [
       {
         "book": "genesis",
@@ -185,6 +185,11 @@
         "book": "genesis",
         "chapter": 32,
         "label": "Génesis 32 (cambio de nombre)"
+      },
+      {
+        "book": "genesis",
+        "chapter": 49,
+        "label": "Génesis 49:33–50:13 (su muerte y entierro)"
       }
     ],
     "life": {
@@ -256,7 +261,6 @@
     "map": {
       "lugares": [
         "sucot-egipto",
-        "etam-desierto",
         "pi-hahirot",
         "mara",
         "elim",
@@ -1456,7 +1460,6 @@
     "map": {
       "lugares": [
         "sucot-egipto",
-        "etam-desierto",
         "pi-hahirot",
         "mara",
         "elim",
@@ -1511,7 +1514,6 @@
     "map": {
       "lugares": [
         "sucot-egipto",
-        "etam-desierto",
         "pi-hahirot",
         "mara",
         "elim",

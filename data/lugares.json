@@ -492,12 +492,6 @@
     "lat": 31.7977
   },
   {
-    "id": "etam-desierto",
-    "label": "Etam",
-    "lon": 35.1788,
-    "lat": 31.6848
-  },
-  {
     "id": "etam-sanson",
     "label": "Etam",
     "lon": 35.0258,
@@ -560,8 +554,8 @@
   {
     "id": "gosen",
     "label": "Gosén",
-    "lon": 34.9723,
-    "lat": 31.4076
+    "lon": 31.9,
+    "lat": 30.6
   },
   {
     "id": "gueba-micmas",
@@ -650,8 +644,8 @@
   {
     "id": "libna",
     "label": "Libná",
-    "lon": 34.704,
-    "lat": 29.9932
+    "lon": 34.8735,
+    "lat": 31.6299
   },
   {
     "id": "macpela",
@@ -716,8 +710,8 @@
   {
     "id": "mizpa",
     "label": "Mizpá",
-    "lon": 35.7147,
-    "lat": 33.2528
+    "lon": 35.2164,
+    "lat": 31.8851
   },
   {
     "id": "monte-hor",
@@ -896,8 +890,8 @@
   {
     "id": "timna",
     "label": "Timná",
-    "lon": 35.1574,
-    "lat": 31.4382
+    "lon": 34.9103,
+    "lat": 31.7848
   },
   {
     "id": "timnat-serah",
