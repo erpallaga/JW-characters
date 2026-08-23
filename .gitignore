@@ -5,3 +5,4 @@
 
 # Lienzo de diseño ya montado: se regenera desde los .dc.html de al lado
 docs/design/**/panel-personajes.html
+docs/design/**/anverso-de-la-tarjeta.html

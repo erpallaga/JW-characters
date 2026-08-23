@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Mulish:wght@400;600;700;800&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: oklch(0.42 0.09 255); }
+    a:hover { color: oklch(0.34 0.1 255); }
+  </style>
+</helmet>
+
+<div style="width: 860px; height: 830px; box-sizing: border-box; padding: 40px; background: oklch(0.95 0.016 80); font-family: 'Mulish', system-ui, sans-serif; color: oklch(0.26 0.03 50); display: flex; flex-direction: column; gap: 24px;">
+
+  <div style="display: flex; align-items: center; gap: 13px;">
+    <span style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: oklch(0.9 0.02 75); color: oklch(0.48 0.02 55); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center;">·</span>
+    <div style="flex-grow: 1;">
+      <div style="font-family: 'Amiri', Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1.15;">Como está hoy</div>
+      <div style="font-size: 12.5px; color: oklch(0.48 0.02 55); margin-top: 2px;">720 × 460 · el retrato ocupa el 42 % y el resto es aire</div>
+    </div>
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.48 0.02 55); background: oklch(0.94 0.014 78); border-radius: 999px; padding: 5px 13px; white-space: nowrap;">imagen 42 %</span>
+  </div>
+
+  <div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 720px; height: 460px; border-radius: 18px; background: oklch(0.97 0.01 80); border: 1px solid oklch(0.82 0.02 70); box-shadow: 0 3px 10px rgba(40,25,10,0.12); overflow: hidden; display: flex; flex-direction: row;">
+      <div style="position: relative; width: 302px; flex-shrink: 0; background-color: oklch(0.88 0.02 75); background-image: url(&quot;recorte-noe.jpg&quot;); background-size: cover; background-position: 50% 50%;">
+        <div style="position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-size: 10.5px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.7); opacity: .55;">⠿ arrastra para ajustar</div>
+      </div>
+      <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 12px; padding: 24px 34px;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.04em; color: oklch(0.56 0.13 35); background: oklch(0.9 0.035 40); border-radius: 999px; padding: 4px 12px;">Génesis · Antes del diluvio</div>
+        <div style="font-family: 'Amiri', Georgia, serif; font-size: 38px; font-weight: 700; line-height: 1.1;">Noé</div>
+        <div style="font-size: 12.5px; color: oklch(0.48 0.02 55);">Toca la tarjeta para ver los detalles</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px; margin: 0 auto; width: 100%;">
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">El hueco</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">418 px de los 720 —el 58 % de la tarjeta— sostienen tres líneas cortas: la píldora de la era, el nombre y «toca la tarjeta».</span>
+    </div>
+    <div style="display: flex; gap: 12px;">
+      <span style="width: 96px; flex-shrink: 0; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: oklch(0.56 0.13 35); padding-top: 2px;">El límite</span>
+      <span style="flex-grow: 1; font-size: 13px; line-height: 1.5;">Con los retratos ya recortados en 3:4 y una tarjeta de 460 px de alto, la imagen no puede pasar de 345 px de ancho sin volver a recortarla. Más imagen significa, entonces, una tarjeta distinta.</span>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
