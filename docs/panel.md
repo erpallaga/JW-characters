@@ -48,20 +48,27 @@ retrato y su mapa si no los usa nadie más.
 ## Las imágenes
 
 Se suben desde el propio formulario. Al elegir el fichero se abre el **encuadre**:
-la foto dentro del marco de la tarjeta —vertical 3:4 el retrato, apaisado 4:3 el
+la foto dentro del marco de la tarjeta —vertical 3:4 el retrato, apaisado 5:3 el
 mapa—, que se arrastra y se acerca con la barra hasta que se ve lo que tiene que
 verse. Lo que se guarda ya está recortado, así que en el mazo se ve exactamente eso;
 no hay que ajustar nada después.
+
+El marco del mapa es el mismo que dibuja el generador, así que un mapa subido a mano
+y uno dibujado aquí se recortan igual en la tarjeta. Está escrito una sola vez, en
+`LIENZO` (`admin/config.js`).
 
 **Reencuadrar** vuelve a abrir ese cuadro para una imagen que ya está puesta. Si se
 subió en esta misma sesión se recorta sobre el original, sin perder calidad; si viene
 de una publicación anterior se recorta sobre lo que hay en la web, que ya venía
 reducido.
 
-Al recortar también se reduce (retrato hasta 800 px de ancho, mapa hasta 1200) y se
+Al recortar también se reduce (retrato hasta 800 px de ancho, mapa hasta 909) y se
 guarda en JPEG. Sin eso, una foto de 6 MB del móvil se quedaría para siempre en el
 historial del repositorio. Nunca se agranda: si el recorte da menos píxeles que el
 límite, el fichero sale más pequeño y el cuadro lo avisa.
+
+Los mapas dibujados no pasan por aquí: salen ya con el tamaño exacto y en PNG de
+paleta, que para un mapa de pocos colores pesa menos que el JPEG y no lo emborrona.
 
 ## El orden del mazo
 
@@ -96,16 +103,36 @@ Al aceptar, el mapa entra en el borrador como una imagen más y se publica con e
 resto. Los lugares elegidos se guardan en la tarjeta (campo `map`), así que el mapa
 se puede volver a abrir y retocar más adelante sin empezar de cero.
 
+Las 47 tarjetas lo llevan, incluidas las 18 primeras, cuyos mapas se dibujaron a mano
+antes de que existiera todo esto: se midió dónde caía cada marcador en aquellos PNG
+para recuperar los lugares. Ninguna ficha se queda fuera.
+
+### Qué puede decir el campo `map`
+
+| Clave | Para qué |
+|---|---|
+| `lugares` | los sitios, por su id en `data/lugares.json`, en el orden del viaje. También vale `{ "label": …, "lon": …, "lat": … }` para uno suelto |
+| `ruta` | `true` traza la línea de puntos que los une |
+| `curva` | cuánto se arquea esa línea; sin ella, dos lugares se unen en recta |
+| `zoom` | píxeles por grado, en vez del encuadre automático |
+| `centro` | `{ "lon": …, "lat": … }` para mirar a un sitio concreto, aunque no haya marcador allí |
+
+`zoom` y `centro` son la salida para los mapas que el encuadre automático no puede
+resolver: uno solo, en mitad del desierto, o ninguno.
+
 Para rehacerlos todos de golpe desde la consola, sin abrir el panel:
 
 ```
 node tools/generar-mapas.mjs            # solo los que falten
 node tools/generar-mapas.mjs --todas    # todos otra vez
+node tools/comprobar-mapas.mjs          # revisarlos sin dibujar nada
 ```
 
 Dibuja con el mismo código que el panel, dentro de un Chromium sin ventana. Si el
 navegador no está en `/opt/pw-browsers/chromium`, se le indica con la variable
-`CHROMIUM`.
+`CHROMIUM`. La comprobación no necesita navegador: mira que toda ficha lleve su
+especificación, que los lugares existan, que el PNG tenga el marco de siempre y que
+ningún marcador se salga de lo que la tarjeta enseña.
 
 ## Los datos
 

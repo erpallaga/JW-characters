@@ -12,7 +12,7 @@ const LADO = 360;   // el lado largo del marco, en píxeles de pantalla
 
 const ROTULOS = {
   portrait: { titulo: 'Encuadrar el retrato', marco: 'Así se ve en la tarjeta · vertical 3:4' },
-  map: { titulo: 'Encuadrar el mapa', marco: 'Así se ve en el reverso · apaisado 4:3' },
+  map: { titulo: 'Encuadrar el mapa', marco: 'Así se ve en el reverso · apaisado 5:3' },
 };
 
 /**

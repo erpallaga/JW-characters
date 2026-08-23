@@ -7,7 +7,10 @@
 // aquellos PNG y sale con menos de 0,25 px de error. Los colores están
 // muestreados de los mismos ficheros.
 
-export const LIENZO = { ancho: 909, alto: 540 };
+// El lienzo se define en config.js, junto al recorte de las imágenes subidas a
+// mano, para que un mapa dibujado y otro subido tengan el mismo marco.
+import { LIENZO } from './config.js';
+export { LIENZO };
 
 export const PALETA = {
   mar: '#efe9dd',
@@ -53,19 +56,24 @@ export function deMercator(x, y) {
  * coordenadas Mercator; `proyectar` los convierte en píxeles.
  *
  * @param {{lon:number, lat:number, label?:string}[]} lugares
- * @param {{margen?:number, medir?:(texto:string)=>number}} opciones
+ * @param {{margen?:number, zoom?:number, centro?:{lon:number,lat:number},
+ *          medir?:(texto:string)=>number}} opciones
  */
 export function encuadrar(lugares, opciones = {}) {
   const margen = opciones.margen ?? 1.35;
   const medir = opciones.medir || (t => t.length * 10);
+  const fijo = opciones.centro ? aMercator(opciones.centro.lon, opciones.centro.lat) : null;
   if (!lugares.length) {
-    return { k: 1048.5, cx: rad(36.27), cy: aMercator(0, 27.71).y };
+    // Sin marcadores no hay nada que encuadrar: manda lo que diga la ficha, y
+    // si no dice nada, la vista ancha de siempre.
+    const k = (opciones.zoom ? opciones.zoom * 180 / Math.PI : 1048.5);
+    return fijo ? { k, cx: fijo.x, cy: fijo.y } : { k, cx: rad(36.27), cy: aMercator(0, 27.71).y };
   }
 
   const puntos = lugares.map(l => ({ ...aMercator(l.lon, l.lat), label: l.label || '' }));
   const xs = puntos.map(p => p.x), ys = puntos.map(p => p.y);
-  const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
-  const cy = (Math.min(...ys) + Math.max(...ys)) / 2;
+  const cx = fijo ? fijo.x : (Math.min(...xs) + Math.max(...xs)) / 2;
+  const cy = fijo ? fijo.y : (Math.min(...ys) + Math.max(...ys)) / 2;
   const anchoSeguro = SEGURO.x1 - SEGURO.x0;
   const altoSeguro = SEGURO.y1 - SEGURO.y0;
 
@@ -74,7 +82,7 @@ export function encuadrar(lugares, opciones = {}) {
   if (opciones.zoom) {
     const k = opciones.zoom * 180 / Math.PI;
     const colaMedia = puntos.reduce((s, p) => s + ETIQUETA.separacion + medir(p.label), 0) / puntos.length;
-    return { k, cx: cx + (colaMedia / 2) / k, cy };
+    return { k, cx: fijo ? cx : cx + (colaMedia / 2) / k, cy };
   }
 
   // Los puntos ocupan un rectángulo, y encima cada etiqueta añade su ancho por
@@ -93,7 +101,7 @@ export function encuadrar(lugares, opciones = {}) {
 
   // Como las etiquetas solo crecen hacia la derecha, el conjunto se ve
   // descentrado si no se corre el encuadre media etiqueta.
-  return { k: Math.max(k, MIN_PX_POR_GRADO * 180 / Math.PI), cx: cx + (cola / 2) / k, cy };
+  return { k: Math.max(k, MIN_PX_POR_GRADO * 180 / Math.PI), cx: fijo ? cx : cx + (cola / 2) / k, cy };
 }
 
 export function proyectar(encuadre, lon, lat) {
@@ -109,12 +117,13 @@ export function proyectar(encuadre, lon, lat) {
  *
  * @param {CanvasRenderingContext2D} ctx
  * @param {object} geo            {paises, lagos} tal y como salen de data/geo/
- * @param {object} spec           {lugares:[{lon,lat,label}], ruta:boolean, curva?:number}
+ * @param {object} spec           {lugares:[{lon,lat,label}], ruta?, curva?, zoom?, centro?}
  * @param {object} [encuadre]     el de `encuadrar` si ya se calculó
  */
 export function dibujar(ctx, geo, spec, encuadre) {
   const lugares = spec.lugares || [];
-  const marco = encuadre || encuadrar(lugares, { medir: t => medirCon(ctx, t) });
+  const marco = encuadre
+    || encuadrar(lugares, { zoom: spec.zoom, centro: spec.centro, medir: t => medirCon(ctx, t) });
 
   ctx.save();
   ctx.fillStyle = PALETA.mar;

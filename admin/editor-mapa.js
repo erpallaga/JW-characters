@@ -52,7 +52,7 @@ export async function abrirEditorDeMapa(personaje) {
       aviso.textContent = err.message;
       return;
     }
-    const marco = encuadrar(resueltos, { zoom: spec.zoom, medir });
+    const marco = encuadrar(resueltos, { zoom: spec.zoom, centro: spec.centro, medir });
     dibujar(ctx, geo, { lugares: resueltos, ruta: !!spec.ruta, curva: spec.curva }, marco);
     aviso.textContent = resueltos.length
       ? `${resueltos.length} lugar${resueltos.length > 1 ? 'es' : ''} · ${Math.round(LIENZO.ancho / (marco.k * Math.PI / 180))}° de ancho`
