@@ -27,7 +27,11 @@ const ETIQUETA = {
   linea: 6.4,       // de la altura del punto a la línea base del texto
 };
 
-const PUNTO = { radio: 5.5, halo: 2 };
+// Un recorrido largo se cuenta con muchas paradas, pero nombrarlas todas llena
+// la tarjeta de letra. Las que llevan rótulo mantienen el punto de siempre; las
+// escalas intermedias van con uno menor, así se ve de un vistazo qué son hitos y
+// qué es camino.
+const PUNTO = { radio: 5.5, radioMenor: 3.6, halo: 2 };
 const RUTA = { grosor: 2.5, trazo: [3, 4.5], curva: 0.12 };
 
 // Zona de la imagen que la tarjeta enseña de verdad: el reverso la recorta con
@@ -237,13 +241,14 @@ function dibujarRuta(ctx, marco, lugares, curva) {
 
 function dibujarPunto(ctx, marco, lugar) {
   const p = proyectar(marco, lugar.lon, lugar.lat);
+  const radio = lugar.label ? PUNTO.radio : PUNTO.radioMenor;
   ctx.save();
   ctx.beginPath();
-  ctx.arc(p.x, p.y, PUNTO.radio + PUNTO.halo, 0, Math.PI * 2);
+  ctx.arc(p.x, p.y, radio + PUNTO.halo, 0, Math.PI * 2);
   ctx.fillStyle = PALETA.halo;
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(p.x, p.y, PUNTO.radio, 0, Math.PI * 2);
+  ctx.arc(p.x, p.y, radio, 0, Math.PI * 2);
   ctx.fillStyle = PALETA.acento;
   ctx.fill();
   ctx.restore();
@@ -304,21 +309,30 @@ const chocan = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y
 /**
  * Resuelve la especificación de una tarjeta contra el nomenclátor.
  * Acepta ids de data/lugares.json, y también {lon, lat, label} sueltos.
+ *
+ * Si la ficha trae `etiquetas`, solo esos lugares salen con su nombre escrito;
+ * los demás quedan como punto. El ancho de las etiquetas es lo que decide cuánto
+ * se puede acercar el encuadre (véase `encuadrar`), así que rotular solo los
+ * hitos es lo que permite que un recorrido largo quepa entero. Sin `etiquetas`,
+ * se rotulan todos, que es como se dibujaron las primeras tarjetas.
  */
 export function resolverLugares(spec, nomenclator) {
   const porId = Object.fromEntries(nomenclator.map(l => [l.id, l]));
+  const rotula = spec?.etiquetas ? new Set(spec.etiquetas) : null;
+  const conNombre = (id, label) => (!rotula || (id && rotula.has(id)) ? label : '');
+
   return (spec?.lugares || []).map(entrada => {
     if (typeof entrada === 'string') {
       const l = porId[entrada];
       if (!l) throw new Error(`lugar desconocido en el nomenclátor: ${entrada}`);
-      return { lon: l.lon, lat: l.lat, label: l.label };
+      return { lon: l.lon, lat: l.lat, label: conNombre(entrada, l.label) };
     }
     const base = entrada.id ? porId[entrada.id] : null;
     if (entrada.id && !base) throw new Error(`lugar desconocido en el nomenclátor: ${entrada.id}`);
     return {
       lon: entrada.lon ?? base.lon,
       lat: entrada.lat ?? base.lat,
-      label: entrada.label ?? base?.label ?? '',
+      label: conNombre(entrada.id, entrada.label ?? base?.label ?? ''),
     };
   });
 }
