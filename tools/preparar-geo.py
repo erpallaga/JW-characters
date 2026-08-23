@@ -16,7 +16,10 @@ costa no pierde nada que se llegue a ver.
 """
 import json, sys, math
 
-BBOX = (-2.0, 5.0, 68.0, 50.0)   # lon_min, lat_min, lon_max, lat_max
+# El limite norte llega a 56 porque el viaje de Pablo, visto entero, sube por
+# encima de los 52 grados: con el recorte anterior la tarjeta ensenaba una
+# franja de lienzo vacio por arriba.
+BBOX = (-2.0, 5.0, 68.0, 56.0)   # lon_min, lat_min, lon_max, lat_max
 TOL = 0.003                       # simplificacion Douglas-Peucker, en grados
 DEC = 4                           # decimales que se conservan
 

@@ -1,0 +1,20 @@
+L01 prediluvio      noe abel job
+L02 patriarcas-a    abraham sara lot
+L03 patriarcas-b    isaac rebeca ruben
+L04 patriarcas-c    jacob jose
+L05 exodo-a         moises aaron miriam
+L06 exodo-b         core zipora
+L07 conquista       josue rahab
+L08 jueces-a        debora barac gedeon
+L09 jueces-b        sanson manoah
+L10 rut             rut noemi
+L11 samuel          ana samuel
+L12 reino-a         jonatan abigail
+L13 reino-b         david salomon
+L14 profetas-norte  elias eliseo jonas
+L15 profetas-juda   isaias jeremias ezequias
+L16 exilio          daniel ester nehemias
+L17 evangelios-a    juanbautista maria
+L18 evangelios-b    jesus marta
+L19 pedro           pedro timoteo
+L20 pablo           pablo

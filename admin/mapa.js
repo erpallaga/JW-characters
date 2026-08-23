@@ -27,16 +27,35 @@ const ETIQUETA = {
   linea: 6.4,       // de la altura del punto a la línea base del texto
 };
 
-const PUNTO = { radio: 5.5, halo: 2 };
+// Un recorrido largo se cuenta con muchas paradas, pero nombrarlas todas llena
+// la tarjeta de letra. Las que llevan rótulo mantienen el punto de siempre; las
+// escalas intermedias van con uno menor, así se ve de un vistazo qué son hitos y
+// qué es camino.
+const PUNTO = { radio: 5.5, radioMenor: 3.6, halo: 2 };
 const RUTA = { grosor: 2.5, trazo: [3, 4.5], curva: 0.12 };
 
 // Zona de la imagen que la tarjeta enseña de verdad: el reverso la recorta con
-// background-size:cover en un hueco casi cuadrado, así que de los 909 px de
-// ancho solo se ven unos 500 del centro. Todo lo que importe cae aquí dentro.
-const SEGURO = { x0: 205, x1: 704, y0: 55, y1: 485 };
+// background-size:cover, así que de los 909 px de ancho solo se ve una franja
+// del centro. Cuánta, depende del hueco, y el hueco cambia con la pantalla.
+//
+// Medido en el navegador sobre el mazo servido: en escritorio se ve de 265 a
+// 644, y en tableta —el hueco más estrecho y alto— de 297 a 612. En móvil el
+// hueco se tumba y entra el ancho entero, pero se recorta por arriba y por
+// abajo. Esta caja toma la de escritorio, que es también la que cabe en móvil.
+// Antes ponía 205 y 704, casi cien píxeles de más por cada lado, y por eso se
+// perdían nombres sin que nada avisara.
+//
+// En tableta vertical el hueco se estrecha aún más (297 a 612) y un recorrido
+// tan ancho como el de Pablo pierde los extremos. Eso no lo arregla el dibujo:
+// el hueco es más alto que ancho y la imagen es apaisada.
+export const SEGURO = { x0: 265, x1: 644, y0: 55, y1: 485 };
 
 const MAX_PX_POR_GRADO = 175;   // no acercarse más que esto (vista tipo Judea)
-const MIN_PX_POR_GRADO = 13;    // ni alejarse más allá de la geometría que hay
+// Alejarse más de esto deja el lienzo con franjas vacías a los lados, porque la
+// geometría está recortada a 70 grados de ancho. Da igual: esas franjas caen
+// fuera de lo que la tarjeta enseña, y sin este margen un viaje como el de
+// Pablo no cabría entero.
+const MIN_PX_POR_GRADO = 9.5;
 
 const rad = g => g * Math.PI / 180;
 
@@ -91,17 +110,26 @@ export function encuadrar(lugares, opciones = {}) {
   const anchoMerc = Math.max(...xs) - Math.min(...xs);
   const altoMerc = Math.max(...ys) - Math.min(...ys);
   const cola = Math.max(...puntos.map(p => ETIQUETA.separacion + medir(p.label)));
-  const respiroX = 40 * margen, respiroY = 30 * margen;
 
-  const porAncho = anchoMerc > 0
-    ? Math.max(anchoSeguro - cola - respiroX * 2, 80) / anchoMerc : Infinity;
-  const porAlto = altoMerc > 0
-    ? Math.max(altoSeguro - respiroY * 2, 80) / altoMerc : Infinity;
-  const k = Math.min(porAncho, porAlto, MAX_PX_POR_GRADO * 180 / Math.PI);
+  // El respiro alrededor es un lujo que solo se puede pagar si sobra sitio. En
+  // un recorrido ancho se come la mitad de la franja visible y echa fuera los
+  // extremos, así que se aprieta antes que recortar el viaje.
+  const escala = (holgura) => {
+    const respiroX = 40 * margen * holgura, respiroY = 30 * margen * holgura;
+    const porAncho = anchoMerc > 0
+      ? Math.max(anchoSeguro - cola - respiroX * 2, 80) / anchoMerc : Infinity;
+    const porAlto = altoMerc > 0
+      ? Math.max(altoSeguro - respiroY * 2, 80) / altoMerc : Infinity;
+    return Math.min(porAncho, porAlto, MAX_PX_POR_GRADO * 180 / Math.PI);
+  };
+  const minimo = MIN_PX_POR_GRADO * 180 / Math.PI;
+  let k = escala(1);
+  if (k < minimo) k = Math.min(escala(0.35), MAX_PX_POR_GRADO * 180 / Math.PI);
 
   // Como las etiquetas solo crecen hacia la derecha, el conjunto se ve
   // descentrado si no se corre el encuadre media etiqueta.
-  return { k: Math.max(k, MIN_PX_POR_GRADO * 180 / Math.PI), cx: fijo ? cx : cx + (cola / 2) / k, cy };
+  k = Math.max(k, minimo);
+  return { k, cx: fijo ? cx : cx + (cola / 2) / k, cy };
 }
 
 export function proyectar(encuadre, lon, lat) {
@@ -237,13 +265,14 @@ function dibujarRuta(ctx, marco, lugares, curva) {
 
 function dibujarPunto(ctx, marco, lugar) {
   const p = proyectar(marco, lugar.lon, lugar.lat);
+  const radio = lugar.label ? PUNTO.radio : PUNTO.radioMenor;
   ctx.save();
   ctx.beginPath();
-  ctx.arc(p.x, p.y, PUNTO.radio + PUNTO.halo, 0, Math.PI * 2);
+  ctx.arc(p.x, p.y, radio + PUNTO.halo, 0, Math.PI * 2);
   ctx.fillStyle = PALETA.halo;
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(p.x, p.y, PUNTO.radio, 0, Math.PI * 2);
+  ctx.arc(p.x, p.y, radio, 0, Math.PI * 2);
   ctx.fillStyle = PALETA.acento;
   ctx.fill();
   ctx.restore();
@@ -278,19 +307,42 @@ function colocarEtiquetas(ctx, marco, lugares) {
     const p = proyectar(marco, lugar.lon, lugar.lat);
     const w = ctx.measureText(lugar.label).width;
     const s = ETIQUETA.separacion;
-    const candidatos = [
-      [p.x + s, p.y + ETIQUETA.linea],
-      [p.x - s - w, p.y + ETIQUETA.linea],
-      [p.x + s, p.y - 9],
-      [p.x + s, p.y + 22],
-      [p.x - s - w, p.y - 9],
-      [p.x - s - w, p.y + 22],
-      [p.x - w / 2, p.y - 12],
-      [p.x - w / 2, p.y + 25],
-    ];
-    const elegido = candidatos.find(([x, base]) =>
-      !ocupado.some(o => chocan(o, caja(x - 2, base - 17, w + 4, 22)))) || candidatos[0];
-    ocupado.push(caja(elegido[0] - 2, elegido[1] - 17, w + 4, 22));
+    const candidatos = [];
+    // Primero pegada al punto, y si ahí no cabe se va apartando. En un mapa con
+    // muchas paradas las cuatro posiciones de siempre se agotan enseguida. El
+    // salto se queda corto a propósito: una etiqueta que huye demasiado deja de
+    // señalar a su punto, y entonces confunde más que un solape pequeño.
+    for (const salto of [0, 11, 22]) {
+      candidatos.push(
+        [p.x + s + salto, p.y + ETIQUETA.linea],
+        [p.x - s - w - salto, p.y + ETIQUETA.linea],
+        [p.x + s + salto * 0.6, p.y - 9 - salto],
+        [p.x + s + salto * 0.6, p.y + 22 + salto],
+        [p.x - s - w - salto * 0.6, p.y - 9 - salto],
+        [p.x - s - w - salto * 0.6, p.y + 22 + salto],
+        [p.x - w / 2, p.y - 12 - salto],
+        [p.x - w / 2, p.y + 25 + salto],
+      );
+    }
+
+    const marca = ([x, base]) => caja(x - 2, base - 17, w + 4, 22);
+    const solape = c => ocupado.reduce((s2, o) => s2 + area(o, marca(c)), 0);
+    // La tarjeta recorta el PNG: de los 909 px de ancho solo enseña la franja
+    // central. Un nombre que se salga de ahí no queda feo, queda amputado —
+    // «Antioquía» perdía la mitad y «Roma» desaparecía entera—, así que sale
+    // de la zona visible pesa más que pisar un poco a otro.
+    const visible = caja(SEGURO.x0, SEGURO.y0, SEGURO.x1 - SEGURO.x0, SEGURO.y1 - SEGURO.y0);
+    const fuera = c => {
+      const m = marca(c);
+      return (m.x1 - m.x0) * (m.y1 - m.y0) - area(m, visible);   // superficie amputada
+    };
+    // Las dos penalizaciones se miden en la misma unidad, superficie, para que
+    // pesen lo que deben: un nombre cortado estorba más que uno que roza a otro.
+    const coste = c => fuera(c) * 4 + solape(c);
+    let elegido = candidatos.find(c => coste(c) === 0);
+    if (!elegido) elegido = candidatos.reduce((a, b) => (coste(b) < coste(a) ? b : a));
+
+    ocupado.push(marca(elegido));
     puestas.push({ texto: lugar.label, x: elegido[0], base: elegido[1] });
   }
 
@@ -300,25 +352,36 @@ function colocarEtiquetas(ctx, marco, lugares) {
 
 const caja = (x, y, w, h) => ({ x0: x, y0: y, x1: x + w, y1: y + h });
 const chocan = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+const area = (a, b) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0))
+                     * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 
 /**
  * Resuelve la especificación de una tarjeta contra el nomenclátor.
  * Acepta ids de data/lugares.json, y también {lon, lat, label} sueltos.
+ *
+ * Si la ficha trae `etiquetas`, solo esos lugares salen con su nombre escrito;
+ * los demás quedan como punto. El ancho de las etiquetas es lo que decide cuánto
+ * se puede acercar el encuadre (véase `encuadrar`), así que rotular solo los
+ * hitos es lo que permite que un recorrido largo quepa entero. Sin `etiquetas`,
+ * se rotulan todos, que es como se dibujaron las primeras tarjetas.
  */
 export function resolverLugares(spec, nomenclator) {
   const porId = Object.fromEntries(nomenclator.map(l => [l.id, l]));
+  const rotula = spec?.etiquetas ? new Set(spec.etiquetas) : null;
+  const conNombre = (id, label) => (!rotula || (id && rotula.has(id)) ? label : '');
+
   return (spec?.lugares || []).map(entrada => {
     if (typeof entrada === 'string') {
       const l = porId[entrada];
       if (!l) throw new Error(`lugar desconocido en el nomenclátor: ${entrada}`);
-      return { lon: l.lon, lat: l.lat, label: l.label };
+      return { lon: l.lon, lat: l.lat, label: conNombre(entrada, l.label) };
     }
     const base = entrada.id ? porId[entrada.id] : null;
     if (entrada.id && !base) throw new Error(`lugar desconocido en el nomenclátor: ${entrada.id}`);
     return {
       lon: entrada.lon ?? base.lon,
       lat: entrada.lat ?? base.lat,
-      label: entrada.label ?? base?.label ?? '',
+      label: conNombre(entrada.id, entrada.label ?? base?.label ?? ''),
     };
   });
 }

@@ -79,6 +79,15 @@ retocar** sin partir de cero, y todos salen con el mismo marco: PNG de paleta,
 909 × 540. Los 18 primeros se dibujaron a mano en Claude Design; se midieron marcador
 a marcador para deducir dónde caía cada lugar, y ahora se generan como los demás.
 
+Los mapas enseñan **todos los lugares de los que hay constancia explícita** de que la
+persona estuvo allí: Pablo lleva las treinta y seis paradas de Hechos, y Josué las
+veintidós de la conquista. Escribir todos esos nombres sería ilegible, y además no
+cabrían: el encuadre reserva a la derecha el ancho de la etiqueta más larga. Por eso
+la ficha nombra en `etiquetas` los cuatro a seis lugares que anclan el mapa, y el
+resto salen como punto menor. Un lugar solo entra si hay un versículo que dice que
+estuvo allí; las regiones —«Canaán», «Macedonia»— no son lugares, y lo que las
+publicaciones no sitúan, como el valle de Kerit o Carcor, se queda fuera.
+
 Para revisarlos sin volver a dibujarlos:
 
 ```

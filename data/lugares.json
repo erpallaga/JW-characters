@@ -1,52 +1,974 @@
 [
-  { "id": "ur", "label": "Ur", "lon": 46.1031, "lat": 30.9626 },
-  { "id": "haran", "label": "Harán", "lon": 39.0308, "lat": 36.8642 },
-  { "id": "canaan", "label": "Canaán", "lon": 35.2099, "lat": 31.7713 },
-  { "id": "egipto", "label": "Egipto", "lon": 31.2444, "lat": 30.0035 },
-  { "id": "sinai", "label": "Sinaí", "lon": 33.8974, "lat": 29.5031 },
-  { "id": "desierto-sinai", "label": "Desierto del Sinaí", "lon": 33.6, "lat": 29.9 },
-  { "id": "madian", "label": "Madián", "lon": 35.0, "lat": 28.4667 },
-  { "id": "susa", "label": "Susa", "lon": 48.2687, "lat": 32.1908 },
-  { "id": "babilonia", "label": "Babilonia", "lon": 44.4272, "lat": 32.537 },
-  { "id": "ninive", "label": "Nínive", "lon": 43.1525, "lat": 36.3597 },
-  { "id": "uz", "label": "Tierra de Uz", "lon": 37.4, "lat": 30.6 },
-  { "id": "ararat", "label": "Ararat", "lon": 44.2983, "lat": 39.7019 },
-
-  { "id": "jerusalen", "label": "Jerusalén", "lon": 35.2137, "lat": 31.7683 },
-  { "id": "belen", "label": "Belén", "lon": 35.202, "lat": 31.7054 },
-  { "id": "betania", "label": "Betania", "lon": 35.2622, "lat": 31.7714 },
-  { "id": "jerico", "label": "Jericó", "lon": 35.444, "lat": 31.87 },
-  { "id": "anatot", "label": "Anatot", "lon": 35.265, "lat": 31.81 },
-  { "id": "silo", "label": "Siló", "lon": 35.2894, "lat": 32.0556 },
-  { "id": "efrain", "label": "Efraín", "lon": 35.2, "lat": 32.1 },
-  { "id": "rama", "label": "Ramá", "lon": 35.2331, "lat": 31.8964 },
-  { "id": "guibea", "label": "Guibeá", "lon": 35.2317, "lat": 31.8236 },
-  { "id": "maon", "label": "Maón", "lon": 35.1319, "lat": 31.4139 },
-  { "id": "beerseba", "label": "Beer-Seba", "lon": 34.7913, "lat": 31.2518 },
-  { "id": "hebron", "label": "Hebrón", "lon": 35.0997, "lat": 31.5326 },
-  { "id": "moria", "label": "Monte Moriá", "lon": 35.2354, "lat": 31.778 },
-  { "id": "zora", "label": "Zorá", "lon": 34.9833, "lat": 31.7667 },
-  { "id": "jope", "label": "Jope", "lon": 34.75, "lat": 32.0533 },
-  { "id": "sodoma", "label": "Sodoma", "lon": 35.4, "lat": 31.1 },
-  { "id": "mar-muerto", "label": "Mar Muerto", "lon": 35.4667, "lat": 31.5 },
-  { "id": "moab", "label": "Moab", "lon": 35.75, "lat": 31.4 },
-  { "id": "valle-jordan", "label": "Valle del Jordán", "lon": 35.55, "lat": 32.0 },
-  { "id": "jordan", "label": "Río Jordán", "lon": 35.5372, "lat": 31.8372 },
-
-  { "id": "nazaret", "label": "Nazaret", "lon": 35.2978, "lat": 32.7021 },
-  { "id": "gat-hefer", "label": "Gat-Héfer", "lon": 35.3419, "lat": 32.7392 },
-  { "id": "tabor", "label": "Monte Tabor", "lon": 35.3906, "lat": 32.6867 },
-  { "id": "jezreel", "label": "Valle de Jezreel", "lon": 35.3333, "lat": 32.5833 },
-  { "id": "ofra", "label": "Ofrá", "lon": 35.35, "lat": 32.55 },
-  { "id": "quedes", "label": "Quedes", "lon": 35.53, "lat": 33.1122 },
-  { "id": "abelmehola", "label": "Abel-Meholá", "lon": 35.53, "lat": 32.35 },
-  { "id": "samaria", "label": "Samaria", "lon": 35.1953, "lat": 32.2806 },
-  { "id": "galilea", "label": "Galilea", "lon": 35.4, "lat": 32.85 },
-  { "id": "carmelo", "label": "Monte Carmelo", "lon": 35.0333, "lat": 32.7333 },
-
-  { "id": "tarso", "label": "Tarso", "lon": 34.8951, "lat": 36.9178 },
-  { "id": "atenas", "label": "Atenas", "lon": 23.7275, "lat": 37.9838 },
-  { "id": "listra", "label": "Listra", "lon": 32.2506, "lat": 37.5794 },
-  { "id": "efeso", "label": "Éfeso", "lon": 27.3417, "lat": 37.9397 },
-  { "id": "roma", "label": "Roma", "lon": 12.4964, "lat": 41.9028 }
+  {
+    "id": "ur",
+    "label": "Ur",
+    "lon": 46.1031,
+    "lat": 30.9626
+  },
+  {
+    "id": "haran",
+    "label": "Harán",
+    "lon": 39.0308,
+    "lat": 36.8642
+  },
+  {
+    "id": "canaan",
+    "label": "Canaán",
+    "lon": 35.2099,
+    "lat": 31.7713
+  },
+  {
+    "id": "egipto",
+    "label": "Egipto",
+    "lon": 31.2444,
+    "lat": 30.0035
+  },
+  {
+    "id": "sinai",
+    "label": "Sinaí",
+    "lon": 33.8974,
+    "lat": 29.5031
+  },
+  {
+    "id": "desierto-sinai",
+    "label": "Desierto del Sinaí",
+    "lon": 33.6,
+    "lat": 29.9
+  },
+  {
+    "id": "madian",
+    "label": "Madián",
+    "lon": 35.0,
+    "lat": 28.4667
+  },
+  {
+    "id": "susa",
+    "label": "Susa",
+    "lon": 48.2687,
+    "lat": 32.1908
+  },
+  {
+    "id": "babilonia",
+    "label": "Babilonia",
+    "lon": 44.4272,
+    "lat": 32.537
+  },
+  {
+    "id": "ninive",
+    "label": "Nínive",
+    "lon": 43.1525,
+    "lat": 36.3597
+  },
+  {
+    "id": "uz",
+    "label": "Tierra de Uz",
+    "lon": 37.4,
+    "lat": 30.6
+  },
+  {
+    "id": "ararat",
+    "label": "Ararat",
+    "lon": 44.2983,
+    "lat": 39.7019
+  },
+  {
+    "id": "jerusalen",
+    "label": "Jerusalén",
+    "lon": 35.2137,
+    "lat": 31.7683
+  },
+  {
+    "id": "belen",
+    "label": "Belén",
+    "lon": 35.202,
+    "lat": 31.7054
+  },
+  {
+    "id": "betania",
+    "label": "Betania",
+    "lon": 35.2622,
+    "lat": 31.7714
+  },
+  {
+    "id": "jerico",
+    "label": "Jericó",
+    "lon": 35.444,
+    "lat": 31.87
+  },
+  {
+    "id": "anatot",
+    "label": "Anatot",
+    "lon": 35.265,
+    "lat": 31.81
+  },
+  {
+    "id": "silo",
+    "label": "Siló",
+    "lon": 35.2894,
+    "lat": 32.0556
+  },
+  {
+    "id": "efrain",
+    "label": "Efraín",
+    "lon": 35.2,
+    "lat": 32.1
+  },
+  {
+    "id": "rama",
+    "label": "Ramá",
+    "lon": 35.2331,
+    "lat": 31.8964
+  },
+  {
+    "id": "guibea",
+    "label": "Guibeá",
+    "lon": 35.2317,
+    "lat": 31.8236
+  },
+  {
+    "id": "maon",
+    "label": "Maón",
+    "lon": 35.1319,
+    "lat": 31.4139
+  },
+  {
+    "id": "beerseba",
+    "label": "Beer-Seba",
+    "lon": 34.7913,
+    "lat": 31.2518
+  },
+  {
+    "id": "hebron",
+    "label": "Hebrón",
+    "lon": 35.0997,
+    "lat": 31.5326
+  },
+  {
+    "id": "moria",
+    "label": "Monte Moriá",
+    "lon": 35.2354,
+    "lat": 31.778
+  },
+  {
+    "id": "zora",
+    "label": "Zorá",
+    "lon": 34.9833,
+    "lat": 31.7667
+  },
+  {
+    "id": "jope",
+    "label": "Jope",
+    "lon": 34.75,
+    "lat": 32.0533
+  },
+  {
+    "id": "sodoma",
+    "label": "Sodoma",
+    "lon": 35.4,
+    "lat": 31.1
+  },
+  {
+    "id": "mar-muerto",
+    "label": "Mar Muerto",
+    "lon": 35.4667,
+    "lat": 31.5
+  },
+  {
+    "id": "moab",
+    "label": "Moab",
+    "lon": 35.75,
+    "lat": 31.4
+  },
+  {
+    "id": "valle-jordan",
+    "label": "Valle del Jordán",
+    "lon": 35.55,
+    "lat": 32.0
+  },
+  {
+    "id": "jordan",
+    "label": "Río Jordán",
+    "lon": 35.5372,
+    "lat": 31.8372
+  },
+  {
+    "id": "nazaret",
+    "label": "Nazaret",
+    "lon": 35.2978,
+    "lat": 32.7021
+  },
+  {
+    "id": "gat-hefer",
+    "label": "Gat-Héfer",
+    "lon": 35.3419,
+    "lat": 32.7392
+  },
+  {
+    "id": "tabor",
+    "label": "Monte Tabor",
+    "lon": 35.3906,
+    "lat": 32.6867
+  },
+  {
+    "id": "jezreel",
+    "label": "Valle de Jezreel",
+    "lon": 35.3333,
+    "lat": 32.5833
+  },
+  {
+    "id": "ofra",
+    "label": "Ofrá",
+    "lon": 35.35,
+    "lat": 32.55
+  },
+  {
+    "id": "quedes",
+    "label": "Quedes",
+    "lon": 35.53,
+    "lat": 33.1122
+  },
+  {
+    "id": "abelmehola",
+    "label": "Abel-Meholá",
+    "lon": 35.53,
+    "lat": 32.35
+  },
+  {
+    "id": "samaria",
+    "label": "Samaria",
+    "lon": 35.1953,
+    "lat": 32.2806
+  },
+  {
+    "id": "galilea",
+    "label": "Galilea",
+    "lon": 35.4,
+    "lat": 32.85
+  },
+  {
+    "id": "carmelo",
+    "label": "Monte Carmelo",
+    "lon": 35.0333,
+    "lat": 32.7333
+  },
+  {
+    "id": "tarso",
+    "label": "Tarso",
+    "lon": 34.8951,
+    "lat": 36.9178
+  },
+  {
+    "id": "atenas",
+    "label": "Atenas",
+    "lon": 23.7275,
+    "lat": 37.9838
+  },
+  {
+    "id": "listra",
+    "label": "Listra",
+    "lon": 32.2506,
+    "lat": 37.5794
+  },
+  {
+    "id": "efeso",
+    "label": "Éfeso",
+    "lon": 27.3417,
+    "lat": 37.9397
+  },
+  {
+    "id": "roma",
+    "label": "Roma",
+    "lon": 12.4964,
+    "lat": 41.9028
+  },
+  {
+    "id": "aguas-merom",
+    "label": "Aguas de Merom",
+    "lon": 35.4378,
+    "lat": 32.9789
+  },
+  {
+    "id": "antioquia-pisidia",
+    "label": "Antioquía de Pisidia",
+    "lon": 31.1892,
+    "lat": 38.3061
+  },
+  {
+    "id": "antioquia-siria",
+    "label": "Antioquía de Siria",
+    "lon": 36.1717,
+    "lat": 36.2267
+  },
+  {
+    "id": "ason",
+    "label": "Asón",
+    "lon": 26.3367,
+    "lat": 39.4906
+  },
+  {
+    "id": "asquelon",
+    "label": "Asquelón",
+    "lon": 34.5458,
+    "lat": 31.6639
+  },
+  {
+    "id": "atalia",
+    "label": "Atalía",
+    "lon": 30.7036,
+    "lat": 36.8813
+  },
+  {
+    "id": "berea",
+    "label": "Berea",
+    "lon": 22.2,
+    "lat": 40.5183
+  },
+  {
+    "id": "bet-san",
+    "label": "Bet-san",
+    "lon": 35.5031,
+    "lat": 32.5036
+  },
+  {
+    "id": "betania-jordan",
+    "label": "Betania al otro lado del Jordán",
+    "lon": 35.5503,
+    "lat": 31.8371
+  },
+  {
+    "id": "betel",
+    "label": "Betel",
+    "lon": 35.2414,
+    "lat": 31.9228
+  },
+  {
+    "id": "betsaida",
+    "label": "Betsaida",
+    "lon": 35.631,
+    "lat": 32.9104
+  },
+  {
+    "id": "buenos-puertos",
+    "label": "Buenos Puertos",
+    "lon": 24.8003,
+    "lat": 34.9297
+  },
+  {
+    "id": "cades-barnea",
+    "label": "Cadés-barnea",
+    "lon": 34.4222,
+    "lat": 30.6483
+  },
+  {
+    "id": "cana",
+    "label": "Caná",
+    "lon": 35.3027,
+    "lat": 32.8222
+  },
+  {
+    "id": "capernaum",
+    "label": "Capernaúm",
+    "lon": 35.575,
+    "lat": 32.8811
+  },
+  {
+    "id": "carmelo-juda",
+    "label": "Carmelo",
+    "lon": 35.133,
+    "lat": 31.4229
+  },
+  {
+    "id": "cencreas",
+    "label": "Cencreas",
+    "lon": 22.9968,
+    "lat": 37.8843
+  },
+  {
+    "id": "cesarea",
+    "label": "Cesarea",
+    "lon": 34.8917,
+    "lat": 32.5
+  },
+  {
+    "id": "cesarea-filipo",
+    "label": "Cesarea de Filipo",
+    "lon": 35.6933,
+    "lat": 33.2461
+  },
+  {
+    "id": "chipre",
+    "label": "Chipre",
+    "lon": 33.0,
+    "lat": 35.0
+  },
+  {
+    "id": "cison",
+    "label": "Torrente Cisón",
+    "lon": 35.0333,
+    "lat": 32.8167
+  },
+  {
+    "id": "corinto",
+    "label": "Corinto",
+    "lon": 22.8787,
+    "lat": 37.9058
+  },
+  {
+    "id": "cueva-de-adulam",
+    "label": "Cueva de Adulam",
+    "lon": 35.0017,
+    "lat": 31.6517
+  },
+  {
+    "id": "damasco",
+    "label": "Damasco",
+    "lon": 36.3064,
+    "lat": 33.5111
+  },
+  {
+    "id": "debir",
+    "label": "Debir",
+    "lon": 35.0149,
+    "lat": 31.4321
+  },
+  {
+    "id": "derbe",
+    "label": "Derbe",
+    "lon": 33.3615,
+    "lat": 37.3486
+  },
+  {
+    "id": "desierto-de-zif",
+    "label": "Desierto de Zif",
+    "lon": 35.1351,
+    "lat": 31.4748
+  },
+  {
+    "id": "desierto-judea",
+    "label": "Desierto de Judá",
+    "lon": 35.3,
+    "lat": 31.55
+  },
+  {
+    "id": "desierto-paran",
+    "label": "Desierto de Parán",
+    "lon": 34.7767,
+    "lat": 30.3032
+  },
+  {
+    "id": "dotan",
+    "label": "Dotán",
+    "lon": 35.2399,
+    "lat": 32.4135
+  },
+  {
+    "id": "eglon",
+    "label": "Eglón",
+    "lon": 34.9281,
+    "lat": 31.4918
+  },
+  {
+    "id": "elim",
+    "label": "Elim",
+    "lon": 32.9158,
+    "lat": 29.2547
+  },
+  {
+    "id": "emaus",
+    "label": "Emaús",
+    "lon": 35.1642,
+    "lat": 31.7929
+  },
+  {
+    "id": "enon",
+    "label": "Enón",
+    "lon": 35.5282,
+    "lat": 32.3815
+  },
+  {
+    "id": "estaol",
+    "label": "Estaol",
+    "lon": 34.986,
+    "lat": 31.7977
+  },
+  {
+    "id": "etam-desierto",
+    "label": "Etam",
+    "lon": 35.1788,
+    "lat": 31.6848
+  },
+  {
+    "id": "etam-sanson",
+    "label": "Etam",
+    "lon": 35.0258,
+    "lat": 31.7637
+  },
+  {
+    "id": "eufrates",
+    "label": "Éufrates",
+    "lon": 47.442,
+    "lat": 31.0043
+  },
+  {
+    "id": "ezion-gueber",
+    "label": "Ezión-guéber",
+    "lon": 34.8601,
+    "lat": 29.4628
+  },
+  {
+    "id": "filipos",
+    "label": "Filipos",
+    "lon": 24.2846,
+    "lat": 41.0121
+  },
+  {
+    "id": "foro-apio",
+    "label": "Foro de Apio",
+    "lon": 12.9975,
+    "lat": 41.4664
+  },
+  {
+    "id": "gabaon",
+    "label": "Gabaón",
+    "lon": 35.1834,
+    "lat": 31.8475
+  },
+  {
+    "id": "gat",
+    "label": "Gat",
+    "lon": 34.8469,
+    "lat": 31.6997
+  },
+  {
+    "id": "gaza",
+    "label": "Gaza",
+    "lon": 34.4644,
+    "lat": 31.504
+  },
+  {
+    "id": "getsemani",
+    "label": "Getsemaní",
+    "lon": 35.2394,
+    "lat": 31.7794
+  },
+  {
+    "id": "golgotha",
+    "label": "Gólgota",
+    "lon": 35.2298,
+    "lat": 31.7784
+  },
+  {
+    "id": "gosen",
+    "label": "Gosén",
+    "lon": 34.9723,
+    "lat": 31.4076
+  },
+  {
+    "id": "gueba-micmas",
+    "label": "Gueba (Garganta de Micmás)",
+    "lon": 35.2611,
+    "lat": 31.8575
+  },
+  {
+    "id": "guerar",
+    "label": "Guerar",
+    "lon": 34.6065,
+    "lat": 31.3821
+  },
+  {
+    "id": "guezer",
+    "label": "Guézer",
+    "lon": 34.9192,
+    "lat": 31.8592
+  },
+  {
+    "id": "guihon",
+    "label": "Guihón (pozo)",
+    "lon": 35.2364,
+    "lat": 31.7729
+  },
+  {
+    "id": "guilgal",
+    "label": "Guilgal",
+    "lon": 35.46,
+    "lat": 31.8819
+  },
+  {
+    "id": "guilgal-betel",
+    "label": "Guilgal",
+    "lon": 35.225,
+    "lat": 32.0306
+  },
+  {
+    "id": "hai",
+    "label": "Hai",
+    "lon": 35.2611,
+    "lat": 31.9169
+  },
+  {
+    "id": "harod",
+    "label": "Manantial de Harod",
+    "lon": 35.3558,
+    "lat": 32.5486
+  },
+  {
+    "id": "hazerot",
+    "label": "Hazerot",
+    "lon": 34.4217,
+    "lat": 28.8969
+  },
+  {
+    "id": "hazor",
+    "label": "Hazor",
+    "lon": 35.5692,
+    "lat": 33.0183
+  },
+  {
+    "id": "iconio",
+    "label": "Iconio",
+    "lon": 32.4923,
+    "lat": 37.8722
+  },
+  {
+    "id": "jabes-galaad",
+    "label": "Jabés-galaad",
+    "lon": 35.6823,
+    "lat": 32.4024
+  },
+  {
+    "id": "lakis",
+    "label": "Lakís",
+    "lon": 34.8492,
+    "lat": 31.5653
+  },
+  {
+    "id": "lehi",
+    "label": "Lehí",
+    "lon": 35.001,
+    "lat": 31.7488
+  },
+  {
+    "id": "libna",
+    "label": "Libná",
+    "lon": 34.704,
+    "lat": 29.9932
+  },
+  {
+    "id": "macpela",
+    "label": "Macpelá",
+    "lon": 35.1108,
+    "lat": 31.5247
+  },
+  {
+    "id": "mahanaim",
+    "label": "Mahanaim",
+    "lon": 35.6867,
+    "lat": 32.1857
+  },
+  {
+    "id": "malta",
+    "label": "Malta",
+    "lon": 14.4117,
+    "lat": 35.9335
+  },
+  {
+    "id": "maqueda",
+    "label": "Maquedá",
+    "lon": 34.9666,
+    "lat": 31.5347
+  },
+  {
+    "id": "mara",
+    "label": "Mará",
+    "lon": 32.9428,
+    "lat": 29.346
+  },
+  {
+    "id": "meguido",
+    "label": "Meguidó",
+    "lon": 35.1844,
+    "lat": 32.5853
+  },
+  {
+    "id": "micmas",
+    "label": "Micmás",
+    "lon": 35.2769,
+    "lat": 31.8728
+  },
+  {
+    "id": "mileto",
+    "label": "Mileto",
+    "lon": 27.2756,
+    "lat": 37.5311
+  },
+  {
+    "id": "mira",
+    "label": "Mira",
+    "lon": 29.9853,
+    "lat": 36.2592
+  },
+  {
+    "id": "mitilene",
+    "label": "Mitilene",
+    "lon": 26.547,
+    "lat": 39.1105
+  },
+  {
+    "id": "mizpa",
+    "label": "Mizpá",
+    "lon": 35.7147,
+    "lat": 33.2528
+  },
+  {
+    "id": "monte-hor",
+    "label": "Monte Hor",
+    "lon": 35.0569,
+    "lat": 30.8321
+  },
+  {
+    "id": "monte-nebo",
+    "label": "Monte Nebo",
+    "lon": 35.75,
+    "lat": 31.7667
+  },
+  {
+    "id": "monte-olivos",
+    "label": "Monte de los Olivos",
+    "lon": 35.2457,
+    "lat": 31.7779
+  },
+  {
+    "id": "montes-ebal-guerizim",
+    "label": "Montes Ebal y Guerizim",
+    "lon": 35.2733,
+    "lat": 32.234
+  },
+  {
+    "id": "more",
+    "label": "Colina de Moré",
+    "lon": 35.3487,
+    "lat": 32.6176
+  },
+  {
+    "id": "nob",
+    "label": "Nob",
+    "lon": 35.2442,
+    "lat": 31.7925
+  },
+  {
+    "id": "pafos",
+    "label": "Pafos",
+    "lon": 32.4042,
+    "lat": 34.7557
+  },
+  {
+    "id": "peniel",
+    "label": "Peniel",
+    "lon": 35.6921,
+    "lat": 32.187
+  },
+  {
+    "id": "perga",
+    "label": "Perga",
+    "lon": 30.8537,
+    "lat": 36.9604
+  },
+  {
+    "id": "pi-hahirot",
+    "label": "Pi-hahirot",
+    "lon": 32.4695,
+    "lat": 30.2252
+  },
+  {
+    "id": "puteoli",
+    "label": "Puteoli",
+    "lon": 14.1206,
+    "lat": 40.8261
+  },
+  {
+    "id": "queila",
+    "label": "Queilá",
+    "lon": 35.0036,
+    "lat": 31.6137
+  },
+  {
+    "id": "refidim",
+    "label": "Refidim",
+    "lon": 33.8803,
+    "lat": 28.6231
+  },
+  {
+    "id": "regio",
+    "label": "Regio",
+    "lon": 15.6441,
+    "lat": 38.1088
+  },
+  {
+    "id": "salamina",
+    "label": "Salamina",
+    "lon": 33.9019,
+    "lat": 35.1849
+  },
+  {
+    "id": "sarepta",
+    "label": "Sarepta",
+    "lon": 35.2951,
+    "lat": 33.4642
+  },
+  {
+    "id": "seleucia",
+    "label": "Seleucia",
+    "lon": 35.922,
+    "lat": 36.124
+  },
+  {
+    "id": "sicar",
+    "label": "Sicar",
+    "lon": 35.289,
+    "lat": 32.2178
+  },
+  {
+    "id": "sidon",
+    "label": "Sidón",
+    "lon": 35.3719,
+    "lat": 33.561
+  },
+  {
+    "id": "siloam",
+    "label": "Siloam (estanque)",
+    "lon": 35.235,
+    "lat": 31.7706
+  },
+  {
+    "id": "siquem",
+    "label": "Siquem",
+    "lon": 35.2819,
+    "lat": 32.2136
+  },
+  {
+    "id": "siracusa",
+    "label": "Siracusa",
+    "lon": 15.2931,
+    "lat": 37.0639
+  },
+  {
+    "id": "sitim",
+    "label": "Sitim",
+    "lon": 35.6737,
+    "lat": 31.8402
+  },
+  {
+    "id": "soreq",
+    "label": "Valle de Soreq",
+    "lon": 35.05,
+    "lat": 31.7558
+  },
+  {
+    "id": "sucot-egipto",
+    "label": "Sucot",
+    "lon": 32.099,
+    "lat": 30.5527
+  },
+  {
+    "id": "sucot-jordan",
+    "label": "Sucot",
+    "lon": 35.6212,
+    "lat": 32.1966
+  },
+  {
+    "id": "sunem",
+    "label": "Sunem",
+    "lon": 35.3343,
+    "lat": 32.6056
+  },
+  {
+    "id": "tahpanes",
+    "label": "Tahpanés",
+    "lon": 32.1714,
+    "lat": 30.8606
+  },
+  {
+    "id": "tesalonica",
+    "label": "Tesalónica",
+    "lon": 22.9458,
+    "lat": 40.6378
+  },
+  {
+    "id": "timna",
+    "label": "Timná",
+    "lon": 35.1574,
+    "lat": 31.4382
+  },
+  {
+    "id": "timnat-serah",
+    "label": "Timnat-sérah",
+    "lon": 35.1073,
+    "lat": 32.0081
+  },
+  {
+    "id": "tiro",
+    "label": "Tiro",
+    "lon": 35.1961,
+    "lat": 33.2708
+  },
+  {
+    "id": "tolemaida",
+    "label": "Tolemaida",
+    "lon": 35.0692,
+    "lat": 32.9214
+  },
+  {
+    "id": "troas",
+    "label": "Troas",
+    "lon": 26.1586,
+    "lat": 39.7519
+  },
+  {
+    "id": "valle-de-ela",
+    "label": "Valle de Elá",
+    "lon": 34.998,
+    "lat": 31.6754
+  },
+  {
+    "id": "ziqlag",
+    "label": "Ziqlag",
+    "lon": 34.6816,
+    "lat": 31.3912
+  },
+  {
+    "id": "zoar",
+    "label": "Zóar",
+    "lon": 35.4877,
+    "lat": 31.0369
+  },
+  {
+    "id": "en-guedi",
+    "label": "En-guedí",
+    "lon": 35.3833,
+    "lat": 31.45
+  },
+  {
+    "id": "ramot-galaad",
+    "label": "Ramot-galaad",
+    "lon": 36.015,
+    "lat": 32.4999
+  },
+  {
+    "id": "hores",
+    "label": "Hores",
+    "lon": 35.1274,
+    "lat": 31.4503
+  },
+  {
+    "id": "zela",
+    "label": "Zelá",
+    "lon": 35.2096,
+    "lat": 31.8025
+  },
+  {
+    "id": "lida",
+    "label": "Lida",
+    "lon": 34.9,
+    "lat": 31.95
+  }
 ]

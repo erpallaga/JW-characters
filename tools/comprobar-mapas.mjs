@@ -19,13 +19,12 @@
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { encuadrar, proyectar, resolverLugares, LIENZO } from '../admin/mapa.js';
+import { encuadrar, proyectar, resolverLugares, LIENZO, SEGURO } from '../admin/mapa.js';
 
 const RAIZ = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // La misma franja que respeta admin/mapa.js: el reverso recorta la imagen con
 // background-size:cover en un hueco casi cuadrado.
-const SEGURO = { x0: 205, x1: 704, y0: 55, y1: 485 };
 const HOLGURA = 25;   // por debajo de esto avisa, aunque todavía esté dentro
 
 const leer = async ruta => JSON.parse(await readFile(join(RAIZ, ruta), 'utf8'));
@@ -67,7 +66,21 @@ async function main() {
       fallos.push(`${c.id}: ${err.message}`);
       continue;
     }
-    for (const l of c.map.lugares || []) usados.add(typeof l === 'string' ? l : l.id);
+    const ids = new Set();
+    for (const l of c.map.lugares || []) {
+      const id = typeof l === 'string' ? l : l.id;
+      usados.add(id);
+      ids.add(id);
+    }
+
+    // Rotular un lugar que no está en el mapa no da error en el dibujo: la
+    // etiqueta sencillamente no aparece, y quien la escribió cree que sí.
+    for (const e of c.map.etiquetas || []) {
+      if (!ids.has(e)) fallos.push(`${c.id}: pide etiqueta para «${e}», que no está entre sus lugares`);
+    }
+    if (c.map.etiquetas && !c.map.etiquetas.length) {
+      avisos.push(`${c.id}: etiquetas vacío deja el mapa entero sin un solo nombre.`);
+    }
 
     if (!c.mapSrc) {
       fallos.push(`${c.id}: la ficha no apunta a ningún mapa`);
