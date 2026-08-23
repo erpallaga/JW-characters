@@ -641,7 +641,52 @@
     "map": {
       "lugares": [
         "tarso",
-        "atenas"
+        "jerusalen",
+        "damasco",
+        {
+          "id": "antioquia-siria",
+          "label": "Antioquía"
+        },
+        "seleucia",
+        "salamina",
+        "pafos",
+        "perga",
+        "antioquia-pisidia",
+        "iconio",
+        "listra",
+        "derbe",
+        "atalia",
+        "troas",
+        "filipos",
+        "tesalonica",
+        "berea",
+        "atenas",
+        "corinto",
+        "cencreas",
+        "efeso",
+        "ason",
+        "mitilene",
+        "mileto",
+        "tiro",
+        "tolemaida",
+        "cesarea",
+        "sidon",
+        "mira",
+        "buenos-puertos",
+        "malta",
+        "siracusa",
+        "regio",
+        "puteoli",
+        "foro-apio",
+        "roma"
+      ],
+      "etiquetas": [
+        "tarso",
+        "damasco",
+        "antioquia-siria",
+        "efeso",
+        "atenas",
+        "roma"
       ],
       "ruta": true
     },

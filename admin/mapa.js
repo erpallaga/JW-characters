@@ -283,19 +283,30 @@ function colocarEtiquetas(ctx, marco, lugares) {
     const p = proyectar(marco, lugar.lon, lugar.lat);
     const w = ctx.measureText(lugar.label).width;
     const s = ETIQUETA.separacion;
-    const candidatos = [
-      [p.x + s, p.y + ETIQUETA.linea],
-      [p.x - s - w, p.y + ETIQUETA.linea],
-      [p.x + s, p.y - 9],
-      [p.x + s, p.y + 22],
-      [p.x - s - w, p.y - 9],
-      [p.x - s - w, p.y + 22],
-      [p.x - w / 2, p.y - 12],
-      [p.x - w / 2, p.y + 25],
-    ];
-    const elegido = candidatos.find(([x, base]) =>
-      !ocupado.some(o => chocan(o, caja(x - 2, base - 17, w + 4, 22)))) || candidatos[0];
-    ocupado.push(caja(elegido[0] - 2, elegido[1] - 17, w + 4, 22));
+    const candidatos = [];
+    // Primero pegada al punto, y si ahí no cabe se va apartando. En un mapa con
+    // muchas paradas las cuatro posiciones de siempre se agotan enseguida.
+    for (const salto of [0, 14, 28, 44]) {
+      candidatos.push(
+        [p.x + s + salto, p.y + ETIQUETA.linea],
+        [p.x - s - w - salto, p.y + ETIQUETA.linea],
+        [p.x + s + salto * 0.6, p.y - 9 - salto],
+        [p.x + s + salto * 0.6, p.y + 22 + salto],
+        [p.x - s - w - salto * 0.6, p.y - 9 - salto],
+        [p.x - s - w - salto * 0.6, p.y + 22 + salto],
+        [p.x - w / 2, p.y - 12 - salto],
+        [p.x - w / 2, p.y + 25 + salto],
+      );
+    }
+
+    const marca = ([x, base]) => caja(x - 2, base - 17, w + 4, 22);
+    const solape = c => ocupado.reduce((s2, o) => s2 + area(o, marca(c)), 0);
+    // Si ninguna posición queda limpia, gana la que menos tape: forzar siempre
+    // la primera es lo que dejaba dos nombres impresos uno encima del otro.
+    let elegido = candidatos.find(c => solape(c) === 0);
+    if (!elegido) elegido = candidatos.reduce((a, b) => (solape(b) < solape(a) ? b : a));
+
+    ocupado.push(marca(elegido));
     puestas.push({ texto: lugar.label, x: elegido[0], base: elegido[1] });
   }
 
@@ -305,6 +316,8 @@ function colocarEtiquetas(ctx, marco, lugares) {
 
 const caja = (x, y, w, h) => ({ x0: x, y0: y, x1: x + w, y1: y + h });
 const chocan = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+const area = (a, b) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0))
+                     * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 
 /**
  * Resuelve la especificación de una tarjeta contra el nomenclátor.
