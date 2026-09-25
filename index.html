@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personajes de la Biblia</title>
+<meta name="description" content="Tarjetas de personajes bíblicos para la noche de adoración en familia: retrato, mapa, pasajes y su lugar en la línea del tiempo.">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -296,11 +298,36 @@ class Component extends DCLogic {
   componentDidMount() {
     this.loadData();
     this._onKeyDown = (e) => {
-      if (this.state.viewMode !== 'single') return;
+      if (this.state.viewMode !== 'single' || e.altKey || e.ctrlKey || e.metaKey) return;
       if (e.key === 'ArrowRight') this.stepCard(1);
       if (e.key === 'ArrowLeft') this.stepCard(-1);
+      // Espacio o Intro dan la vuelta a la tarjeta, salvo que haya un botón o
+      // un enlace con el foco: entonces esa tecla es suya.
+      const enControl = e.target && e.target.closest && e.target.closest('button, a, input, select, textarea');
+      if ((e.key === ' ' || e.key === 'Enter') && !enControl && this._singleId) {
+        e.preventDefault();
+        this.toggleFlip(this._singleId);
+      }
     };
     document.addEventListener('keydown', this._onKeyDown);
+
+    // En el móvil y la tableta se pasa de tarjeta deslizando el dedo, como en
+    // una baraja. Un toque sin desplazamiento sigue siendo darle la vuelta.
+    this._onTouchStart = (e) => {
+      const t = e.touches[0];
+      this._toque = e.touches.length === 1 && e.target.closest && e.target.closest('.jw-single-wrap')
+        ? { x: t.clientX, y: t.clientY } : null;
+    };
+    this._onTouchEnd = (e) => {
+      const inicio = this._toque;
+      this._toque = null;
+      if (!inicio || this.state.viewMode !== 'single') return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - inicio.x, dy = t.clientY - inicio.y;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) this.stepCard(dx < 0 ? 1 : -1);
+    };
+    document.addEventListener('touchstart', this._onTouchStart, { passive: true });
+    document.addEventListener('touchend', this._onTouchEnd, { passive: true });
   }
   loadData() {
     // no-cache revalida con el ETag: siempre trae la última publicación sin
@@ -324,6 +351,8 @@ class Component extends DCLogic {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this._onKeyDown);
+    document.removeEventListener('touchstart', this._onTouchStart);
+    document.removeEventListener('touchend', this._onTouchEnd);
   }
 
   setViewMode(mode) { this.setState({ viewMode: mode }); }
@@ -337,7 +366,10 @@ class Component extends DCLogic {
   toggleFlip(id) { this.setState(s => ({ flipped: { ...s.flipped, [id]: !s.flipped[id] } })); }
   toggleQuiz() { this.setState(s => ({ quizMode: !s.quizMode })); }
   toggleReveal(id, e) { e.stopPropagation(); this.setState(s => ({ revealed: { ...s.revealed, [id]: !s.revealed[id] } })); }
-  selectEra(id) { this.setState(s => ({ eraFilter: s.eraFilter === id ? null : id })); }
+  // Al cambiar el filtro o barajar se empieza por la primera tarjeta. Si no,
+  // el índice viejo (la 31 de 47, por ejemplo) se quedaba clavado en la última
+  // de un filtro de 4, y la flecha parecía no hacer nada.
+  selectEra(id) { this.setState(s => ({ eraFilter: s.eraFilter === id ? null : id, currentIndex: 0 })); }
 
   shuffle() {
     const order = (this.state.orderIds ? [...this.state.orderIds] : this.state.characters.map(c => c.id));
@@ -345,7 +377,7 @@ class Component extends DCLogic {
       const j = Math.floor(Math.random() * (i + 1));
       [order[i], order[j]] = [order[j], order[i]];
     }
-    this.setState({ orderIds: order });
+    this.setState({ orderIds: order, currentIndex: 0 });
   }
 
   renderVals() {
@@ -394,13 +426,14 @@ class Component extends DCLogic {
     this._lastTotal = filtered.length || 1;
     const safeIndex = filtered.length ? Math.min(this.state.currentIndex, filtered.length - 1) : 0;
     const single = filtered[safeIndex];
+    this._singleId = single ? single.id : null;
 
     const characters = filtered.map(c => {
       const era = erasById[c.eraId] || { label: '—', range: '' };
       const flipped = !!this.state.flipped[c.id];
       return {
         id: c.id, name: c.name, eraLabel: era.label, eraRange: c.timeframe, place: c.place, knownFor: c.knownFor,
-        passages: c.passages.map(p => ({ ...p, href: jwHref(booksById, p.book, p.chapter), styleSmall: linkStyleSmall })),
+        passages: (c.passages || []).map(p => ({ ...p, href: jwHref(booksById, p.book, p.chapter), styleSmall: linkStyleSmall })),
         accentColor: primary, frontName: this.state.quizMode ? '¿Quién es?' : c.name,
         onClick: () => this.toggleFlip(c.id),
         frontFaceStyle: { ...FRONT_FACE_BASE, ...faceVisState(flipped, true) },
@@ -423,7 +456,7 @@ class Component extends DCLogic {
       return {
         id: single.id, name: single.name, eraLabel: era.label, eraRange: single.timeframe,
         place: single.place, knownFor: single.knownFor,
-        passages: single.passages.map(p => ({ ...p, href: jwHref(booksById, p.book, p.chapter), style: linkStyle })),
+        passages: (single.passages || []).map(p => ({ ...p, href: jwHref(booksById, p.book, p.chapter), style: linkStyle })),
         accentColor: primary, frontName: (this.state.quizMode && !this.state.revealed[single.id]) ? '¿Quién es?' : single.name,
         quizMode: this.state.quizMode && !this.state.revealed[single.id],
         quizModeOff: !this.state.quizMode || !!this.state.revealed[single.id],
@@ -477,8 +510,8 @@ class Component extends DCLogic {
         },
         timelineTrackStyle: { position: 'relative', height: '6px', borderRadius: '999px', background: 'oklch(0.85 0.02 70)' },
         timelineFillStyle: single.life ? (() => {
-          const izq = Math.max(0, (single.life.start - TIMELINE_MIN) / TIMELINE_SPAN * 100);
-          const ancho = Math.max(1.2, (single.life.end - single.life.start) / TIMELINE_SPAN * 100);
+          const izq = Math.max(0, Math.min(100, (single.life.start - TIMELINE_MIN) / TIMELINE_SPAN * 100));
+          const ancho = Math.max(1.2, Math.min(100 - izq, (single.life.end - Math.max(single.life.start, TIMELINE_MIN)) / TIMELINE_SPAN * 100));
           const base = { position: 'absolute', top: 0, bottom: 0, borderRadius: '999px' };
           // Una barra maciza afirma unas fechas documentadas. De bastantes
           // personajes las publicaciones no dan año, y esa barra no debería
