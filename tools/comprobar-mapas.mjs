@@ -98,17 +98,20 @@ async function main() {
     }
 
     const encuadre = encuadrar(resueltos, { zoom: c.map.zoom, centro: c.map.centro });
-    for (const l of resueltos) {
+    resueltos.forEach((l, i) => {
+      // Un lugar sin rótulo se nombra por su id, que es lo que hay que buscar en la ficha.
+      const entrada = c.map.lugares[i];
+      const quien = l.label || `${typeof entrada === 'string' ? entrada : entrada.id || '?'}, sin rótulo`;
       const p = proyectar(encuadre, l.lon, l.lat);
       const margen = Math.min(p.x - SEGURO.x0, SEGURO.x1 - p.x, p.y - SEGURO.y0, SEGURO.y1 - p.y);
-      if (margen < peor.margen) peor = { margen, quien: `${c.id} · ${l.label}` };
+      if (margen < peor.margen) peor = { margen, quien: `${c.id} · ${quien}` };
       if (margen < 0) {
-        fallos.push(`${c.id}: «${l.label}» cae fuera de lo que enseña la tarjeta (${Math.round(-margen)} px)`);
+        fallos.push(`${c.id}: «${quien}» cae fuera de lo que enseña la tarjeta (${Math.round(-margen)} px)`);
       } else if (margen < HOLGURA) {
-        avisos.push(`${c.id}: «${l.label}» queda a ${Math.round(margen)} px del borde visible. `
+        avisos.push(`${c.id}: «${quien}» queda a ${Math.round(margen)} px del borde visible. `
           + 'Con la etiqueta puede rozar; mira el PNG.');
       }
-    }
+    });
   }
 
   const sinUsar = lugares.filter(l => !usados.has(l.id)).map(l => l.id);

@@ -120,12 +120,12 @@ cargan con `fetch`, así que abrir el archivo directamente con `file://` no func
 npx http-server . -p 8080
 ```
 
-Los enlaces a la Biblia se construyen con `data/books.json`, y de sus 66 libros solo
-20 se han comprobado nunca contra jw.org. Para comprobarlos todos hace falta una
-conexión que llegue a jw.org:
+Los enlaces a la Biblia se construyen con `data/books.json`. Los 66 libros se
+comprobaron contra jw.org el 25-09-2026, primer y último capítulo de cada uno, y
+responden todos. Para repetirlo hace falta una conexión que llegue a jw.org:
 
 ```
-node tools/comprobar-libros.mjs --red
+node tools/comprobar-libros.mjs --red --capitulos
 ```
 
 Sin `--red` revisa la tabla sin salir a la red: que estén los 66 libros, que los

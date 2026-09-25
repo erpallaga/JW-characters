@@ -1,9 +1,12 @@
 # Task Completion
 
-No automated linter/formatter/test runner configured. To consider a change done:
+No CI and no test runner. Before calling a change done:
 
-- Open/reload `index.html` in a browser and visually verify (grid view, single-card flip view, era filter,
-  quiz mode toggle, shuffle) — this is a hand-authored template, no compile step to catch errors.
-- If a new character was added: confirm its `eraId` matches an existing `ERAS` entry, any new `jw()` book key
-  was added to `SLUG` (index.html:232), and `assets/mapa-<id>.png` exists if `mapSrc` is set.
-- Do not hand-edit `support.js` or `image-slot.js` — both are generated/vendored (see `mem:tech_stack`).
+- Data change: run `node tools/comprobar-mapas.mjs` and `node tools/comprobar-libros.mjs`; both must end
+  without "cosas mal". New book ids go in `data/books.json`, new places in `data/lugares.json`.
+- Map spec change: regenerate that map with `tools/generar-mapas.mjs <id>` and commit the PNG.
+- `admin/mapa.js` change: regenerate all maps; `git status assets/` must stay clean unless intended.
+- `admin/model.js` change: it is pure, exercise `rebasar`/`ficherosDelCommit` from node.
+- UI change: serve the folder and check the deck (single, grid, era filter, quiz, shuffle, mobile width)
+  or the panel. The panel can be driven against a mocked `api.github.com` so nothing is published.
+- Do not hand-edit `support.js` (generated).

@@ -2,9 +2,10 @@
 // Comprueba data/books.json: la tabla con la que se construyen todos los
 // enlaces a la Biblia de jw.org.
 //
-// Los 20 libros que ya se usaban antes del panel se comprobaron a mano. Los
-// otros 46 se escribieron siguiendo la misma convención y nunca se abrieron.
-// Este script recorre los 66 enlaces y dice cuáles responden.
+// Los 20 libros que ya se usaban antes del panel se comprobaron a mano; los
+// otros 46 se escribieron siguiendo la misma convención. La primera pasada
+// completa con --red --capitulos (25-09-2026) abrió los 66, primer y último
+// capítulo, y respondieron todos. Este script repite esa comprobación.
 //
 //   node tools/comprobar-libros.mjs              solo lo que se puede mirar sin red
 //   node tools/comprobar-libros.mjs --red        además abre los 66 enlaces
@@ -230,8 +231,8 @@ async function main() {
       avisos.push(`Esta red no llega a jw.org (${salida.motivo}), así que no se ha abierto ningún enlace. `
         + 'Vuelve a lanzarlo desde una conexión normal.');
     } else {
-      const sinComprobar = libros.filter(b => !COMPROBADOS_A_MANO.has(b.id)).length;
-      console.log(`Abriendo los ${libros.length} enlaces en jw.org (${sinComprobar} nunca se han comprobado)…`);
+      const nuevos = libros.filter(b => !COMPROBADOS_A_MANO.has(b.id)).length;
+      console.log(`Abriendo los ${libros.length} enlaces en jw.org (${nuevos} no se habían probado a mano)…`);
       const red = await revisarEnlaces(libros, { capitulos: conCapitulos });
       fallos.push(...red.fallos);
       avisos.push(...red.avisos);

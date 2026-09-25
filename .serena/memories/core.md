@@ -1,10 +1,10 @@
 # Core
 
-Single-page Spanish-language Bible-character flashcard app ("Personajes de la Biblia" / JW-characters). Built with
-a custom `<x-dc>` template DSL rendered by a generated runtime — see `mem:tech_stack` for the file map and what's
-generated vs. hand-authored, and `mem:conventions` for the data-array schema, styling, and templating tag rules
-used inside `index.html`. See `mem:suggested_commands` and `mem:task_completion` for how to preview/verify changes
-(no build/test tooling exists).
+Spanish-language Bible-character flashcard deck ("Personajes de la Biblia") for family worship, served as a
+static site on GitHub Pages, plus an admin panel that edits `data/*.json` and publishes one commit per
+publish through the GitHub API. See `mem:tech_stack` for the file map (deck vs panel vs tools, what is
+generated) and `mem:conventions` for the character/map data schema and styling/templating rules. See
+`mem:suggested_commands` for serving and the check/generate scripts, and `mem:task_completion` for what to
+run before a change is done.
 
-Original design spec/plan: `docs/superpowers/specs/2026-08-08-bible-character-flashcards-design.md` and
-`docs/superpowers/plans/2026-08-08-bible-character-flashcards.md`.
+Human-facing docs: `README.md`, `docs/panel.md`. Original spec/plan under `docs/superpowers/`.

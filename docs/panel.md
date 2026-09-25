@@ -43,7 +43,15 @@ El estado de cada tarjeta sale de comparar el borrador con lo que hay publicado:
 
 Ocultar no borra: la tarjeta se queda en `data/characters.json` con `hidden: true`
 y desaparece del mazo. Borrar sí la quita, y al publicar se lleva por delante su
-retrato y su mapa si no los usa nadie más.
+retrato y su mapa si no los usa nadie más. Lo mismo vale para una imagen que se
+quita o que se sustituye por otra con distinta extensión: al publicar, la vieja sale
+del repositorio. Y solo se sube una imagen si alguna tarjeta la usa.
+
+Si entre tanto se publica algo por otro camino —desde otro navegador, o con un
+commit a mano en el repositorio—, al abrir el panel se trae al borrador: gana lo que
+haya cambiado de un solo lado, tarjeta a tarjeta y campo a campo. Si un mismo campo
+cambió en los dos lados se queda el del borrador, y un aviso dice en qué tarjetas
+para revisarlas antes de publicar.
 
 ## Las imágenes
 
@@ -94,7 +102,11 @@ los dibuja en el propio panel.
    la lista, «Otro lugar (a mano)» acepta un nombre con su latitud y su longitud.
 2. **Unirlos con la línea del viaje** traza la línea roja de puntos que pasa por
    todos ellos, en el orden en que estén.
-3. El encuadre se calcula solo para que los lugares y sus nombres queden dentro de
+3. La casilla **nombre** de cada lugar decide si sale escrito o como punto menor. En
+   un recorrido largo conviene dejar con nombre solo los cuatro a seis que anclan el
+   mapa: cuantos más nombres, menos se puede acercar el encuadre. Un lugar recién
+   añadido sale con nombre, y uno puesto a mano lo lleva siempre.
+4. El encuadre se calcula solo para que los lugares y sus nombres queden dentro de
    lo que la tarjeta enseña —las bandas oscuras de la vista previa marcan lo que se
    recorta—. Quitando **Encuadre automático** se ajusta a mano, que es lo que
    conviene en un desierto, donde de cerca no se reconoce nada.
@@ -168,8 +180,9 @@ libro.
 ## Si algo va mal
 
 - **«El token no vale o ha caducado»** — vuelve a conectarlo; el panel lo pedirá solo.
-- **«El repositorio ha cambiado desde que abriste el panel»** — alguien (o tú desde
-  otro sitio) ha publicado por medio. Recarga y repite; el panel se niega a publicar
-  encima para no pisar ese commit.
+- **«Las tarjetas publicadas han cambiado desde que abriste el panel»** — alguien (o
+  tú desde otro sitio) ha publicado tarjetas por medio. Recarga: el borrador se
+  conserva y se fusiona con lo nuevo, y luego se vuelve a publicar. Un commit que
+  solo toque código o documentación no bloquea la publicación.
 - **El borrador vive en este navegador.** Si borras los datos del sitio, se pierde lo
   que no hayas publicado. Lo publicado está a salvo en el historial de Git.

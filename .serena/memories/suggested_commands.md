@@ -1,10 +1,10 @@
 # Suggested Commands
 
-No package manager, no build/test/lint tooling in this repo (static site, single index.html).
+No package manager or build. Data is fetched, so serve over HTTP (file:// does not work):
 
-- Preview locally: open `index.html` directly in a browser, or serve the folder (e.g. `npx serve .` /
-  `python -m http.server`) since it fetches fonts from Google CDN and reads `.image-slots.state.json` via
-  relative fetch.
-- Windows shell is PowerShell — standard `git`, `Get-ChildItem` (`ls`), `Select-String` (`grep` equivalent)
-  differ from Unix; Bash tool (Git Bash) is also available in this environment and behaves POSIX-like.
-- No test suite, no CI config found in repo root.
+- `npx http-server . -p 8080` — then open `/index.html` (deck) or `/admin.html` (panel).
+- `node tools/comprobar-mapas.mjs` — every card has a map spec, places exist, PNG frame, markers visible.
+- `node tools/comprobar-libros.mjs` — books table and passage chapters; `--red --capitulos` opens jw.org.
+- `node tools/generar-mapas.mjs [--todas | id ...]` — redraw map PNGs in headless Chromium
+  (`CHROMIUM` env var overrides the binary path). Output must be byte-identical unless a spec changed.
+- Owner's machine is Windows (PowerShell); Git Bash is POSIX-like.
