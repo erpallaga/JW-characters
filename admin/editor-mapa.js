@@ -4,7 +4,7 @@
 // que un mapa retocado aquí sale igual que si se hubiera generado por consola.
 
 import { h, vaciar, icono } from './ui.js';
-import { dibujar, encuadrar, resolverLugares, LIENZO } from './mapa.js';
+import { dibujar, resolverLugares, LIENZO } from './mapa.js';
 import { aPngIndexado } from './png.js';
 
 let datos = null;
@@ -39,7 +39,6 @@ export async function abrirEditorDeMapa(personaje) {
     style: 'display:block;width:100%;height:auto',
   });
   const ctx = lienzo.getContext('2d');
-  const medir = t => { ctx.font = 'bold 21px "Bitstream Charter", Charter, Georgia, serif'; return ctx.measureText(t).width; };
 
   const listaLugares = h('div', { style: 'display:flex;flex-direction:column;gap:6px' });
   const aviso = h('div', { style: 'font-size:11.5px;color:var(--tinta-2)' });
@@ -52,12 +51,39 @@ export async function abrirEditorDeMapa(personaje) {
       aviso.textContent = err.message;
       return;
     }
-    const marco = encuadrar(resueltos, { zoom: spec.zoom, centro: spec.centro, medir });
-    dibujar(ctx, geo, { lugares: resueltos, ruta: !!spec.ruta, curva: spec.curva }, marco);
+    // Sin encuadre calculado aparte: dibujar() mide las etiquetas con la misma
+    // letra con que las pinta, igual que el generador por lotes.
+    const marco = dibujar(ctx, geo,
+      { lugares: resueltos, ruta: !!spec.ruta, curva: spec.curva, zoom: spec.zoom, centro: spec.centro });
     aviso.textContent = resueltos.length
       ? `${resueltos.length} lugar${resueltos.length > 1 ? 'es' : ''} · ${Math.round(LIENZO.ancho / (marco.k * Math.PI / 180))}° de ancho`
       : 'Sin lugares: saldrá solo el mapa de fondo, sin marcadores.';
     pintarLista();
+  };
+
+  // Con `etiquetas`, solo los lugares que nombra salen rotulados; los demás
+  // quedan como punto menor. Sin ella se rotulan todos. Un lugar puesto a mano
+  // no tiene id y va siempre rotulado.
+  const idDe = entrada => (typeof entrada === 'string' ? entrada : entrada.id);
+  const rotulado = entrada => {
+    const id = idDe(entrada);
+    return !id || !spec.etiquetas || spec.etiquetas.includes(id);
+  };
+  const alternarRotulo = entrada => {
+    const id = idDe(entrada);
+    if (!id) return;
+    if (!spec.etiquetas) spec.etiquetas = [...new Set(spec.lugares.map(idDe).filter(Boolean))];
+    spec.etiquetas = spec.etiquetas.includes(id)
+      ? spec.etiquetas.filter(x => x !== id)
+      : [...spec.etiquetas, id];
+    repintar();
+  };
+  // Quitar un lugar no puede dejar su id en `etiquetas`: tools/comprobar-mapas
+  // lo da por error, porque pide un rótulo para algo que no está en el mapa.
+  const limpiarEtiquetas = () => {
+    if (!spec.etiquetas) return;
+    const presentes = new Set(spec.lugares.map(idDe).filter(Boolean));
+    spec.etiquetas = spec.etiquetas.filter(id => presentes.has(id));
   };
 
   const pintarLista = () => {
@@ -75,6 +101,16 @@ export async function abrirEditorDeMapa(personaje) {
         style: 'display:flex;align-items:center;gap:8px;border:1px solid var(--borde);border-radius:10px;padding:6px 8px',
       },
         h('span', { style: 'flex:1;font-size:12.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap' }, nombre),
+        h('label', {
+          style: 'display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--tinta-2);flex-shrink:0',
+          title: idDe(entrada) ? 'Escribir el nombre en el mapa, o dejarlo como punto menor'
+                               : 'Un lugar puesto a mano lleva siempre su nombre',
+        },
+          h('input', {
+            type: 'checkbox', checked: rotulado(entrada), disabled: !idDe(entrada),
+            onchange: () => alternarRotulo(entrada),
+          }),
+          'nombre'),
         h('button', {
           class: 'icono-btn', title: 'Subir', disabled: i === 0,
           onclick: () => { mover(i, -1); },
@@ -85,7 +121,7 @@ export async function abrirEditorDeMapa(personaje) {
         }, '↓'),
         h('button', {
           class: 'icono-btn', title: 'Quitar',
-          onclick: () => { spec.lugares.splice(i, 1); repintar(); },
+          onclick: () => { spec.lugares.splice(i, 1); limpiarEtiquetas(); repintar(); },
         }, icono('equis', 13))));
     });
   };
@@ -107,6 +143,8 @@ export async function abrirEditorDeMapa(personaje) {
     if (!v) return;
     if (v === '__otro') { manual.hidden = false; return; }
     spec.lugares.push(v);
+    // Un lugar recién añadido sale con su nombre; se puede dejar en punto después.
+    if (spec.etiquetas && !spec.etiquetas.includes(v)) spec.etiquetas.push(v);
     repintar();
   });
 
@@ -146,7 +184,18 @@ export async function abrirEditorDeMapa(personaje) {
   zoom.addEventListener('input', () => { spec.zoom = Number(zoom.value); repintar(); });
 
   return new Promise(resolver => {
-    const cerrar = respuesta => { velo.remove(); delete document.body.dataset.modal; resolver(respuesta); };
+    let terminado = false;
+    const cerrar = respuesta => {
+      if (terminado) return;
+      terminado = true;
+      document.removeEventListener('keydown', alPulsar);
+      velo.remove();
+      delete document.body.dataset.modal;
+      resolver(respuesta);
+    };
+    // Escape cierra como Cancelar. Sin esto, el Escape general del panel
+    // quitaba el cuadro de la pantalla pero dejaba esta promesa sin resolver.
+    const alPulsar = e => { if (e.key === 'Escape') cerrar(null); };
 
     const aceptar = async () => {
       try {
@@ -198,6 +247,7 @@ export async function abrirEditorDeMapa(personaje) {
 
     document.body.appendChild(velo);
     document.body.dataset.modal = '1';
+    document.addEventListener('keydown', alPulsar);
     repintar();
   });
 }

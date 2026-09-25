@@ -168,7 +168,12 @@ export function dibujar(ctx, geo, spec, encuadre) {
   return marco;
 }
 
-function medirCon(ctx, texto) {
+/**
+ * Ancho de una etiqueta con la misma letra con la que se pinta. El encuadre
+ * depende de él, así que el editor y el generador por lotes tienen que medir
+ * con esto y no con una fuente parecida.
+ */
+export function medirCon(ctx, texto) {
   const previa = ctx.font;
   ctx.font = ETIQUETA.fuente(700);
   const w = ctx.measureText(texto || '').width;
@@ -351,7 +356,6 @@ function colocarEtiquetas(ctx, marco, lugares) {
 }
 
 const caja = (x, y, w, h) => ({ x0: x, y0: y, x1: x + w, y1: y + h });
-const chocan = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
 const area = (a, b) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0))
                      * Math.max(0, Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0));
 
@@ -364,11 +368,15 @@ const area = (a, b) => Math.max(0, Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0))
  * se puede acercar el encuadre (véase `encuadrar`), así que rotular solo los
  * hitos es lo que permite que un recorrido largo quepa entero. Sin `etiquetas`,
  * se rotulan todos, que es como se dibujaron las primeras tarjetas.
+ *
+ * Un lugar puesto a mano —{lon, lat, label} sin id— no se puede nombrar en
+ * `etiquetas`, así que lleva siempre su rótulo: si no, no habría forma de que
+ * saliera escrito.
  */
 export function resolverLugares(spec, nomenclator) {
   const porId = Object.fromEntries(nomenclator.map(l => [l.id, l]));
   const rotula = spec?.etiquetas ? new Set(spec.etiquetas) : null;
-  const conNombre = (id, label) => (!rotula || (id && rotula.has(id)) ? label : '');
+  const conNombre = (id, label) => (!rotula || !id || rotula.has(id) ? label : '');
 
   return (spec?.lugares || []).map(entrada => {
     if (typeof entrada === 'string') {
