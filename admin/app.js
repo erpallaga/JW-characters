@@ -182,7 +182,7 @@ function ir(pantalla, id = null) {
 // ---------------------------------------------------------------- cabecera
 
 function cabecera({ titulo, volver } = {}) {
-  const r = estado.publicado ? modelo.resumen(estado.borrador, estado.publicado) : null;
+  const r = estado.publicado ? modelo.resumen(estado.borrador, estado.publicado, Object.keys(estado.imagenes)) : null;
   const pendientes = r ? modelo.contarPendientes(r) : 0;
 
   return h('div', { class: 'topbar' },
@@ -397,12 +397,13 @@ function pantallaLista() {
   const eras = estado.borrador.eras || [];
   const erasPorId = Object.fromEntries(eras.map(e => [e.id, e]));
   const publicadasPorId = Object.fromEntries((estado.publicado.characters || []).map(c => [c.id, c]));
+  const sinSubir = Object.keys(estado.imagenes);
   const todas = estado.borrador.characters || [];
 
   const f = estado.filtros;
   const visibles = todas.filter(c => {
     if (f.era && c.eraId !== f.era) return false;
-    if (f.estado && modelo.estadoDe(c, publicadasPorId) !== f.estado) return false;
+    if (f.estado && modelo.estadoDe(c, publicadasPorId, sinSubir) !== f.estado) return false;
     if (f.texto) {
       const aguja = f.texto.toLowerCase();
       if (!`${c.name} ${c.place || ''}`.toLowerCase().includes(aguja)) return false;
@@ -411,7 +412,7 @@ function pantallaLista() {
   });
 
   const ocultas = todas.filter(c => c.hidden).length;
-  const pendientes = modelo.contarPendientes(modelo.resumen(estado.borrador, estado.publicado));
+  const pendientes = modelo.contarPendientes(modelo.resumen(estado.borrador, estado.publicado, sinSubir));
 
   // Cada letra vuelve a montar la pantalla: sin devolver el foco al buscador
   // nuevo, solo se podría escribir la primera.
@@ -433,7 +434,7 @@ function pantallaLista() {
   const contenedor = h('div', { class: 'lista' });
 
   const filas = visibles.map(c => {
-    const tipo = modelo.estadoDe(c, publicadasPorId);
+    const tipo = modelo.estadoDe(c, publicadasPorId, sinSubir);
     const era = erasPorId[c.eraId];
     const url = urlImagen(c.portraitSrc);
     const agarre = h('button', {
@@ -1103,7 +1104,7 @@ function pantallaEras() {
 // ---------------------------------------------------------------- publicar
 
 function abrirPublicar() {
-  const r = modelo.resumen(estado.borrador, estado.publicado);
+  const r = modelo.resumen(estado.borrador, estado.publicado, Object.keys(estado.imagenes));
   if (!modelo.hayCambios(r)) return;
 
   const sinNombre = (estado.borrador.characters || []).filter(c => !c.name || !c.name.trim());
