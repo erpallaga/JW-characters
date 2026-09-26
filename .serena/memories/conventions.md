@@ -14,4 +14,6 @@
     id are always labelled. Every place needs an explicit verse placing the person there.
   - `eraId` must exist in `data/eras.json`. `hidden: true` keeps the card out of the deck.
 - `id` follows the name until first publish, then is frozen (asset filenames depend on it).
-- Maps are drawn, not sourced: edit `map` and regenerate; never hand-edit PNGs.
+- Maps are drawn, not sourced: edit `map` and regenerate; never hand-edit PNGs. Drawn = `mapSrc` is PNG.
+  A JPG `mapSrc` is a hand-uploaded map: its `map` spec is kept (reviewed data) but does not describe
+  the image; checker only warns + checks ratio, batch generator skips it.

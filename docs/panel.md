@@ -115,6 +115,12 @@ Al aceptar, el mapa entra en el borrador como una imagen más y se publica con e
 resto. Los lugares elegidos se guardan en la tarjeta (campo `map`), así que el mapa
 se puede volver a abrir y retocar más adelante sin empezar de cero.
 
+También se puede **subir un mapa a mano** (un JPG, recortado a la proporción del
+marco). La lista de lugares no se borra: sigue siendo la revisada contra los
+versículos, y **Editar el mapa** vuelve a dibujarlo y sustituye la imagen subida,
+que sale del repositorio al publicar. `tools/comprobar-mapas.mjs` lo da por bueno con
+un aviso, y el generador por lotes no lo toca.
+
 Las 47 tarjetas lo llevan, incluidas las 18 primeras, cuyos mapas se dibujaron a mano
 antes de que existiera todo esto: se midió dónde caía cada marcador en aquellos PNG
 para recuperar los lugares. Ninguna ficha se queda fuera.

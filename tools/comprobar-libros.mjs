@@ -10,6 +10,8 @@
 //   node tools/comprobar-libros.mjs              solo lo que se puede mirar sin red
 //   node tools/comprobar-libros.mjs --red        además abre los 66 enlaces
 //   node tools/comprobar-libros.mjs --red --capitulos   y también el último capítulo
+//   ... --red --exigir-red   si no se llega a jw.org, es un fallo y no un aviso
+//                            (lo usa la comprobación semanal de GitHub Actions)
 //
 // Hace falta salida a www.jw.org: desde una red que lo bloquee, todo saldrá
 // como «sin respuesta» y no querrá decir nada.
@@ -213,6 +215,7 @@ async function main() {
   const args = process.argv.slice(2);
   const conRed = args.includes('--red');
   const conCapitulos = args.includes('--capitulos');
+  const exigirRed = args.includes('--exigir-red');
 
   const leer = async (ruta) => JSON.parse(await readFile(join(RAIZ, ruta), 'utf8'));
   const libros = await leer('data/books.json');
@@ -228,7 +231,7 @@ async function main() {
   if (conRed) {
     const salida = await haySalida();
     if (!salida.ok) {
-      avisos.push(`Esta red no llega a jw.org (${salida.motivo}), así que no se ha abierto ningún enlace. `
+      (exigirRed ? fallos : avisos).push(`Esta red no llega a jw.org (${salida.motivo}), así que no se ha abierto ningún enlace. `
         + 'Vuelve a lanzarlo desde una conexión normal.');
     } else {
       const nuevos = libros.filter(b => !COMPROBADOS_A_MANO.has(b.id)).length;

@@ -6,7 +6,8 @@ Static site on GitHub Pages. No build step, no package.json, no framework in the
   `<script type="text/x-dc" data-dc-script data-props="...">` (React-class-like: `state`, `setState`,
   `renderVals()`). Read-only: fetches `data/characters.json`, `data/eras.json`, `data/books.json`.
 - `support.js` — GENERATED dc-runtime (upstream `dc-runtime` project, not in repo). Never hand-edit.
-  Loads React 18 UMD from unpkg.com at runtime: the deck needs that CDN to render.
+  Loads React from unpkg only if `window.React` is missing; `index.html` preloads it from `vendor/`
+  (same files, same SRI). `tools/comprobar-vendor.mjs` keeps runtime, files and tags in sync.
 - `admin.html` + `admin/*.js` — admin panel, plain ES modules loaded directly by the browser:
   - `app.js` screens (login, token, list, editor, eras, publish) and state; `ui.js` `h()` DOM helper + icons.
   - `model.js` pure logic: diff draft vs published, `rebasar` (3-way merge of the stored draft onto the
@@ -21,7 +22,10 @@ Static site on GitHub Pages. No build step, no package.json, no framework in the
   (gazetteer), `geo/` (Natural Earth clips).
 - `assets/` — `portrait-<id>.jpg`, `mapa-<id>.png` (909×540 indexed PNG).
 - `tools/` — node scripts: `generar-mapas.mjs` (headless Chromium via CDP), `comprobar-mapas.mjs`,
-  `comprobar-libros.mjs`; python helpers `preparar-geo.py`, `wol.py`.
+  `comprobar-libros.mjs`, `comprobar-vendor.mjs`, `probar-modelo.mjs` (model.js tests); python helpers
+  `preparar-geo.py`, `wol.py`.
+- `.github/workflows/comprobaciones.yml` — CI: the four node checks on push to main / PR; jw.org links
+  weekly (`--red --capitulos --exigir-red`).
 - `docs/` — panel manual (`panel.md`), design sources, fact-check reports, original specs/plans.
 - Reference PDFs are gitignored.
 
