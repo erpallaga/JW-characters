@@ -186,9 +186,11 @@ libro.
 ## Si algo va mal
 
 - **«El token no vale o ha caducado»** — vuelve a conectarlo; el panel lo pedirá solo.
-- **«Las tarjetas publicadas han cambiado desde que abriste el panel»** — alguien (o
-  tú desde otro sitio) ha publicado tarjetas por medio. Recarga: el borrador se
-  conserva y se fusiona con lo nuevo, y luego se vuelve a publicar. Un commit que
-  solo toque código o documentación no bloquea la publicación.
+- **«Lo publicado ha cambiado desde que abriste el panel»** — alguien (o tú desde
+  otro sitio) ha publicado por medio tarjetas, o una imagen que tú también estás
+  sustituyendo. Recarga: el borrador se conserva y se fusiona con lo nuevo, y luego
+  se vuelve a publicar. Si el choque era una imagen, al recargar sigue ganando la
+  tuya: míralo antes de publicar. Un commit que solo toque código o documentación,
+  o imágenes que tú no tocas, no bloquea la publicación.
 - **El borrador vive en este navegador.** Si borras los datos del sitio, se pierde lo
   que no hayas publicado. Lo publicado está a salvo en el historial de Git.
