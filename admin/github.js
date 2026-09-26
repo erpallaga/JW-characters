@@ -76,21 +76,30 @@ export async function cabeza() {
   return { commitSha: ref.object.sha, treeSha: commit.tree.sha, fecha: commit.committer && commit.committer.date };
 }
 
-/** Lee un fichero de texto del repositorio, tal cual está publicado. */
-export async function leerTexto(path) {
-  return api(`${base}/contents/${path}?ref=${REPO.branch}`, { raw: true });
+/** Lee un fichero de texto del repositorio, en la punta de la rama o en un commit dado. */
+export async function leerTexto(path, ref = REPO.branch) {
+  return api(`${base}/contents/${path}?ref=${encodeURIComponent(ref)}`, { raw: true });
 }
 
 /**
  * Publica un lote de cambios como un único commit.
+ *
+ * Que la rama se haya movido desde que se abrió el panel no basta para
+ * rechazar: un commit que solo toca código o documentación no pisa nada de lo
+ * que se publica aquí, y el árbol nuevo se monta sobre la punta actual.
+ * `sigueIgual(sha)` decide si los datos de ese commit son los mismos que se
+ * leyeron al empezar.
+ *
  * @param {{mensaje: string, escrituras: Array<{path: string, base64: string}>,
- *          borrados: string[], baseCommitSha: string}} cambios
+ *          borrados: string[], baseCommitSha: string,
+ *          sigueIgual?: (sha: string) => Promise<boolean>}} cambios
  */
-export async function publicar({ mensaje, escrituras = [], borrados = [], baseCommitSha }) {
+export async function publicar({ mensaje, escrituras = [], borrados = [], baseCommitSha, sigueIgual }) {
   const actual = await cabeza();
-  if (baseCommitSha && actual.commitSha !== baseCommitSha) {
+  if (baseCommitSha && actual.commitSha !== baseCommitSha &&
+      !(sigueIgual && await sigueIgual(actual.commitSha))) {
     throw new GitHubError(
-      'El repositorio ha cambiado desde que abriste el panel. Recarga para traer lo último antes de publicar.',
+      'Las tarjetas publicadas han cambiado desde que abriste el panel. Recarga la página: tu borrador se conserva y se fusiona con lo nuevo.',
       'desincronizado',
     );
   }

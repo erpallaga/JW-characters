@@ -2,13 +2,13 @@
   {
     "id": "genesis",
     "name": "Génesis",
-    "slug": "Génesis",
+    "slug": "genesis",
     "chapters": 50
   },
   {
     "id": "exodo",
     "name": "Éxodo",
-    "slug": "Éxodo",
+    "slug": "exodo",
     "chapters": 40
   },
   {

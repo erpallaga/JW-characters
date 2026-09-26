@@ -33,6 +33,7 @@ compilación: se abre `index.html` y funciona.
 ```
 index.html          el mazo entero: plantilla y lógica en un archivo
 support.js          runtime de Claude Design (el mazo es un componente .dc)
+vendor/             React, servido desde aquí para no depender de una CDN
 admin.html          panel de administración
 admin/*.js          módulos del panel (sin framework, sin compilar)
 admin/mapa.js       el dibujo de los mapas, compartido con el generador
@@ -40,12 +41,18 @@ data/*.json         los datos: personajes, eras, libros y lugares
 data/geo/           costas y fronteras recortadas, para dibujar los mapas
 assets/             retratos y mapas
 tools/              el generador de mapas y las comprobaciones, a mano con node
+.github/workflows/  las mismas comprobaciones, solas en cada publicación
 docs/               especificaciones, planes y el manual del panel
 ```
 
 El mazo se dibujó en [Claude Design](https://claude.ai/design) y se importó tal cual,
 por eso `index.html` es un componente `.dc` en vez de HTML corriente. El panel, en
 cambio, es JavaScript plano con módulos ES que el navegador carga directamente.
+
+El runtime pediría React a unpkg.com al arrancar, y con unpkg caído el mazo salía en
+blanco. `index.html` lo carga antes desde `vendor/` —los mismos ficheros, con el
+mismo hash de integridad que exige el runtime—, y esa petición ya no se hace. Solo
+las fuentes siguen viniendo de Google Fonts; si fallan, se ve la letra del sistema.
 
 ### Los datos
 
@@ -98,6 +105,11 @@ Comprueba que toda ficha lleve su especificación, que los lugares que nombra ex
 en el nomenclátor, que el PNG tenga el marco de siempre y que ningún marcador se
 salga de la parte de la imagen que la tarjeta llega a enseñar.
 
+Si a una tarjeta se le sube un mapa a mano desde el panel (un JPG), la especificación
+se conserva: es la lista de lugares revisada, y sirve para volver al dibujado. La
+comprobación lo acepta con un aviso y solo le mira la proporción, y el generador por
+lotes no lo pisa.
+
 ## Añadir o editar tarjetas
 
 Desde el propio sitio, con el botón del candado de la cabecera. El panel guarda un
@@ -120,16 +132,32 @@ cargan con `fetch`, así que abrir el archivo directamente con `file://` no func
 npx http-server . -p 8080
 ```
 
-Los enlaces a la Biblia se construyen con `data/books.json`, y de sus 66 libros solo
-20 se han comprobado nunca contra jw.org. Para comprobarlos todos hace falta una
-conexión que llegue a jw.org:
+Los enlaces a la Biblia se construyen con `data/books.json`. Los 66 libros se
+comprobaron contra jw.org el 25-09-2026, primer y último capítulo de cada uno, y
+responden todos. Para repetirlo hace falta una conexión que llegue a jw.org:
 
 ```
-node tools/comprobar-libros.mjs --red
+node tools/comprobar-libros.mjs --red --capitulos
 ```
 
 Sin `--red` revisa la tabla sin salir a la red: que estén los 66 libros, que los
 capítulos cuadren y que ningún pasaje apunte a un capítulo que no existe.
+
+### Comprobaciones automáticas
+
+GitHub Actions ([`comprobaciones.yml`](.github/workflows/comprobaciones.yml)) lanza
+en cada push a `main` —también las publicaciones del panel— y en cada pull request:
+
+```
+node tools/probar-modelo.mjs       la lógica del panel: fusión del borrador y ficheros del commit
+node tools/comprobar-vendor.mjs    el React de vendor/ es el que espera support.js
+node tools/comprobar-mapas.mjs
+node tools/comprobar-libros.mjs
+```
+
+Los enlaces a jw.org se abren aparte, los lunes, para que una caída de una web ajena
+no ponga en rojo una publicación. Si una publicación del panel deja algo mal, el
+commit sale con una cruz roja en GitHub y GitHub avisa por correo.
 
 ## Contenido
 

@@ -24,7 +24,7 @@ const estado = {
   libros: [],
   imagenes: {},        // ruta -> { blob, ancho, alto }, pendientes de subir
   originales: {},      // ruta -> fichero tal cual se eligió, para poder reencuadrar sin perder calidad
-  reciennPublicadas: {}, // ya subidas: se siguen pintando hasta que Pages reconstruya
+  recienPublicadas: {}, // ya subidas: se siguen pintando hasta que Pages reconstruya
   baseCommitSha: null,
   editandoId: null,
   filtros: { texto: '', era: '', estado: '' },
@@ -49,7 +49,32 @@ function anyoTexto(y) { return y < 0 ? `${Math.abs(y)} a.e.c.` : `${y} e.c.`; }
 
 function vidaTexto(life) {
   if (!life || typeof life.start !== 'number') return '—';
-  return `${life.approx ? '≈ ' : ''}${Math.abs(life.start)} – ${Math.abs(life.end)} ${life.end < 0 ? 'a.e.c.' : 'e.c.'}`;
+  // «2 – 33 e.c.» diría que Jesús nació en el año 2 de nuestra era: cuando la
+  // vida cruza el cambio de era, cada extremo lleva la suya.
+  const tramo = (life.start < 0) === (life.end < 0)
+    ? `${Math.abs(life.start)} – ${anyoTexto(life.end)}`
+    : `${anyoTexto(life.start)} – ${anyoTexto(life.end)}`;
+  return `${life.approx ? '≈ ' : ''}${tramo}`;
+}
+
+/** El rótulo que pone la tarjeta bajo su línea de tiempo: el mismo que index.html. */
+function rotuloDeVida(life) {
+  return `${life.approx ? 'Aprox. ' : ''}${anyoTexto(life.start)} – ${anyoTexto(life.end)}`;
+}
+
+/**
+ * El tramo de una vida sobre la línea, sin salirse de la pista. Como en el
+ * mazo, unas fechas aproximadas no cortan en seco: se desvanecen por los lados.
+ */
+function tramoPintado(l) {
+  const span = LINEA.max - LINEA.min;
+  const izq = Math.max(0, Math.min(100, ((l.start - LINEA.min) / span) * 100));
+  const ancho = Math.max(1.2, Math.min(100 - izq, ((l.end - Math.max(l.start, LINEA.min)) / span) * 100));
+  const estilo = l.approx
+    ? `left:calc(${izq.toFixed(1)}% - 7px);width:calc(${ancho.toFixed(1)}% + 14px);` +
+      'background:linear-gradient(90deg, transparent 0%, var(--acento) 34%, var(--acento) 66%, transparent 100%)'
+    : `left:${izq.toFixed(1)}%;width:${ancho.toFixed(1)}%`;
+  return h('div', { class: 'via-tramo', style: estilo });
 }
 
 function identificador(nombre, usados) {
@@ -64,7 +89,7 @@ function identificador(nombre, usados) {
 /** URL para pintar una imagen: la pendiente de subir, o la ya publicada. */
 function urlImagen(ruta) {
   if (!ruta) return null;
-  const registro = estado.imagenes[ruta] || estado.reciennPublicadas[ruta];
+  const registro = estado.imagenes[ruta] || estado.recienPublicadas[ruta];
   if (registro && registro.blob) {
     registro._url = registro._url || URL.createObjectURL(registro.blob);
     return registro._url;
@@ -73,13 +98,19 @@ function urlImagen(ruta) {
 }
 
 let temporizadorGuardado = null;
+const escribirBorrador = () => {
+  temporizadorGuardado = null;
+  return store.guardarBorrador(JSON.parse(JSON.stringify(estado.borrador))).catch(e => console.error(e));
+};
 function guardarBorrador() {
   estado.guardadoEn = Date.now();
   clearTimeout(temporizadorGuardado);
-  temporizadorGuardado = setTimeout(() => {
-    store.guardarBorrador(JSON.parse(JSON.stringify(estado.borrador))).catch(e => console.error(e));
-  }, 250);
+  temporizadorGuardado = setTimeout(escribirBorrador, 250);
 }
+// Cerrar la pestaña justo después de teclear no debe perder la última letra.
+window.addEventListener('pagehide', () => {
+  if (temporizadorGuardado) { clearTimeout(temporizadorGuardado); escribirBorrador(); }
+});
 
 const tarjetaPorId = (id) => (estado.borrador.characters || []).find(c => c.id === id);
 
@@ -104,16 +135,26 @@ async function cargarDatos() {
     estado.publicado = { characters: chars, eras };
     estado.libros = libros;
     estado.baseCommitSha = cabeza.commitSha;
-    await store.guardarPublicado(estado.publicado);
-    await store.guardarBaseSha(cabeza.commitSha);
 
-    const guardado = await store.leerBorrador();
     // La primera vez el borrador se siembra con lo publicado: a partir de ahí
     // toda tarjeta es un registro igual, se editen las 18 antiguas o una nueva.
-    estado.borrador = guardado || JSON.parse(JSON.stringify(estado.publicado));
+    // Si ya había uno, antes se le trae lo publicado por otro camino desde que
+    // se empezó; si no, al publicar se desharía sin que nadie lo viera.
+    const guardado = await store.leerBorrador();
+    let fusion = null;
+    if (guardado) {
+      fusion = modelo.rebasar(guardado, await store.leerPublicado(), estado.publicado);
+      estado.borrador = fusion.borrador;
+      if (fusion.borrador !== guardado) await store.guardarBorrador(fusion.borrador);
+    } else {
+      estado.borrador = JSON.parse(JSON.stringify(estado.publicado));
+    }
+    await store.guardarPublicado(estado.publicado);
+    await store.guardarBaseSha(cabeza.commitSha);
     estado.imagenes = await store.listarImagenes();
     estado.cargando = false;
     ir('lista');
+    if (fusion && (fusion.traidas.length || fusion.conflictos.length)) avisarFusion(fusion);
   } catch (err) {
     estado.cargando = false;
     estado.error = err.message || String(err);
@@ -122,6 +163,13 @@ async function cargarDatos() {
     }
     render();
   }
+}
+
+function avisarFusion({ traidas, conflictos }) {
+  const partes = [];
+  if (traidas.length) partes.push(`Traído al borrador lo publicado fuera del panel: ${traidas.join(', ')}.`);
+  if (conflictos.length) partes.push(`En ${conflictos.join(', ')} había cambios en los dos lados sobre lo mismo y se ha quedado el tuyo: revísalo antes de publicar.`);
+  mostrarBanda(partes.join(' '), conflictos.length ? 15000 : 8000);
 }
 
 function ir(pantalla, id = null) {
@@ -135,8 +183,7 @@ function ir(pantalla, id = null) {
 
 function cabecera({ titulo, volver } = {}) {
   const r = estado.publicado ? modelo.resumen(estado.borrador, estado.publicado) : null;
-  const pendientes = r ? r.nuevas.length + r.editadas.length + r.borradas.length +
-    (r.erasCambiadas ? 1 : 0) + (r.ordenCambiado ? 1 : 0) : 0;
+  const pendientes = r ? modelo.contarPendientes(r) : 0;
 
   return h('div', { class: 'topbar' },
     h('div', { class: 'marca' },
@@ -364,12 +411,20 @@ function pantallaLista() {
   });
 
   const ocultas = todas.filter(c => c.hidden).length;
-  const r = modelo.resumen(estado.borrador, estado.publicado);
-  const pendientes = r.nuevas.length + r.editadas.length + r.borradas.length;
+  const pendientes = modelo.contarPendientes(modelo.resumen(estado.borrador, estado.publicado));
 
+  // Cada letra vuelve a montar la pantalla: sin devolver el foco al buscador
+  // nuevo, solo se podría escribir la primera.
   const buscador = h('input', {
     class: 'campo', type: 'search', placeholder: 'Buscar por nombre o lugar', value: f.texto,
-    style: 'width:250px', oninput: (e) => { f.texto = e.target.value; render(); },
+    style: 'width:250px', 'data-buscador': '1',
+    oninput: (e) => {
+      f.texto = e.target.value;
+      const cursor = e.target.selectionStart;
+      render();
+      const nuevo = raiz.querySelector('[data-buscador]');
+      if (nuevo) { nuevo.focus(); nuevo.setSelectionRange(cursor, cursor); }
+    },
   });
 
   // Reordenar solo tiene sentido viendo el mazo entero: con un filtro puesto,
@@ -488,11 +543,19 @@ async function borrarTarjeta(c) {
     : `Descartar «${c.name || c.id}». Todavía no se ha publicado, así que se pierde sin más. ¿Seguro?`;
   if (!confirm(texto)) return;
   estado.borrador.characters = estado.borrador.characters.filter(x => x.id !== c.id);
-  for (const ruta of [c.portraitSrc, c.mapSrc]) {
-    if (ruta && estado.imagenes[ruta]) { await store.borrarImagen(ruta); delete estado.imagenes[ruta]; }
-  }
+  await olvidarImagenes([c.portraitSrc, c.mapSrc]);
   guardarBorrador();
   render();
+}
+
+/** Descarta las imágenes pendientes de estas rutas, salvo las que otra tarjeta siga usando. */
+async function olvidarImagenes(rutas) {
+  const enUso = modelo.rutasEnUso(estado.borrador.characters);
+  for (const ruta of rutas) {
+    if (!ruta || enUso.has(ruta)) continue;
+    if (estado.imagenes[ruta]) { await store.borrarImagen(ruta); delete estado.imagenes[ruta]; }
+    delete estado.originales[ruta];
+  }
 }
 
 // ---------------------------------------------------------------- editor
@@ -521,6 +584,11 @@ function renombrar(c) {
       store.borrarImagen(ruta);
       store.guardarImagen(destino, { blob: registro.blob, ancho: registro.ancho, alto: registro.alto });
     }
+    // El original acompaña a la imagen, o reencuadrar después perdería calidad.
+    if (estado.originales[ruta]) {
+      estado.originales[destino] = estado.originales[ruta];
+      delete estado.originales[ruta];
+    }
     c[campo] = destino;
   }
   estado.editandoId = nuevoId;
@@ -533,9 +601,11 @@ function pantallaEditor() {
   const previa = h('div', { class: 'editor-previa' });
   const pintarPrevia = () => { vaciar(previa); previa.appendChild(vistaPrevia(c)); };
 
+  const campoId = h('input', { class: 'campo mono', value: c.id, readOnly: true, title: 'Se usa en el nombre de los ficheros de imagen' });
+
   const cambiar = (campo, valor) => {
     if (valor === '' || valor == null) delete c[campo]; else c[campo] = valor;
-    if (campo === 'name' && !publicada) renombrar(c);
+    if (campo === 'name' && !publicada) { renombrar(c); campoId.value = c.id; }
     guardarBorrador();
     pintarPrevia();
     actualizarCabecera();
@@ -553,7 +623,7 @@ function pantallaEditor() {
       h('label', { class: 'campo-grupo' }, h('span', { class: 'label' }, 'Nombre'),
         texto('name', { placeholder: 'Ana' })),
       h('label', { class: 'campo-grupo' }, h('span', { class: 'label' }, 'Identificador'),
-        h('input', { class: 'campo mono', value: c.id, readOnly: true, title: 'Se usa en el nombre de los ficheros de imagen' })),
+        campoId),
       h('label', { class: 'campo-grupo' }, h('span', { class: 'label' }, 'Era'),
         h('select', { class: 'campo', onchange: (e) => cambiar('eraId', e.target.value) },
           h('option', { value: '', selected: !c.eraId }, '— elige una era —'),
@@ -599,14 +669,18 @@ function pantallaEditor() {
     if (!publicada) {
       if (!confirm('Esta tarjeta no se ha publicado nunca. Descartarla la borra del todo. ¿Seguro?')) return;
       estado.borrador.characters = estado.borrador.characters.filter(x => x.id !== c.id);
+      await olvidarImagenes([c.portraitSrc, c.mapSrc]);
       guardarBorrador();
       return ir('lista');
     }
     if (!confirm(`Devolver «${c.name}» a como está publicada, perdiendo los cambios del borrador. ¿Seguro?`)) return;
     const i = estado.borrador.characters.findIndex(x => x.id === c.id);
     estado.borrador.characters[i] = JSON.parse(JSON.stringify(publicada));
+    // Aquí no vale olvidarImagenes: la tarjeta restaurada suele apuntar a la
+    // misma ruta que la imagen pendiente, y esa es justo la que hay que tirar.
     for (const ruta of [c.portraitSrc, c.mapSrc]) {
       if (ruta && estado.imagenes[ruta]) { await store.borrarImagen(ruta); delete estado.imagenes[ruta]; }
+      delete estado.originales[ruta];
     }
     guardarBorrador();
     ir('editor', c.id);
@@ -639,11 +713,10 @@ function bloqueDeLinea(c, cambiar, pintarPrevia) {
     vaciar(barra);
     const l = c.life;
     if (l && typeof l.start === 'number' && typeof l.end === 'number') {
-      const span = LINEA.max - LINEA.min;
-      const izq = Math.max(0, Math.min(100, ((l.start - LINEA.min) / span) * 100));
-      const ancho = Math.max(1.2, Math.min(100 - izq, ((l.end - l.start) / span) * 100));
-      barra.appendChild(h('div', { class: 'via-tramo', style: `left:${izq.toFixed(1)}%;width:${ancho.toFixed(1)}%` }));
-      rotulo.textContent = vidaTexto(l);
+      barra.appendChild(tramoPintado(l));
+      rotulo.textContent = l.end < l.start
+        ? 'El final va antes que el principio: revisa las fechas y sus eras'
+        : vidaTexto(l);
     } else {
       rotulo.textContent = 'Sin fechas: no aparecerá en la línea de tiempo';
     }
@@ -743,6 +816,12 @@ function campoImagen(c, tipo, pintarPrevia) {
                     : (ruta ? 'ya publicada' : `se recorta y se reduce a ${IMAGES[tipo].maxW} × ${IMAGES[tipo].maxH} px al subirla`)),
         !esRetrato && ruta ? h('div', { style: 'font-size:11px;color:var(--acento);font-weight:700;margin-top:5px' },
           `Punto del mapa: ${c.mapPos || '50% 50%'}`) : null,
+        // Un mapa subido a mano no borra la lista de lugares: es trabajo
+        // revisado contra los versículos y sirve para volver al dibujado.
+        !esRetrato && ruta && !/\.png$/i.test(ruta) && c.map
+          ? h('div', { style: 'font-size:11px;color:var(--tinta-2);margin-top:5px;line-height:1.4' },
+              'Imagen subida a mano. Los lugares del mapa se conservan; «Editar el mapa» la sustituye por una dibujada.')
+          : null,
       ),
       h('div', { style: 'display:flex;gap:6px;flex-wrap:wrap' },
         h('button', { class: 'btn btn-bajo', onclick: () => entrada.click() }, ruta ? 'Reemplazar' : 'Subir'),
@@ -830,12 +909,16 @@ function bloqueDePasajes(c, pintarPrevia) {
   const lista = h('div', { style: 'display:flex;flex-direction:column;gap:9px' });
   const urlEjemplo = h('span', { class: 'mono', style: 'font-size:10.5px;color:var(--tinta-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap' });
 
+  const pintarUrl = () => {
+    const primero = (c.passages || [])[0];
+    const libro = primero && libros[primero.book];
+    urlEjemplo.textContent = libro ? `jw.org/es/biblioteca/biblia/nwt/libros/${libro.slug}/${primero.chapter}/` : '';
+  };
+
   const pintar = () => {
     vaciar(lista);
     (c.passages || []).forEach((p, i) => lista.appendChild(filaPasaje(p, i)));
-    const ultimo = (c.passages || [])[0];
-    const libro = ultimo && libros[ultimo.book];
-    urlEjemplo.textContent = libro ? `jw.org/es/biblioteca/biblia/nwt/libros/${libro.slug}/${ultimo.chapter}/` : '';
+    pintarUrl();
     if (!c.passages || !c.passages.length) {
       lista.appendChild(h('div', { style: 'font-size:12.5px;color:var(--tinta-2)' }, 'Todavía no hay pasajes.'));
     }
@@ -863,7 +946,9 @@ function bloqueDePasajes(c, pintarPrevia) {
         if (b && n > b.chapters) { n = b.chapters; e.target.value = n; }
         p.chapter = n;
         sincronizarRotulo(antes);
-        guardarBorrador(); pintar(); pintarPrevia();
+        // Sin repintar la lista: rehacerla quitaría el foco a este campo y
+        // no dejaría escribir un capítulo de dos cifras.
+        guardarBorrador(); pintarUrl(); pintarPrevia();
       } });
 
     return h('div', { class: 'fila-pasaje' },
@@ -874,7 +959,7 @@ function bloqueDePasajes(c, pintarPrevia) {
         const b = libros[p.book];
         if (b && p.chapter > b.chapters) { p.chapter = b.chapters; cap.value = b.chapters; }
         sincronizarRotulo(antes);
-        guardarBorrador(); pintar(); pintarPrevia();
+        guardarBorrador(); pintarUrl(); pintarPrevia();
       } }, ...estado.libros.map(b => h('option', { value: b.id, selected: p.book === b.id }, b.name))),
       cap, rotulo,
       h('button', { class: 'icono-btn', title: 'Quitar pasaje', onclick: () => {
@@ -910,15 +995,11 @@ function vistaPrevia(c) {
 
   const linea = h('div', { class: 'previa-linea' });
   const via = h('div', { class: 'via' });
-  if (c.life && typeof c.life.start === 'number') {
-    const span = LINEA.max - LINEA.min;
-    const izq = Math.max(0, Math.min(100, ((c.life.start - LINEA.min) / span) * 100));
-    const ancho = Math.max(1.2, Math.min(100 - izq, ((c.life.end - c.life.start) / span) * 100));
-    via.appendChild(h('div', { class: 'via-tramo', style: `left:${izq.toFixed(1)}%;width:${ancho.toFixed(1)}%` }));
-  }
+  const conFechas = c.life && typeof c.life.start === 'number' && typeof c.life.end === 'number';
+  if (conFechas) via.appendChild(tramoPintado(c.life));
   linea.append(via,
     h('div', { style: 'font-size:10.5px;font-weight:700;color:var(--acento);text-align:center' },
-      c.life ? `Vivió hacia ${vidaTexto(c.life).replace('≈ ', '')}` : 'Sin fechas'),
+      conFechas ? rotuloDeVida(c.life) : 'Sin fechas'),
     h('div', { style: 'display:flex;justify-content:space-between;font-size:9.5px;color:var(--tinta-2)' },
       h('span', {}, anyoTexto(LINEA.min)), h('span', {}, anyoTexto(LINEA.max))));
 
@@ -1051,8 +1132,26 @@ function abrirPublicar() {
     ...(r.ordenCambiado && !r.nuevas.length ? [linea('ORDEN', 'Mazo', 'Cambia el orden de las tarjetas')] : []),
   ];
 
-  const nImagenes = Object.keys(estado.imagenes).length;
-  const peso = Object.values(estado.imagenes).reduce((n, x) => n + (x.blob ? x.blob.size : 0), 0);
+  const previstos = modelo.ficherosDelCommit(estado.borrador, estado.publicado, estado.imagenes);
+  const nDatos = previstos.textos.length;
+  const nImagenes = previstos.imagenes.length;
+  const nBorrados = previstos.borrados.length;
+  const peso = previstos.imagenes.reduce((n, [, x]) => n + (x.blob ? x.blob.size : 0), 0);
+  const recuento = [
+    nDatos ? `${nDatos} ${nDatos === 1 ? 'archivo' : 'archivos'} de datos` : null,
+    nImagenes ? `${nImagenes} ${nImagenes === 1 ? 'imagen' : 'imágenes'} · ${formatearPeso(peso)}, ya reducidas` : null,
+    nBorrados ? (nBorrados === 1 ? '1 imagen que deja de usarse, fuera' : `${nBorrados} imágenes que dejan de usarse, fuera`) : null,
+  ].filter(Boolean).join(' · ') || 'Sin archivos que cambien';
+
+  // Si la rama se ha movido, se puede publicar igual mientras lo que se movió
+  // no sean los datos que este borrador pisaría.
+  const sigueIgual = async (sha) => {
+    const [chars, eras] = await Promise.all([
+      gh.leerTexto(PATHS.characters, sha).then(JSON.parse),
+      gh.leerTexto(PATHS.eras, sha).then(JSON.parse),
+    ]);
+    return JSON.stringify({ characters: chars, eras }) === JSON.stringify(estado.publicado);
+  };
 
   const publicar = async () => {
     if (estado.publicando) return;
@@ -1068,14 +1167,14 @@ function abrirPublicar() {
       }
       const res = await gh.publicar({
         mensaje: mensaje.value.trim() || 'Actualiza las tarjetas',
-        escrituras, borrados, baseCommitSha: estado.baseCommitSha,
+        escrituras, borrados, baseCommitSha: estado.baseCommitSha, sigueIgual,
       });
       // Lo publicado pasa a ser el borrador, y las imágenes dejan de estar pendientes.
       estado.publicado = JSON.parse(JSON.stringify(estado.borrador));
       estado.baseCommitSha = res.commitSha;
       // No se revocan las URL: durante el minuto que tarda la reconstrucción,
       // el fichero todavía no existe en la web y la miniatura saldría rota.
-      Object.assign(estado.reciennPublicadas, estado.imagenes);
+      Object.assign(estado.recienPublicadas, estado.imagenes);
       await store.vaciarImagenes();
       estado.imagenes = {};
       await store.guardarPublicado(estado.publicado);
@@ -1108,8 +1207,7 @@ function abrirPublicar() {
         h('span', { class: 'label' }, `Se van a publicar ${lineas.length} ${lineas.length === 1 ? 'cambio' : 'cambios'}`),
         h('div', { style: 'display:flex;flex-direction:column;gap:1px;background:var(--borde-suave);border:1px solid var(--borde);border-radius:13px;overflow:hidden' }, ...lineas),
         h('div', { style: 'display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--tinta-2)' },
-          icono('commit', 13),
-          `1 archivo de datos${nImagenes ? ` · ${nImagenes} ${nImagenes === 1 ? 'imagen' : 'imágenes'} · ${formatearPeso(peso)}, ya reducidas` : ''}`)),
+          icono('commit', 13), recuento)),
 
       h('label', { class: 'campo-grupo' }, h('span', { class: 'label' }, 'Mensaje del commit'), mensaje),
       zona,
@@ -1129,12 +1227,12 @@ function cerrarModal() {
   delete document.body.dataset.modal;
 }
 
-function mostrarBanda(texto) {
+function mostrarBanda(texto, ms = 6000) {
   const banda = h('div', {
-    style: 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:50;background:var(--tinta);color:oklch(0.97 0.01 80);padding:12px 20px;border-radius:999px;font-size:13px;font-weight:700;box-shadow:var(--sombra-alta)',
+    style: 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:50;background:var(--tinta);color:oklch(0.97 0.01 80);padding:12px 20px;border-radius:18px;font-size:13px;font-weight:700;box-shadow:var(--sombra-alta);max-width:min(640px,calc(100vw - 32px));text-align:center;line-height:1.45',
   }, texto);
   document.body.appendChild(banda);
-  setTimeout(() => banda.remove(), 6000);
+  setTimeout(() => banda.remove(), ms);
 }
 
 // ---------------------------------------------------------------- render

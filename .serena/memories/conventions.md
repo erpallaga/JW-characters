@@ -1,19 +1,19 @@
 # Conventions
 
-- App content/UI language is Spanish (labels, character bios, era names) — keep new user-facing strings in Spanish.
-- Colors use `oklch(...)` exclusively (light/paper "clay" theme), inline in `style="..."` attribute strings —
-  no CSS classes, no stylesheet file. Two accent palettes exist: `CLAY`/`CLAY_SOFT` (default) and
-  `TEKHELET`/`TEKHELET_SOFT`, switched via the `accentPalette` prop declared in the `data-props` block
-  (index.html:215-220).
-- Template uses custom pseudo-JSX tags handled by `support.js`'s dc-runtime: `<sc-for list="{{ expr }}" as="item">`
-  for loops, `<sc-if value="{{ expr }}" hint-placeholder-val="{{ default }}">` for conditionals, `{{ expr }}`
-  interpolation in attributes/text. Treat these as the templating language, not literal custom elements.
-- Character records live in the `CHARACTERS` array (index.html, starts ~line 243), one object per person:
-  `id, name, eraId, timeframe, place, mapSrc, mapPos, life:{start,end} (negative=BCE), knownFor, passages:[{label,href}]`.
-  `passages[].href` built via `jw(book, chapter)` helper (index.html:239) — links to jw.org NWT Bible reader;
-  `book` must be a key already present in the `SLUG` map (index.html:232), add new entries there before using
-  a new book.
-- Eras are a fixed ordered list `ERAS` (index.html:221-230) with `id/label/range`; character `eraId` must match
-  one of these ids — this drives era filter chips and the timeline segments.
-- `hasImageSlot` is derived from `!!c.mapSrc` — every character with a map image gets an `<image-slot>` portrait
-  placeholder; characters without `mapSrc` fall back to the inverse placeholder state.
+- All user-facing text, identifiers in the panel/tools, comments and commit messages are in Spanish.
+- Deck styling: `oklch(...)` colors inline in style strings/objects; palettes `CLAY`/`TEKHELET` via the
+  `accentPalette` prop. Panel reuses the same values as CSS custom properties in `admin.html`.
+- Deck template DSL (dc-runtime): `<sc-for list="{{ expr }}" as="x">`, `<sc-if value="{{ expr }}">`,
+  `{{ expr }}` interpolation. Values come from `renderVals()`.
+- Character record (`data/characters.json`), array order = deck order (manual, not strictly by date):
+  `id, name, eraId, timeframe, place, portraitSrc, mapSrc, mapPos, map, knownFor, passages[], life, hidden?`.
+  - `life: {start, end, approx?}`, negative = a.e.c. Timeline spans -4026..100.
+  - `passages[]: {book, chapter, label}`; `book` must be an id in `data/books.json`; URL built at runtime.
+  - `map: {lugares[], etiquetas?, ruta?, curva?, zoom?, centro?}`; `lugares` are gazetteer ids or
+    `{id?, lon, lat, label}`. With `etiquetas`, only those ids get a written label; manual entries without
+    id are always labelled. Every place needs an explicit verse placing the person there.
+  - `eraId` must exist in `data/eras.json`. `hidden: true` keeps the card out of the deck.
+- `id` follows the name until first publish, then is frozen (asset filenames depend on it).
+- Maps are drawn, not sourced: edit `map` and regenerate; never hand-edit PNGs. Drawn = `mapSrc` is PNG.
+  A JPG `mapSrc` is a hand-uploaded map: its `map` spec is kept (reviewed data) but does not describe
+  the image; checker only warns + checks ratio, batch generator skips it.

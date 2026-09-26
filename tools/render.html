@@ -10,7 +10,7 @@
 <canvas id="lienzo" width="909" height="540" style="max-width:100%"></canvas>
 <pre id="estado">cargando…</pre>
 <script type="module">
-import { dibujar, encuadrar, resolverLugares } from '../admin/mapa.js';
+import { dibujar, encuadrar, resolverLugares, medirCon } from '../admin/mapa.js';
 import { aPngIndexado } from '../admin/png.js';
 
 const ctx = document.getElementById('lienzo').getContext('2d');
@@ -22,7 +22,9 @@ const [paises, lagos, personajes, nomenclator] = await Promise.all(
 );
 const geo = { paises, lagos };   // cada capa lleva su bbox y sus piezas
 const porId = Object.fromEntries(personajes.map(p => [p.id, p]));
-const medir = t => { ctx.font = 'bold 21px "Bitstream Charter", serif'; return ctx.measureText(t).width; };
+// La misma medida que usa dibujar() y el editor del panel: si aquí se midiera
+// con otra letra, el lote y el panel encuadrarían distinto el mismo mapa.
+const medir = t => medirCon(ctx, t);
 
 window.dibujarPersonaje = async id => {
   const p = porId[id];

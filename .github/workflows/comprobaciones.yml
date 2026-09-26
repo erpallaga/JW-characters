@@ -1,0 +1,65 @@
+# Comprobaciones automáticas del mazo.
+#
+# Corre en cada push a main —incluidas las publicaciones del panel, que son
+# commits normales— y en cada pull request. Son los mismos scripts que se
+# lanzan a mano desde tools/; no instalan nada.
+#
+# Los enlaces a jw.org se abren aparte, una vez por semana: dependen de una web
+# ajena, y no conviene que un fallo suyo ponga en rojo una publicación.
+
+name: Comprobaciones
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 1'   # lunes, 06:17 UTC
+
+permissions:
+  contents: read
+
+concurrency:
+  group: comprobaciones-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  datos:
+    name: Datos, mapas y panel
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Lógica del panel (admin/model.js)
+        run: node tools/probar-modelo.mjs
+
+      - name: React servido desde vendor/
+        run: node tools/comprobar-vendor.mjs
+
+      - name: Mapas de las tarjetas
+        run: node tools/comprobar-mapas.mjs
+
+      - name: Libros y pasajes
+        run: node tools/comprobar-libros.mjs
+
+  enlaces:
+    name: Enlaces a jw.org
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Abrir los 66 libros (primer y último capítulo)
+        # --exigir-red: si GitHub no llegara a jw.org, que salga en rojo en vez
+        # de aprobar sin haber abierto nada.
+        run: node tools/comprobar-libros.mjs --red --capitulos --exigir-red
