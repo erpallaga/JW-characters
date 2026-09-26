@@ -816,6 +816,12 @@ function campoImagen(c, tipo, pintarPrevia) {
                     : (ruta ? 'ya publicada' : `se recorta y se reduce a ${IMAGES[tipo].maxW} × ${IMAGES[tipo].maxH} px al subirla`)),
         !esRetrato && ruta ? h('div', { style: 'font-size:11px;color:var(--acento);font-weight:700;margin-top:5px' },
           `Punto del mapa: ${c.mapPos || '50% 50%'}`) : null,
+        // Un mapa subido a mano no borra la lista de lugares: es trabajo
+        // revisado contra los versículos y sirve para volver al dibujado.
+        !esRetrato && ruta && !/\.png$/i.test(ruta) && c.map
+          ? h('div', { style: 'font-size:11px;color:var(--tinta-2);margin-top:5px;line-height:1.4' },
+              'Imagen subida a mano. Los lugares del mapa se conservan; «Editar el mapa» la sustituye por una dibujada.')
+          : null,
       ),
       h('div', { style: 'display:flex;gap:6px;flex-wrap:wrap' },
         h('button', { class: 'btn btn-bajo', onclick: () => entrada.click() }, ruta ? 'Reemplazar' : 'Subir'),

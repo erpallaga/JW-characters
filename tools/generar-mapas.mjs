@@ -6,6 +6,10 @@
  *   node tools/generar-mapas.mjs --todas         (rehacerlas todas)
  *   node tools/generar-mapas.mjs abel ana job    (solo esas)
  *
+ * Se salta las tarjetas cuyo mapa es una imagen subida a mano (mapSrc en JPG):
+ * el PNG no lo usaría nadie. Para volver al dibujado, «Editar el mapa» en el
+ * panel, o poner mapSrc en assets/mapa-<id>.png y lanzar esto con su id.
+ *
  * Dibuja con el mismo admin/mapa.js que usa el panel, dentro de un Chromium
  * sin ventana, para que el lote y el editor den el mismo píxel. No hace falta
  * instalar nada: sirve el repositorio por HTTP y habla con el navegador por su
@@ -63,16 +67,25 @@ await esperar(cdp, sesion, 'window.listo === true', 30000);
 const conMapa = await valor(cdp, sesion, 'JSON.stringify(window.conMapa)');
 const ids = pedidas.length ? pedidas : JSON.parse(conMapa);
 
-let hechos = 0, saltados = 0;
+const fuentes = Object.fromEntries(
+  JSON.parse(await readFile(join(RAIZ, 'data', 'characters.json'), 'utf8')).map(c => [c.id, c.mapSrc]));
+
+let hechos = 0, saltados = 0, aMano = 0;
 for (const id of ids) {
   const destino = join(RAIZ, 'assets', `mapa-${id}.png`);
+  if (fuentes[id] && !/\.png$/i.test(fuentes[id])) {
+    console.log(`  ${id}: su mapa es una imagen subida a mano (${fuentes[id]}); no se dibuja`);
+    aMano++;
+    continue;
+  }
   if (!todas && !pedidas.length && await existe(destino)) { saltados++; continue; }
   const png = Buffer.from(await valor(cdp, sesion, `window.dibujarPersonaje(${JSON.stringify(id)})`), 'base64');
   await writeFile(destino, png);
   console.log(`  mapa-${id}.png  ${Math.round(png.length / 1024)} KB`);
   hechos++;
 }
-console.log(`\n${hechos} mapa(s) generado(s)${saltados ? `, ${saltados} ya estaban` : ''}.`);
+console.log(`\n${hechos} mapa(s) generado(s)${saltados ? `, ${saltados} ya estaban` : ''}`
+  + `${aMano ? `, ${aMano} subido(s) a mano sin tocar` : ''}.`);
 
 navegador.kill();
 servidor.close();

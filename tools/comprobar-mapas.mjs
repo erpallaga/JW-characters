@@ -11,6 +11,11 @@
 //     de verdad, que es la mitad central de la imagen;
 //   · que el PNG exista y tenga el marco de siempre.
 //
+// Un mapa subido a mano desde el panel es un JPG, no el PNG dibujado: se
+// acepta, se avisa, y solo se le mira que exista y tenga la proporción del
+// marco. Su especificación se conserva —es la lista de lugares revisada—, pero
+// no describe esa imagen, así que los marcadores no se comprueban.
+//
 // El encuadre se calcula con el mismo admin/mapa.js que dibuja. Lo único que
 // aquí se aproxima es el ancho de las etiquetas, que sin canvas no se puede
 // medir: se cuenta a 10 px por carácter, con un error de unos 20 px en la más
@@ -36,6 +41,26 @@ async function marcoDelPng(ruta) {
   if (b.length < 24 || !b.subarray(0, 8).equals(firma)) return null;
   return { ancho: b.readUInt32BE(16), alto: b.readUInt32BE(20) };
 }
+
+/** Ancho y alto de un JPEG, leídos del primer segmento SOF. */
+async function marcoDelJpeg(ruta) {
+  const b = await readFile(join(RAIZ, ruta));
+  if (b.length < 4 || b[0] !== 0xff || b[1] !== 0xd8) return null;
+  for (let i = 2; i + 9 < b.length;) {
+    if (b[i] !== 0xff) return null;
+    const tipo = b[i + 1];
+    if (tipo === 0xd8 || (tipo >= 0xd0 && tipo <= 0xd7) || tipo === 0x01) { i += 2; continue; }
+    const largo = b.readUInt16BE(i + 2);
+    // SOF0–SOF15, salvo DHT (C4), JPG (C8) y DAC (CC), que comparten el rango.
+    if (tipo >= 0xc0 && tipo <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(tipo)) {
+      return { alto: b.readUInt16BE(i + 5), ancho: b.readUInt16BE(i + 7) };
+    }
+    i += 2 + largo;
+  }
+  return null;
+}
+
+const esDibujado = (ruta) => /\.png$/i.test(ruta);
 
 function bloque(titulo, lineas, marca) {
   if (!lineas.length) return;
@@ -84,6 +109,19 @@ async function main() {
 
     if (!c.mapSrc) {
       fallos.push(`${c.id}: la ficha no apunta a ningún mapa`);
+    } else if (!esDibujado(c.mapSrc)) {
+      const marco = await marcoDelJpeg(c.mapSrc).catch(() => null);
+      if (!marco) {
+        fallos.push(`${c.id}: ${c.mapSrc} no está o no es un JPEG`);
+      } else {
+        const proporcion = marco.ancho / marco.alto, esperada = LIENZO.ancho / LIENZO.alto;
+        if (Math.abs(proporcion / esperada - 1) > 0.01) {
+          fallos.push(`${c.id}: ${c.mapSrc} mide ${marco.ancho}×${marco.alto}, que no es la proporción del marco (${LIENZO.ancho}×${LIENZO.alto})`);
+        }
+      }
+      avisos.push(`${c.id}: el mapa es una imagen subida a mano (${c.mapSrc}). La especificación se conserva `
+        + 'pero no la describe; «Editar el mapa» en el panel la sustituye por una dibujada.');
+      continue;
     } else {
       const marco = await marcoDelPng(c.mapSrc).catch(() => null);
       if (!marco) fallos.push(`${c.id}: ${c.mapSrc} no está o no es un PNG`);
