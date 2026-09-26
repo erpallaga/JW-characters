@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Personajes de la Biblia</title>
 <meta name="description" content="Tarjetas de personajes bíblicos para la noche de adoración en familia: retrato, mapa, pasajes y su lugar en la línea del tiempo.">
+<!-- React se sirve desde el propio sitio. support.js lo pediría a unpkg.com si
+     no lo encuentra ya cargado, y con unpkg caído el mazo salía en blanco. Son
+     los mismos ficheros que pide el runtime: el integrity es el suyo. -->
+<script src="./vendor/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z"></script>
+<script src="./vendor/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1"></script>
 <script src="./support.js"></script>
 </head>
 <body>
