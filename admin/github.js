@@ -86,9 +86,14 @@ export async function leerTexto(path, ref = REPO.branch) {
  *
  * Que la rama se haya movido desde que se abrió el panel no basta para
  * rechazar: un commit que solo toca código o documentación no pisa nada de lo
- * que se publica aquí, y el árbol nuevo se monta sobre la punta actual.
- * `sigueIgual(sha)` decide si los datos de ese commit son los mismos que se
- * leyeron al empezar.
+ * que se publica aquí, y el árbol nuevo se monta sobre la punta actual. Se
+ * publica si se cumplen las dos cosas:
+ *  · ningún fichero que este commit escribe o borra ha cambiado por medio. Si
+ *    no, dos paneles que sustituyen el mismo retrato —misma ruta, JSON
+ *    idéntico— se pisarían la imagen sin que nadie se enterase;
+ *  · `sigueIgual(sha)` confirma que los datos de ese commit son los que se
+ *    leyeron al empezar, aunque este commit no los escriba: el borrador se
+ *    montó sobre ellos y la próxima publicación los reescribiría.
  *
  * @param {{mensaje: string, escrituras: Array<{path: string, base64: string}>,
  *          borrados: string[], baseCommitSha: string,
@@ -97,9 +102,12 @@ export async function leerTexto(path, ref = REPO.branch) {
 export async function publicar({ mensaje, escrituras = [], borrados = [], baseCommitSha, sigueIgual }) {
   const actual = await cabeza();
   if (baseCommitSha && actual.commitSha !== baseCommitSha &&
-      !(sigueIgual && await sigueIgual(actual.commitSha))) {
+      !(sigueIgual &&
+        await sinCambiosPorMedio(baseCommitSha, actual.treeSha, [...escrituras.map(e => e.path), ...borrados]) &&
+        await sigueIgual(actual.commitSha))) {
     throw new GitHubError(
-      'Las tarjetas publicadas han cambiado desde que abriste el panel. Recarga la página: tu borrador se conserva y se fusiona con lo nuevo.',
+      'Lo publicado ha cambiado desde que abriste el panel: las tarjetas, o alguna imagen que este cambio sustituye. '
+      + 'Recarga la página: tu borrador se conserva y se fusiona con lo nuevo. Si sustituías una imagen, mira antes cuál quieres dejar.',
       'desincronizado',
     );
   }
@@ -129,6 +137,22 @@ export async function publicar({ mensaje, escrituras = [], borrados = [], baseCo
     body: { sha: commit.sha },
   });
   return { commitSha: commit.sha, ficheros: escrituras.length + borrados.length };
+}
+
+/** Ruta -> sha de cada fichero de un árbol, o null si GitHub lo da recortado. */
+async function ficherosDelArbol(treeSha) {
+  const arbol = await api(`${base}/git/trees/${treeSha}?recursive=1`);
+  if (arbol.truncated) return null;
+  return Object.fromEntries(arbol.tree.filter(e => e.type === 'blob').map(e => [e.path, e.sha]));
+}
+
+/** ¿Siguen estas rutas como estaban en `baseCommitSha`? Ante la duda, no. */
+async function sinCambiosPorMedio(baseCommitSha, treeActual, rutas) {
+  if (!rutas.length) return true;
+  const inicio = await api(`${base}/git/commits/${baseCommitSha}`);
+  const [antes, ahora] = await Promise.all([ficherosDelArbol(inicio.tree.sha), ficherosDelArbol(treeActual)]);
+  if (!antes || !ahora) return false;
+  return rutas.every(ruta => antes[ruta] === ahora[ruta]);
 }
 
 // --- utilidades de codificación -------------------------------------------

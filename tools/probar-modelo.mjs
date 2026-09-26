@@ -6,7 +6,7 @@
 //   node tools/probar-modelo.mjs
 
 import assert from 'node:assert/strict';
-import { rebasar, ficherosDelCommit } from '../admin/model.js';
+import { rebasar, ficherosDelCommit, resumen, estadoDe, hayCambios } from '../admin/model.js';
 const C = (id, extra = {}) => ({ id, name: id.toUpperCase(), eraId: 'e', portraitSrc: `assets/portrait-${id}.jpg`, mapSrc: `assets/mapa-${id}.png`, passages: [], ...extra });
 const eras = [{ id: 'e', label: 'E', range: '' }];
 const base = { characters: [C('a'), C('b'), C('c')], eras };
@@ -77,5 +77,18 @@ const clone = x => JSON.parse(JSON.stringify(x));
   const f = ficherosDelCommit(d, base, imgs);
   assert.deepEqual(f.imagenes.map(([r]) => r), ['assets/mapa-a.jpg']);
   assert.deepEqual(f.borrados.sort(), ['assets/mapa-a.png', 'assets/mapa-c.png', 'assets/portrait-b.jpg', 'assets/portrait-c.jpg']);
+}
+// Sustituir un retrato ya publicado lo escribe en la misma ruta: el JSON no
+// cambia, pero la tarjeta tiene un cambio y hay algo que publicar.
+{
+  const d = clone(base);
+  const pendientes = ['assets/portrait-a.jpg'];
+  assert.equal(hayCambios(resumen(d, base)), false);
+  const r = resumen(d, base, pendientes);
+  assert.deepEqual(r.editadas.map(e => [e.tarjeta.id, e.campos]), [['a', ['portraitSrc']]]);
+  assert.equal(estadoDe(d.characters[0], { a: base.characters[0] }, pendientes), 'cambios');
+  const f = ficherosDelCommit(d, base, { 'assets/portrait-a.jpg': { blob: 1 } });
+  assert.deepEqual(f.imagenes.map(([ruta]) => ruta), ['assets/portrait-a.jpg']);
+  assert.deepEqual(f.textos, []);
 }
 console.log('admin/model.js: todas las pruebas pasan.');

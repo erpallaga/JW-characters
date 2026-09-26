@@ -18,23 +18,36 @@ const ETIQUETAS = {
 
 const igual = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
 
-/** Campos en los que difieren dos versiones de una misma tarjeta. */
-export function diferencias(borrador, publicado) {
+/**
+ * Campos en los que difieren dos versiones de una misma tarjeta.
+ *
+ * Una imagen pendiente de subir cuenta aunque la ruta no cambie: sustituir o
+ * reencuadrar un retrato ya publicado lo escribe en el mismo fichero, así que
+ * el JSON queda idéntico, y sin esto la tarjeta salía como «Publicada» y el
+ * botón de publicar no se activaba.
+ *
+ * @param {Set<string>|string[]} [pendientes]  rutas de imágenes sin subir
+ */
+export function diferencias(borrador, publicado, pendientes) {
   if (!publicado) return null;
   const campos = [...CAMPOS, 'life', 'passages'].filter(k => !igual(borrador[k], publicado[k]));
-  return campos.length ? campos : [];
+  const sinSubir = new Set(pendientes || []);
+  for (const k of ['portraitSrc', 'mapSrc']) {
+    if (borrador[k] && sinSubir.has(borrador[k]) && !campos.includes(k)) campos.push(k);
+  }
+  return campos;
 }
 
 /** 'nueva' | 'cambios' | 'oculta' | 'publicada' */
-export function estadoDe(tarjeta, publicadasPorId) {
+export function estadoDe(tarjeta, publicadasPorId, pendientes) {
   const previa = publicadasPorId[tarjeta.id];
   if (!previa) return 'nueva';
-  const dif = diferencias(tarjeta, previa);
+  const dif = diferencias(tarjeta, previa, pendientes);
   if (dif.length) return 'cambios';
   return tarjeta.hidden ? 'oculta' : 'publicada';
 }
 
-export function resumen(borrador, publicado) {
+export function resumen(borrador, publicado, pendientes) {
   const publicadasPorId = Object.fromEntries((publicado.characters || []).map(c => [c.id, c]));
   const borradorPorId = Object.fromEntries((borrador.characters || []).map(c => [c.id, c]));
 
@@ -42,7 +55,10 @@ export function resumen(borrador, publicado) {
   for (const c of borrador.characters || []) {
     const previa = publicadasPorId[c.id];
     if (!previa) nuevas.push(c);
-    else if (diferencias(c, previa).length) editadas.push({ tarjeta: c, campos: diferencias(c, previa) });
+    else {
+      const campos = diferencias(c, previa, pendientes);
+      if (campos.length) editadas.push({ tarjeta: c, campos });
+    }
   }
   const borradas = (publicado.characters || []).filter(c => !borradorPorId[c.id]);
   const erasCambiadas = !igual(borrador.eras, publicado.eras);
@@ -187,7 +203,7 @@ function lista(nombres) {
  * @param {Record<string, {blob: Blob}>} imagenes  imágenes pendientes, por ruta
  */
 export function ficherosDelCommit(borrador, publicado, imagenes) {
-  const r = resumen(borrador, publicado);
+  const r = resumen(borrador, publicado, Object.keys(imagenes || {}));
   const textos = [];
 
   const charsSinCambios = igual(borrador.characters, publicado.characters);
