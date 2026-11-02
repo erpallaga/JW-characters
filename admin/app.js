@@ -54,12 +54,13 @@ function vidaTexto(life) {
   const tramo = (life.start < 0) === (life.end < 0)
     ? `${Math.abs(life.start)} – ${anyoTexto(life.end)}`
     : `${anyoTexto(life.start)} – ${anyoTexto(life.end)}`;
-  return `${life.approx ? '≈ ' : ''}${tramo}`;
+  return `${life.estimate ? 'estimación · ' : life.approx ? '≈ ' : ''}${tramo}`;
 }
 
 /** El rótulo que pone la tarjeta bajo su línea de tiempo: el mismo que index.html. */
 function rotuloDeVida(life) {
-  return `${life.approx ? 'Aprox. ' : ''}${anyoTexto(life.start)} – ${anyoTexto(life.end)}`;
+  if (life.label) return life.label;
+  return `${life.estimate ? 'Estimación: ' : life.approx ? 'Aprox. ' : ''}${anyoTexto(life.start)} – ${anyoTexto(life.end)}`;
 }
 
 /**
@@ -729,7 +730,9 @@ function bloqueDeLinea(c, cambiar, pintarPrevia) {
     else {
       c.life = { start: eraInicio.value === 'aec' ? -Math.abs(s) : Math.abs(s),
                  end: eraFin.value === 'aec' ? -Math.abs(e) : Math.abs(e) };
-      if (aprox.checked) c.life.approx = true;
+      if (aprox.checked || estimacion.checked) c.life.approx = true;
+      if (estimacion.checked) c.life.estimate = true;
+      if (rotuloLibre.value.trim()) c.life.label = rotuloLibre.value.trim();
       colocarPorFecha(c);
     }
     guardarBorrador(); pintarBarra(); pintarPrevia();
@@ -748,6 +751,11 @@ function bloqueDeLinea(c, cambiar, pintarPrevia) {
   const aprox = h('input', { type: 'checkbox', checked: !!life.approx, onchange: escribirVida,
     style: 'width:17px;height:17px;accent-color:var(--acento);cursor:pointer' });
 
+  const estimacion = h('input', { type: 'checkbox', checked: !!life.estimate, onchange: escribirVida,
+    style: 'width:17px;height:17px;accent-color:var(--acento);cursor:pointer' });
+  const rotuloLibre = h('input', { class: 'campo', type: 'text', value: life.label || '', oninput: escribirVida,
+    placeholder: 'Rótulo propio (opcional), p. ej. «Su reinado: 1037 – 997 a.e.c.»', style: 'width:100%' });
+
   pintarBarra();
 
   return h('div', { class: 'tarjeta-panel' },
@@ -759,7 +767,10 @@ function bloqueDeLinea(c, cambiar, pintarPrevia) {
         h('div', { style: 'display:flex;gap:7px' }, fin, eraFin)),
       h('label', { style: 'display:flex;align-items:center;gap:9px;height:36px;cursor:pointer' },
         aprox, h('span', { style: 'font-size:13px' }, 'Fechas aproximadas')),
+      h('label', { style: 'display:flex;align-items:center;gap:9px;height:36px;cursor:pointer' },
+        estimacion, h('span', { style: 'font-size:13px' }, 'Estimación (ninguna publicación da la fecha)')),
     ),
+    h('div', { style: 'margin-top:10px' }, rotuloLibre),
     h('div', { style: 'font-size:11.5px;color:var(--tinta-2);margin-top:10px' },
       'Con las fechas puestas, una tarjeta nueva se coloca sola en su sitio del mazo. El orden se puede cambiar luego desde la lista.'),
     h('div', { style: 'margin-top:18px;padding:14px 16px 12px;background:var(--hueco);border-radius:12px' },

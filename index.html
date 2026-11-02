@@ -360,7 +360,11 @@ function yearLabel(y) {
 }
 function lifeLabel(life) {
   if (!life) return '';
-  const prefix = life.approx ? 'Aprox. ' : '';
+  // «label» sustituye al rótulo cuando lo que se dibuja no es la vida entera
+  // sino un tramo documentado (un reinado, un ministerio). «estimate» marca las
+  // fechas que ninguna publicación da: son una estimación nuestra.
+  if (life.label) return life.label;
+  const prefix = life.estimate ? 'Estimación: ' : life.approx ? 'Aprox. ' : '';
   return `${prefix}${yearLabel(life.start)} – ${yearLabel(life.end)}`;
 }
 
@@ -615,12 +619,13 @@ class Component extends DCLogic {
           // pista: la barra deja de decir «de aquí a aquí» y pasa a decir «por
           // aquí». Se ensancha unos píxeles a cada lado para que el degradado
           // tenga dónde apagarse sin comerse el centro.
-          if (!single.life.approx) return { ...base, left: `${izq}%`, width: `${ancho}%`, background: primary };
+          if (!single.life.approx && !single.life.estimate) return { ...base, left: `${izq}%`, width: `${ancho}%`, background: primary };
           return {
             ...base,
             left: `calc(${izq}% - 7px)`,
             width: `calc(${ancho}% + 14px)`,
             background: `linear-gradient(90deg, transparent 0%, ${primary} 34%, ${primary} 66%, transparent 100%)`,
+            opacity: single.life.estimate ? 0.55 : 1,
           };
         })() : { display: 'none' },
         timelineEndsStyle: { display: 'flex', justifyContent: 'space-between', fontSize: '8px', color: 'oklch(0.55 0.02 55)', fontWeight: 700 },

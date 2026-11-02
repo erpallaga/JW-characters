@@ -29,7 +29,8 @@
     "life": {
       "start": -3996,
       "end": -3896,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [],
@@ -56,7 +57,7 @@
       "ruta": false,
       "zoom": 20
     },
-    "knownFor": "Descendiente de Set, es descrito como un hombre justo e intachable en medio de una sociedad corrompida y malvada. Durante unos 40 a 50 años construyó el arca siguiendo instrucciones precisas de Dios, mientras predicaba sobre el juicio que se avecinaba. Sobrevivió al diluvio junto con su esposa, sus tres hijos y sus esposas, y se convirtió en el antepasado de toda la humanidad posterior al diluvio. Después de salir del arca, Dios estableció con él un pacto simbolizado con el arco iris.",
+    "knownFor": "Descendiente de Set, es descrito como un hombre justo e intachable en medio de una sociedad corrompida y malvada. Durante años —probablemente varias décadas— construyó el arca siguiendo instrucciones precisas de Dios, mientras predicaba sobre el juicio que se avecinaba. Sobrevivió al diluvio junto con su esposa, sus tres hijos y sus esposas, y se convirtió en el antepasado de toda la humanidad posterior al diluvio. Después de salir del arca, Dios estableció con él un pacto simbolizado con el arco iris.",
     "passages": [
       {
         "book": "genesis",
@@ -78,58 +79,6 @@
       "start": -2970,
       "end": -2020,
       "approx": true
-    }
-  },
-  {
-    "id": "lot",
-    "name": "Lot",
-    "eraId": "patriarcas",
-    "timeframe": "~2000–1900 a.e.c.",
-    "place": "Ur → Harán → Sodoma (valle del Jordán)",
-    "portraitSrc": "assets/portrait-lot.jpg",
-    "mapSrc": "assets/mapa-lot.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Sobrino de Abrahán. Viajó con él hacia Canaán, pero al haber disputas entre pastores eligió para sí la fértil llanura del Jordán y terminó viviendo en Sodoma. Fue librado milagrosamente de la destrucción de esa ciudad por dos ángeles, aunque perdió a su esposa, que miró atrás. Pedro lo llama \"justo Lot\", cuya alma justa se atormentaba viendo la conducta inmoral de sus vecinos.",
-    "passages": [
-      {
-        "book": "genesis",
-        "chapter": 13,
-        "label": "Génesis 13 (separación)"
-      },
-      {
-        "book": "genesis",
-        "chapter": 19,
-        "label": "Génesis 19 (destrucción de Sodoma)"
-      },
-      {
-        "book": "pedro2",
-        "chapter": 2,
-        "label": "2 Pedro 2:7–8 (llamado justo)"
-      }
-    ],
-    "life": {
-      "start": -2050,
-      "end": -1950,
-      "approx": true
-    },
-    "map": {
-      "lugares": [
-        "ur",
-        "haran",
-        "canaan",
-        "egipto",
-        "valle-jordan",
-        "sodoma",
-        "zoar"
-      ],
-      "etiquetas": [
-        "ur",
-        "haran",
-        "egipto",
-        "valle-jordan",
-        "zoar"
-      ],
-      "ruta": true
     }
   },
   {
@@ -186,6 +135,59 @@
     "life": {
       "start": -2018,
       "end": -1843
+    }
+  },
+  {
+    "id": "lot",
+    "name": "Lot",
+    "eraId": "patriarcas",
+    "timeframe": "Época de Abrahán",
+    "place": "Ur → Harán → Sodoma (valle del Jordán)",
+    "portraitSrc": "assets/portrait-lot.jpg",
+    "mapSrc": "assets/mapa-lot.png",
+    "mapPos": "50% 50%",
+    "knownFor": "Sobrino de Abrahán. Viajó con él hacia Canaán, pero al haber disputas entre pastores eligió para sí la fértil llanura del Jordán y terminó viviendo en Sodoma. Fue librado milagrosamente de la destrucción de esa ciudad por dos ángeles, aunque perdió a su esposa, que miró atrás. Pedro lo llama \"justo Lot\", cuya alma justa se atormentaba viendo la conducta inmoral de sus vecinos.",
+    "passages": [
+      {
+        "book": "genesis",
+        "chapter": 13,
+        "label": "Génesis 13 (separación)"
+      },
+      {
+        "book": "genesis",
+        "chapter": 19,
+        "label": "Génesis 19 (destrucción de Sodoma)"
+      },
+      {
+        "book": "pedro2",
+        "chapter": 2,
+        "label": "2 Pedro 2:7–8 (llamado justo)"
+      }
+    ],
+    "life": {
+      "start": -2015,
+      "end": -1915,
+      "approx": true,
+      "estimate": true
+    },
+    "map": {
+      "lugares": [
+        "ur",
+        "haran",
+        "canaan",
+        "egipto",
+        "valle-jordan",
+        "sodoma",
+        "zoar"
+      ],
+      "etiquetas": [
+        "ur",
+        "haran",
+        "egipto",
+        "valle-jordan",
+        "zoar"
+      ],
+      "ruta": true
     }
   },
   {
@@ -314,7 +316,8 @@
     "life": {
       "start": -1900,
       "end": -1760,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -408,7 +411,8 @@
     "life": {
       "start": -1773,
       "end": -1660,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -474,8 +478,8 @@
   {
     "id": "job",
     "name": "Job",
-    "eraId": "patriarcas",
-    "timeframe": "~1600 a.e.c. aprox.",
+    "eraId": "exodo",
+    "timeframe": "Prueba ~1613 a.e.c.",
     "place": "Tierra de Uz",
     "portraitSrc": "assets/portrait-job.jpg",
     "mapSrc": "assets/mapa-job.png",
@@ -499,9 +503,10 @@
       }
     ],
     "life": {
-      "start": -1700,
-      "end": -1500,
-      "approx": true
+      "start": -1613,
+      "end": -1473,
+      "approx": true,
+      "label": "Su prueba, c. 1613, y su muerte, c. 1473 a.e.c."
     },
     "map": {
       "lugares": [
@@ -509,6 +514,60 @@
       ],
       "ruta": false,
       "zoom": 55
+    }
+  },
+  {
+    "id": "miriam",
+    "name": "Míriam",
+    "eraId": "exodo",
+    "timeframe": "~1600–1474 a.e.c. aprox.",
+    "place": "Egipto; luego desierto",
+    "portraitSrc": "assets/portrait-miriam.jpg",
+    "mapSrc": "assets/mapa-miriam.png",
+    "mapPos": "50% 50%",
+    "knownFor": "Hermana de Moisés y Aarón. De niña vigiló con inteligencia la cesta donde flotaba el bebé Moisés y propuso a la hija del Faraón una nodriza hebrea (su propia madre). Profetisa y líder de las mujeres: dirigió el canto y danza tras cruzar el mar Rojo. Fue castigada temporalmente con lepra por murmurar contra Moisés, pero se recuperó y el pueblo esperó por ella antes de seguir viajando.",
+    "passages": [
+      {
+        "book": "exodo",
+        "chapter": 2,
+        "label": "Éxodo 2:1–10 (vigilando a Moisés)"
+      },
+      {
+        "book": "exodo",
+        "chapter": 15,
+        "label": "Éxodo 15:20–21 (canto victorioso)"
+      },
+      {
+        "book": "numeros",
+        "chapter": 12,
+        "label": "Números 12 (murmuración)"
+      }
+    ],
+    "life": {
+      "start": -1600,
+      "end": -1474,
+      "approx": true
+    },
+    "map": {
+      "lugares": [
+        "sucot-egipto",
+        "pi-hahirot",
+        "mara",
+        "elim",
+        "refidim",
+        "desierto-sinai",
+        "hazerot",
+        "sinai",
+        "cades-barnea"
+      ],
+      "etiquetas": [
+        "sucot-egipto",
+        "mara",
+        "sinai",
+        "hazerot",
+        "cades-barnea"
+      ],
+      "ruta": true
     }
   },
   {
@@ -581,6 +640,7 @@
     "mapPos": "50% 50%",
     "map": {
       "lugares": [
+        "madian",
         "sucot-egipto",
         "pi-hahirot",
         "mara",
@@ -593,7 +653,7 @@
       ],
       "etiquetas": [
         "sucot-egipto",
-        "mara",
+        "madian",
         "refidim",
         "sinai",
         "cades-barnea",
@@ -601,7 +661,7 @@
       ],
       "ruta": true
     },
-    "knownFor": "Criado en la corte egipcia pero educado en su identidad hebrea, huyó a Madián tras matar a un egipcio y pasó allí cuarenta años como pastor. Dios lo comisionó desde una zarza ardiente para liberar a Israel de la esclavitud. Después de las diez plagas, guio al pueblo a través del mar Rojo y, en el monte Sinaí, recibió los Diez Mandamientos y la Ley que organizaría la nación.",
+    "knownFor": "Criado en la corte egipcia e instruido en toda la sabiduría de los egipcios, huyó a Madián tras matar a un egipcio y pasó allí cuarenta años como pastor. Dios lo comisionó desde una zarza ardiente para liberar a Israel de la esclavitud. Después de las diez plagas, guio al pueblo a través del mar Rojo y, en el monte Sinaí, recibió los Diez Mandamientos y la Ley que organizaría la nación.",
     "passages": [
       {
         "book": "exodo",
@@ -625,60 +685,6 @@
     }
   },
   {
-    "id": "miriam",
-    "name": "Míriam",
-    "eraId": "exodo",
-    "timeframe": "~1592–1490 a.e.c. aprox.",
-    "place": "Egipto; luego desierto",
-    "portraitSrc": "assets/portrait-miriam.jpg",
-    "mapSrc": "assets/mapa-miriam.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Hermana de Moisés y Aarón. De niña vigiló con inteligencia la cesta donde flotaba el bebé Moisés y propuso a la hija del Faraón una nodriza hebrea (su propia madre). Profetisa y líder de las mujeres: dirigió el canto y danza tras cruzar el mar Rojo. Fue castigada temporalmente con lepra por murmurar contra Moisés, pero se recuperó y el pueblo esperó por ella antes de seguir viajando.",
-    "passages": [
-      {
-        "book": "exodo",
-        "chapter": 2,
-        "label": "Éxodo 2:1–10 (vigilando a Moisés)"
-      },
-      {
-        "book": "exodo",
-        "chapter": 15,
-        "label": "Éxodo 15:20–21 (canto victorioso)"
-      },
-      {
-        "book": "numeros",
-        "chapter": 12,
-        "label": "Números 12 (murmuración)"
-      }
-    ],
-    "life": {
-      "start": -1592,
-      "end": -1490,
-      "approx": true
-    },
-    "map": {
-      "lugares": [
-        "sucot-egipto",
-        "pi-hahirot",
-        "mara",
-        "elim",
-        "refidim",
-        "desierto-sinai",
-        "hazerot",
-        "sinai",
-        "cades-barnea"
-      ],
-      "etiquetas": [
-        "sucot-egipto",
-        "mara",
-        "sinai",
-        "hazerot",
-        "cades-barnea"
-      ],
-      "ruta": true
-    }
-  },
-  {
     "id": "zipora",
     "name": "Ziporá",
     "eraId": "exodo",
@@ -686,7 +692,7 @@
     "place": "Madián; luego Egipto",
     "mapSrc": "assets/mapa-zipora.png",
     "mapPos": "50% 50%",
-    "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo cuando el descuido de ese pacto puso una vida en peligro, aunque el relato no aclara si la de Moisés o la del niño. Moisés la envió de vuelta a Madián con su padre, y no volvieron a encontrarse hasta después del éxodo, cuando Jetró la llevó al campamento en el desierto.",
+    "knownFor": "Hija de Jetró, pastor de Madián, que se convirtió en esposa de Moisés cuando este huyó de Egipto. Valiente y decisiva: circuncidió a su hijo cuando el descuido de ese pacto puso una vida en peligro, aunque el relato no aclara si la de Moisés o la del niño. Al parecer volvió con sus padres a Madián, y tras el éxodo Jetró la llevó, junto con sus dos hijos, al campamento de Moisés en el desierto.",
     "passages": [
       {
         "book": "exodo",
@@ -707,7 +713,8 @@
     "life": {
       "start": -1580,
       "end": -1480,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -721,12 +728,12 @@
     "id": "core",
     "name": "Coré",
     "eraId": "exodo",
-    "timeframe": "~1513 a.e.c.",
+    "timeframe": "Poco después de 1512 a.e.c.",
     "place": "Desierto del Sinaí",
     "portraitSrc": "assets/portrait-core.jpg",
     "mapSrc": "assets/mapa-core.png",
     "mapPos": "50% 50%",
-    "knownFor": "Levita que lideró una rebelión contra el nombramiento de Moisés y Aarón junto a Datán y Abiram, con 250 hombres prominentes. Su argumento sonaba piadoso (\"la asamblea entera es santa\") pero encubría ambición. La tierra se abrió y se lo tragó junto a sus seguidores: un recordatorio solemne de que Jehová respalda a quienes él designa. Sus descendientes posteriores escribieron varios salmos y sirvieron fielmente.",
+    "knownFor": "Levita que lideró una rebelión contra el nombramiento de Moisés y Aarón junto a Datán y Abiram, con 250 hombres prominentes. Su argumento sonaba piadoso (\"la asamblea entera es santa\") pero encubría ambición. Jehová lo destruyó con fuego delante del tabernáculo, junto con los 250 rebeldes, mientras la tierra se tragaba a Datán y Abiram con sus casas: un recordatorio solemne de que Jehová respalda a quienes él designa. Sus hijos no murieron con él, y los \"hijos de Coré\" aparecen en los encabezamientos de varios salmos.",
     "passages": [
       {
         "book": "numeros",
@@ -741,13 +748,14 @@
       {
         "book": "salmos",
         "chapter": 84,
-        "label": "Salmo 84 (hijos de Coré, leales después)"
+        "label": "Salmo 84 (salmo de los hijos de Coré)"
       }
     ],
     "life": {
-      "start": -1550,
-      "end": -1513,
-      "approx": true
+      "start": -1512,
+      "end": -1511,
+      "approx": true,
+      "label": "Su rebelión, poco después de 1512 a.e.c."
     },
     "map": {
       "lugares": [
@@ -755,6 +763,80 @@
       ],
       "ruta": false,
       "zoom": 85
+    }
+  },
+  {
+    "id": "josue",
+    "name": "Josué",
+    "eraId": "exodo",
+    "timeframe": "~1512–1467 a.e.c.",
+    "place": "Egipto → desierto → Canaán",
+    "portraitSrc": "assets/portrait-josue.jpg",
+    "mapSrc": "assets/mapa-josue.png",
+    "mapPos": "50% 50%",
+    "knownFor": "Asistente fiel de Moisés desde joven, uno de los dos espías que dieron buen informe sobre Canaán. Sucedió a Moisés y dirigió la conquista de Canaán: Jericó, la coalición del sur y la del norte. Al final de su vida declaró: \"escoge hoy a quién sirvan... pero yo y mi casa serviremos a Jehová\". Su fidelidad contrasta con la generación infiel del desierto.",
+    "passages": [
+      {
+        "book": "exodo",
+        "chapter": 17,
+        "label": "Éxodo 17:8–13 (primera batalla)"
+      },
+      {
+        "book": "numeros",
+        "chapter": 13,
+        "label": "Números 13–14 (los espías)"
+      },
+      {
+        "book": "josue",
+        "chapter": 6,
+        "label": "Josué 1–6 (la conquista)"
+      },
+      {
+        "book": "josue",
+        "chapter": 24,
+        "label": "Josué 24 (discurso final)"
+      }
+    ],
+    "life": {
+      "start": -1512,
+      "end": -1467,
+      "approx": true,
+      "label": "Actividad documentada: 1512 – 1467 a.e.c."
+    },
+    "map": {
+      "lugares": [
+        "refidim",
+        "sinai",
+        "desierto-paran",
+        "sitim",
+        "jordan",
+        "guilgal",
+        "jerico",
+        "hai",
+        "betel",
+        "montes-ebal-guerizim",
+        "gabaon",
+        "maqueda",
+        "libna",
+        "lakis",
+        "eglon",
+        "hebron",
+        "debir",
+        "hazor",
+        "aguas-merom",
+        "siquem",
+        "silo",
+        "timnat-serah"
+      ],
+      "etiquetas": [
+        "sinai",
+        "jerico",
+        "gabaon",
+        "hebron",
+        "hazor",
+        "timnat-serah"
+      ],
+      "ruta": true
     }
   },
   {
@@ -797,7 +879,8 @@
     "life": {
       "start": -1500,
       "end": -1440,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -807,83 +890,10 @@
     }
   },
   {
-    "id": "josue",
-    "name": "Josué",
-    "eraId": "exodo",
-    "timeframe": "~1500–1390 a.e.c. aprox.",
-    "place": "Egipto → desierto → Canaán",
-    "portraitSrc": "assets/portrait-josue.jpg",
-    "mapSrc": "assets/mapa-josue.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Asistente fiel de Moisés desde joven, uno de los dos espías que dieron buen informe sobre Canaán. Sucedió a Moisés y dirigió la conquista de Canaán: Jericó, la coalición del sur y la del norte. Al final de su vida declaró: \"escoge hoy a quién sirvan... pero yo y mi casa serviremos a Jehová\". Su fidelidad contrasta con la generación infiel del desierto.",
-    "passages": [
-      {
-        "book": "exodo",
-        "chapter": 17,
-        "label": "Éxodo 17:8–13 (primera batalla)"
-      },
-      {
-        "book": "numeros",
-        "chapter": 13,
-        "label": "Números 13–14 (los espías)"
-      },
-      {
-        "book": "josue",
-        "chapter": 6,
-        "label": "Josué 1–6 (la conquista)"
-      },
-      {
-        "book": "josue",
-        "chapter": 24,
-        "label": "Josué 24 (discurso final)"
-      }
-    ],
-    "life": {
-      "start": -1500,
-      "end": -1390,
-      "approx": true
-    },
-    "map": {
-      "lugares": [
-        "refidim",
-        "sinai",
-        "desierto-paran",
-        "sitim",
-        "jordan",
-        "guilgal",
-        "jerico",
-        "hai",
-        "betel",
-        "montes-ebal-guerizim",
-        "gabaon",
-        "maqueda",
-        "libna",
-        "lakis",
-        "eglon",
-        "hebron",
-        "debir",
-        "hazor",
-        "aguas-merom",
-        "siquem",
-        "silo",
-        "timnat-serah"
-      ],
-      "etiquetas": [
-        "sinai",
-        "jerico",
-        "gabaon",
-        "hebron",
-        "hazor",
-        "timnat-serah"
-      ],
-      "ruta": true
-    }
-  },
-  {
     "id": "barac",
     "name": "Barac",
     "eraId": "jueces",
-    "timeframe": "~1250 a.e.c.",
+    "timeframe": "Época de los jueces",
     "place": "Quedes, Neftalí",
     "portraitSrc": "assets/portrait-barac.jpg",
     "mapSrc": "assets/mapa-barac.png",
@@ -904,7 +914,8 @@
     "life": {
       "start": -1280,
       "end": -1220,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -919,7 +930,7 @@
     "id": "debora",
     "name": "Débora",
     "eraId": "jueces",
-    "timeframe": "~1200 a.e.c.",
+    "timeframe": "Época de los jueces",
     "place": "Montañas de Efraín, Israel",
     "portraitSrc": "assets/portrait-debora.jpg",
     "mapSrc": "assets/mapa-debora.png",
@@ -948,9 +959,10 @@
       }
     ],
     "life": {
-      "start": -1240,
-      "end": -1180,
-      "approx": true
+      "start": -1280,
+      "end": -1200,
+      "approx": true,
+      "estimate": true
     }
   },
   {
@@ -978,7 +990,8 @@
     "life": {
       "start": -1200,
       "end": -1100,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1018,7 +1031,8 @@
     "life": {
       "start": -1190,
       "end": -1150,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1062,7 +1076,8 @@
     "life": {
       "start": -1170,
       "end": -1078,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1101,7 +1116,8 @@
     "life": {
       "start": -1160,
       "end": -1085,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1143,7 +1159,61 @@
     "life": {
       "start": -1150,
       "end": -1090,
+      "approx": true,
+      "estimate": true
+    }
+  },
+  {
+    "id": "jonatan",
+    "name": "Jonatán",
+    "eraId": "jueces",
+    "timeframe": "~1138–1078 a.e.c.",
+    "place": "Guibea, Benjamín",
+    "portraitSrc": "assets/portrait-jonatan.jpg",
+    "mapSrc": "assets/mapa-jonatan.png",
+    "mapPos": "50% 50%",
+    "knownFor": "Hijo mayor del rey Saúl y amigo fiel de David. Hombre valiente que, con solo su escudero, atacó una guarnición filistea confiando en que a Jehová nada le impide salvar, ya sea con muchos o con pocos (1 Samuel 14:6). Renunció voluntariamente a su derecho al trono al reconocer que Jehová había elegido a David, y su amistad con este es un ejemplo de lealtad desinteresada.",
+    "passages": [
+      {
+        "book": "samuel1",
+        "chapter": 14,
+        "label": "1 Samuel 14 (valentía contra los filisteos)"
+      },
+      {
+        "book": "samuel1",
+        "chapter": 18,
+        "label": "1 Samuel 18:1–4 (pacto con David)"
+      },
+      {
+        "book": "samuel1",
+        "chapter": 20,
+        "label": "1 Samuel 20 (lealtad y advertencia)"
+      }
+    ],
+    "life": {
+      "start": -1138,
+      "end": -1078,
       "approx": true
+    },
+    "map": {
+      "lugares": [
+        "guibea",
+        "gueba-micmas",
+        "micmas",
+        "guilgal-betel",
+        "hores",
+        "bet-san",
+        "jabes-galaad",
+        "zela"
+      ],
+      "etiquetas": [
+        "guibea",
+        "micmas",
+        "hores",
+        "bet-san",
+        "jabes-galaad"
+      ],
+      "ruta": true
     }
   },
   {
@@ -1155,7 +1225,7 @@
     "portraitSrc": "assets/portrait-manoah.jpg",
     "mapSrc": "assets/mapa-manoah.png",
     "mapPos": "50% 50%",
-    "knownFor": "Padre de Sansón. Él y su esposa eran estériles, pero un ángel les anunció el nacimiento del futuro juez y les dio instrucciones sobre el voto de nazareno para el niño. Manóah oró pidiendo más detalles y recibió al mensajero una segunda vez; quiso ofrecerle un sacrificio y le preguntó su nombre, pero el ángel se lo negó: \"¿No ves que es algo maravilloso?\". Ejemplo de padres que crían a un hijo según las instrucciones de Dios.",
+    "knownFor": "Padre de Sansón. Su esposa era estéril, pero un ángel les anunció el nacimiento del futuro juez y les dio instrucciones sobre el voto de nazareno para el niño. Manóah oró pidiendo más detalles y recibió al mensajero una segunda vez; quiso ofrecerle un sacrificio y le preguntó su nombre, pero el ángel le respondió que era algo maravilloso (Jueces 13:18). Ejemplo de padres que crían a un hijo según las instrucciones de Dios.",
     "passages": [
       {
         "book": "jueces",
@@ -1166,7 +1236,8 @@
     "life": {
       "start": -1130,
       "end": -1090,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1201,7 +1272,8 @@
     "life": {
       "start": -1118,
       "end": -1078,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1228,7 +1300,7 @@
     "id": "david",
     "name": "David",
     "eraId": "jueces",
-    "timeframe": "~1100–1000 a.e.c.",
+    "timeframe": "1107–1037 a.e.c.",
     "place": "Belén y Jerusalén",
     "portraitSrc": "assets/portrait-david.jpg",
     "mapSrc": "assets/mapa-david.png",
@@ -1284,59 +1356,6 @@
     }
   },
   {
-    "id": "jonatan",
-    "name": "Jonatán",
-    "eraId": "jueces",
-    "timeframe": "~1098–1078 a.e.c.",
-    "place": "Guibea, Benjamín",
-    "portraitSrc": "assets/portrait-jonatan.jpg",
-    "mapSrc": "assets/mapa-jonatan.png",
-    "mapPos": "50% 50%",
-    "knownFor": "Hijo mayor del rey Saúl y amigo fiel de David. Hombre valiente que, con solo su escudero, atacó una guarnición filistea confiando en que a Jehová nada le impide salvar, ya sea con muchos o con pocos (1 Samuel 14:6). Renunció voluntariamente a su derecho al trono al reconocer que Jehová había elegido a David, y su amistad con este es un ejemplo de lealtad desinteresada.",
-    "passages": [
-      {
-        "book": "samuel1",
-        "chapter": 14,
-        "label": "1 Samuel 14 (valentía contra los filisteos)"
-      },
-      {
-        "book": "samuel1",
-        "chapter": 18,
-        "label": "1 Samuel 18:1–4 (pacto con David)"
-      },
-      {
-        "book": "samuel1",
-        "chapter": 20,
-        "label": "1 Samuel 20 (lealtad y advertencia)"
-      }
-    ],
-    "life": {
-      "start": -1098,
-      "end": -1078,
-      "approx": true
-    },
-    "map": {
-      "lugares": [
-        "guibea",
-        "gueba-micmas",
-        "micmas",
-        "guilgal-betel",
-        "hores",
-        "bet-san",
-        "jabes-galaad",
-        "zela"
-      ],
-      "etiquetas": [
-        "guibea",
-        "micmas",
-        "hores",
-        "bet-san",
-        "jabes-galaad"
-      ],
-      "ruta": true
-    }
-  },
-  {
     "id": "abigail",
     "name": "Abigaíl",
     "eraId": "jueces",
@@ -1356,7 +1375,8 @@
     "life": {
       "start": -1080,
       "end": -1040,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
@@ -1373,7 +1393,7 @@
     "id": "salomon",
     "name": "Salomón",
     "eraId": "jueces",
-    "timeframe": "~1037–998 a.e.c.",
+    "timeframe": "Reinó 1037–997 a.e.c.",
     "place": "Jerusalén",
     "portraitSrc": "assets/portrait-salomon.jpg",
     "mapSrc": "assets/mapa-salomon.png",
@@ -1418,16 +1438,16 @@
       }
     ],
     "life": {
-      "start": -1057,
-      "end": -998,
-      "approx": true
+      "start": -1037,
+      "end": -997,
+      "label": "Su reinado: 1037 – 997 a.e.c."
     }
   },
   {
     "id": "elias",
     "name": "Elías",
     "eraId": "reino_dividido",
-    "timeframe": "~940 a.e.c.",
+    "timeframe": "~940–906 a.e.c.",
     "place": "Reino del norte, Israel",
     "portraitSrc": "assets/portrait-elias.jpg",
     "mapSrc": "assets/mapa-elias.png",
@@ -1475,20 +1495,21 @@
     ],
     "life": {
       "start": -940,
-      "end": -860,
-      "approx": true
+      "end": -906,
+      "approx": true,
+      "label": "Ministerio: c. 940 – 906 a.e.c."
     }
   },
   {
     "id": "eliseo",
     "name": "Eliseo",
     "eraId": "reino_dividido",
-    "timeframe": "~905–800 a.e.c. aprox.",
+    "timeframe": "~920–845 a.e.c. aprox.",
     "place": "Abelmehola → Israel (reino del norte)",
     "portraitSrc": "assets/portrait-eliseo.jpg",
     "mapSrc": "assets/mapa-eliseo.png",
     "mapPos": "50% 50%",
-    "knownFor": "Sucesor de Elías, labrador que abandonó sus bueyes para seguirlo tras recibir el manto profético. Pidió \"dos partes de su espíritu\" y realizó el doble de milagros: multiplicó el aceite de una viuda, resucitó al hijo de la sunemita, curó a Naamán de lepra e hizo flotar un hacha. Sirvió discretamente a los reyes de Israel, guiándolos en guerras contra Aram.",
+    "knownFor": "Sucesor de Elías, labrador que abandonó sus bueyes para seguirlo tras recibir el manto profético. Pidió una porción doble del espíritu de Elías y realizó muchos milagros: multiplicó el aceite de una viuda, resucitó al hijo de la sunemita, curó a Naamán de lepra e hizo flotar un hacha. Sirvió discretamente a los reyes de Israel, guiándolos en guerras contra Aram.",
     "passages": [
       {
         "book": "reyes1",
@@ -1508,8 +1529,9 @@
     ],
     "life": {
       "start": -920,
-      "end": -800,
-      "approx": true
+      "end": -845,
+      "approx": true,
+      "label": "Ministerio: hasta antes de 844 a.e.c."
     },
     "map": {
       "lugares": [
@@ -1539,7 +1561,7 @@
     "id": "jonas",
     "name": "Jonás",
     "eraId": "reino_dividido",
-    "timeframe": "~844 a.e.c. aprox.",
+    "timeframe": "~844–804 a.e.c.",
     "place": "Gat-hefer, Israel; misión a Nínive (Asiria)",
     "portraitSrc": "assets/portrait-jonas.jpg",
     "mapSrc": "assets/mapa-jonas.png",
@@ -1563,9 +1585,10 @@
       }
     ],
     "life": {
-      "start": -870,
-      "end": -800,
-      "approx": true
+      "start": -844,
+      "end": -804,
+      "approx": true,
+      "label": "Ministerio con Jeroboán II: c. 844 – 804 a.e.c."
     },
     "map": {
       "lugares": [
@@ -1611,7 +1634,8 @@
     "life": {
       "start": -778,
       "end": -732,
-      "approx": true
+      "approx": true,
+      "label": "Ministerio: c. 778 – 732 a.e.c."
     },
     "map": {
       "lugares": [
@@ -1665,12 +1689,12 @@
     "id": "jeremias",
     "name": "Jeremías",
     "eraId": "reino_dividido",
-    "timeframe": "~647–580 a.e.c.",
+    "timeframe": "~647–607 a.e.c.",
     "place": "Anatot, Benjamín; luego Jerusalén y Egipto",
     "portraitSrc": "assets/portrait-jeremias.jpg",
     "mapSrc": "assets/mapa-jeremias.png",
     "mapPos": "50% 50%",
-    "knownFor": "Profeta joven llamado por Dios siendo casi un adolescente: \"antes de formarte yo te conocí\". Pasó décadas advirtiendo de la caída de Jerusalén, siendo ridiculizado, encarcelado y arrojado a una cisterna, aunque nunca dejó de hablar. Escribió Lamentaciones tras la destrucción, con la famosa frase sobre la bondad de Jehová que renueva cada mañana. Ejemplo de aguante en un ministerio aparentemente infructuoso.",
+    "knownFor": "Profeta llamado por Dios en su juventud, en 647 a. e. c.: \"antes de estar formándote en el vientre, te conocí\". Pasó décadas advirtiendo de la caída de Jerusalén, siendo ridiculizado, encarcelado y arrojado a una cisterna, aunque nunca dejó de hablar. Escribió Lamentaciones tras la destrucción, con la famosa frase sobre la bondad de Jehová que renueva cada mañana. Ejemplo de aguante en un ministerio aparentemente infructuoso.",
     "passages": [
       {
         "book": "jeremias",
@@ -1695,8 +1719,9 @@
     ],
     "life": {
       "start": -647,
-      "end": -580,
-      "approx": true
+      "end": -607,
+      "approx": true,
+      "label": "Ministerio: 40 años desde 647 a.e.c."
     },
     "map": {
       "lugares": [
@@ -1750,14 +1775,15 @@
     "life": {
       "start": -640,
       "end": -536,
-      "approx": true
+      "approx": true,
+      "estimate": true
     }
   },
   {
     "id": "ester",
     "name": "Ester",
     "eraId": "exilio",
-    "timeframe": "~475 a.e.c.",
+    "timeframe": "Reina desde ~489 a.e.c.",
     "place": "Persia (Susa)",
     "portraitSrc": "assets/portrait-ester.jpg",
     "mapSrc": "assets/mapa-ester.png",
@@ -1783,21 +1809,22 @@
       }
     ],
     "life": {
-      "start": -510,
-      "end": -460,
-      "approx": true
+      "start": -493,
+      "end": -475,
+      "approx": true,
+      "label": "Su historia (libro de Ester): 493 – 475 a.e.c."
     }
   },
   {
     "id": "nehemias",
     "name": "Nehemías",
     "eraId": "exilio",
-    "timeframe": "~455 a.e.c. aprox.",
+    "timeframe": "~455 a.e.c.",
     "place": "Susa (Persia) → Jerusalén",
     "portraitSrc": "assets/portrait-nehemias.jpg",
     "mapSrc": "assets/mapa-nehemias.png",
     "mapPos": "50% 50%",
-    "knownFor": "Copero del rey persa Artajerjes, judío en la corte extranjera. Al enterarse del estado ruinoso de los muros de Jerusalén, ayunó y oró, y pidió permiso para reconstruirlos. Superó la oposición de Sanbalat y Tobías, completando la obra en 52 días. Como gobernador rechazó el salario debido y corrigió abusos económicos; organizó una lectura pública de la Ley que produjo un gran despertar espiritual.",
+    "knownFor": "Copero del rey persa Artajerjes, judío en la corte extranjera. Al enterarse del estado ruinoso de los muros de Jerusalén, ayunó y oró, y pidió permiso para reconstruirlos. Superó la oposición de Sanbalat y Tobías, completando la obra en 52 días. Como gobernador rechazó el salario debido y corrigió abusos económicos; respaldó la lectura pública de la Ley que hizo Esdras, seguida de una asamblea de regocijo, ayuno y confesión de pecados.",
     "passages": [
       {
         "book": "nehemias",
@@ -1816,9 +1843,10 @@
       }
     ],
     "life": {
-      "start": -500,
-      "end": -420,
-      "approx": true
+      "start": -455,
+      "end": -443,
+      "approx": true,
+      "label": "Misión en Jerusalén: 455 – 443 a.e.c."
     },
     "map": {
       "lugares": [
@@ -1872,7 +1900,8 @@
     "life": {
       "start": -22,
       "end": 55,
-      "approx": true
+      "approx": true,
+      "estimate": true
     }
   },
   {
@@ -1905,68 +1934,14 @@
     "life": {
       "start": -10,
       "end": 45,
-      "approx": true
+      "approx": true,
+      "estimate": true
     },
     "map": {
       "lugares": [
         "betania"
       ],
       "ruta": true
-    }
-  },
-  {
-    "id": "pedro",
-    "name": "Pedro",
-    "eraId": "iglesia",
-    "timeframe": "~30–60 e.c.",
-    "place": "Galilea, luego Jerusalén y otras regiones",
-    "portraitSrc": "assets/portrait-pedro.jpg",
-    "mapSrc": "assets/mapa-pedro.png",
-    "mapPos": "50% 50%",
-    "map": {
-      "lugares": [
-        "betsaida",
-        "capernaum",
-        "jerusalen",
-        "samaria",
-        "lida",
-        "jope",
-        "cesarea",
-        "antioquia-siria",
-        "babilonia"
-      ],
-      "etiquetas": [
-        "betsaida",
-        "capernaum",
-        "jerusalen",
-        "jope",
-        "cesarea",
-        "babilonia"
-      ],
-      "ruta": true
-    },
-    "knownFor": "Pescador de Galilea junto con su hermano Andrés, fue uno de los primeros discípulos llamados por Jesús. Reconocido por su carácter impulsivo, en una ocasión negó conocer a Jesús tres veces, pero luego fue restaurado y encomendado a cuidar de sus seguidores. Después de Pentecostés se convirtió en un líder destacado de la congregación en Jerusalén y predicó tanto a judíos como a los primeros gentiles convertidos.",
-    "passages": [
-      {
-        "book": "mateo",
-        "chapter": 16,
-        "label": "Mateo 16 (confiesa a Jesús como el Cristo)"
-      },
-      {
-        "book": "hechos",
-        "chapter": 2,
-        "label": "Hechos 2 (Pentecostés)"
-      },
-      {
-        "book": "hechos",
-        "chapter": 10,
-        "label": "Hechos 10 (Cornelio, el primer gentil)"
-      }
-    ],
-    "life": {
-      "start": -5,
-      "end": 64,
-      "approx": true
     }
   },
   {
@@ -2003,7 +1978,8 @@
     "life": {
       "start": -2,
       "end": 32,
-      "approx": true
+      "approx": true,
+      "estimate": true
     }
   },
   {
@@ -2066,6 +2042,62 @@
     "life": {
       "start": -2,
       "end": 33
+    }
+  },
+  {
+    "id": "pedro",
+    "name": "Pedro",
+    "eraId": "iglesia",
+    "timeframe": "~30–60 e.c.",
+    "place": "Galilea, luego Jerusalén y otras regiones",
+    "portraitSrc": "assets/portrait-pedro.jpg",
+    "mapSrc": "assets/mapa-pedro.png",
+    "mapPos": "50% 50%",
+    "map": {
+      "lugares": [
+        "betsaida",
+        "capernaum",
+        "jerusalen",
+        "samaria",
+        "lida",
+        "jope",
+        "cesarea",
+        "antioquia-siria",
+        "babilonia"
+      ],
+      "etiquetas": [
+        "betsaida",
+        "capernaum",
+        "jerusalen",
+        "jope",
+        "cesarea",
+        "babilonia"
+      ],
+      "ruta": true
+    },
+    "knownFor": "Pescador de Galilea junto con su hermano Andrés, fue uno de los primeros discípulos llamados por Jesús. Reconocido por su carácter impulsivo, en una ocasión negó conocer a Jesús tres veces, pero luego fue restaurado y encomendado a cuidar de sus seguidores. Después de Pentecostés se convirtió en un líder destacado de la congregación en Jerusalén y predicó tanto a judíos como a los primeros gentiles convertidos.",
+    "passages": [
+      {
+        "book": "mateo",
+        "chapter": 16,
+        "label": "Mateo 16 (confiesa a Jesús como el Cristo)"
+      },
+      {
+        "book": "hechos",
+        "chapter": 2,
+        "label": "Hechos 2 (Pentecostés)"
+      },
+      {
+        "book": "hechos",
+        "chapter": 10,
+        "label": "Hechos 10 (Cornelio, el primer gentil)"
+      }
+    ],
+    "life": {
+      "start": -5,
+      "end": 64,
+      "approx": true,
+      "estimate": true
     }
   },
   {
@@ -2148,21 +2180,22 @@
       }
     ],
     "life": {
-      "start": 5,
+      "start": 34,
       "end": 65,
-      "approx": true
+      "approx": true,
+      "label": "Actividad documentada: c. 34 – 65 e.c."
     }
   },
   {
     "id": "timoteo",
     "name": "Timoteo",
     "eraId": "iglesia",
-    "timeframe": "~29–100 e.c. aprox.",
+    "timeframe": "~49–64 e.c.",
     "place": "Listra, Galacia; luego viajes misioneros",
     "portraitSrc": "assets/portrait-timoteo.jpg",
     "mapSrc": "assets/mapa-timoteo.png",
     "mapPos": "50% 50%",
-    "knownFor": "Colaborador cercano de Pablo, hijo de madre judía creyente (Eunice) y abuela creyente (Loída), que lo instruyeron en las santas Escrituras desde bebé. Se unió a Pablo en su segundo viaje misionero siendo joven y llegó a dirigir la congregación de Éfeso. Recibió dos cartas personales llenas de consejos prácticos: \"que nadie tenga en poco tu juventud\".",
+    "knownFor": "Colaborador cercano de Pablo, hijo de madre judía creyente (Eunice) y abuela creyente (Loída), que lo instruyeron en las santas Escrituras desde la infancia. Se unió a Pablo en su segundo viaje misionero siendo joven y permaneció en Éfeso, bajo la dirección de Pablo, con autoridad para nombrar superintendentes. Recibió dos cartas personales llenas de consejos prácticos: \"que nadie tenga en poco tu juventud\".",
     "passages": [
       {
         "book": "hechos",
@@ -2181,9 +2214,10 @@
       }
     ],
     "life": {
-      "start": 29,
-      "end": 100,
-      "approx": true
+      "start": 49,
+      "end": 64,
+      "approx": true,
+      "label": "Actividad documentada: c. 49 – 64 e.c."
     },
     "map": {
       "lugares": [

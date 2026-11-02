@@ -137,3 +137,15 @@ Fechas ✔: Noé 2970–2020 ([it-2 pág. 990 párr. 4](https://wol.jw.org/es/wo
 2. Corregir `sinai` a ~28.54 N en `data/lugares.json` y regenerar los 5 mapas con `node tools/generar-mapas.mjs`.
 3. Decidir qué hacer con las 17 barras sin fuente: ocultarlas, rotularlas como «estimación» o sustituirlas por el dato publicado (p. ej., «Prueba ~1613»).
 4. Decidir el criterio de orden de las tarjetas sin fecha documentada.
+
+## Aplicado
+
+Tras esta auditoría se aplicaron las correcciones:
+
+- **Fechas**: Míriam, Jonatán, Job (con su era, ahora `exodo`), Josué, Elías, Eliseo, Coré, Ester, Salomón, David (rótulo de época), Jonás, Isaías, Jeremías, Nehemías, Pablo y Timoteo. Donde lo publicado es un tramo (reinado, ministerio, actividad) la barra lleva ese rótulo en vez de «vida».
+- **Estimaciones**: 21 barras sin fecha publicada llevan `estimate: true` y se ven más tenues con la etiqueta «Estimación:» (Abel, Lot, Rebeca, Rubén, Ziporá, Rahab, Barac, Débora, Ana, Gedeón, Samuel, Noemí, Rut, Manóah, Sansón, Abigaíl, Daniel, María, Marta, Pedro, Juan el Bautista). Barac y Débora se alinearon: son contemporáneos.
+- **Texto**: Coré (murió por fuego), Manóah (solo su esposa era estéril; sin cita no literal), Moisés (instruido en la sabiduría de los egipcios), Noé («años, probablemente varias décadas»), Eliseo (sin «el doble de milagros»), Jeremías («en su juventud», cita literal de Perspicacia), Timoteo, Ziporá y Nehemías (respaldó la lectura de Esdras: [it-2 pág. 198 párr. 4](https://wol.jw.org/es/wol/d/r4/lp-s/1200003576#p5)).
+- **Mapas**: el Sinaí pasa a 33.9755 E, 28.5392 N (Jebel Musa) y se regeneraron los de Moisés, Aarón, Míriam, Josué y Elías. El de Moisés incluye ahora Madián.
+- **Orden del mazo**: por eras y, dentro de cada una, por el inicio de la barra de vida.
+
+Los plazos de época (`timeframe`) de las tarjetas con estimación se conservaron tal cual, salvo Lot, Barac y Débora.
