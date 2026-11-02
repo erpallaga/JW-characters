@@ -16,6 +16,10 @@ compilación: se abre `index.html` y funciona.
   la era, el nombre y la época al lado; detrás, dónde vivió, por qué se le conoce, los
   pasajes enlazados a la Biblia en línea de jw.org y una barra que sitúa su vida entre
   4026 a. e. c. y 100 e. c.
+- **Tarjeta a escala de pantalla** (escritorio, vista «Una por una»): la tarjeta toma el
+  alto de la ventana en vez de quedarse en 570 × 460, sin scroll. El reverso reparte el
+  texto y los pasajes a la izquierda, y el mapa y la línea de vida a la derecha. En móvil
+  y en la cuadrícula no cambia nada.
 - **Modo repaso**: oculta los nombres para adivinar quién es antes de darle la vuelta.
 - **Filtro por eras** y barajado.
 - **Imágenes encuadradas**: al subirla desde el panel, la foto se recorta al marco de
