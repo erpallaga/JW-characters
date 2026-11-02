@@ -6,7 +6,7 @@
 //   node tools/probar-modelo.mjs
 
 import assert from 'node:assert/strict';
-import { rebasar, ficherosDelCommit, resumen, estadoDe, hayCambios } from '../admin/model.js';
+import { rebasar, ficherosDelCommit, resumen, estadoDe, hayCambios, restaurarMapas } from '../admin/model.js';
 const C = (id, extra = {}) => ({ id, name: id.toUpperCase(), eraId: 'e', portraitSrc: `assets/portrait-${id}.jpg`, mapSrc: `assets/mapa-${id}.png`, passages: [], ...extra });
 const eras = [{ id: 'e', label: 'E', range: '' }];
 const base = { characters: [C('a'), C('b'), C('c')], eras };
@@ -90,5 +90,21 @@ const clone = x => JSON.parse(JSON.stringify(x));
   const f = ficherosDelCommit(d, base, { 'assets/portrait-a.jpg': { blob: 1 } });
   assert.deepEqual(f.imagenes.map(([ruta]) => ruta), ['assets/portrait-a.jpg']);
   assert.deepEqual(f.textos, []);
+}
+// Un borrador antiguo que llega sin la especificación de un mapa dibujado no
+// debe borrarla al publicar; un mapa quitado a propósito, en cambio, se respeta.
+{
+  const pub = clone(base);
+  pub.characters[0].map = { lugares: ['x'], ruta: false };
+  pub.characters[0].mapPos = '50% 50%';
+  const viejo = clone(pub);
+  delete viejo.characters[0].map; viejo.characters[0].mapPos = '65% 15%';
+  assert.deepEqual(restaurarMapas(viejo, pub), ['a']);
+  assert.deepEqual(viejo.characters[0].map, pub.characters[0].map);
+  assert.equal(viejo.characters[0].mapPos, '50% 50%');
+  const quitado = clone(pub);
+  delete quitado.characters[0].map; delete quitado.characters[0].mapSrc;
+  assert.deepEqual(restaurarMapas(quitado, pub), []);
+  assert.equal(quitado.characters[0].map, undefined);
 }
 console.log('admin/model.js: todas las pruebas pasan.');

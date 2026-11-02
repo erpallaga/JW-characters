@@ -164,6 +164,29 @@ export function rebasar(borrador, base, remoto) {
   };
 }
 
+/**
+ * Un mapa dibujado (PNG) guarda su especificación en `map`. Si un borrador viejo
+ * llega sin ella —ya pasó con las 18 tarjetas antiguas—, publicarlo borraría la
+ * especificación y dejaría el mapa sin poder rehacerse. Aquí se devuelve a la
+ * tarjeta la publicada, junto con su `mapPos`, siempre que el borrador siga
+ * apuntando al mismo PNG; un mapa quitado a propósito (sin `mapSrc`) se respeta.
+ * Cambia el borrador en el sitio y devuelve los ids que arregló.
+ */
+export function restaurarMapas(borrador, publicado) {
+  const P = Object.fromEntries((publicado.characters || []).map(c => [c.id, c]));
+  const arregladas = [];
+  for (const c of borrador.characters || []) {
+    const p = P[c.id];
+    if (!p || !p.map || c.map) continue;
+    if (c.mapSrc && c.mapSrc === p.mapSrc && /\.png$/i.test(c.mapSrc)) {
+      c.map = JSON.parse(JSON.stringify(p.map));
+      if (p.mapPos) c.mapPos = p.mapPos;
+      arregladas.push(c.id);
+    }
+  }
+  return arregladas;
+}
+
 /** Rutas de imagen a las que apunta alguna tarjeta. */
 export function rutasEnUso(personajes) {
   const enUso = new Set();

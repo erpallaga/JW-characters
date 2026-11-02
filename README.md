@@ -23,7 +23,7 @@ compilación: se abre `index.html` y funciona.
 - **Modo repaso**: oculta los nombres para adivinar quién es antes de darle la vuelta.
 - **Filtro por eras** y barajado.
 - **Imágenes encuadradas**: al subirla desde el panel, la foto se recorta al marco de
-  la tarjeta —3:4 el retrato, 5:3 el mapa— y la tarjeta la enseña entera. El encuadre
+  la tarjeta —5:6 el retrato, 5:3 el mapa— y la tarjeta la enseña entera. El encuadre
   se decide una vez y lo ve todo el mundo.
 - **Panel de administración** para añadir, editar y ocultar tarjetas sin tocar el código.
 

@@ -56,7 +56,7 @@ para revisarlas antes de publicar.
 ## Las imágenes
 
 Se suben desde el propio formulario. Al elegir el fichero se abre el **encuadre**:
-la foto dentro del marco de la tarjeta —vertical 3:4 el retrato, apaisado 5:3 el
+la foto dentro del marco de la tarjeta —vertical 5:6 el retrato, apaisado 5:3 el
 mapa—, que se arrastra y se acerca con la barra hasta que se ve lo que tiene que
 verse. Lo que se guarda ya está recortado, así que en el mazo se ve exactamente eso;
 no hay que ajustar nada después.
