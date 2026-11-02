@@ -39,7 +39,8 @@
         "lat": 33
       },
       "zoom": 20
-    }
+    },
+    "portraitX": 38
   },
   {
     "id": "noe",
@@ -79,7 +80,8 @@
       "start": -2970,
       "end": -2020,
       "approx": true
-    }
+    },
+    "portraitX": 55
   },
   {
     "id": "abraham",
@@ -237,7 +239,8 @@
     "life": {
       "start": -2008,
       "end": -1881
-    }
+    },
+    "portraitX": 67
   },
   {
     "id": "isaac",
@@ -514,7 +517,8 @@
       ],
       "ruta": false,
       "zoom": 55
-    }
+    },
+    "portraitX": 67
   },
   {
     "id": "miriam",
@@ -682,7 +686,8 @@
     "life": {
       "start": -1593,
       "end": -1473
-    }
+    },
+    "portraitX": 45
   },
   {
     "id": "zipora",
@@ -963,7 +968,8 @@
       "end": -1200,
       "approx": true,
       "estimate": true
-    }
+    },
+    "portraitX": 60
   },
   {
     "id": "ana",
@@ -1089,7 +1095,8 @@
         "belen"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 26
   },
   {
     "id": "noemi",
@@ -1161,7 +1168,8 @@
       "end": -1090,
       "approx": true,
       "estimate": true
-    }
+    },
+    "portraitX": 78
   },
   {
     "id": "jonatan",
@@ -1214,7 +1222,8 @@
         "jabes-galaad"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 41
   },
   {
     "id": "manoah",
@@ -1353,7 +1362,8 @@
     "life": {
       "start": -1107,
       "end": -1037
-    }
+    },
+    "portraitX": 24
   },
   {
     "id": "abigail",
@@ -1387,7 +1397,8 @@
         "hebron"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 100
   },
   {
     "id": "salomon",
@@ -1441,7 +1452,8 @@
       "start": -1037,
       "end": -997,
       "label": "Su reinado: 1037 – 997 a.e.c."
-    }
+    },
+    "portraitX": 60
   },
   {
     "id": "elias",
@@ -1597,7 +1609,8 @@
         "ninive"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 7
   },
   {
     "id": "isaias",
@@ -1683,7 +1696,8 @@
         "siloam"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 2
   },
   {
     "id": "jeremias",
@@ -1777,7 +1791,8 @@
       "end": -536,
       "approx": true,
       "estimate": true
-    }
+    },
+    "portraitX": 36
   },
   {
     "id": "ester",
@@ -1854,7 +1869,8 @@
         "jerusalen"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 59
   },
   {
     "id": "maria",
@@ -1902,7 +1918,8 @@
       "end": 55,
       "approx": true,
       "estimate": true
-    }
+    },
+    "portraitX": 71
   },
   {
     "id": "marta",
@@ -1942,7 +1959,8 @@
         "betania"
       ],
       "ruta": true
-    }
+    },
+    "portraitX": 41
   },
   {
     "id": "juanbautista",
@@ -2042,7 +2060,8 @@
     "life": {
       "start": -2,
       "end": 33
-    }
+    },
+    "portraitX": 41
   },
   {
     "id": "pedro",
@@ -2098,7 +2117,8 @@
       "end": 64,
       "approx": true,
       "estimate": true
-    }
+    },
+    "portraitX": 84
   },
   {
     "id": "pablo",
@@ -2184,7 +2204,8 @@
       "end": 65,
       "approx": true,
       "label": "Actividad documentada: c. 34 – 65 e.c."
-    }
+    },
+    "portraitX": 36
   },
   {
     "id": "timoteo",

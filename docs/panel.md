@@ -171,6 +171,13 @@ ministerio), `label` sustituye al rótulo: «Su reinado: 1037 – 997 a.e.c.». 
 son la casilla *Estimación* y el campo *Rótulo propio* de la línea de tiempo. La
 auditoría que justifica cada caso está en `docs/fact-check/auditoria-jw-rag.md`.
 
+## El encuadre del retrato
+
+Los retratos antiguos son apaisados (1200 × 600) y la tarjeta enseña una ventana
+vertical de ellos. `portraitX` (0–100, por defecto 50) dice a qué altura horizontal de
+la imagen se centra esa ventana: 0 es el borde izquierdo y 100 el derecho. Un retrato
+subido desde el panel sale ya recortado y no lo necesita.
+
 ## Los datos
 
 - `data/characters.json` — los personajes.

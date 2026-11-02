@@ -42,7 +42,7 @@
     /* Frente: el retrato pasa de 3:4 a 5:6 (+11 % de superficie) y se ancla arriba,
        donde está la cara; lo que sobra se recorta por abajo. El nombre y los datos
        crecen con la altura de la ventana. */
-    body[data-view="single"] .jw-front-portrait { aspect-ratio: 5 / 6 !important; max-width: calc(100% - 300px) !important; background-position: 50% 18% !important; }
+    body[data-view="single"] .jw-front-portrait { aspect-ratio: 5 / 6 !important; max-width: calc(100% - 300px) !important; background-position-y: 18% !important; }
     body[data-view="single"] .jw-front-text { padding: 40px 48px !important; gap: 18px !important; }
     body[data-view="single"] .jw-front-name { font-size: clamp(52px, 9.4vh, 96px) !important; line-height: 1.02 !important; }
     body[data-view="single"] .jw-erarange { font-size: clamp(18px, 2.7vh, 26px) !important; }
@@ -115,7 +115,7 @@
     /* En vertical el retrato se queda todo lo que no pide el texto, en vez de
        una banda fija de 190 px con medio anverso vacío debajo. Anclado un poco
        más arriba de la mitad, que es donde suele estar la cara. */
-    .jw-front-portrait{width:100% !important;max-width:100% !important;height:auto !important;min-height:0 !important;flex:1 1 auto !important;border-radius:18px 18px 0 0 !important;background-position:50% 25% !important;}
+    .jw-front-portrait{width:100% !important;max-width:100% !important;height:auto !important;min-height:0 !important;flex:1 1 auto !important;border-radius:18px 18px 0 0 !important;background-position-y:25% !important;}
     .jw-front-text{flex:0 0 auto !important;padding:18px 22px 22px !important;}
     .jw-back-inner{flex-direction:column !important;gap:14px !important;overflow-y:auto !important;}
     .jw-back-content{min-height:0 !important;}
@@ -352,6 +352,7 @@ const SINGLE_FRONT_FACE_INNER_STYLE = { position: 'absolute', inset: 0, display:
 const SINGLE_BACK_FACE_BASE = { position: 'absolute', inset: 0, borderRadius: '18px', background: 'oklch(0.905 0.02 76)', border: '1px solid oklch(0.82 0.02 70)', cursor: 'pointer', transition: 'opacity .3s ease, transform .3s ease' };
 const SINGLE_BACK_FACE_INNER_STYLE = { position: 'absolute', inset: 0, padding: '24px', display: 'flex', flexDirection: 'row', gap: '22px', borderRadius: '18px' };
 
+const portraitX = (c) => `${typeof c.portraitX === 'number' ? c.portraitX : 50}% 50%`;
 const TIMELINE_MIN = -4026;
 const TIMELINE_MAX = 100;
 const TIMELINE_SPAN = TIMELINE_MAX - TIMELINE_MIN;
@@ -538,7 +539,7 @@ class Component extends DCLogic {
         portraitStyle: {
           position: 'relative', margin: '14px 14px 0', height: '70%', borderRadius: '110px 110px 10px 10px',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: c.portraitSrc ? `url(${c.portraitSrc})` : 'none',
-          backgroundSize: 'cover', backgroundPosition: '50% 50%',
+          backgroundSize: 'cover', backgroundPosition: portraitX(c),
           border: '1px solid oklch(0.82 0.02 70)', overflow: 'hidden',
         },
         eraPillStyle: { fontSize: '10.5px', fontWeight: 700, letterSpacing: '0.04em', color: primary, background: primarySoft, borderRadius: '999px', padding: '3px 10px' },
@@ -569,7 +570,7 @@ class Component extends DCLogic {
         quizPortraitStyle: {
           position: 'relative', width: '100%', height: '100%', borderRadius: '14px', overflow: 'hidden',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: single.portraitSrc ? `url(${single.portraitSrc})` : 'none',
-          backgroundSize: 'cover', backgroundPosition: '50% 50%',
+          backgroundSize: 'cover', backgroundPosition: portraitX(single),
         },
         mapImgStyle: single.mapSrc ? { position: 'absolute', inset: 0, backgroundImage: `url(${single.mapSrc})`, backgroundSize: 'cover', backgroundPosition: single.mapPos || '50% 50%', opacity: 1 } : { position: 'absolute', inset: 0, opacity: 0 },
         onClick: () => this.toggleFlip(single.id),
@@ -586,7 +587,7 @@ class Component extends DCLogic {
           position: 'relative', height: '100%', aspectRatio: '3 / 4', maxWidth: 'calc(100% - 220px)', flexShrink: 0,
           borderRadius: '18px 0 0 18px', overflow: 'hidden',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: single.portraitSrc ? `url(${single.portraitSrc})` : 'none',
-          backgroundSize: 'cover', backgroundPosition: '50% 50%',
+          backgroundSize: 'cover', backgroundPosition: portraitX(single),
         },
         innerStyle: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' },
         eraPillStyle: { fontSize: '11px', fontWeight: 700, letterSpacing: '0.04em', color: primary, background: primarySoft, borderRadius: '999px', padding: '4px 12px', width: 'fit-content', maxWidth: '100%' },

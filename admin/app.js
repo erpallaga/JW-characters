@@ -863,6 +863,7 @@ function campoImagen(c, tipo, pintarPrevia) {
     c[campo] = ruta;
     // Ya viene recortada a la proporción de la tarjeta: no hay que desplazarla.
     if (!esRetrato) c.mapPos = '50% 50%';
+    else delete c.portraitX;   // el retrato nuevo sale ya encuadrado
     guardarBorrador(); pintar(); pintarPrevia(); actualizarCabecera();
   };
 
