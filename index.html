@@ -24,6 +24,86 @@
   a:hover{color:oklch(0.34 0.1 255);}
   ::-webkit-scrollbar{height:8px;width:8px;}
   ::-webkit-scrollbar-thumb{background:oklch(0.82 0.02 70);border-radius:8px;}
+  /* Escritorio, vista «Una por una»: la tarjeta se escala con la ventana en vez
+     de quedarse en 570 × 460. La cabecera se reduce a una línea y la franja de
+     eras (que repite los chips) se oculta, para que la tarjeta quepa entera sin
+     scroll. El móvil y la cuadrícula no cambian. La altura es 100vh menos lo que
+     ocupan cabecera, chips, contador y márgenes (~205 px). */
+  @media (min-width: 900px) {
+    body[data-view="single"] .jw-eyebrow, body[data-view="single"] .jw-sub, body[data-view="single"] .jw-strip { display: none !important; }
+    body[data-view="single"] .jw-head { padding-top: 18px !important; padding-bottom: 6px !important; align-items: center !important; }
+    body[data-view="single"] .jw-h1 { font-size: 32px !important; }
+    body[data-view="single"] .jw-single-main { max-width: 1320px !important; padding-top: 6px !important; padding-bottom: 14px !important; gap: 10px !important; }
+    body[data-view="single"] .jw-single-wrap {
+      height: min(880px, max(440px, calc(100vh - 205px))) !important;
+      height: min(880px, max(440px, calc(100dvh - 205px))) !important;
+      max-width: min(1180px, calc((100vh - 205px) * 1.65)) !important;
+    }
+    /* Frente: el retrato pasa de 3:4 a 5:6 (+11 % de superficie) y se ancla arriba,
+       donde está la cara; lo que sobra se recorta por abajo. El nombre y los datos
+       crecen con la altura de la ventana. */
+    body[data-view="single"] .jw-front-portrait { aspect-ratio: 5 / 6 !important; max-width: calc(100% - 300px) !important; background-position-y: 18% !important; }
+    body[data-view="single"] .jw-front-text { padding: 40px 48px !important; gap: 18px !important; }
+    body[data-view="single"] .jw-front-name { font-size: clamp(52px, 9.4vh, 96px) !important; line-height: 1.02 !important; }
+    body[data-view="single"] .jw-erarange { font-size: clamp(18px, 2.7vh, 26px) !important; }
+    body[data-view="single"] .jw-hint { font-size: clamp(14px, 1.9vh, 17px) !important; margin-top: 14px !important; }
+    body[data-view="single"] .jw-front-text > div:first-child { font-size: clamp(14px, 1.9vh, 17px) !important; padding: 6px 18px !important; }
+    /* Reverso: rejilla de dos columnas. Izquierda: nombre y era, el texto, los
+       pasajes en fila y la línea de vida abajo. Derecha: el mapa, tan alto como
+       la tarjeta, con «Dónde vivió» debajo. La caja del mapa (~440 × 520) deja ver
+       entera la zona que el generador reserva a los marcadores (SEGURO, 379 × 430
+       de 909 × 540), así que no se pierde ningún lugar. En modo repaso la barra
+       del retrato sigue como antes (flex). */
+    body[data-view="single"] .jw-back-inner { padding: 34px 40px 34px 44px !important; gap: 40px !important; }
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) {
+      display: grid !important; gap: 0 44px !important;
+      grid-template-columns: minmax(0, 1fr) clamp(320px, 38%, 470px);
+      grid-template-rows: auto minmax(0, 1fr) auto auto;
+    }
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) .jw-back-sidebar { display: contents !important; }
+    body[data-view="single"] .jw-bk-head { grid-column: 1; grid-row: 1; margin-bottom: 26px; }
+    body[data-view="single"] .jw-bk-meta { display: flex !important; }
+    body[data-view="single"] .jw-bk-meta > span:first-child { font-size: 13px !important; padding: 5px 14px !important; }
+    /* .jw-back-content se disuelve para que el texto (izquierda) y la línea de vida
+       (derecha, bajo «Dónde vivió») sean celdas de la rejilla. */
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) .jw-back-content { display: contents !important; }
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) .jw-back-scroll { grid-column: 1; grid-row: 2 / 5; min-height: 0; }
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) .jw-back-content > div:last-child:not(.jw-back-scroll) { grid-column: 2; grid-row: 4; margin-top: 14px !important; }
+    body[data-view="single"] .jw-map { grid-column: 2; grid-row: 1 / 3; min-height: 0 !important; height: 100%; border-radius: 14px !important; }
+    body[data-view="single"] .jw-bk-place { grid-column: 2; grid-row: 3; margin-top: 14px; }
+    body[data-view="single"] .jw-quiz-sidebar { width: clamp(300px, 36%, 420px) !important; }
+    body[data-view="single"] .jw-back-name { font-size: clamp(40px, 6.4vh, 60px) !important; }
+    body[data-view="single"] .jw-lbl { font-size: 12px !important; }
+    body[data-view="single"] .jw-place { font-size: clamp(15px, 2.1vh, 18px) !important; margin-top: 5px !important; }
+    body[data-view="single"] .jw-kf { font-size: clamp(16px, 2.3vh, 21px) !important; line-height: 1.6 !important; margin-top: 10px !important; }
+    body[data-view="single"] .jw-plinks { flex-direction: row !important; flex-wrap: wrap !important; gap: 10px !important; margin-top: 10px !important; }
+    body[data-view="single"] .jw-plink { font-size: 15px !important; padding: 10px 16px !important; border-radius: 10px !important; }
+    body[data-view="single"] .jw-tltrack { height: 10px !important; }
+    body[data-view="single"] .jw-tllabel { font-size: 15px !important; }
+    body[data-view="single"] .jw-tlends { font-size: 11.5px !important; }
+    /* La línea de vida deja de flotar sobre el texto: ocupa su sitio debajo, y si
+       el texto no cabe, es el texto lo que hace scroll, no lo que queda tapado. */
+    body[data-view="single"] .jw-back-scroll { gap: 26px !important; padding-bottom: 12px !important; }
+    body[data-view="single"] .jw-back-content > div:last-child:not(.jw-back-scroll) { position: static !important; flex-shrink: 0; }
+  }
+  /* Portátiles bajos (≤ 800 px de alto): la tarjeta mide ~500 px y hay que ceder tipo. */
+  @media (min-width: 900px) and (max-height: 800px) {
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) { padding: 24px 32px 24px 36px !important; }
+    body[data-view="single"] .jw-bk-head { margin-bottom: 14px !important; }
+    body[data-view="single"] .jw-back-name { font-size: 38px !important; }
+    body[data-view="single"] .jw-bk-meta { margin-top: 4px !important; }
+    body[data-view="single"] .jw-kf { font-size: 15px !important; line-height: 1.45 !important; margin-top: 6px !important; }
+    body[data-view="single"] .jw-back-scroll { gap: 14px !important; }
+    body[data-view="single"] .jw-plinks { gap: 8px !important; margin-top: 6px !important; }
+    body[data-view="single"] .jw-plink { font-size: 13px !important; padding: 7px 12px !important; }
+    body[data-view="single"] .jw-back-inner:not(:has(.jw-quiz-sidebar)) { grid-template-columns: minmax(0, 1fr) 300px; gap: 0 32px !important; }
+    body[data-view="single"] .jw-tllabel { font-size: 13px !important; }
+    body[data-view="single"] .jw-tlends { display: none !important; }
+    body[data-view="single"] .jw-front-name { font-size: clamp(46px, 9vh, 70px) !important; }
+    body[data-view="single"] .jw-bk-place { margin-top: 10px !important; }
+    body[data-view="single"] .jw-place { font-size: 14.5px !important; }
+    body[data-view="single"] .jw-counter { font-size: 13.5px !important; }
+  }
   @media (max-width: 899px) {
     .jw-single-wrap{height:520px !important;}
   }
@@ -35,7 +115,7 @@
     /* En vertical el retrato se queda todo lo que no pide el texto, en vez de
        una banda fija de 190 px con medio anverso vacío debajo. Anclado un poco
        más arriba de la mitad, que es donde suele estar la cara. */
-    .jw-front-portrait{width:100% !important;max-width:100% !important;height:auto !important;min-height:0 !important;flex:1 1 auto !important;border-radius:18px 18px 0 0 !important;background-position:50% 25% !important;}
+    .jw-front-portrait{width:100% !important;max-width:100% !important;height:auto !important;min-height:0 !important;flex:1 1 auto !important;border-radius:18px 18px 0 0 !important;background-position-y:25% !important;}
     .jw-front-text{flex:0 0 auto !important;padding:18px 22px 22px !important;}
     .jw-back-inner{flex-direction:column !important;gap:14px !important;overflow-y:auto !important;}
     .jw-back-content{min-height:0 !important;}
@@ -49,11 +129,11 @@
 
 <div style="min-height:100vh;background:oklch(0.95 0.016 80);font-family:'Mulish',sans-serif;">
 
-  <div style="max-width:1180px;margin:0 auto;padding:clamp(24px,6vw,48px) clamp(16px,4vw,32px) 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+  <div class="jw-head" style="max-width:1180px;margin:0 auto;padding:clamp(24px,6vw,48px) clamp(16px,4vw,32px) 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap;">
     <div>
-      <div style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:oklch(0.48 0.02 55);margin-bottom:10px;font-weight:700;">Noche de adoración en familia</div>
-      <h1 style="font-family:'Amiri',serif;font-size:clamp(28px,7vw,44px);font-weight:700;color:oklch(0.26 0.03 50);margin:0;line-height:1.1;">Personajes de la Biblia</h1>
-      <p style="font-size:15px;color:oklch(0.48 0.02 55);margin:10px 0 0;max-width:520px;line-height:1.5;">Conócelos mejor y ubícalos en el relato bíblico y la corriente del tiempo.</p>
+      <div class="jw-eyebrow" style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:oklch(0.48 0.02 55);margin-bottom:10px;font-weight:700;">Noche de adoración en familia</div>
+      <h1 class="jw-h1" style="font-family:'Amiri',serif;font-size:clamp(28px,7vw,44px);font-weight:700;color:oklch(0.26 0.03 50);margin:0;line-height:1.1;">Personajes de la Biblia</h1>
+      <p class="jw-sub" style="font-size:15px;color:oklch(0.48 0.02 55);margin:10px 0 0;max-width:520px;line-height:1.5;">Conócelos mejor y ubícalos en el relato bíblico y la corriente del tiempo.</p>
     </div>
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
       <div style="display:flex;">
@@ -85,7 +165,7 @@
     </div>
   </div>
 
-  <div style="max-width:1180px;margin:0 auto;padding:6px clamp(16px,4vw,32px) 28px;">
+  <div class="jw-strip" style="max-width:1180px;margin:0 auto;padding:6px clamp(16px,4vw,32px) 28px;">
     <div style="display:flex;overflow-x:auto;border-top:1px solid oklch(0.82 0.02 70);border-bottom:1px solid oklch(0.82 0.02 70);">
       <sc-for list="{{ timelineSegments }}" as="seg" hint-placeholder-count="7">
         <div onClick="{{ seg.onClick }}" style="{{ seg.wrapStyle }}">
@@ -98,7 +178,7 @@
   </div>
 
   <sc-if value="{{ isSingleView }}" hint-placeholder-val="{{ true }}">
-  <div style="max-width:820px;margin:0 auto;padding:14px clamp(16px,4vw,32px) 72px;display:flex;flex-direction:column;align-items:center;gap:18px;">
+  <div class="jw-single-main" style="max-width:820px;margin:0 auto;padding:14px clamp(16px,4vw,32px) 72px;display:flex;flex-direction:column;align-items:center;gap:18px;">
     <div class="jw-nav-row" style="display:flex;align-items:center;gap:20px;width:100%;justify-content:center;">
       <button onClick="{{ onPrev }}" class="jw-arrow" style="{{ arrowBtnStyle }}">‹</button>
       <div class="jw-single-wrap" style="perspective:1800px;flex:1 1 0%;min-width:0;max-width:570px;height:460px;">
@@ -112,11 +192,11 @@
                 <sc-if value="{{ singleCard.showEra }}" hint-placeholder-val="{{ true }}">
                 <div style="{{ singleCard.eraPillStyle }}">{{ singleCard.eraLabel }}</div>
                 </sc-if>
-                <div style="font-family:'Amiri',serif;font-size:36px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.08;">{{ singleCard.frontName }}</div>
+                <div class="jw-front-name" style="font-family:'Amiri',serif;font-size:36px;font-weight:700;color:oklch(0.26 0.03 50);line-height:1.08;">{{ singleCard.frontName }}</div>
                 <sc-if value="{{ singleCard.showEra }}" hint-placeholder-val="{{ true }}">
-                <div style="font-size:12px;font-weight:700;color:{{ singleCard.accentColor }};">{{ singleCard.eraRange }}</div>
+                <div class="jw-erarange" style="font-size:12px;font-weight:700;color:{{ singleCard.accentColor }};">{{ singleCard.eraRange }}</div>
                 </sc-if>
-                <div style="font-size:12.5px;color:oklch(0.48 0.02 55);margin-top:2px;">Toca para voltear</div>
+                <div class="jw-hint" style="font-size:12.5px;color:oklch(0.48 0.02 55);margin-top:2px;">Toca para voltear</div>
               </div>
             </div>
           </div>
@@ -130,17 +210,21 @@
               </sc-if>
               <sc-if value="{{ singleCard.quizModeOff }}" hint-placeholder-val="{{ true }}">
               <div class="jw-back-sidebar" style="width:230px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;border-right:1px solid oklch(0.82 0.02 70);padding-right:20px;">
-                <div>
-                  <div style="font-family:'Amiri',serif;font-weight:700;font-size:32px;color:oklch(0.26 0.03 50);line-height:1.1;">{{ singleCard.name }}</div>
+                <div class="jw-bk-head">
+                  <div class="jw-back-name" style="font-family:'Amiri',serif;font-weight:700;font-size:32px;color:oklch(0.26 0.03 50);line-height:1.1;">{{ singleCard.name }}</div>
+                  <div class="jw-bk-meta" style="display:none;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;">
+                    <span style="{{ singleCard.eraPillStyle }}">{{ singleCard.eraLabel }}</span>
+                    <span style="font-size:14px;font-weight:700;color:{{ singleCard.accentColor }};">{{ singleCard.eraRange }}</span>
+                  </div>
                 </div>
                 <div class="jw-map" style="{{ singleCard.mapStyle }}">
                   <span style="{{ singleCard.mapDotStyle }}"></span>
                   <span style="font-family:ui-monospace,Menlo,monospace;font-size:9.5px;color:oklch(0.4 0.02 55);letter-spacing:0.02em;text-align:center;padding:0 8px;">mapa · lugar aproximado</span>
                   <div style="{{ singleCard.mapImgStyle }}"></div>
                 </div>
-                <div>
-                  <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:{{ singleCard.accentColor }};">Dónde vivió</div>
-                  <div style="font-size:13px;color:oklch(0.26 0.03 50);margin-top:3px;line-height:1.4;">{{ singleCard.place }}</div>
+                <div class="jw-bk-place">
+                  <div class="jw-lbl" style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:{{ singleCard.accentColor }};">Dónde vivió</div>
+                  <div class="jw-place" style="font-size:13px;color:oklch(0.26 0.03 50);margin-top:3px;line-height:1.4;">{{ singleCard.place }}</div>
                 </div>
               </div>
               </sc-if>
@@ -152,15 +236,15 @@
                 </div>
                 </sc-if>
                 <div>
-                  <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:{{ singleCard.accentColor }};">{{ singleCard.knownForLabel }}</div>
-                  <div style="font-size:13.5px;color:oklch(0.26 0.03 50);margin-top:4px;line-height:1.55;">{{ singleCard.knownFor }}</div>
+                  <div class="jw-lbl" style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:{{ singleCard.accentColor }};">{{ singleCard.knownForLabel }}</div>
+                  <div class="jw-kf" style="font-size:13.5px;color:oklch(0.26 0.03 50);margin-top:4px;line-height:1.55;">{{ singleCard.knownFor }}</div>
                 </div>
                 <sc-if value="{{ singleCard.quizModeOff }}" hint-placeholder-val="{{ true }}">
                 <div>
-                  <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:{{ singleCard.accentColor }};">Aparece en (Biblia en línea, JW.ORG)</div>
-                  <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
+                  <div class="jw-lbl" style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:{{ singleCard.accentColor }};">Aparece en (Biblia en línea, JW.ORG)</div>
+                  <div class="jw-plinks" style="display:flex;flex-direction:column;gap:6px;margin-top:6px;">
                     <sc-for list="{{ singleCard.passages }}" as="p" hint-placeholder-count="3">
-                      <a href="{{ p.href }}" target="_blank" rel="noopener" onClick="{{ stopBubble }}" style="{{ p.style }}">{{ p.label }} ↗</a>
+                      <a class="jw-plink" href="{{ p.href }}" target="_blank" rel="noopener" onClick="{{ stopBubble }}" style="{{ p.style }}">{{ p.label }} ↗</a>
                     </sc-for>
                   </div>
                 </div>
@@ -168,11 +252,11 @@
               </div>
               <sc-if value="{{ singleCard.quizModeOff }}" hint-placeholder-val="{{ true }}">
               <div style="{{ singleCard.timelineWrapStyle }}">
-                <div style="{{ singleCard.timelineTrackStyle }}">
+                <div class="jw-tltrack" style="{{ singleCard.timelineTrackStyle }}">
                   <div style="{{ singleCard.timelineFillStyle }}"></div>
                 </div>
-                <div style="font-size:10.5px;font-weight:700;color:{{ singleCard.accentColor }};text-align:center;">{{ singleCard.lifeLabelText }}</div>
-                <div style="{{ singleCard.timelineEndsStyle }}"><span>4026 a.e.c.</span><span>100 e.c.</span></div>
+                <div class="jw-tllabel" style="font-size:10.5px;font-weight:700;color:{{ singleCard.accentColor }};text-align:center;">{{ singleCard.lifeLabelText }}</div>
+                <div class="jw-tlends" style="{{ singleCard.timelineEndsStyle }}"><span>4026 a.e.c.</span><span>100 e.c.</span></div>
               </div>
               </sc-if>
               </div>
@@ -183,7 +267,7 @@
       </div>
       <button onClick="{{ onNext }}" class="jw-arrow" style="{{ arrowBtnStyle }}">›</button>
     </div>
-    <div style="font-family:'Mulish',sans-serif;font-size:12.5px;color:oklch(0.48 0.02 55);font-weight:700;">{{ counterLabel }}</div>
+    <div class="jw-counter" style="font-family:'Mulish',sans-serif;font-size:12.5px;color:oklch(0.48 0.02 55);font-weight:700;">{{ counterLabel }}</div>
   </div>
   </sc-if>
 
@@ -268,6 +352,7 @@ const SINGLE_FRONT_FACE_INNER_STYLE = { position: 'absolute', inset: 0, display:
 const SINGLE_BACK_FACE_BASE = { position: 'absolute', inset: 0, borderRadius: '18px', background: 'oklch(0.905 0.02 76)', border: '1px solid oklch(0.82 0.02 70)', cursor: 'pointer', transition: 'opacity .3s ease, transform .3s ease' };
 const SINGLE_BACK_FACE_INNER_STYLE = { position: 'absolute', inset: 0, padding: '24px', display: 'flex', flexDirection: 'row', gap: '22px', borderRadius: '18px' };
 
+const portraitX = (c) => `${typeof c.portraitX === 'number' ? c.portraitX : 50}% 50%`;
 const TIMELINE_MIN = -4026;
 const TIMELINE_MAX = 100;
 const TIMELINE_SPAN = TIMELINE_MAX - TIMELINE_MIN;
@@ -276,7 +361,11 @@ function yearLabel(y) {
 }
 function lifeLabel(life) {
   if (!life) return '';
-  const prefix = life.approx ? 'Aprox. ' : '';
+  // «label» sustituye al rótulo cuando lo que se dibuja no es la vida entera
+  // sino un tramo documentado (un reinado, un ministerio). «estimate» marca las
+  // fechas que ninguna publicación da: son una estimación nuestra.
+  if (life.label) return life.label;
+  const prefix = life.estimate ? 'Estimación: ' : life.approx ? 'Aprox. ' : '';
   return `${prefix}${yearLabel(life.start)} – ${yearLabel(life.end)}`;
 }
 
@@ -386,6 +475,8 @@ class Component extends DCLogic {
   }
 
   renderVals() {
+    // Las reglas de escritorio de la cabecera y la tarjeta dependen de la vista.
+    if (typeof document !== 'undefined') document.body.dataset.view = this.state.viewMode;
     const palette = (this.props && this.props.accentPalette) || 'clay';
     const primary = palette === 'tekhelet' ? TEKHELET : CLAY;
     const primarySoft = palette === 'tekhelet' ? TEKHELET_SOFT : CLAY_SOFT;
@@ -448,7 +539,7 @@ class Component extends DCLogic {
         portraitStyle: {
           position: 'relative', margin: '14px 14px 0', height: '70%', borderRadius: '110px 110px 10px 10px',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: c.portraitSrc ? `url(${c.portraitSrc})` : 'none',
-          backgroundSize: 'cover', backgroundPosition: '50% 50%',
+          backgroundSize: 'cover', backgroundPosition: portraitX(c),
           border: '1px solid oklch(0.82 0.02 70)', overflow: 'hidden',
         },
         eraPillStyle: { fontSize: '10.5px', fontWeight: 700, letterSpacing: '0.04em', color: primary, background: primarySoft, borderRadius: '999px', padding: '3px 10px' },
@@ -479,7 +570,7 @@ class Component extends DCLogic {
         quizPortraitStyle: {
           position: 'relative', width: '100%', height: '100%', borderRadius: '14px', overflow: 'hidden',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: single.portraitSrc ? `url(${single.portraitSrc})` : 'none',
-          backgroundSize: 'cover', backgroundPosition: '50% 50%',
+          backgroundSize: 'cover', backgroundPosition: portraitX(single),
         },
         mapImgStyle: single.mapSrc ? { position: 'absolute', inset: 0, backgroundImage: `url(${single.mapSrc})`, backgroundSize: 'cover', backgroundPosition: single.mapPos || '50% 50%', opacity: 1 } : { position: 'absolute', inset: 0, opacity: 0 },
         onClick: () => this.toggleFlip(single.id),
@@ -496,7 +587,7 @@ class Component extends DCLogic {
           position: 'relative', height: '100%', aspectRatio: '3 / 4', maxWidth: 'calc(100% - 220px)', flexShrink: 0,
           borderRadius: '18px 0 0 18px', overflow: 'hidden',
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: single.portraitSrc ? `url(${single.portraitSrc})` : 'none',
-          backgroundSize: 'cover', backgroundPosition: '50% 50%',
+          backgroundSize: 'cover', backgroundPosition: portraitX(single),
         },
         innerStyle: { position: 'relative', width: '100%', height: '100%', cursor: 'pointer' },
         eraPillStyle: { fontSize: '11px', fontWeight: 700, letterSpacing: '0.04em', color: primary, background: primarySoft, borderRadius: '999px', padding: '4px 12px', width: 'fit-content', maxWidth: '100%' },
@@ -529,12 +620,13 @@ class Component extends DCLogic {
           // pista: la barra deja de decir «de aquí a aquí» y pasa a decir «por
           // aquí». Se ensancha unos píxeles a cada lado para que el degradado
           // tenga dónde apagarse sin comerse el centro.
-          if (!single.life.approx) return { ...base, left: `${izq}%`, width: `${ancho}%`, background: primary };
+          if (!single.life.approx && !single.life.estimate) return { ...base, left: `${izq}%`, width: `${ancho}%`, background: primary };
           return {
             ...base,
             left: `calc(${izq}% - 7px)`,
             width: `calc(${ancho}% + 14px)`,
             background: `linear-gradient(90deg, transparent 0%, ${primary} 34%, ${primary} 66%, transparent 100%)`,
+            opacity: single.life.estimate ? 0.55 : 1,
           };
         })() : { display: 'none' },
         timelineEndsStyle: { display: 'flex', justifyContent: 'space-between', fontSize: '8px', color: 'oklch(0.55 0.02 55)', fontWeight: 700 },

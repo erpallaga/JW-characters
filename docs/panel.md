@@ -81,8 +81,9 @@ paleta, que para un mapa de pocos colores pesa menos que el JPEG y no lo emborro
 ## El orden del mazo
 
 El mazo se lee en el orden de la lista, y ese orden es una decisión, no una
-ordenación automática: Ester va antes que Daniel aunque las fechas digan lo
-contrario.
+ordenación automática. El orden de partida es por **eras** y, dentro de cada era, por
+el inicio de la barra de vida; las tarjetas cuyas fechas son una estimación quedan
+así colocadas por una cifra nuestra, no publicada.
 
 Para cambiarlo, el asa (⠿) a la izquierda de cada fila: se arrastra la tarjeta a
 donde tenga que ir, o se mueve con las flechas ↑ y ↓ una vez el asa tiene el foco.
@@ -151,6 +152,31 @@ navegador no está en `/opt/pw-browsers/chromium`, se le indica con la variable
 `CHROMIUM`. La comprobación no necesita navegador: mira que toda ficha lleve su
 especificación, que los lugares existan, que el PNG tenga el marco de siempre y que
 ningún marcador se salga de lo que la tarjeta enseña.
+
+## Las fechas de vida
+
+Cada tarjeta lleva `life` (`start`, `end`, en años; negativos son a. e. c.) y la barra
+sobre la línea de tiempo se dibuja con ella. Tres grados de certeza, que se ven
+distintos en la tarjeta:
+
+- **Fecha firme** (barra maciza): publicada, o deducida por la aritmética bíblica que
+  hacen las propias publicaciones (Abrahán, 2018–1843).
+- **Aproximada** (`approx: true`; barra difuminada, «Aprox. …»): hay base, pero la cifra
+  no es exacta.
+- **Estimación** (`estimate: true`; barra más tenue, «Estimación: …»): ninguna
+  publicación da la fecha. Es una cifra de trabajo para poder ordenar y dibujar.
+
+Cuando lo que se dibuja no es la vida entera sino un tramo documentado (un reinado, un
+ministerio), `label` sustituye al rótulo: «Su reinado: 1037 – 997 a.e.c.». En el panel
+son la casilla *Estimación* y el campo *Rótulo propio* de la línea de tiempo. La
+auditoría que justifica cada caso está en `docs/fact-check/auditoria-jw-rag.md`.
+
+## El encuadre del retrato
+
+Los retratos antiguos son apaisados (1200 × 600) y la tarjeta enseña una ventana
+vertical de ellos. `portraitX` (0–100, por defecto 50) dice a qué altura horizontal de
+la imagen se centra esa ventana: 0 es el borde izquierdo y 100 el derecho. Un retrato
+subido desde el panel sale ya recortado y no lo necesita.
 
 ## Los datos
 
