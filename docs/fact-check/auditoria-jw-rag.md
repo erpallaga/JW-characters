@@ -148,4 +148,4 @@ Tras esta auditoría se aplicaron las correcciones:
 - **Mapas**: el Sinaí pasa a 33.9755 E, 28.5392 N (Jebel Musa) y se regeneraron los de Moisés, Aarón, Míriam, Josué y Elías. El de Moisés incluye ahora Madián.
 - **Orden del mazo**: por eras y, dentro de cada una, por el inicio de la barra de vida.
 
-Los plazos de época (`timeframe`) de las tarjetas con estimación se conservaron tal cual, salvo Lot, Barac y Débora.
+El campo de época (`timeframe`) de las tarjetas con estimación pasó a una descripción («Época de los jueces») o a un hecho publicado («Caída de Jericó, 1473 a.e.c.»); la cifra estimada queda solo en la barra del reverso.
