@@ -572,13 +572,13 @@ class Component extends DCLogic {
           backgroundColor: 'oklch(0.88 0.02 75)', backgroundImage: single.portraitSrc ? `url(${single.portraitSrc})` : 'none',
           backgroundSize: 'cover', backgroundPosition: portraitX(single),
         },
-        mapImgStyle: single.mapSrc ? { position: 'absolute', inset: 0, backgroundImage: `url(${single.mapSrc})`, backgroundSize: 'cover', backgroundPosition: single.mapPos || '50% 50%', opacity: 1 } : { position: 'absolute', inset: 0, opacity: 0 },
+        mapImgStyle: single.mapSrc ? { position: 'absolute', inset: 0, backgroundImage: `url(${single.mapSrc})`, backgroundSize: 'cover', backgroundPosition: (single.map && /\.png$/i.test(single.mapSrc || '')) ? '50% 50%' : (single.mapPos || '50% 50%'), opacity: 1 } : { position: 'absolute', inset: 0, opacity: 0 },
         onClick: () => this.toggleFlip(single.id),
         frontFaceStyle: { ...SINGLE_FRONT_FACE_BASE, ...faceVisState(flipped, true) },
         frontFaceInnerStyle: SINGLE_FRONT_FACE_INNER_STYLE,
         backFaceStyle: { ...SINGLE_BACK_FACE_BASE, ...faceVisState(flipped, false) },
         backFaceInnerStyle: SINGLE_BACK_FACE_INNER_STYLE,
-        // El retrato viene ya recortado en 3:4 desde el panel, así que la
+        // El retrato viene ya recortado en 5:6 desde el panel (los antiguos, en 3:4), así que la
         // ventana toma esa misma proporción y se ve entero. maxWidth reserva
         // los 220 px que necesita la columna de texto en su caso peor
         // («Congregación Cristiana»): cuando la tarjeta no da para tanto, el

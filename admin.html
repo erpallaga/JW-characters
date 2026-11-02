@@ -205,7 +205,13 @@
   .previa-rotulo { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--acento); }
   .previa-texto { font-size: 13px; margin-top: 4px; line-height: 1.5; }
-  .previa-mapa { position: relative; height: 150px; border-radius: 10px; border: 1px solid var(--borde);
+  .previa-frente { display: flex; height: 190px; border-radius: 18px; overflow: hidden; background: oklch(0.97 0.01 80);
+    border: 1px solid var(--borde); }
+  .previa-retrato { aspect-ratio: 5 / 6; height: 100%; flex-shrink: 0; background-color: oklch(0.88 0.02 75);
+    background-size: cover; }
+  .previa-frente-texto { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 8px;
+    padding: 14px 16px; min-width: 0; }
+  .previa-mapa { position: relative; height: 210px; border-radius: 10px; border: 1px solid var(--borde);
     overflow: hidden; background: var(--hueco); }
   .previa-mapa img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .previa-punto { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--acento);

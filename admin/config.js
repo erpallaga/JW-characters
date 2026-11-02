@@ -30,7 +30,7 @@ export const LIENZO = { ancho: 909, alto: 540 };
 
 // Límites al reducir las imágenes en el navegador antes de subirlas.
 export const IMAGES = {
-  portrait: { maxW: 800, maxH: 1067, quality: 0.82, ext: 'jpg', mime: 'image/jpeg' },
+  portrait: { maxW: 800, maxH: 960, quality: 0.82, ext: 'jpg', mime: 'image/jpeg' },
   map: { maxW: LIENZO.ancho, maxH: LIENZO.alto, quality: 0.85, ext: 'jpg', mime: 'image/jpeg' },
   // Aviso (no bloqueo) si un fichero ya reducido sigue pesando más que esto.
   warnBytes: 400 * 1024,

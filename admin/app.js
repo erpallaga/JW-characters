@@ -913,7 +913,7 @@ function campoImagen(c, tipo, pintarPrevia) {
 
   pintar();
   return h('div', { class: 'campo-grupo' },
-    h('span', { class: 'label' }, esRetrato ? 'Retrato · vertical 3:4' : 'Mapa · apaisado 5:3'),
+    h('span', { class: 'label' }, esRetrato ? 'Retrato · vertical 5:6' : 'Mapa · apaisado 5:3'),
     zona, entrada);
 }
 
@@ -1004,6 +1004,8 @@ function vistaPrevia(c) {
   const libros = librosPorId();
   const era = (estado.borrador.eras || []).find(e => e.id === c.eraId);
   const urlMapa = urlImagen(c.mapSrc);
+  const urlRetrato = urlImagen(c.portraitSrc);
+  const mapaDibujado = !!c.map && /\.png$/i.test(c.mapSrc || '');
   const [px, py] = (c.mapPos || '50% 50%').split(' ');
 
   const linea = h('div', { class: 'previa-linea' });
@@ -1022,14 +1024,22 @@ function vistaPrevia(c) {
 
   return h('div', { style: 'display:flex;flex-direction:column;gap:12px' },
     h('div', { style: 'display:flex;align-items:center;justify-content:space-between;gap:10px' },
-      h('span', { class: 'label' }, 'Vista previa · reverso'),
+      h('span', { class: 'label' }, 'Vista previa · frente y reverso'),
       era ? h('span', { class: 'chip chip-neutro' }, era.label) : null),
+    h('div', { class: 'previa-frente' },
+      h('div', { class: 'previa-retrato', style: urlRetrato
+        ? `background-image:url(${urlRetrato});background-position:${typeof c.portraitX === 'number' ? c.portraitX : 50}% 18%` : '' }),
+      h('div', { class: 'previa-frente-texto' },
+        era ? h('span', { class: 'chip chip-acento' }, era.label) : null,
+        h('div', { class: 'previa-nombre' }, c.name || 'Sin nombre'),
+        h('div', { style: 'font-size:12px;font-weight:700;color:var(--acento)' }, c.timeframe || ''))),
     h('div', { class: 'previa-tarjeta' },
       h('div', { class: 'previa-nombre' }, c.name || 'Sin nombre'),
       urlMapa
         ? h('div', { class: 'previa-mapa' },
             h('img', { src: urlMapa, alt: '' }),
-            h('span', { class: 'previa-punto', style: `left:${px};top:${py}` }))
+            // Un mapa dibujado ya viene encuadrado: el punto solo sirve con una imagen de fuera.
+            mapaDibujado ? null : h('span', { class: 'previa-punto', style: `left:${px};top:${py}` }))
         : h('div', { class: 'previa-mapa', style: 'display:flex;align-items:center;justify-content:center;color:var(--tinta-2);font-size:11px' }, 'sin mapa'),
       seccion('Dónde vivió', c.place || '—'),
       seccion('Por qué se le conoce', c.knownFor || '—'),
@@ -1116,6 +1126,13 @@ function pantallaEras() {
 // ---------------------------------------------------------------- publicar
 
 function abrirPublicar() {
+  // Un borrador antiguo puede traer tarjetas sin la especificación de su mapa
+  // dibujado; publicarlas la borraría. Se les devuelve antes de calcular nada.
+  const mapasArreglados = modelo.restaurarMapas(estado.borrador, estado.publicado);
+  if (mapasArreglados.length) {
+    guardarBorrador();
+    mostrarBanda(`Se ha devuelto a su tarjeta la especificación del mapa que faltaba en: ${mapasArreglados.join(', ')}.`, 12000);
+  }
   const r = modelo.resumen(estado.borrador, estado.publicado, Object.keys(estado.imagenes));
   if (!modelo.hayCambios(r)) return;
 
